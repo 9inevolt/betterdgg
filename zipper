@@ -1,0 +1,3 @@
+#!/bin/sh
+
+zip -x betterdgg/.git\* -x \*.swp -r betterdgg.zip betterdgg

@@ -1,0 +1,55 @@
+.chat-emote.chat-emote-ASLAN, .chat-emote.bdgg-chat-emote-ASLAN {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/ASLAN.png');
+    width: 37px;
+    height: 30px;
+    margin-top: -30px;
+}
+
+.chat-emote.chat-emote-CallCatz, .chat-emote.bdgg-chat-emote-CallCatz {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/CallCatz.png');
+    width: 22px;
+    height: 30px;
+    margin-top: -30px;
+}
+
+.chat-emote.chat-emote-CallChad, .chat-emote.bdgg-chat-emote-CallChad {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/CallChad.png');
+    width: 24px;
+    height: 30px;
+    margin-top: -30px;
+}
+
+.chat-emote.chat-emote-DESBRO, .chat-emote.bdgg-chat-emote-DESBRO {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/DESBRO.png');
+    width: 27px;
+    height: 30px;
+    margin-top: -30px;
+}
+
+.chat-emote.chat-emote-DJAslan, .chat-emote.bdgg-chat-emote-DJAslan {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/DJAslan.png');
+    width: 29px;
+    height: 36px;
+    margin-top: -36px;
+}
+
+.chat-emote.chat-emote-Dravewin, .chat-emote.bdgg-chat-emote-Dravewin {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/Dravewin.png');
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+}
+
+.chat-emote.chat-emote-FIDGETLOL, .chat-emote.bdgg-chat-emote-FIDGETLOL {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/FIDGETLOL.png');
+    width: 25px;
+    height: 25px;
+    margin-top: -25px;
+}
+
+.chat-emote.chat-emote-TooSpicy, .chat-emote.bdgg-chat-emote-TooSpicy {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/emoticons/TooSpicy.png');
+    width: 23px;
+    height: 30px;
+    margin-top: -30px;
+}
