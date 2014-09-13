@@ -34,8 +34,22 @@ exec(function() {
                 var rawLink = "<span style=\"text-decoration: line-through;\">" + $(this).attr("href").replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</span>";
                 $(this).replaceWith(rawLink);
             });
-        });
+        }); 
     };
 
-    console.log("Better destiny.gg v0.1.0 loaded");
+    // >greentext
+    destiny.fn.GreenTextFormatter = function(chat){
+        return this;
+    }
+    destiny.fn.GreenTextFormatter.prototype.format = function(str, user){
+        var loc = str.indexOf("&gt;")
+        if(loc != -1 && loc == 0){
+            str = '<span style="color:#6ca528">'+str+'</span>';
+        }
+        return str;
+    }
+    
+    destiny.chat.gui.formatters.push(new destiny.fn.GreenTextFormatter(destiny.chat.gui));
+
+    console.log("Better destiny.gg v0.1.1 loaded");
 });
