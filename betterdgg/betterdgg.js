@@ -15,20 +15,28 @@ exec(function() {
     $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addData(v, 2) });
 
     var BDGGEmoteFormatter = {
-        emoteregex: new RegExp('(^|[\\s,\\.\\?!])('+emoticons.join('|')+')(?=$|[\\s,\\.\\?!])'),
-        gemoteregex: new RegExp('(^|[\\s,\\.\\?!])('+emoticons.join('|')+')(?=$|[\\s,\\.\\?!])', 'gm'),
+        bdggemoteregex: new RegExp('\\b('+emoticons.join('|')+')\\b', 'gm'),
 
         format: function(str, user) {
-            var emoteregex = (user && ((user.features || []).length > 0)) ? this.gemoteregex:this.emoteregex;
-            return str.replace(emoteregex, '$1<div title="$2" class="chat-emote bdgg-chat-emote-$2"></div>');
+            return str.replace(this.bdggemoteregex, '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>');
         }
     };
 
     destiny.chat.gui.formatters.push(BDGGEmoteFormatter);
 
+    // multi-emote
+    $.each(destiny.chat.gui.formatters, function(i, f) {
+        if (f && f.hasOwnProperty('emoteregex') && f.hasOwnProperty('gemoteregex')) {
+            f.emoteregex = f.gemoteregex;
+            return false;
+        }
+    });
+
+    // deleted messages
     destiny.chat.gui.removeUserMessages = function(username) {
         this.lines.children('div[data-username="'+username.toLowerCase()+'"]').each(function() {
             $(this).find('.msg').css('color', '#555');
+            $(this).find('.greentext').css('color', '#286100');
             $(this).find('div.chat-emote').css('opacity', 0.25);
             $(this).find('a.externallink').each(function() {
                 var rawLink = "<span style=\"text-decoration: line-through;\">" + $(this).attr("href").replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</span>";
@@ -38,18 +46,17 @@ exec(function() {
     };
 
     // >greentext
-    destiny.fn.GreenTextFormatter = function(chat){
-        return this;
-    }
-    destiny.fn.GreenTextFormatter.prototype.format = function(str, user){
-        var loc = str.indexOf("&gt;")
-        if(loc != -1 && loc == 0){
-            str = '<span style="color:#6ca528">'+str+'</span>';
+    var BDGGGreenTextFormatter = {
+        format: function(str, user) {
+            var loc = str.indexOf("&gt;")
+            if(loc === 0){
+                str = '<span class="greentext">'+str+'</span>';
+            }
+            return str;
         }
-        return str;
     }
     
-    destiny.chat.gui.formatters.push(new destiny.fn.GreenTextFormatter(destiny.chat.gui));
+    destiny.chat.gui.formatters.push(BDGGGreenTextFormatter);
 
-    console.log("Better destiny.gg v0.1.1 loaded");
+    console.log("Better destiny.gg v0.2.0 loaded");
 });
