@@ -1,12 +1,4 @@
-function exec(fn) {
-    var script = document.createElement('script');
-    script.setAttribute("type", "application/javascript");
-    script.textContent = '(' + fn.toString() + ')();';
-    document.body.appendChild(script); // run the script
-    document.body.removeChild(script); // clean up
-}
-
-exec(function() {
+var BetterDGG = function() {
     var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
         "CallCatz", "DESBRO", "Dravewin", "TooSpicy"
     ];
@@ -59,4 +51,13 @@ exec(function() {
     destiny.chat.gui.formatters.push(BDGGGreenTextFormatter);
 
     console.log("Better destiny.gg v0.2.0 loaded");
-});
+
+    window.BetterDGG = window.BetterDGG || {
+        test: function() {
+            var m = m=destiny.chat.onMSG({data:'>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
+                nick:'BetterDGG', features:[]});
+            destiny.chat.gui.push(m);
+            setTimeout(function() { destiny.chat.onMUTE({data: 'BetterDGG'}) }, 3000);
+        }
+    };
+};
