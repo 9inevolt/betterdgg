@@ -2,7 +2,7 @@
     background-image:url('images/emoticons/ASLAN.png');
     width: 37px;
     height: 30px;
-    margin-top: -30px;
+    margin-top: -30px !important;
 }
 
 .chat-emote.chat-emote-CallCatz, .chat-emote.bdgg-chat-emote-CallCatz {
@@ -23,14 +23,14 @@
     background-image:url('images/emoticons/DESBRO.png');
     width: 27px;
     height: 30px;
-    margin-top: -30px;
+    margin-top: -30px !important;
 }
 
 .chat-emote.chat-emote-DJAslan, .chat-emote.bdgg-chat-emote-DJAslan {
     background-image:url('images/emoticons/DJAslan.png');
     width: 29px;
     height: 36px;
-    margin-top: -36px;
+    margin-top: -36px !important;
 }
 
 .chat-emote.chat-emote-Dravewin, .chat-emote.bdgg-chat-emote-Dravewin {
