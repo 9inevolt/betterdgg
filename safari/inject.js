@@ -6,4 +6,4 @@ function inject(fn) {
     document.body.removeChild(script); // clean up
 }
 
-inject(BetterDGG);
+inject(injectedBetterDGG);
