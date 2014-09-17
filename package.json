@@ -26,6 +26,7 @@
     "gulp-run": "^1.6.4",
     "gulp-zip": "^2.0.1",
     "merge-stream": "^0.1.5",
+    "mime": "^1.2.11",
     "vinyl-map": "^1.0.1"
   }
 }

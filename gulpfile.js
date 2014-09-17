@@ -1,5 +1,6 @@
 var fs      = require('fs');
 var path    = require('path');
+var mime    = require('mime');
 var gulp    = require('gulp');
 var clean   = require('gulp-clean');
 var concat  = require('gulp-concat');
@@ -19,8 +20,9 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
+var rImages = /(url\(['|"]?)([^:'"]*)(?=['|"]?\))/ig;
+
 gulp.task('chrome:css', function() {
-    var rImages = /(url\(['|"]?)([^:]*)(?=['|"]?\))/ig;
     var extPath = map(function(code) {
         code = code.toString();
         return code.replace(rImages, '$1chrome-extension://__MSG_@@extension_id__/$2');
@@ -29,6 +31,28 @@ gulp.task('chrome:css', function() {
         .pipe(extPath)
         .pipe(concat('betterdgg.css'))
         .pipe(gulp.dest('./build/chrome/'));
+});
+
+gulp.task('firefox:css', function() {
+    var encode64 = map(function(code, filename) {
+        code = code.toString();
+        var dir = path.dirname(filename);
+        return code.replace(rImages, function(match, p1, url) {
+            var imgPath = path.join(dir, url);
+            if (fs.existsSync(imgPath)) {
+                var img = fs.readFileSync(imgPath);
+                url = 'data:' + mime.lookup(imgPath) + ';base64,' + img.toString('base64');
+                match = p1 + url;
+            } else {
+                console.error('Could not find image: ' + imgPath);
+            }
+            return match;
+        });
+    });
+    return gulp.src('./betterdgg/*.css')
+        .pipe(encode64)
+        .pipe(concat('betterdgg.css'))
+        .pipe(gulp.dest('./build/firefox/data/'));
 });
 
 gulp.task('js', [ 'templates' ], function() {
@@ -71,7 +95,7 @@ gulp.task('chrome:zip', [ 'chrome' ], function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('firefox', [ 'js' ], function() {
+gulp.task('firefox', [ 'firefox:css', 'js' ], function() {
     var assets = gulp.src([ './firefox/**/*', '!./firefox/data/inject.js' ])
         .pipe(gulp.dest('./build/firefox/'));
     var js = gulp.src([ './build/betterdgg.js', './firefox/data/inject.js' ])

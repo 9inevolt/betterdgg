@@ -32,7 +32,7 @@
                 });
 
                 bdgg.settings.add(_getSetting('bdgg_emote_tab_priority', 'Prioritize emotes',
-                    'Prioritize emotes for tab completion'));
+                    'Prioritize emotes for tab completion', true));
             },
             addObserver: function(obs) {
                 if (_observers.indexOf(obs) < 0) {
@@ -62,6 +62,7 @@
                 var value = localStorage.getItem(key);
                 if (value == null) {
                     value = defValue;
+                    bdgg.settings.put(key, defValue);
                 } else {
                     value = value === true || value === "true";
                 }
