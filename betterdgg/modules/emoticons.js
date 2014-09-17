@@ -3,7 +3,9 @@
         return {
             init: function() {
                 var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
-                    "CallCatz", "DESBRO", "Dravewin", "TooSpicy"
+                    "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
+                    "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
+                    "ResidentSleeper", "WinWaker"
                 ];
                 var emoticons = EMOTICONS.filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 });
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons);

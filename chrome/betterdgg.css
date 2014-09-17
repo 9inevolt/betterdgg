@@ -54,6 +54,55 @@
     margin-top: -30px;
 }
 
+.chat-emote.bdgg-chat-emote-BrainSlug {
+    width: 18px;
+    height: 27px;
+    margin-top: -30px;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/emoticons/BrainSlug.png');
+}
+
+.chat-emote.bdgg-chat-emote-DansGame {
+    width: 25px;
+    height: 32px;
+    margin-top: -32px;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/emoticons/emoticons.png') no-repeat 0 -90px;
+}
+
+.chat-emote.bdgg-chat-emote-Kreygasm {
+    width: 19px;
+    height: 27px;
+    margin-top: -27px;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/emoticons/emoticons.png') no-repeat -141px 0;
+}
+
+.chat-emote.bdgg-chat-emote-PJSalt {
+    width: 36px;
+    height: 30px;
+    margin-top: -30px;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/emoticons/emoticons.png') no-repeat -106px -123px;
+}
+
+.chat-emote.bdgg-chat-emote-PogChamp {
+    width: 23px;
+    height: 30px;
+    margin-top: -30px;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/emoticons/emoticons.png') no-repeat -166px -28px;
+}
+
+.chat-emote.bdgg-chat-emote-ResidentSleeper {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/emoticons/emoticons.png') no-repeat -212px -28px;
+}
+
+.chat-emote.bdgg-chat-emote-WinWaker {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/emoticons/emoticons.png') no-repeat -23px -59px;
+}
+
 .chat-input-wrap {
     margin-right: 90px !important;
 }
