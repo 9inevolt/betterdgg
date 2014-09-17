@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+   <key>Extension Updates</key>
+   <array>
+     <dict>
+       <key>CFBundleIdentifier</key>
+       <string>gg.destiny.better</string>
+       <key>Developer Identifier</key>
+       <string>X5828D8K32</string>
+       <key>CFBundleVersion</key>
+       <string>0.3.0</string>
+       <key>CFBundleShortVersionString</key>
+       <string>0.3</string>
+       <key>URL</key>
+       <string>https://github.com/9inevolt/betterdgg/releases/download/v0.3/betterdgg.safariextz</string>
+     </dict>
+   </array>
+</dict>
+</plist>
