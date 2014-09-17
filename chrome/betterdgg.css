@@ -53,3 +53,56 @@
     height: 30px;
     margin-top: -30px;
 }
+
+.chat-input-wrap {
+    margin-right: 90px !important;
+}
+
+.bdgg-glyphicon-aslan {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/glyphicon_aslan_grey.png');
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+    vertical-align: text-top;
+}
+
+.active .bdgg-glyphicon-aslan {
+    background-image:url('chrome-extension://__MSG_@@extension_id__/images/glyphicon_aslan.png');
+}
+
+.bdgg-menu {
+    position: absolute;
+    bottom: 0;
+    right: 270px;
+    padding: 0 0 20px;
+    background: #1A1A1A;
+    font-size: 12px;
+}
+
+.bdgg-menu .toolbar {
+    background-color: #353535;
+    margin: 0;
+    padding: 5px;
+    width: 100%;
+}
+
+.bdgg-menu .toolbar .close {
+    font-size: 12px;
+}
+
+.bdgg-menu .toolbar h5 {
+    margin: 0;
+    padding: 0;
+}
+
+.bdgg-menu label {
+    font-weight: normal;
+}
+
+.bdgg-menu ul {
+    padding: 0 5px;
+}
+
+.bdgg-menu li {
+    list-style-type: none;
+}

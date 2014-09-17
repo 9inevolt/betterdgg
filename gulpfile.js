@@ -1,11 +1,15 @@
+var fs      = require('fs');
+var path    = require('path');
 var gulp    = require('gulp');
 var clean   = require('gulp-clean');
 var concat  = require('gulp-concat');
 var footer  = require('gulp-footer');
 var header  = require('gulp-header');
+var jade    = require('gulp-jade');
 var run     = require('gulp-run');
 var zip     = require('gulp-zip');
 var merge   = require('merge-stream');
+var map     = require('vinyl-map');
 
 gulp.task('default', [ 'chrome:zip', 'firefox:xpi', 'safari' ], function() {
 });
@@ -15,11 +19,27 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
-gulp.task('js', function() {
-    return gulp.src('./betterdgg/*.js')
+gulp.task('js', [ 'templates' ], function() {
+    return gulp.src([ './node_modules/gulp-jade/node_modules/jade/runtime.js',
+            './betterdgg/modules/*.js', './build/templates.js',
+            './betterdgg/*.js' ])
         .pipe(concat('betterdgg.js'))
-        .pipe(header('var injectedBetterDGG = function() {'))
-        .pipe(footer('};'))
+        .pipe(header('var injectedBetterDGG = function() {\n'))
+        .pipe(footer('\n};'))
+        .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('templates', function() {
+    var nameTemplate = map(function(code, filename) {
+        code = code.toString();
+        var declaration = 'window.BetterDGG.templates.' + path.basename(filename, '.js') + ' = function(';
+        return code.replace(/^function template\(/, declaration);
+    });
+
+    return gulp.src([ './betterdgg/templates/**/*.jade' ])
+        .pipe(jade({ client: true }))
+        .pipe(nameTemplate)
+        .pipe(concat('templates.js'))
         .pipe(gulp.dest('./build/'));
 });
 

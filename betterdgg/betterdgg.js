@@ -1,27 +1,6 @@
-var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
-    "CallCatz", "DESBRO", "Dravewin", "TooSpicy"
-];
-var emoticons = EMOTICONS.filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 });
-destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons);
-$.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addData(v, 2) });
-
-var BDGGEmoteFormatter = {
-    bdggemoteregex: new RegExp('\\b('+emoticons.join('|')+')\\b', 'gm'),
-
-    format: function(str, user) {
-        return str.replace(this.bdggemoteregex, '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>');
-    }
-};
-
-destiny.chat.gui.formatters.push(BDGGEmoteFormatter);
-
-// multi-emote
-$.each(destiny.chat.gui.formatters, function(i, f) {
-    if (f && f.hasOwnProperty('emoteregex') && f.hasOwnProperty('gemoteregex')) {
-        f.emoteregex = f.gemoteregex;
-        return false;
-    }
-});
+// TODO: find a cleaner way to load this
+window.BetterDGG.settings.init();
+window.BetterDGG.emoticons.init();
 
 // deleted messages
 destiny.chat.gui.removeUserMessages = function(username) {

@@ -1,5 +1,5 @@
 ;(function(bdgg) {
-    bdgg.settings = (function() {
+    bdgg.templates = (function() {
         return {};
     })();
 }(window.BetterDGG = window.BetterDGG || {}));

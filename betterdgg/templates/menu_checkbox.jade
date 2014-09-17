@@ -1,0 +1,5 @@
+li
+  label.checkbox
+    input(id="#{setting.key}" type="checkbox", title="#{setting.name}",
+      checked=(setting.value ? 'checked' : undefined))
+    = setting.description
