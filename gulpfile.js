@@ -19,6 +19,18 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
+gulp.task('chrome:css', function() {
+    var rImages = /(url\(['|"]?)([^:]*)(?=['|"]?\))/ig;
+    var extPath = map(function(code) {
+        code = code.toString();
+        return code.replace(rImages, '$1chrome-extension://__MSG_@@extension_id__/$2');
+    });
+    return gulp.src('./betterdgg/*.css')
+        .pipe(extPath)
+        .pipe(concat('betterdgg.css'))
+        .pipe(gulp.dest('./build/chrome/'));
+});
+
 gulp.task('js', [ 'templates' ], function() {
     return gulp.src([ './node_modules/gulp-jade/node_modules/jade/runtime.js',
             './betterdgg/modules/*.js', './build/templates.js',
@@ -43,8 +55,9 @@ gulp.task('templates', function() {
         .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('chrome', [ 'js' ], function() {
-    var assets = gulp.src([ './chrome/**/*', '!./chrome/inject.js' ])
+gulp.task('chrome', [ 'chrome:css', 'js' ], function() {
+    var assets = gulp.src([ './betterdgg/**/*.png',
+            './chrome/**/*', '!./chrome/inject.js' ])
         .pipe(gulp.dest('./build/chrome/'));
     var js = gulp.src([ './build/betterdgg.js', './chrome/inject.js' ])
         .pipe(concat('betterdgg.js'))
@@ -72,7 +85,8 @@ gulp.task('firefox:xpi', [ 'firefox' ], function() {
 });
 
 gulp.task('safari', [ 'js' ], function() {
-    var assets = gulp.src([ './safari/**/*', '!./safari/inject.js' ])
+    var assets = gulp.src([ './betterdgg/betterdgg.css', './betterdgg/**/*.png',
+            './safari/**/*', '!./safari/inject.js' ])
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
     var js = gulp.src([ './build/betterdgg.js', './safari/inject.js' ])
         .pipe(concat('betterdgg.js'))

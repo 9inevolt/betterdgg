@@ -1,13 +1,13 @@
 ;(function(bdgg) {
     bdgg.emoticons = (function() {
         return {
+            EMOTICONS: [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
+                "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
+                "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
+                "ResidentSleeper", "WinWaker"
+            ],
             init: function() {
-                var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
-                    "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
-                    "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
-                    "ResidentSleeper", "WinWaker"
-                ];
-                var emoticons = EMOTICONS.filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 });
+                var emoticons = bdgg.emoticons.EMOTICONS.filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 });
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons);
                 $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addData(v, 2) });
 
