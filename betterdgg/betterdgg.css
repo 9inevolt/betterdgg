@@ -136,16 +136,16 @@
 }
 
 .bdgg-menu .toolbar .close {
-    font-size: 12px;
+    font-size: 12px !important;
 }
 
 .bdgg-menu .toolbar h5 {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .bdgg-menu label {
-    font-weight: normal;
+    font-weight: normal !important;
 }
 
 .bdgg-menu ul {

@@ -28,4 +28,4 @@ var BDGGGreenTextFormatter = {
 
 destiny.chat.gui.formatters.push(BDGGGreenTextFormatter);
 
-console.log("Better destiny.gg v0.2.0 loaded");
+console.log("Better destiny.gg v0.3 loaded");
