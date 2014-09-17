@@ -48,6 +48,8 @@
 			<string>Some</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://9inevolt.github.io/betterdgg/safari/update-manifest.plist</string>
 	<key>Website</key>
 	<string>http://9inevolt.github.io/betterdgg</string>
 </dict>
