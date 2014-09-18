@@ -129,6 +129,7 @@
     vertical-align: text-top;
 }
 
+.bdgg-glyphicon-aslan:hover,
 .active .bdgg-glyphicon-aslan {
     background-image:url('images/glyphicon_aslan.png');
 }
@@ -136,7 +137,8 @@
 .bdgg-menu {
     position: absolute;
     bottom: 0;
-    right: 270px;
+    right: 20px;
+    width: 240px;
     padding: 0 0 20px;
     background: #1A1A1A;
     font-size: 12px;

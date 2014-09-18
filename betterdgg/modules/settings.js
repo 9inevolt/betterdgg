@@ -25,11 +25,15 @@
                 $('#bdgg-settings-btn').on('click', function(e) {
                     $('#bdgg-settings').toggle();
                     $(this).toggleClass('active');
+                    window.cMenu.closeMenus(destiny.chat.gui);
                 });
 
                 $('#bdgg-settings .close').on('click', function(e) {
                     bdgg.settings.hide();
                 });
+
+                destiny.chat.gui.chatsettings.btn.on('click', bdgg.settings.hide);
+                destiny.chat.gui.userslist.btn.on('click', bdgg.settings.hide);
 
                 bdgg.settings.add(_getSetting('bdgg_emote_tab_priority', 'Prioritize emotes',
                     'Prioritize emotes for tab completion', true));
