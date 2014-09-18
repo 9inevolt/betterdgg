@@ -61,11 +61,25 @@
     background: url('images/emoticons/BrainSlug.png');
 }
 
+.chat-emote.bdgg-chat-emote-ChanChamp {
+    width: 23px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/ChanChamp.png');
+}
+
+.chat-emote.bdgg-chat-emote-RipPA {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/RipPA.png');
+}
+
 .chat-emote.bdgg-chat-emote-DansGame {
-    width: 25px;
-    height: 32px;
-    margin-top: -32px !important;
-    background: url('images/emoticons/emoticons.png') no-repeat 0 -90px;
+    width: 24px;
+    height: 31px;
+    margin-top: -31px !important;
+    background: url('images/emoticons/DansGame.png');
 }
 
 .chat-emote.bdgg-chat-emote-Kreygasm {

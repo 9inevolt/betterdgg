@@ -4,7 +4,7 @@
             EMOTICONS: [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
                 "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
                 "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
-                "ResidentSleeper", "WinWaker"
+                "ResidentSleeper", "WinWaker", "ChanChamp", "RipPA"
             ],
             init: function() {
                 var emoticons = bdgg.emoticons.EMOTICONS.filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 });
