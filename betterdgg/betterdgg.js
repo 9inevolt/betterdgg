@@ -1,6 +1,7 @@
 // TODO: find a cleaner way to load this
 window.BetterDGG.settings.init();
 window.BetterDGG.emoticons.init();
+window.BetterDGG.theme.init();
 
 // deleted messages
 destiny.chat.gui.removeUserMessages = function(username) {
@@ -28,4 +29,4 @@ var BDGGGreenTextFormatter = {
 
 destiny.chat.gui.formatters.push(BDGGGreenTextFormatter);
 
-console.log("Better destiny.gg v0.3 loaded");
+console.log("Better destiny.gg v0.4 loaded");

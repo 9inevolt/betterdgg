@@ -1,0 +1,250 @@
+.chat-theme-light {
+    background: #f2f2f2 !important;
+    color: #262626 !important;
+}
+
+.chat-theme-light .nano > .pane {
+  background            : rgba(180,180,180,0.3) !important;
+}
+
+.chat-theme-light .nano > .pane > .slider {
+  background            : #aaa !important;
+}
+
+.chat-theme-light .nano > .pane > .slider:hover,
+.chat-theme-light .nano > .pane.active > .slider {
+  background: #666 !important;
+}
+
+.chat-theme-light .chat-lines > .info-msg,
+.chat-theme-light .chat-lines > .status-msg {
+  color: #88738a;
+}
+
+.chat-theme-light .chat-lines > .error-msg {
+  color: #a94442;
+}
+
+.chat-theme-light .chat-lines > .command-msg {
+  color: #70511b;
+}
+
+.chat-theme-light .chat-lines > .ui-msg,
+.chat-theme-light .chat-lines > .own-msg,
+.chat-theme-light .chat-lines > .highlight {
+  color: black;
+}
+
+.chat-theme-light .chat-lines > .highlight {
+  background: linear-gradient(to right,  rgba(0,180,255,0.3) 0%,rgba(100,242,255,0) 100%);
+}
+
+.chat-theme-light .chat-lines > .broadcast-msg .msg {
+  color: #70511b;
+}
+.chat-theme-light .chat-lines > .broadcast-msg {
+  background: linear-gradient(to right, rgba(255, 255, 21, 0.25) 0%,rgba(255, 255, 100, 0.1));
+}
+
+.chat-theme-light .chat-lines > .command-msg,
+.chat-theme-light .chat-lines > .own-msg,
+.chat-theme-light .chat-lines > .highlight .msg,
+.chat-theme-light .chat-lines > .broadcast-msg .msg {
+  text-shadow: 0 1px 0 rgba(255,255,255,.2);
+}
+
+.chat-theme-light .chat-lines a.externallink {
+  color: #4476b3 !important;
+}
+
+.chat-theme-light .chat-lines a.externallink:visited {
+  color: #003388 !important; 
+}
+
+.chat-theme-light .chat-lines a.externallink:hover, 
+.chat-theme-light .chat-lines a.externallink:focus {
+}
+
+.chat-theme-light .chat-lines a.nsfw-link {
+  border-bottom: 1px dashed red !important;
+}
+
+.chat-theme-light a.user {
+    color: #161616 !important;
+}
+
+.chat-theme-light a.user:hover {
+    color: #161616 !important;
+}
+
+/**
+ * T1,T2
+ */
+.chat-theme-light a.subscriber {
+  color: #1a3a81 !important;
+}
+
+.chat-theme-light a.subscriber:hover {
+  color: #1a3a81 !important;
+}
+
+/**
+ * T3
+ */
+.chat-theme-light a.flair3 {
+  color: #0060FF !important;
+  text-shadow: 1px 1px 1px #999 !important;
+}
+.chat-theme-light a.flair3:hover {
+  color: #0060FF !important;
+}
+
+/**
+ * T4
+ */
+.chat-theme-light a.flair8 {
+  color: #9427b6 !important;
+  text-shadow: 1px 1px 1px #999 !important;
+}
+.chat-theme-light a.flair8:hover {
+  color: #9427b6 !important;
+}
+
+.chat-theme-light a.vip {
+  color: #4DB524 !important;
+}
+.chat-theme-light a.vip:hover {
+  color: #4DB524 !important;
+}
+
+.chat-theme-light a.bot {
+  color: #e79015 !important;
+}
+.chat-theme-light a.bot:hover {
+  color: #e79015 !important;
+}
+
+.chat-theme-light a.admin {
+  color: #B91010 !important;
+}
+.chat-theme-light a.admin:hover {
+  color: #FF0000 !important;
+}
+
+.chat-theme-light .greentext {
+  color: #71951c !important;
+}
+
+.chat-theme-light .chat-input > div {
+  margin: 5px 0 0 0 !important;
+  background: #e0e0e0 !important;
+  border-top: 1px solid #bbb !important;
+}
+
+.chat-theme-light .chat-input-control {
+  background: none !important;
+  border:none !important;
+}
+.chat-theme-light .chat-input-control input {
+  border: 1px solid #a6a6a6 !important;
+  border-radius: 4px !important;
+  color: #555 !important;
+  background: white !important;
+  text-shadow: none !important;
+  outline: none !important;
+  padding: 1px 4px !important;
+}
+
+/**
+ * Need to keep these rules seperate
+ * Browsers will kill the whole line of css if one rule is invalid
+ **/
+.chat-theme-light input:input-placeholder {
+  color:#bababa; 
+}
+.chat-theme-light input::-webkit-input-placeholder {
+  color:#bababa; 
+}
+.chat-theme-light input:-moz-placeholder { /* Firefox 18- */
+  color:#bababa; 
+}
+.chat-theme-light input::-moz-placeholder {  /* Firefox 19+ */
+  color:#bababa; 
+}
+.chat-theme-light input:-ms-input-placeholder {
+  color:#bababa; 
+}
+
+.chat-theme-light .chat-tools-wrap .iconbtn:hover,
+.chat-theme-light .chat-tools-wrap .iconbtn.active {
+  color: black !important;
+}
+
+.chat-theme-light .chat-lines .emotecount {
+  color: #191919 !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.9) !important;
+  font-size: 10px !important;
+  line-height: 10px !important;
+  border-radius: 10px !important;
+  padding:3px 6px !important;
+  margin: 0 0 0 5px !important;
+  background: white !important;
+}
+
+.chat-theme-light .chat-lines .emotecount {
+  text-shadow: none !important;
+  animation: emotecount-light 600ms 1 !important;
+  -webkit-animation: emotecount-light 600ms 1 !important;
+}
+
+@keyframes emotecount-light {
+  from {
+    color: white;
+    background-color: black;
+  }
+  to {
+    color: black;
+    background-color: white;
+  }
+}
+
+@-webkit-keyframes emotecount-light {
+  from {
+    color: white;
+    background-color: black;
+  }
+  to {
+    color: black;
+    background-color: white;
+  }
+}
+
+.chat-theme-light .chat-login-msg {
+    color: #222 !important;
+    text-shadow: none !important;
+}
+
+.chat-theme-light .chat-menu label:hover {
+    color: #262626 !important;
+}
+
+.chat-theme-light .chat-menu .list-wrap,
+.chat-theme-light .user-tools > div,
+.chat-theme-light .bdgg-menu {
+    background: #d0d0c9 !important;
+    box-shadow: 0 2px 6px #666 !important;
+}
+
+.chat-theme-light .chat-menu h5,
+.chat-theme-light .user-tools h5,
+.chat-theme-light .bdgg-menu .toolbar {
+    background: #aaaaa0 !important;
+    text-shadow: none !important;
+}
+
+.chat-theme-light .chat-menu h5,
+.chat-theme-light .user-tools h5,
+.chat-theme-light #chat-user-list h6,
+.chat-theme-light .bdgg-menu .toolbar h5 {
+    color: #333 !important;
+}

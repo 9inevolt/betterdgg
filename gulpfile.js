@@ -55,6 +55,12 @@ gulp.task('firefox:css', function() {
         .pipe(gulp.dest('./build/firefox/data/'));
 });
 
+gulp.task('safari:css', function() {
+    return gulp.src('./betterdgg/*.css')
+        .pipe(concat('betterdgg.css'))
+        .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
+});
+
 gulp.task('js', [ 'templates' ], function() {
     return gulp.src([ './node_modules/gulp-jade/node_modules/jade/runtime.js',
             './betterdgg/modules/*.js', './build/templates.js',
@@ -108,8 +114,8 @@ gulp.task('firefox:xpi', [ 'firefox' ], function() {
     run('mkdir -p ./dist && cd ./build/firefox && cfx xpi --output-file=../../dist/betterdgg.xpi').exec();
 });
 
-gulp.task('safari', [ 'js' ], function() {
-    var assets = gulp.src([ './betterdgg/betterdgg.css', './betterdgg/**/*.png',
+gulp.task('safari', [ 'safari:css', 'js' ], function() {
+    var assets = gulp.src([ './betterdgg/**/*.png',
             './safari/**/*', '!./safari/inject.js' ])
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
     var js = gulp.src([ './build/betterdgg.js', './safari/inject.js' ])

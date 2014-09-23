@@ -37,6 +37,8 @@
 
                 bdgg.settings.add(_getSetting('bdgg_emote_tab_priority', 'Prioritize emotes',
                     'Prioritize emotes for tab completion', true));
+                bdgg.settings.add(_getSetting('bdgg_light_theme', 'Light theme',
+                    'Light chat theme', false));
             },
             addObserver: function(obs) {
                 if (_observers.indexOf(obs) < 0) {

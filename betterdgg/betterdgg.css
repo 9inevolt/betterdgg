@@ -142,13 +142,15 @@
     padding: 0 0 20px;
     background: #1A1A1A;
     font-size: 12px;
+    border-radius: 4px;
 }
 
 .bdgg-menu .toolbar {
-    background-color: #353535;
+    background: #353535;
     margin: 0;
     padding: 5px;
     width: 100%;
+    border-radius: 4px 4px 0 0;
 }
 
 .bdgg-menu .toolbar .close {
