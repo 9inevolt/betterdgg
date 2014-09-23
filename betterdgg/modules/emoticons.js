@@ -10,6 +10,7 @@
             init: function() {
                 var emoticons = bdgg.emoticons.EMOTICONS.filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 });
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons);
+                destiny.chat.gui.emoticons.sort();
                 $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addData(v, 2) });
 
                 var BDGGEmoteFormatter = {
