@@ -68,6 +68,20 @@
     background: url('images/emoticons/ChanChamp.png');
 }
 
+.chat-emote.bdgg-chat-emote-DankMeMe {
+    width: 27px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/DankMeMe.png');
+}
+
+.chat-emote.bdgg-chat-emote-GabeN {
+    width: 27px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/GabeN.png');
+}
+
 .chat-emote.bdgg-chat-emote-RipPA {
     width: 30px;
     height: 29px;
@@ -75,11 +89,32 @@
     background: url('images/emoticons/RipPA.png');
 }
 
+.chat-emote.bdgg-chat-emote-SuccesS {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/SuccesS.png');
+}
+
+.chat-emote.bdgg-chat-emote-4Head {
+    width: 20px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/emoticons.png') no-repeat -242px -123px;
+}
+
 .chat-emote.bdgg-chat-emote-DansGame {
     width: 24px;
     height: 31px;
     margin-top: -31px !important;
     background: url('images/emoticons/DansGame.png');
+}
+
+.chat-emote.bdgg-chat-emote-DatSheffy {
+    width: 24px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/emoticons.png') no-repeat -131px -90px;
 }
 
 .chat-emote.bdgg-chat-emote-Kreygasm {
