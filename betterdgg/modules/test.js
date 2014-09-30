@@ -21,6 +21,12 @@
         destiny.chat.gui.push(m);
     };
 
+    bdgg.test4 = function() {
+        var m = destiny.chat.onMSG({data:'>green ChanChamp http://GabeN.com/foo?s=RipPA&p=DESBRO PJSalt',
+            nick:'BetterDGG', features:['flair3']});
+        destiny.chat.gui.push(m);
+    };
+
     bdgg.test.chat.combo = function(emote, count) {
         emote = emote || 'DESBRO';
         count = count || 5;
