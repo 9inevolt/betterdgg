@@ -50,11 +50,11 @@
 
         return {
             init: function() {
-                var origobj = destiny.chat.gui.send;    //original object to be replaced by hook
-
-                destiny.chat.gui.send = function() {
-                    var sendstr = this.input.val().trim();
-                    var Regexp = /^\/s(?:talk)?\s+([\w\d]+)\s*(\d+)?/g;  //matches format $stalk {name} {number of messages to stalk}
+                // hook into handle command
+                var fnHandleCommand = destiny.chat.handleCommand;
+                destiny.chat.handleCommand = function(str) {
+                    var sendstr = str.trim();
+                    var Regexp = /^s(?:talk)?\s+([\w\d]+)\s*(\d+)?/g;  //matches format $stalk {name} {number of messages to stalk}
                     var match = Regexp.exec(sendstr);
                     var number;
                     
@@ -75,17 +75,11 @@
                                 }
                             }, 5000);
                       };
-                      this.insertInputHistory(sendstr);
-                      this.input.val('').focus();   //zero out input field
-                      return;
-                    } else {
-                      if (sendstr.match(/^\/s(?:talk)?\s*/)) {
-                        this.insertInputHistory(sendstr);
-                        this.input.val('').focus();   //zero out input field
+                    } else if (sendstr.match(/^s(?:talk)?\s*$/)) {
                         PushChat("Command not understood. Format: /stalk {username} #");
                         PushChat("# optional, /stalk alias: /s")
-                      }
-                      origobj.call(destiny.chat.gui);   //call original function, passing proper "this" pointer
+                    } else {
+                      fnHandleCommand.apply(this, arguments);
                     }
                 };
             }
