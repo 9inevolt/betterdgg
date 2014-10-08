@@ -17,13 +17,7 @@
                 var bdggemoteregex = new RegExp('\\b('+emoticons.join('|')+')\\b', 'gm');
                 var BDGGEmoteFormatter = {
                     format: function(str, user) {
-                        // use jQuery to parse str as html and only replace in text nodes
-                        var wrapped = $('<span>').append(str);
-                        wrapped.find('span').addBack().contents().filter(function() { return this.nodeType == 3})
-                            .replaceWith(function() {
-                                return $(this).text().replace(bdggemoteregex, '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>');
-                            });
-                        return wrapped.html();
+                        return str.replace(bdggemoteregex, '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>');
                     }
                 };
 
