@@ -79,7 +79,8 @@
     };
 
     bdgg.test.chat.inject = function(str) {
-        var msg = destiny.chat.user.username + " " + (str || "<b>hi</b><br>there");
-        destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+        var msg = destiny.chat.onMSG({data:(str || destiny.chat.user.username + " <b>hi</b><br>there"),
+            nick:'BetterDGG', features:['flair3']});
+        destiny.chat.gui.push(msg);
     };
 }(window.BetterDGG = window.BetterDGG || {}));
