@@ -62,7 +62,7 @@ gulp.task('safari:css', function() {
 });
 
 gulp.task('js', [ 'templates' ], function() {
-    return gulp.src([ './node_modules/gulp-jade/node_modules/jade/runtime.js',
+    return gulp.src([ './vendor/**/*.js',
             './betterdgg/modules/*.js', './build/templates.js',
             './betterdgg/*.js' ])
         .pipe(concat('betterdgg.js'))
