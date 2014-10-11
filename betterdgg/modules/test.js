@@ -84,4 +84,20 @@
             nick:'BetterDGG', features:['flair3']});
         destiny.chat.gui.push(msg);
     };
+
+    // fake injected content in message
+    bdgg.test.chat.security = function(str) {
+        var msg = destiny.chat.onMSG({data:'', nick:'BetterDGG', features:['flair2']});
+        var html = str || 'foo <b>abc</b> <script>alert("hi");</script> <div onload="javascript:alert(\"onload\");"></div> ...';
+        var f = destiny.chat.gui.formatters;
+        try {
+            destiny.chat.gui.formatters = [{ format: function() {
+                return html;
+            }}];
+            destiny.chat.gui.put(msg);
+            destiny.chat.gui.scrollPlugin.updateAndScroll(true);
+        } finally {
+           destiny.chat.gui.formatters = f;
+        }
+    };
 }(window.BetterDGG = window.BetterDGG || {}));
