@@ -39,6 +39,9 @@
                     'Prioritize emotes for tab completion', true));
                 bdgg.settings.add(_getSetting('bdgg_light_theme', 'Light theme',
                     'Light chat theme', false));
+                bdgg.settings.add(_getSetting('bdgg_convert_overrustle_links',
+                    'Convert stream links to overrustle',
+                    'Auto-converts stream links to use overrustle.com.'));
             },
             addObserver: function(obs) {
                 if (_observers.indexOf(obs) < 0) {

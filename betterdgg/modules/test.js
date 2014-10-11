@@ -1,5 +1,5 @@
 ;(function(bdgg) {
-    bdgg.test = { chat: {} },
+    bdgg.test = { chat: {}, or: {} },
     bdgg.test1 = function() {
         var m = destiny.chat.onMSG({data:'>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
             nick:'BetterDGG', features:[]});
@@ -99,5 +99,29 @@
         } finally {
            destiny.chat.gui.formatters = f;
         }
+    };
+
+    bdgg.test.or.twitch = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'visit http://www.twitch.tv/9inevolt',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
+    };
+
+    bdgg.test.or.hitbox = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'visit http://www.hitbox.tv/9inevolt',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
+    };
+
+    bdgg.test.or.castamp = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'visit http://castamp.com/live/9inevolt',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
+    };
+
+    bdgg.test.or.ustream = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/embed/6299343',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
     };
 }(window.BetterDGG = window.BetterDGG || {}));
