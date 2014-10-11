@@ -96,6 +96,13 @@
     background: url('images/emoticons/SuccesS.png');
 }
 
+.chat-emote.bdgg-chat-emote-TopCake {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/TopCake.png');
+}
+
 .chat-emote.bdgg-chat-emote-4Head {
     width: 20px;
     height: 30px;

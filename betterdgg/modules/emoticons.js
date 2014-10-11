@@ -5,7 +5,8 @@
                 "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
                 "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
                 "ResidentSleeper", "WinWaker", "ChanChamp", "RipPA",
-                "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS", "DankMeMe"
+                "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS", "DankMeMe",
+                "TopCake"
             ],
             init: function() {
                 var emoticons = bdgg.emoticons.EMOTICONS
