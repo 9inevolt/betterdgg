@@ -44,10 +44,6 @@
         }
     };
 
-    bdgg.test.chat.theme = function() {
-        $('.chat').toggleClass('chat-theme-dark').toggleClass('chat-theme-light');
-    };
-
     bdgg.test.chat.broadcast = function(str) {
         str = str || 'BetterDGG is now a Tier II subscriber! gifted by 9inevolt OverRustle';
         destiny.chat.gui.push(destiny.chat.onBROADCAST({data:str}));

@@ -26,6 +26,22 @@ gulp.task('clean', function() {
 
 var rImages = /(url\(['|"]?)([^:'"]*)(?=['|"]?\))/ig;
 
+var encode64 = map(function(code, filename) {
+    code = code.toString();
+    var dir = path.dirname(filename);
+    return code.replace(rImages, function(match, p1, url) {
+        var imgPath = path.join(dir, url);
+        if (fs.existsSync(imgPath)) {
+            var img = fs.readFileSync(imgPath);
+            url = 'data:' + mime.lookup(imgPath) + ';base64,' + img.toString('base64');
+            match = p1 + url;
+        } else {
+            console.error('Could not find image: ' + imgPath);
+        }
+        return match;
+    });
+});
+
 gulp.task('chrome:css', function() {
     var extPath = map(function(code) {
         code = code.toString();
@@ -38,21 +54,6 @@ gulp.task('chrome:css', function() {
 });
 
 gulp.task('firefox:css', function() {
-    var encode64 = map(function(code, filename) {
-        code = code.toString();
-        var dir = path.dirname(filename);
-        return code.replace(rImages, function(match, p1, url) {
-            var imgPath = path.join(dir, url);
-            if (fs.existsSync(imgPath)) {
-                var img = fs.readFileSync(imgPath);
-                url = 'data:' + mime.lookup(imgPath) + ';base64,' + img.toString('base64');
-                match = p1 + url;
-            } else {
-                console.error('Could not find image: ' + imgPath);
-            }
-            return match;
-        });
-    });
     return gulp.src('./betterdgg/*.css')
         .pipe(encode64)
         .pipe(concat('betterdgg.css'))
@@ -61,6 +62,7 @@ gulp.task('firefox:css', function() {
 
 gulp.task('safari:css', function() {
     return gulp.src('./betterdgg/*.css')
+        .pipe(encode64)
         .pipe(concat('betterdgg.css'))
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
