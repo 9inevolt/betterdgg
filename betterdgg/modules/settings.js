@@ -20,7 +20,9 @@
         return {
             init: function() {
                 $('#destinychat .chat-tools-wrap').prepend(bdgg.templates.menu_button());
-                $('#chat-bottom-frame').append(bdgg.templates.menu());
+                $('#chat-bottom-frame').append(
+                    $(bdgg.templates.menu()).append(
+                        bdgg.templates.menu_footer({version: bdgg.version})));
 
                 $('#bdgg-settings-btn').on('click', function(e) {
                     $('#bdgg-settings').toggle();
