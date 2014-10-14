@@ -1,4 +1,17 @@
 ;(function(bdgg) {
+    var SETTINGS = [
+        [ 'bdgg_emote_tab_priority', 'Prioritize emotes',
+            'Prioritize emotes for tab completion', true ],
+
+        [ 'bdgg_light_theme', 'Light theme',
+            'Light chat theme', false ],
+
+        [ 'bdgg_convert_overrustle_links',
+            'Convert stream links to overrustle',
+            'Auto-converts stream links to use overrustle.com.',
+            false ]
+    ];
+
     bdgg.settings = (function() {
         var _observers = [];
 
@@ -34,16 +47,12 @@
                     bdgg.settings.hide();
                 });
 
+                for (var i=0; i<SETTINGS.length; i++) {
+                    bdgg.settings.add(_getSetting.apply(this, SETTINGS[i]));
+                }
+
                 destiny.chat.gui.chatsettings.btn.on('click', bdgg.settings.hide);
                 destiny.chat.gui.userslist.btn.on('click', bdgg.settings.hide);
-
-                bdgg.settings.add(_getSetting('bdgg_emote_tab_priority', 'Prioritize emotes',
-                    'Prioritize emotes for tab completion', true));
-                bdgg.settings.add(_getSetting('bdgg_light_theme', 'Light theme',
-                    'Light chat theme', false));
-                bdgg.settings.add(_getSetting('bdgg_convert_overrustle_links',
-                    'Convert stream links to overrustle',
-                    'Auto-converts stream links to use overrustle.com.'));
             },
             addObserver: function(obs) {
                 if (_observers.indexOf(obs) < 0) {
@@ -74,8 +83,10 @@
                 if (value == null) {
                     value = defValue;
                     bdgg.settings.put(key, defValue);
-                } else {
-                    value = value === true || value === "true";
+                } else if (value === "true") {
+                    value = true;
+                } else if (value === "false") {
+                    value = false;
                 }
                 return value;
             },

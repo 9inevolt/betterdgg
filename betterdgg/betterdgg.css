@@ -183,15 +183,18 @@
     background-image:url('images/glyphicon_aslan.png');
 }
 
-.bdgg-menu {
+#bdgg-settings {
     position: absolute;
     bottom: 0;
     right: 20px;
     width: 240px;
     padding: 0 0 5px;
+    border-radius: 4px;
+}
+
+.bdgg-menu {
     background: #1A1A1A;
     font-size: 12px;
-    border-radius: 4px;
 }
 
 .bdgg-menu .toolbar {
@@ -224,10 +227,91 @@
     font-weight: normal !important;
 }
 
-.bdgg-menu ul {
+#bdgg-settings ul {
     padding: 0 5px;
 }
 
-.bdgg-menu li {
+#bdgg-settings li {
     list-style-type: none;
+}
+
+#bdgg-about {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#bdgg-about ul {
+    padding-left: 20px;
+    padding-right: 5px;
+    margin-top: 10px;
+}
+
+#bdgg-about li {
+    margin-top: 5px;
+}
+
+#bdgg-about h6 {
+    font-family: Helvetica, Arial, sans-serif !important;
+    margin: 0;
+    padding: 5px 5px 0 !important;
+}
+
+#bdgg-popup {
+    background: white;
+    color: black;
+    padding: 0;
+    border-radius: 0px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 64px;
+    z-index: 500;
+    box-shadow: 2px 2px 5px #333;
+    -webkit-animation: bdgg-slideDown 750ms ease-in;
+    -moz-animation: bdgg-slideDown 750ms ease-in;
+}
+
+#bdgg-popup h5 {
+    color: black !important;
+    font-family: Helvetica, Arial, sans-serif !important;
+    margin: 2px 5px 5px 2px !important;
+}
+
+#bdgg-popup a {
+    font-size: 12px;
+    display: inline-block;
+}
+
+#bdgg-popup a.bdgg-dismiss {
+    margin-left: 8px;
+}
+
+#bdgg-popup .bdgg-logo {
+    background:url('images/logo.png') no-repeat;
+    background-size: contain;
+    width: 64px;
+    height: 64px;
+    display: inline-block;
+}
+
+#bdgg-popup .bdgg-notice {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 5px;
+}
+
+#bdgg-popup .bdgg-link-wrap {
+    text-align: center;
+}
+
+@-webkit-keyframes bdgg-slideDown {
+    from { -webkit-transform: translateY(-50px); }
+    to   { -webkit-transform: translateY(0); }
+}
+
+@-moz-keyframes bdgg-slideDown {
+    from { -moz-transform: translateY(-50px); }
+    to   { -moz-transform: translateY(0); }
 }

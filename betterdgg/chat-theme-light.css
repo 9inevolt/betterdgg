@@ -245,6 +245,7 @@
 .chat-theme-light .chat-menu h5,
 .chat-theme-light .user-tools h5,
 .chat-theme-light #chat-user-list h6,
-.chat-theme-light .bdgg-menu .toolbar h5 {
+.chat-theme-light .bdgg-menu .toolbar h5,
+.chat-theme-light .bdgg-menu h6 {
     color: #333 !important;
 }
