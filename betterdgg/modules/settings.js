@@ -3,6 +3,9 @@
         [ 'bdgg_emote_tab_priority', 'Prioritize emotes',
             'Prioritize emotes for tab completion', true ],
 
+        [ 'bdgg_emote_override', 'Override emotes',
+            'Override some emotes', true ],
+
         [ 'bdgg_light_theme', 'Light theme',
             'Light chat theme', false ],
 

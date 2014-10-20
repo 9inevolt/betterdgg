@@ -97,6 +97,11 @@
         }
     };
 
+    bdgg.test.chat.override = function(str) {
+        var msg = str || "KINGSLY";
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+    };
+
     bdgg.test.or.twitch = function(str) {
         var msg = destiny.chat.onMSG({data:str || 'visit http://www.twitch.tv/9inevolt',
             nick:'BetterDGG', features:['flair1']});

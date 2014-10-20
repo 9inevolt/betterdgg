@@ -1,13 +1,18 @@
 ;(function(bdgg) {
     bdgg.emoticons = (function() {
+        var override;
+
         return {
             EMOTICONS: [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
                 "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
                 "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
                 "ResidentSleeper", "WinWaker", "ChanChamp", "RipPA",
                 "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS", "DankMeMe",
-                "TopCake"
+                "TopCake", "DSPstiny", "SephURR"
             ],
+
+            OVERRIDES: [ "KINGSLY" ].sort(),
+
             init: function() {
                 var emoticons = bdgg.emoticons.EMOTICONS
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 })
@@ -27,6 +32,11 @@
                                     .replace(/</g, '&lt;').replace(/>/g, '&gt;')
                                     .replace(bdggemoteregex, '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>');
                             });
+
+                        if (override) {
+                            wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
+                        }
+
                         return wrapped.html();
                     }
                 };
@@ -42,9 +52,12 @@
                 });
 
                 bdgg.emoticons.giveTabPriority(bdgg.settings.get('bdgg_emote_tab_priority'));
+                bdgg.emoticons.overrideEmotes(bdgg.settings.get('bdgg_emote_override'));
                 bdgg.settings.addObserver(function(key, value) {
                     if (key == 'bdgg_emote_tab_priority') {
                         bdgg.emoticons.giveTabPriority(value);
+                    } else if (key == 'bdgg_emote_override') {
+                        bdgg.emoticons.overrideEmotes(value);
                     }
                 });
 
@@ -54,6 +67,9 @@
                     fnHandleCommand.apply(this, arguments);
                     if (/^emotes ?/.test(str)) {
                         this.gui.push(new ChatInfoMessage("Better Destiny.gg: "+ emoticons.join(", ")));
+                        if (override) {
+                            this.gui.push(new ChatInfoMessage("Overrides: "+ bdgg.emoticons.OVERRIDES.join(", ")));
+                        }
                     }
                 };
             },
@@ -63,6 +79,9 @@
                     var emote = destiny.chat.gui.emoticons[i];
                     destiny.chat.gui.autoCompletePlugin.addData(emote, weight);
                 }
+            },
+            overrideEmotes: function(value) {
+                override = value;
             }
         }
     })();
