@@ -1,5 +1,10 @@
 ;(function(bdgg) {
     bdgg.stalk = (function() {
+        function BDGGChatStalkMessage(message, user, timestamp) {
+            ChatUserMessage.call(this, message, user, timestamp);
+            this.timestampformat = 'MMM DD HH:mm:ss';
+        }
+
         //stalk command and all supporting code. 
         function MySocket()
         {
@@ -13,7 +18,7 @@
               var strings = JSON.parse(json_data.Data);
               
               for (var i = 0; i < strings.length; i++) {
-                PushChat(strings[i]);
+                PushUserMessage(strings[i]);
               }
             }
             else if (json_data.Type === "e") {
@@ -41,15 +46,60 @@
         }
 
         function PushChat(string) {
-          destiny.chat.gui.push(new ChatInfoMessage(string));
+            destiny.chat.gui.push(new ChatInfoMessage(string));
         }
 
         function PushError(string) {
-          destiny.chat.gui.push(new ChatErrorMessage(string));
+            destiny.chat.gui.push(new ChatErrorMessage(string));
+        }
+
+        timeRegExp = /^\[([^\]]*)\]\s*/;
+        nickRegExp = /^<?(\w+)>?: /;
+        function PushUserMessage(msg) {
+            var timeMatch = msg.match(timeRegExp);
+            msg = msg.replace(timeRegExp, '');
+            var nickMatch = msg.match(nickRegExp);
+            msg = msg.replace(nickRegExp, '');
+
+            if (!timeMatch || !nickMatch) {
+                return;
+            }
+
+            var time = moment(timeMatch[1], 'MMM D H:mm:ss Z');
+            if (!time.isValid()) {
+                // Older logs are in CDT/CST and sometimes AM/PM
+                time = moment(timeMatch[1] + ' -0500', [ 'MM/DD/YYYY hh:mm:ss A Z', 'MM/DD/YYYY HH:mm:ss Z' ]);
+                if (time.isValid() && time.isBefore('2013-03-09 02:00-0500')) {
+                    time = time.subtract(1, 'hours'); 
+                }
+            }
+
+            var nick = nickMatch[1];
+            var user = destiny.chat.users[nick];
+            if (!user) {
+                user = new ChatUser({ nick: nick });
+            }
+
+            msg = JSON.parse('"' + msg + '"');
+
+            destiny.chat.gui.push(new BDGGChatStalkMessage(msg, user, time));
         }
 
         return {
             init: function() {
+              BDGGChatStalkMessage.prototype = Object.create(ChatUserMessage.prototype);
+              BDGGChatStalkMessage.prototype.constructor = BDGGChatStalkMessage;
+
+              BDGGChatStalkMessage.prototype.wrap = function(html, css) {
+                  var elem = $(ChatUserMessage.prototype.wrap.call(this, html, css));
+                  elem.addClass('bdgg-stalk-msg');
+                  return elem[0].outerHTML;
+              };
+
+              BDGGChatStalkMessage.prototype.addonHtml = function() {
+                  return this.html();
+              };
+
               // hook into handle command
               var fnHandleCommand = destiny.chat.handleCommand;
               destiny.chat.handleCommand = function(str) {
