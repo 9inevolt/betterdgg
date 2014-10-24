@@ -103,63 +103,58 @@
               // hook into handle command
               var fnHandleCommand = destiny.chat.handleCommand;
               destiny.chat.handleCommand = function(str) {
+                  var match;
                   var sendstr = str.trim();
-                  if (match = sendstr.match(/^s(?:talk)?\s+([\w\d]+)\s*(\d+)?/)) { //matches format /stalk {name} {number of messages to stalk}
-                  var sock = MySocket();
-                  sock.onopen = function() {
-                      sock.send( //send stalk query to backend
-                      JSON.stringify({
-                      "Session" : destiny.chat.user.username,
-                      "QueryType" : "s",
-                      "Name" : match[1],
-                      "Number" : ((typeof match[2] === 'undefined')? "3" :match[2]) //default to 3 lines if unspecified.
-                  }));
-                  setTimeout(function() {
+                  if (match = sendstr.match(/^s(?:talk)?(?:\s+(\w+))(?:\s+(\w+))?(?:\s+(\w+))?(?:\s+(\w+))?(?:\s+(\d+))?\s*$/))
+                  {
+                    //debugger;
+                    var querystr = { "Session": destiny.chat.user.username };
+                    for (var i = 1; match[i] !== undefined; i++);
+                    var length = i;
+                    var num = Number(match[length-1]);
+                    var lastIsNum = !isNaN(num);
+                    var nickCount = length - (lastIsNum ? 2 : 1);
+
+                    if (nickCount < 1) {
+                      return;
+                    } else if (nickCount == 1) {
+                      // Stalk
+                      querystr["QueryType"] = "s";
+                      querystr["Name"] = match[1];
+                      querystr["Number"] = "3";
+                    } else {
+                      // Multi
+                      var Names = [];
+                      for (var i = 1; i <= nickCount; i++) {
+                        Names.push(match[i]);
+                      }
+                      querystr["QueryType"] = "m";
+                      querystr["Names"] = Names;
+                      querystr["Number"] = "10";
+                    }
+
+                    if (lastIsNum) {
+                      querystr["Number"] = Math.min(200, num).toString();
+                    }
+
+                    var sock = MySocket();
+                    sock.onopen = function() {
+                      sock.send(JSON.stringify(querystr));
+                    };
+                    setTimeout(function() {
                       if (sock.readyState < 2) {
-                      PushChat("Timed out stalking " + match[1]);
-                      sock.close();
+                        if (nickCount > 1) {
+                          PushChat("Timed out stalking multiple people.");
+                        } else {
+                          PushChat("Timed out stalking " + match[1]);
+                        }
+                        sock.close();
                       }
                     }, 5000);
-                  };
                   } else if (sendstr.match(/^s(?:talk)?\s*$/)) {
-                    PushChat("Command not understood. Format: /stalk {username} #");
-                    PushChat("# optional, /stalk alias: /s");
-                  } else if (match = sendstr.match(/^m(?:ulti)?\s+([\w\d]+)\s*([\w\d]+)?\s*([\w\d]+)?\s*([\w\d]+)?\s*(\d{1,3})?\s*$/)) { //matches format /multi {name}(up to 4) #
-                        var querystr = {"Session": destiny.chat.user.username,
-                                        "QueryType": "m",
-                                        };
-                        for (var i = 1; match[i] !== undefined; i++);
-                
-                        var Names = [];
-                        if (/^\d+$/.test(match[i-1])) {  //if last argument is integer, set n. otherwise, n is default (10)
-                          n = match[i-1];
-                        } else {
-                          n = "10";
-                          Names.push(match[i-1]);
-                        }
-                
-                        for (var j = 1; j < i-1; j++) {
-                          Names.push(match[j]);
-                        }
-                
-                        querystr["Names"] = Names;
-                        querystr["Number"] = n;
-                        
-                        var sock = MySocket();
-                        sock.onopen = function() {
-                          sock.send( //send stalk query to backend
-                            JSON.stringify(querystr));
-                        setTimeout(function() {
-                            if (sock.readyState < 2) {
-                            PushChat("Timed out stalking multiple people.");
-                            sock.close();
-                            }
-                          }, 5000);
-                        };
-                  } else if (sendstr.match(/^m(?:ulti)?\s*$/)) {
                     PushChat("Command not understood.");
-                    PushChat("Format: /multi {username} {username} #");
-                    PushChat("up to 4 usernames, # optional, alias: /m");
+                    PushChat("Format: /stalk {username} {optional username} #");
+                    PushChat("up to 4 usernames, # optional, /stalk alias: /s");
                   } else {
                     fnHandleCommand.apply(this, arguments);
                   } 
