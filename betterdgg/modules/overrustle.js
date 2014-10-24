@@ -41,6 +41,9 @@
         }
         else if (match = USTREAM_EMBED_URL.exec(href)) {
             href = _link('ustream', match[1]);
+        } else {
+          // Don't prepend http to other urls
+          return;
         }
 
         elem.setAttribute('href', href);

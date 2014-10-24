@@ -125,4 +125,10 @@
             nick:'BetterDGG', features:['flair1']});
         destiny.chat.gui.push(msg);
     };
+
+    bdgg.test.or.not = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'no http before destiny.gg',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
+    };
 }(window.BetterDGG = window.BetterDGG || {}));
