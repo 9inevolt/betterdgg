@@ -249,3 +249,12 @@
 .chat-theme-light .bdgg-menu h6 {
     color: #333 !important;
 }
+
+.chat-theme-light .bdgg-stalk-msg {
+    background: #ccc;
+}
+
+.chat-theme-light .chat-lines .bdgg-stalk-msg time {
+    display: inline-block !important;
+    color: #888;
+}

@@ -74,6 +74,12 @@
         destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
     };
 
+    bdgg.test.chat.self = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'Message from self WhoahDude',
+            nick:destiny.chat.user.username, features:destiny.chat.user.features});
+        destiny.chat.gui.push(msg);
+    };
+
     bdgg.test.chat.inject = function(str) {
         var msg = destiny.chat.onMSG({data:(str || destiny.chat.user.username + ' <script type="text/javascript">' +
                 'alert("hi there");</script><b>hi</b><br>there'),

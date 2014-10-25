@@ -337,6 +337,11 @@
     to   { -moz-transform: translateY(0); }
 }
 
-.chat .chat-lines .bdgg-stalk-msg time {
+.chat-theme-dark .bdgg-stalk-msg {
+    background: #222;
+}
+
+.chat-theme-dark .chat-lines .bdgg-stalk-msg time {
     display: inline-block !important;
+    color: #888;
 }
