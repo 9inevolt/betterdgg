@@ -8,7 +8,7 @@
                 "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
                 "ResidentSleeper", "WinWaker", "ChanChamp", "RipPA",
                 "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS", "DankMeMe",
-                "TopCake", "DSPstiny", "SephURR"
+                "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ"
             ],
 
             OVERRIDES: [ "KINGSLY" ].sort(),

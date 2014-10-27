@@ -96,6 +96,13 @@
     background: url('images/emoticons/GabeN.png');
 }
 
+.chat-emote.bdgg-chat-emote-POTATO {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/POTATO.png');
+}
+
 .chat-emote.bdgg-chat-emote-RipPA {
     width: 30px;
     height: 29px;
@@ -108,6 +115,13 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/SephURR.png');
+}
+
+.chat-emote.bdgg-chat-emote-ShibeZ {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/ShibeZ.png');
 }
 
 .chat-emote.bdgg-chat-emote-SuccesS {
@@ -143,6 +157,13 @@
     height: 30px;
     margin-top: -30px !important;
     background: url('images/emoticons/emoticons.png') no-repeat -131px -90px;
+}
+
+.chat-emote.bdgg-chat-emote-Keepo {
+    width: 27px;
+    height: 29px;
+    margin-top: -29px !important;
+    background: url('images/emoticons/Keepo.png');
 }
 
 .chat-emote.bdgg-chat-emote-Kreygasm {
