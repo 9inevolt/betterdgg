@@ -1,6 +1,7 @@
 // TODO: find a cleaner way to load this
 window.BetterDGG.settings.init();
 window.BetterDGG.emoticons.init();
+window.BetterDGG.spooky.init();
 window.BetterDGG.overrustle.init();
 window.BetterDGG.stalk.init();
 window.BetterDGG.theme.init();
