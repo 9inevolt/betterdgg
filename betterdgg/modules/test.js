@@ -69,6 +69,12 @@
         destiny.chat.gui.push(new ChatCommandMessage(str));
     };
 
+    bdgg.test.chat.flair = function(str) {
+        var msg = str || "hi there";
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'ILiedAboutCake', features:[]}));
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'mellipelli', features:[]}));
+    };
+
     bdgg.test.chat.highlight = function(str) {
         var msg = destiny.chat.user.username + " " + (str || "hi there");
         destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));

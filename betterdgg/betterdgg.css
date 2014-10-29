@@ -225,6 +225,10 @@
     background-image:url('images/glyphicon_aslan.png');
 }
 
+.icon-bdgg-contributor {
+    background-image:url('images/contributor.png');
+}
+
 #bdgg-settings {
     position: absolute;
     bottom: 0;
