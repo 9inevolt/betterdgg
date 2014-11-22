@@ -370,3 +370,11 @@
     display: inline-block !important;
     color: #888;
 }
+
+.chat-lines div.bdgg-muted {
+    opacity: 0.5 !important;
+}
+
+.chat-lines div.bdgg-muted a.externallink {
+    text-decoration: line-through !important;
+}

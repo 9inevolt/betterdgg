@@ -1,7 +1,7 @@
 ;(function(bdgg) {
     bdgg.test = { chat: {}, or: {} },
-    bdgg.test1 = function() {
-        var m = destiny.chat.onMSG({data:'>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
+    bdgg.test1 = function(msg) {
+        var m = destiny.chat.onMSG({data:msg || '>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
             nick:'BetterDGG', features:[]});
         destiny.chat.gui.push(m);
         setTimeout(function() { destiny.chat.onMUTE({data: 'BetterDGG'}) }, 3000);
