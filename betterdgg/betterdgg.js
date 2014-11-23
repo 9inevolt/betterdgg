@@ -6,4 +6,5 @@ window.BetterDGG.spooky.init();
 window.BetterDGG.overrustle.init();
 window.BetterDGG.stalk.init();
 window.BetterDGG.theme.init();
+window.BetterDGG.window.init();
 window.BetterDGG.firstrun.init();

@@ -378,3 +378,14 @@
 .chat-lines div.bdgg-muted a.externallink {
     text-decoration: line-through !important;
 }
+
+#bdgg-scroll-notify {
+    position: absolute;
+    display: none;
+    bottom : 0;
+    left: 0;
+    right: 0;
+    background: rgba(25, 25, 25, 0.75);
+    text-align: center;
+    cursor: pointer;
+}
