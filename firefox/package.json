@@ -5,5 +5,11 @@
   "description": "Restores emotes and faith in humanity to users of destiny.gg",
   "author": "9inevolt",
   "version": "development",
-  "icon": "icon.png"
+  "icon": "icon.png",
+  "permissions": {
+    "cross-domain-content": [
+      "http://ustream.tv",
+      "http://www.ustream.tv"
+    ]
+  }
 }

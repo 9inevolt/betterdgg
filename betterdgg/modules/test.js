@@ -138,6 +138,18 @@
         destiny.chat.gui.push(msg);
     };
 
+    bdgg.test.or.ustream2 = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/channel/JoeRogan',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
+    };
+
+    bdgg.test.or.ustream3 = function(str) {
+        var msg = destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/z',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
+    };
+
     bdgg.test.or.not = function(str) {
         var msg = destiny.chat.onMSG({data:str || 'no http before destiny.gg',
             nick:'BetterDGG', features:['flair1']});

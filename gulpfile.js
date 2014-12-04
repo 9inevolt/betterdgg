@@ -67,7 +67,7 @@ gulp.task('safari:css', function() {
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
 
-gulp.task('js', [ 'templates', 'version' ], function() {
+gulp.task('js', [ 'templates', 'version', 'content-scripts' ], function() {
     return gulp.src([ './vendor/**/*.js',
             './betterdgg/modules/*.js', './build/templates.js', './build/version.js',
             './betterdgg/*.js' ])
@@ -102,6 +102,12 @@ gulp.task('version', function() {
         .pipe(gulp.dest('./build/'));
 });
 
+gulp.task('content-scripts', function() {
+    return gulp.src([ './betterdgg/content-scripts/*.js' ])
+        .pipe(concat('content.js'))
+        .pipe(gulp.dest('./build/'));
+});
+
 gulp.task('chrome:manifest', function() {
     return gulp.src('./chrome/manifest.json')
         .pipe(map(function(code) {
@@ -116,7 +122,7 @@ gulp.task('chrome', [ 'chrome:css', 'chrome:manifest', 'js' ], function() {
     var assets = gulp.src([ './betterdgg/**/*.png',
             './chrome/**/*', '!./chrome/inject.js', '!./chrome/manifest.json' ])
         .pipe(gulp.dest('./build/chrome/'));
-    var js = gulp.src([ './build/betterdgg.js', './chrome/inject.js' ])
+    var js = gulp.src([ './build/betterdgg.js', './chrome/inject.js', './build/content.js' ])
         .pipe(concat('betterdgg.js'))
         .pipe(gulp.dest('./build/chrome/'));
     return merge(assets, js);
@@ -142,7 +148,7 @@ gulp.task('firefox', [ 'firefox:css', 'firefox:manifest', 'js' ], function() {
     var assets = gulp.src([ './firefox/**/*', '!./firefox/data/inject.js',
             '!./firefox/package.json' ])
         .pipe(gulp.dest('./build/firefox/'));
-    var js = gulp.src([ './build/betterdgg.js', './firefox/data/inject.js' ])
+    var js = gulp.src([ './build/betterdgg.js', './firefox/data/inject.js', './build/content.js' ])
         .pipe(concat('betterdgg.js'))
         .pipe(gulp.dest('./build/firefox/data/'));
     return merge(assets, js);
@@ -169,7 +175,7 @@ gulp.task('safari', [ 'safari:css', 'safari:plist', 'js' ], function() {
     var assets = gulp.src([ './betterdgg/**/*.png',
             './safari/**/*', '!./safari/inject.js', '!./safari/Info.plist' ])
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
-    var js = gulp.src([ './build/betterdgg.js', './safari/inject.js' ])
+    var js = gulp.src([ './build/betterdgg.js', './safari/inject.js', './build/content.js' ])
         .pipe(concat('betterdgg.js'))
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
     merge(assets, js).on('end', function() {

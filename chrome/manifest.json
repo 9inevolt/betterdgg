@@ -10,7 +10,8 @@
     },
     
     "permissions": [
-        "*://*.destiny.gg/*"
+        "*://*.destiny.gg/*",
+        "*://*.ustream.tv/*"
     ],
 
     "content_scripts": [
