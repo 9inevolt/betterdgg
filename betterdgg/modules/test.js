@@ -93,6 +93,15 @@
         destiny.chat.gui.push(msg);
     };
 
+    bdgg.test.chat.mention = function(user1, user2, msg) {
+        allUsers = Object.keys(destiny.chat.users);
+        user1 = user1 || destiny.chat.users[allUsers[0]].username;
+        user2 = user2 || destiny.chat.users[allUsers[1]].username;
+        msg = msg || "hi there";
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg + " " + user2, nick:user1, features:[]}));
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg + " " + user1, nick:user2, features:[]}));
+    };
+
     // fake injected content in message
     bdgg.test.chat.security = function(str) {
         var msg = destiny.chat.onMSG({data:'', nick:'BetterDGG', features:['flair2']});
