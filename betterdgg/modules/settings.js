@@ -1,19 +1,40 @@
 ;(function(bdgg) {
-    var SETTINGS = [
-        [ 'bdgg_emote_tab_priority', 'Prioritize emotes',
-            'Prioritize emotes for tab completion', true ],
+    var SETTINGS = {
+        'bdgg_emote_tab_priority': {
+            'name': 'Prioritize emotes',
+            'description': 'Prioritize emotes for tab completion',
+            'value': true,
+            'type': 'boolean'
+        },
 
-        [ 'bdgg_emote_override', 'Override emotes',
-            'Override some emotes', true ],
+        'bdgg_emote_override': {
+            'name': 'Override emotes',
+            'description': 'Override some emotes',
+            'value': true,
+            'type': 'boolean'
+        },
 
-        [ 'bdgg_light_theme', 'Light theme',
-            'Light chat theme', false ],
+        'bdgg_light_theme': {
+            'name': 'Light theme',
+            'description': 'Light chat theme',
+            'value': false,
+            'type': 'boolean'
+        },
 
-        [ 'bdgg_convert_overrustle_links',
-            'Convert stream links to overrustle',
-            'Auto-converts stream links to use overrustle.com.',
-            false ]
-    ];
+        'bdgg_convert_overrustle_links': {
+            'name': 'Convert stream links to overrustle',
+            'description': 'Auto-converts stream links to use overrustle.com',
+            'value': false,
+            'type': 'boolean'
+        },
+
+        'bdgg_filter_words': {
+            'name': 'Custom ignore words',
+            'description': 'Comma-separated list of words to filter messages from chat (case-insensitive)',
+            'value': '',
+            'type': 'string'
+        }
+    };
 
     bdgg.settings = (function() {
         var _observers = [];
@@ -22,15 +43,6 @@
             for (var i = 0; i < _observers.length; i++) {
                 _observers[i].call(this, key, value);
             }
-        };
-
-        var _getSetting = function(key, name, description, defValue) {
-            return {
-                key: key,
-                name: name,
-                value: bdgg.settings.get(key, defValue),
-                description: description
-            };
         };
 
         return {
@@ -50,8 +62,11 @@
                     bdgg.settings.hide();
                 });
 
-                for (var i=0; i<SETTINGS.length; i++) {
-                    bdgg.settings.add(_getSetting.apply(this, SETTINGS[i]));
+                for (var key in SETTINGS) {
+                    var s = SETTINGS[key];
+                    s.key = key;
+                    s.value = bdgg.settings.get(s.key, s.value);
+                    bdgg.settings.add(s);
                 }
 
                 destiny.chat.gui.chatsettings.btn.on('click', bdgg.settings.hide);
@@ -75,22 +90,29 @@
                 $('#bdgg-settings-btn').removeClass('active');
             },
             add: function(setting) {
-                $('#bdgg-settings ul').append(bdgg.templates.menu_checkbox({setting: setting}));
-                $('#bdgg-settings input[type="checkbox"]#' + setting.key).on('change', function(e) {
-                    var value = $(this).prop('checked');
-                    bdgg.settings.put(setting.key, value);
-                });
+                if (setting.type == 'string') {
+                    $('#bdgg-settings ul').append(bdgg.templates.menu_text({setting: setting}));
+                    $('#bdgg-settings input[type="text"]#' + setting.key).on('blur', function(e) {
+                        var value = $(this).val();
+                        bdgg.settings.put(setting.key, value);
+                    });
+                } else { // boolean
+                    $('#bdgg-settings ul').append(bdgg.templates.menu_checkbox({setting: setting}));
+                    $('#bdgg-settings input[type="checkbox"]#' + setting.key).on('change', function(e) {
+                        var value = $(this).prop('checked');
+                        bdgg.settings.put(setting.key, value);
+                    });
+                }
             },
             get: function(key, defValue) {
                 var value = localStorage.getItem(key);
                 if (value == null) {
                     value = defValue;
                     bdgg.settings.put(key, defValue);
-                } else if (value === "true") {
-                    value = true;
-                } else if (value === "false") {
-                    value = false;
+                } else if (SETTINGS[key] && SETTINGS[key].type == 'boolean') {
+                    value = value === 'true';
                 }
+
                 return value;
             },
             put: function(key, value) {

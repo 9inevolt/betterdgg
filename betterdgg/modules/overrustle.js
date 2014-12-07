@@ -45,7 +45,6 @@
                 elem.id = elemId;
 
                 var listener = function(e) {
-                    debugger;
                     if (window != e.source ||
                             e.data.type != 'bdgg_ustream_channel' || e.data.text != href) {
                         return;
