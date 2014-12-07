@@ -258,3 +258,7 @@
     display: inline-block !important;
     color: #888;
 }
+
+.chat-theme-light #bdgg-scroll-notify {
+    background: rgba(25, 25, 25, 0.5);
+}

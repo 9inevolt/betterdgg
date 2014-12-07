@@ -37,7 +37,7 @@
     };
 
     bdgg.test.chat.emotes = function() {
-        var emoticons = bdgg.emoticons.EMOTICONS;
+        var emoticons = bdgg.emoticons.all;
         for (var i=0; i<emoticons.length; i++) {
             var m = destiny.chat.onMSG({data:emoticons[i], nick:'BetterDGG', features:[]});
             m && destiny.chat.gui.push(m);
@@ -77,6 +77,11 @@
 
     bdgg.test.chat.highlight = function(str) {
         var msg = destiny.chat.user.username + " " + (str || "hi there");
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+    };
+
+    bdgg.test.chat.ignore = function(str) {
+        var msg = str || " ^nsfw$ ";
         destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
     };
 

@@ -2,25 +2,36 @@
     bdgg.emoticons = (function() {
         var override;
 
+        var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
+            "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
+            "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
+            "ResidentSleeper", "WinWaker", "ChanChamp", "RipPA",
+            "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS", "DankMeMe",
+            "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ"
+        ];
+
+        var NEW = [ "lirikThump", "SpookerZ", "Riperino" ].sort();
+        var OVERRIDES = [ "KINGSLY" ].sort();
+
+        var xmasEND = moment('2014-12-29 05:00');
+        var xmasOn = moment().isBefore(xmasEND);
+
         return {
-            EMOTICONS: [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
-                "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
-                "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
-                "ResidentSleeper", "WinWaker", "ChanChamp", "RipPA",
-                "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS", "DankMeMe",
-                "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ"
-            ],
-
-            OVERRIDES: [ "KINGSLY" ].sort(),
-
+            all: [],
             init: function() {
-                var emoticons = bdgg.emoticons.EMOTICONS
+                var emoticons = EMOTICONS.concat(NEW)
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 })
                     .sort();
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();
                 $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addData(v, 2) });
+                bdgg.emoticons.all = emoticons;
 
                 var bdggemoteregex = new RegExp('\\b('+emoticons.join('|')+')\\b', 'gm');
+                var bdggemotereplacement = '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>';
+                if (xmasOn) {
+                    bdggemotereplacement = '<div title="$1" class="chat-emote bdgg-chat-emote-$1 bdgg-xmas"></div>';
+                }
+
                 var BDGGEmoteFormatter = {
                     format: function(str, user) {
                         // use jQuery to parse str as html and only replace in text nodes
@@ -30,7 +41,7 @@
                                 return this.data
                                     .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
                                     .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                                    .replace(bdggemoteregex, '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>');
+                                    .replace(bdggemoteregex, bdggemotereplacement);
                             });
 
                         if (override) {
@@ -67,8 +78,9 @@
                     fnHandleCommand.apply(this, arguments);
                     if (/^emotes ?/.test(str)) {
                         this.gui.push(new ChatInfoMessage("Better Destiny.gg: "+ emoticons.join(", ")));
+                        this.gui.push(new ChatInfoMessage("NEW: "+ NEW.sort().join(", ")));
                         if (override) {
-                            this.gui.push(new ChatInfoMessage("Overrides: "+ bdgg.emoticons.OVERRIDES.join(", ")));
+                            this.gui.push(new ChatInfoMessage("Overrides: "+ OVERRIDES.join(", ")));
                         }
                     }
                 };

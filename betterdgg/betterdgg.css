@@ -5,6 +5,11 @@
     margin-top: -30px !important;
 }
 
+.chat-emote.chat-emote-ASLAN, .chat-emote.bdgg-chat-emote-ASLAN.bdgg-xmas {
+    background-image:url('images/emoticons/xmasASLAN.png');
+    width: 35px;
+}
+
 .chat-emote-CallCatz, .chat-emote.bdgg-chat-emote-CallCatz {
     background-image:url('images/emoticons/CallCatz.png');
     width: 22px;
@@ -24,6 +29,11 @@
     width: 27px;
     height: 30px;
     margin-top: -30px !important;
+}
+
+.chat-emote.chat-emote-DESBRO, .chat-emote.bdgg-chat-emote-DESBRO.bdgg-xmas {
+    background-image:url('images/emoticons/xmasDESBRO.png');
+    width: 32px;
 }
 
 .chat-emote.chat-emote-DJAslan, .chat-emote.bdgg-chat-emote-DJAslan {
@@ -83,9 +93,9 @@
 }
 
 .chat-emote.bdgg-chat-emote-DSPstiny {
-    width: 28px;
-    height: 28px;
-    margin-top: -28px !important;
+    width: 22px;
+    height: 32px;
+    margin-top: -32px !important;
     background: url('images/emoticons/DSPstiny.png');
 }
 
@@ -101,6 +111,13 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/POTATO.png');
+}
+
+.chat-emote.bdgg-chat-emote-Riperino {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/Riperino.png');
 }
 
 .chat-emote.bdgg-chat-emote-RipPA {
@@ -122,6 +139,13 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/ShibeZ.png');
+}
+
+.chat-emote.bdgg-chat-emote-SpookerZ {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/SpookerZ.png');
 }
 
 .chat-emote.bdgg-chat-emote-SuccesS {
@@ -171,6 +195,13 @@
     height: 27px;
     margin-top: -27px !important;
     background: url('images/emoticons/emoticons.png') no-repeat -141px 0;
+}
+
+.chat-emote.bdgg-chat-emote-lirikThump {
+    width: 28px;
+    height: 26px;
+    margin-top: -26px !important;
+    background: url('images/emoticons/lirikThump.png');
 }
 
 .chat-emote.bdgg-chat-emote-OpieOP {
@@ -271,6 +302,10 @@
 
 .bdgg-menu label {
     font-weight: normal !important;
+}
+
+.bdgg-menu label.text input {
+    width: 100%;
 }
 
 #bdgg-settings ul {
