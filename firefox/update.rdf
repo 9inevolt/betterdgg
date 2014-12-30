@@ -5,13 +5,13 @@
             <Seq>
                 <li>
                     <Description>
-                        <em:version>0.6</em:version>
+                        <em:version>0.6.1</em:version>
                         <em:targetApplication>
                             <Description>
                                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                                 <em:minVersion>31.0</em:minVersion>
                                 <em:maxVersion>34.0</em:maxVersion>
-                                <em:updateLink>https://github.com/9inevolt/betterdgg/releases/download/v0.6/betterdgg.xpi</em:updateLink>
+                                <em:updateLink>https://github.com/9inevolt/betterdgg/releases/download/v0.6.1/betterdgg.xpi</em:updateLink>
                             </Description>
                         </em:targetApplication>
                     </Description>
