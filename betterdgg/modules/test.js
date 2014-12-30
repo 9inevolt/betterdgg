@@ -8,8 +8,10 @@
     };
 
     bdgg.test2 = function() {
-        destiny.chat.gui.autoCompletePlugin.addData('GamerzKit_TV', Date.now());
-        destiny.chat.gui.autoCompletePlugin.addData('OverRustla', Date.now());
+        destiny.chat.gui.autoCompletePlugin.addNick('GamerzKit_TV');
+        destiny.chat.gui.autoCompletePlugin.promoteNick('GamerzKit_TV');
+        destiny.chat.gui.autoCompletePlugin.addNick('OverRustla');
+        destiny.chat.gui.autoCompletePlugin.promoteNick('OverRustla');
         var m = m=destiny.chat.onMSG({data:'Check tab completion of GameOfThrows and OverRustle',
             nick:'BetterDGG', features:[]});
         destiny.chat.gui.push(m);

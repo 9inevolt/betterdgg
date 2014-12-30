@@ -1,6 +1,6 @@
 ;(function(bdgg) {
     bdgg.emoticons = (function() {
-        var override;
+        var override, emoteTabPriority;
 
         var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
             "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
@@ -16,6 +16,18 @@
         var xmasEND = moment('2014-12-29 05:00');
         var xmasOn = moment().isBefore(xmasEND);
 
+        var bdggCmp = function(fnCmp) {
+            return function(a, b) {
+                if (emoteTabPriority) {
+                    if (a.isemote != b.isemote) {
+                        return a.isemote ? -1 : 1;
+                    }
+                }
+
+                return fnCmp.apply(this, arguments);
+            };
+        };
+
         return {
             all: [],
             init: function() {
@@ -23,7 +35,7 @@
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 })
                     .sort();
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();
-                $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addData(v, 2) });
+                $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addEmote(v) });
                 bdgg.emoticons.all = emoticons;
 
                 var bdggemoteregex = new RegExp('\\b('+emoticons.join('|')+')\\b', 'gm');
@@ -84,13 +96,12 @@
                         }
                     }
                 };
+
+                var fnCmp = destiny.chat.gui.autoCompletePlugin.cmp;
+                destiny.chat.gui.autoCompletePlugin.cmp = bdggCmp(fnCmp);
             },
             giveTabPriority: function(value) {
-                var weight = value ? Number.MAX_VALUE : 2;
-                for (var i = 0; i < destiny.chat.gui.emoticons.length; i++) {
-                    var emote = destiny.chat.gui.emoticons[i];
-                    destiny.chat.gui.autoCompletePlugin.addData(emote, weight);
-                }
+                emoteTabPriority = value;
             },
             overrideEmotes: function(value) {
                 override = value;
