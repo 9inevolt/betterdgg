@@ -171,4 +171,43 @@
             nick:'BetterDGG', features:['flair1']});
         destiny.chat.gui.push(msg);
     };
+
+    bdgg.test.stalk = function(ts, expected) {
+        var t = bdgg.stalk.parseTime(ts);
+        if (!t.isValid()) {
+            bdgg.test.chat.error("invalid timestamp");
+        } else if (!t.isSame(expected)) {
+            bdgg.test.chat.error("timestamp mismatch");
+        } else {
+            bdgg.test.chat.info("success");
+        }
+    };
+
+    bdgg.test.stalk1 = function() {
+        bdgg.test.stalk('01/17/2014 01:29:41', moment.unix(1389943781));
+    };
+
+    bdgg.test.stalk2 = function() {
+        bdgg.test.stalk('03/07/2014 11:12:39 AM', moment.unix(1394212359));
+    };
+
+    bdgg.test.stalk3 = function() {
+        bdgg.test.stalk('03/28/2014 10:33:26 AM', moment.unix(1396020806));
+    };
+
+    bdgg.test.stalk4 = function() {
+        bdgg.test.stalk('Fri Sep 05 2014 01:38:01 UTC', moment.unix(1409881081));
+    };
+
+    bdgg.test.stalk5 = function() {
+        bdgg.test.stalk('Sep 29 06:32:38 UTC', moment.unix(1411972358));
+    };
+
+    bdgg.test.stalk6 = function() {
+        bdgg.test.stalk('Jan 19 21:00:51 UTC', moment.unix(1421701251));
+    };
+
+    bdgg.test.stalk7 = function() {
+        bdgg.test.stalk('Feb 09 2015 17:46:40 UTC', moment.unix(1423504000));
+    };
 }(window.BetterDGG = window.BetterDGG || {}));
