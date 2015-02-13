@@ -246,9 +246,9 @@
 .bdgg-glyphicon-aslan {
     background-image:url('images/glyphicon_aslan_grey.png');
     display: inline-block;
-    height: 14px;
-    width: 14px;
-    vertical-align: text-top;
+    height: 20px;
+    width: 24px;
+    vertical-align: baseline;
 }
 
 .bdgg-glyphicon-aslan:hover,
