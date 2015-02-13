@@ -2,6 +2,8 @@ const data = require("sdk/self").data;
 const pageMod = require("sdk/page-mod");
 const styleUtils = require("sdk/stylesheet/utils");
 //const events = require("sdk/system/events");
+const winUtils = require("sdk/window/utils");
+
 const { Worker } = require("sdk/content/worker");
 const { on, emit, once } = require('sdk/event/core');
 const { pipe } = require('sdk/event/utils');
@@ -56,7 +58,11 @@ var windowListener = {
         if (!aDOMWindow) {
             return;
         }
-        //START - EDIT BELOW HERE
+
+        if (!aXULWindow) {
+            aXULWindow = winUtils.getXULWindow(aDOMWindow);
+        }
+
         var browser = aDOMWindow.document.querySelector('#browser')
         if (browser) {
             var splitter = aDOMWindow.document.createElement('splitter');
@@ -132,7 +138,11 @@ var windowListener = {
         if (!aDOMWindow) {
             return;
         }
-        //START - EDIT BELOW HERE
+
+        if (!aXULWindow) {
+            aXULWindow = winUtils.getXULWindow(aDOMWindow);
+        }
+
         var splitter = aDOMWindow.document.querySelector('#demo-sidebar-with-html_splitter');
 
         if (splitter) {

@@ -1,3 +1,4 @@
+const winUtils = require("sdk/window/utils");
 const { ToggleButton } = require("sdk/ui/button/toggle");
 const windowListener = require("./window-listener.js");
 
@@ -7,9 +8,9 @@ var button = ToggleButton({
     icon: "./icon.png",
     onChange: function(state) {
         if (state.checked) {
-            windowListener.register();
+            windowListener.loadIntoWindow(winUtils.getMostRecentBrowserWindow());
         } else {
-            windowListener.unregister();
+            windowListener.unloadFromWindow(winUtils.getMostRecentBrowserWindow());
         }
     }
 });
