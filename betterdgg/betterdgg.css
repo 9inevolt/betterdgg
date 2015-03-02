@@ -260,6 +260,18 @@
     background-image:url('images/contributor.png');
 }
 
+.icon-bdgg-play {
+    background-image:url('images/play.png');
+}
+
+.icon-bdgg-platform-twitch {
+    background-image:url('images/platform_twitch.png');
+}
+
+.icon-bdgg-platform-ustream {
+    background-image:url('images/platform_ustream.png');
+}
+
 #bdgg-settings {
     position: absolute;
     bottom: 0;
@@ -399,6 +411,10 @@
 
 .chat-theme-dark .bdgg-stalk-msg {
     background: #222;
+}
+
+.chat-theme-dark .bdgg-strim-msg {
+    background: #302b29;
 }
 
 .chat-theme-dark .chat-lines .bdgg-stalk-msg time {

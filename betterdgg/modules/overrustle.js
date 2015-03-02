@@ -7,6 +7,88 @@
 
     var _channels = {};
 
+    function _initStrims() {
+        // hook into handle command
+        var fnHandleCommand = destiny.chat.handleCommand;
+        destiny.chat.handleCommand = function(str) {
+            var cmd = str.trim();
+            if (/^strims\b/.test(cmd)) {
+                var match;
+                if (match = cmd.match(/^strims(?: (\d+))?$/)) {
+                    var count = match[1] || 5;
+                    window.postMessage({type: 'bdgg_overrustle_get_strims', count: count}, '*');
+                } else {
+                    destiny.chat.gui.push(new ChatInfoMessage("Format: /strims {optional #}"));
+                }
+            } else {
+                fnHandleCommand.apply(this, arguments);
+            }
+        };
+
+        var listener = function(e) {
+            if (window != e.source || e.data.type != 'bdgg_overrustle_strims' ) {
+                return;
+            }
+
+            for (var i=0; i<e.data.strims.length; i++) {
+                var strim = e.data.strims[i];
+                //console.log(strim);
+                destiny.chat.gui.push(new BDGGChatStrimMessage(strim));
+            }
+        };
+        window.addEventListener('message', listener);
+
+        function BDGGChatStrimMessage(strim) {
+            this.strim = strim;
+            this.url = 'http://www.overrustle.com' + strim['url'];
+            this.viewers = strim['viewers'];
+            this.name = strim['name'] || strim['channel'];
+            this.title = strim['title'];
+            this.platform = strim['platform'];
+        };
+        BDGGChatStrimMessage.prototype = Object.create(ChatUIMessage.prototype);
+        BDGGChatStrimMessage.prototype.constructor = BDGGChatStrimMessage;
+
+        BDGGChatStrimMessage.prototype.html = function() {
+            var elem = $('<div class="ui-msg bdgg-strim-msg"></div>');
+            $('<a class="externallink"></a>').attr('href', this.url)
+                .text(this.text())
+                .prepend(this.icon())
+                .appendTo(elem);
+            return elem[0].outerHTML;
+        };
+
+        BDGGChatStrimMessage.prototype.text = function() {
+            var txt = ' ';
+            if (this.name) {
+                txt += this.name;
+            } else {
+                txt += this.strim['url'];
+            }
+
+            if (this.title) {
+                txt += ' - ' + this.title;
+            }
+
+            if (this.viewers != null) {
+                txt += ' (' + this.viewers + ')';
+            }
+
+            return txt;
+        };
+
+        BDGGChatStrimMessage.prototype.icon = function() {
+            var ico = "icon-bdgg-play";
+            if (this.platform == 'twitch') {
+                ico = "icon-bdgg-platform-twitch";
+            } else if (this.platform == 'ustream') {
+                ico = "icon-bdgg-platform-ustream";
+            }
+
+            return '<i class="' + ico + '"></i>';
+        };
+    };
+
     function _randString(len) {
         var s = '';
         for (var i=0; i<len; i++) {
@@ -100,6 +182,8 @@
                         bdgg.overrustle.convertLinks(value);
                     }
                 });
+
+                _initStrims();
             },
             convertLinks: function(value) {
                 _enabled = value;

@@ -254,6 +254,10 @@
     background: #ccc;
 }
 
+.chat-theme-light .bdgg-strim-msg {
+    background: #d4c8bc;
+}
+
 .chat-theme-light .chat-lines .bdgg-stalk-msg time {
     display: inline-block !important;
     color: #888;

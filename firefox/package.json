@@ -9,7 +9,8 @@
   "permissions": {
     "cross-domain-content": [
       "http://ustream.tv",
-      "http://www.ustream.tv"
+      "http://www.ustream.tv",
+      "http://api.overrustle.com"
     ]
   }
 }

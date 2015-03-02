@@ -29,6 +29,11 @@
         destiny.chat.gui.push(m);
     };
 
+    bdgg.test.chat.disconnect = function() {
+        destiny.chat.dontconnect = true;
+        destiny.chat.sock.close();
+    };
+
     bdgg.test.chat.combo = function(emote, count) {
         emote = emote || 'DESBRO';
         count = count || 5;
