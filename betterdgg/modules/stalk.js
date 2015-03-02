@@ -78,7 +78,7 @@
         //stalk command and all supporting code. 
         function MySocket()
         {
-          var ws = new WebSocket("ws://overrustlelogs.net:13373/ws");
+          var ws = new WebSocket("ws://ws.overrustlelogs.net:13373/ws");
           //console.log(ws.readyState);
           
           ws.onmessage = function(evt) {
