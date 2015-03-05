@@ -1,9 +1,16 @@
-var data = require("sdk/self").data;
-var pageMod = require("sdk/page-mod");
- 
-pageMod.PageMod({
-    include: "*.destiny.gg",
-    contentScriptFile: data.url("betterdgg.js"),
-    contentStyleFile: [ data.url("betterdgg.css"), data.url("emoticons.css") ],
-    attachTo: [ "top", "frame" ]
+const winUtils = require("sdk/window/utils");
+const { ToggleButton } = require("sdk/ui/button/toggle");
+const windowListener = require("./window-listener.js");
+
+var button = ToggleButton({
+    id: "sidebar_toggle_button",
+    label: "Sidebar",
+    icon: "./icon.png",
+    onChange: function(state) {
+        if (state.checked) {
+            windowListener.loadIntoWindow(winUtils.getMostRecentBrowserWindow());
+        } else {
+            windowListener.unloadFromWindow(winUtils.getMostRecentBrowserWindow());
+        }
+    }
 });
