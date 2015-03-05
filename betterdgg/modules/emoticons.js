@@ -16,7 +16,7 @@
         var xmasEND = moment('2014-12-29 05:00');
         var xmasOn = moment().isBefore(xmasEND);
 
-        var bdggCmp = function(fnCmp) {
+        var bdggSortResults = function(fnSortResults) {
             return function(a, b) {
                 if (emoteTabPriority) {
                     if (a.isemote != b.isemote) {
@@ -24,7 +24,7 @@
                     }
                 }
 
-                return fnCmp.apply(this, arguments);
+                return fnSortResults.apply(this, arguments);
             };
         };
 
@@ -97,8 +97,8 @@
                     }
                 };
 
-                var fnCmp = destiny.chat.gui.autoCompletePlugin.cmp;
-                destiny.chat.gui.autoCompletePlugin.cmp = bdggCmp(fnCmp);
+                var fnSortResults = destiny.chat.gui.autoCompletePlugin.sortResults;
+                destiny.chat.gui.autoCompletePlugin.sortResults = bdggSortResults(fnSortResults);
             },
             giveTabPriority: function(value) {
                 emoteTabPriority = value;
