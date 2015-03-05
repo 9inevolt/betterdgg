@@ -18,13 +18,13 @@
     };
 
     bdgg.test3 = function() {
-        var m = destiny.chat.onMSG({data:'ChanChamp http://GabeN.com/foo?s=RipPA&p=DESBRO PJSalt',
+        var m = destiny.chat.onMSG({data:'ChanChamp http://GabeN.com/foo?s=Riperino&p=DESBRO PJSalt',
             nick:'BetterDGG', features:[]});
         destiny.chat.gui.push(m);
     };
 
     bdgg.test4 = function() {
-        var m = destiny.chat.onMSG({data:'>green ChanChamp http://GabeN.com/foo?s=RipPA&p=DESBRO PJSalt',
+        var m = destiny.chat.onMSG({data:'>green ChanChamp http://GabeN.com/foo?s=Riperino&p=DESBRO PJSalt',
             nick:'BetterDGG', features:['flair3']});
         destiny.chat.gui.push(m);
     };
@@ -131,7 +131,7 @@
     };
 
     bdgg.test.chat.override = function(str) {
-        var msg = str || "KINGSLY";
+        var msg = str || "SoSad";
         destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
     };
 

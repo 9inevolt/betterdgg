@@ -5,13 +5,18 @@
         var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
             "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
             "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
-            "ResidentSleeper", "WinWaker", "ChanChamp", "RipPA",
-            "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS", "DankMeMe",
-            "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ"
+            "ResidentSleeper", "WinWaker", "ChanChamp",
+            "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS",
+            "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ",
+            "lirikThump", "SpookerZ", "Riperino"
         ];
 
-        var NEW = [ "lirikThump", "SpookerZ", "Riperino" ].sort();
-        var OVERRIDES = [ "KINGSLY" ].sort();
+        var NEW = [ "NiceMeMe", "YEE", "BabyRage", "dayJoy", "kaceyFace",
+            "aaaChamp", "CheekerZ" ].sort();
+
+        var OVERRIDES = [ "SoSad" ].sort();
+
+        var RIP = [ "DankMeMe", "RipPA" ].sort();
 
         var xmasEND = moment('2014-12-29 05:00');
         var xmasOn = moment().isBefore(xmasEND);
@@ -91,6 +96,7 @@
                     if (/^emotes ?/.test(str)) {
                         this.gui.push(new ChatInfoMessage("Better Destiny.gg: "+ emoticons.join(", ")));
                         this.gui.push(new ChatInfoMessage("NEW: "+ NEW.sort().join(", ")));
+                        this.gui.push(new ChatInfoMessage("RIP: "+ RIP.sort().join(", ")));
                         if (override) {
                             this.gui.push(new ChatInfoMessage("Overrides: "+ OVERRIDES.join(", ")));
                         }

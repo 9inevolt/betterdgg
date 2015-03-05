@@ -71,11 +71,11 @@
     background: url('images/emoticons/BrainSlug.png');
 }
 
-.chat-emote-KINGSLY.bdgg-chat-emote-override {
-    width: 28px !important;
-    height: 28px !important;
-    margin-top: -28px !important;
-    background: url('images/emoticons/KINGSLY.png') !important;
+.chat-emote-SoSad.bdgg-chat-emote-override {
+    background:url('images/emoticons/SoSad.png') !important;
+    width: 23px !important;
+    height: 32px !important;
+    margin-top: -32px !important;
 }
 
 .chat-emote.bdgg-chat-emote-ChanChamp {
@@ -85,11 +85,18 @@
     background: url('images/emoticons/ChanChamp.png');
 }
 
-.chat-emote.bdgg-chat-emote-DankMeMe {
+.chat-emote.bdgg-chat-emote-CheekerZ {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/CheekerZ.png');
+}
+
+.chat-emote.bdgg-chat-emote-NiceMeMe {
     width: 27px;
     height: 30px;
     margin-top: -30px !important;
-    background: url('images/emoticons/DankMeMe.png');
+    background: url('images/emoticons/NiceMeMe.png');
 }
 
 .chat-emote.bdgg-chat-emote-DSPstiny {
@@ -118,13 +125,6 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/Riperino.png');
-}
-
-.chat-emote.bdgg-chat-emote-RipPA {
-    width: 30px;
-    height: 29px;
-    margin-top: -29px !important;
-    background: url('images/emoticons/RipPA.png');
 }
 
 .chat-emote.bdgg-chat-emote-SephURR {
@@ -162,11 +162,32 @@
     background: url('images/emoticons/TopCake.png');
 }
 
+.chat-emote.bdgg-chat-emote-YEE {
+    width: 23px;
+    height: 32px;
+    margin-top: -32px !important;
+    background: url('images/emoticons/YEE.png');
+}
+
 .chat-emote.bdgg-chat-emote-4Head {
     width: 20px;
     height: 30px;
     margin-top: -30px !important;
     background: url('images/emoticons/emoticons.png') no-repeat -242px -123px;
+}
+
+.chat-emote.bdgg-chat-emote-aaaChamp {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/aaaChamp.png');
+}
+
+.chat-emote.bdgg-chat-emote-BabyRage {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/BabyRage.png');
 }
 
 .chat-emote.bdgg-chat-emote-DansGame {
@@ -176,11 +197,25 @@
     background: url('images/emoticons/DansGame.png');
 }
 
+.chat-emote.bdgg-chat-emote-dayJoy {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/dayJoy.png');
+}
+
 .chat-emote.bdgg-chat-emote-DatSheffy {
     width: 24px;
     height: 30px;
     margin-top: -30px !important;
     background: url('images/emoticons/emoticons.png') no-repeat -131px -90px;
+}
+
+.chat-emote.bdgg-chat-emote-kaceyFace {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/kaceyFace.png');
 }
 
 .chat-emote.bdgg-chat-emote-Keepo {
