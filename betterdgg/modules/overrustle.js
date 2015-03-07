@@ -51,7 +51,7 @@
 
         BDGGChatStrimMessage.prototype.html = function() {
             var elem = $('<div class="ui-msg bdgg-strim-msg"></div>');
-            $('<a class="externallink"></a>').attr('href', this.url)
+            $('<a target="_blank" class="externallink"></a>').attr('href', this.url)
                 .text(this.text())
                 .prepend(this.icon())
                 .appendTo(elem);
