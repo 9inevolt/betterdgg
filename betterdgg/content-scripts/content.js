@@ -2,6 +2,17 @@ function isWindow(src) {
     return src == window || typeof unsafeWindow != "undefined" && src.wrappedJSObject == unsafeWindow;
 }
 
+function doXHR(xhr) {
+    if (typeof chrome != "undefined" && chrome.runtime) {
+        chrome.runtime.sendMessage(null, { xhr: xhr }, xhr.onload);
+    } else {
+        var req = new XMLHttpRequest();
+        req.onload = function() { xhr.onload(this.responseText) };
+        req.open(xhr.method, xhr.url);
+        req.send();
+    }
+}
+
 window.addEventListener("message", function(e) {
     if (!isWindow(e.source) || !e.data.type) {
         return;
@@ -10,23 +21,27 @@ window.addEventListener("message", function(e) {
     if (e.data.type == 'bdgg_hello_world') {
         console.log("Content script received: " + e.data.text);
     } else if (e.data.type == 'bdgg_ustream_url') {
-        var req = new XMLHttpRequest();
-        req.onload = function() {
-            if (match = /"cid":(\d+)/.exec(this.responseText)) {
-                //console.log("ustream cid is " + match[1]);
-                window.postMessage({ type: 'bdgg_ustream_channel', text: e.data.text, id: match[1] }, '*');
-            }
+        var xhr = {
+            onload: function(responseText) {
+                if (match = /"cid":(\d+)/.exec(responseText)) {
+                    //console.log("ustream cid is " + match[1]);
+                    window.postMessage({ type: 'bdgg_ustream_channel', text: e.data.text, id: match[1] }, '*');
+                }
+            },
+            method: 'GET',
+            url: e.data.text
         };
-        req.open('GET', e.data.text);
-        req.send();
+        doXHR(xhr);
     } else if (e.data.type == 'bdgg_overrustle_get_strims') {
-        var req = new XMLHttpRequest();
-        req.onload = function() {
-            var strims = parseStrims(this.responseText);
-            window.postMessage({ type: 'bdgg_overrustle_strims', strims: strims.slice(0, e.data.count) }, '*');
+        var xhr = {
+            onload: function(responseText) {
+                var strims = parseStrims(responseText);
+                window.postMessage({ type: 'bdgg_overrustle_strims', strims: strims.slice(0, e.data.count) }, '*');
+            },
+            method: 'GET',
+            url: 'http://api.overrustle.com/api'
         };
-        req.open('GET', 'http://api.overrustle.com/api');
-        req.send();
+        doXHR(xhr);
     }
 });
 

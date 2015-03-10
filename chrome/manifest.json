@@ -15,6 +15,11 @@
         "*://*.overrustle.com/*"
     ],
 
+    "background": {
+        "scripts": [ "lib/xhr.js" ],
+        "persistent": false
+    },
+
     "content_scripts": [
         {
             "matches": ["*://*.destiny.gg/*"],
