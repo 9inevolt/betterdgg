@@ -119,7 +119,7 @@ gulp.task('chrome:manifest', function() {
 });
 
 gulp.task('chrome', [ 'chrome:css', 'chrome:manifest', 'js' ], function() {
-    var assets = gulp.src([ './betterdgg/**/*.png',
+    var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
             './chrome/**/*', '!./chrome/inject.js', '!./chrome/manifest.json' ])
         .pipe(gulp.dest('./build/chrome/'));
     var js = gulp.src([ './build/betterdgg.js', './chrome/inject.js', './build/content.js' ])
@@ -172,7 +172,7 @@ gulp.task('safari:plist', function() {
 });
 
 gulp.task('safari', [ 'safari:css', 'safari:plist', 'js' ], function() {
-    var assets = gulp.src([ './betterdgg/**/*.png',
+    var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
             './safari/**/*', '!./safari/inject.js', '!./safari/Info.plist' ])
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
     var js = gulp.src([ './build/betterdgg.js', './safari/inject.js', './build/content.js' ])

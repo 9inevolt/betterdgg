@@ -141,6 +141,13 @@
     background: url('images/emoticons/ShibeZ.png');
 }
 
+.chat-emote.bdgg-chat-emote-SourPls {
+    width: 32px;
+    height: 32px;
+    margin-top: -32px !important;
+    background: url('images/emoticons/SourPls.gif');
+}
+
 .chat-emote.bdgg-chat-emote-SpookerZ {
     width: 30px;
     height: 30px;

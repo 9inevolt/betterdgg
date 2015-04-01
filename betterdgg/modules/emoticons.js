@@ -8,15 +8,15 @@
             "ResidentSleeper", "WinWaker", "ChanChamp",
             "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS",
             "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ",
-            "lirikThump", "SpookerZ", "Riperino"
+            "lirikThump", "SpookerZ", "Riperino", "NiceMeMe", "YEE", "BabyRage",
+            "dayJoy", "kaceyFace", "aaaChamp", "CheekerZ"
         ];
 
-        var NEW = [ "NiceMeMe", "YEE", "BabyRage", "dayJoy", "kaceyFace",
-            "aaaChamp", "CheekerZ" ].sort();
+        var NEW = [ "SourPls" ].sort();
 
         var OVERRIDES = [ "SoSad" ].sort();
 
-        var RIP = [ "DankMeMe", "RipPA" ].sort();
+        var RIP = [ ].sort();
 
         var xmasEND = moment('2014-12-29 05:00');
         var xmasOn = moment().isBefore(xmasEND);
