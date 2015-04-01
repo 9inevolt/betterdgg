@@ -12,9 +12,11 @@
             "dayJoy", "kaceyFace", "aaaChamp", "CheekerZ"
         ];
 
-        var NEW = [ "SourPls", "D:" ].sort();
+        var NEW = [ "SourPls", "D:", "WEOW" ];
 
-        var OVERRIDES = [ "SoSad" ].sort();
+        var OVERRIDES = [ "SoSad" ];
+
+        var SUBONLY = [ "nathanDad" ];
 
         var RIP = [ ].sort();
 
@@ -36,7 +38,7 @@
         return {
             all: [],
             init: function() {
-                var emoticons = EMOTICONS.concat(NEW)
+                var emoticons = EMOTICONS.concat(NEW).concat(SUBONLY)
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 })
                     .sort();
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();
@@ -48,10 +50,18 @@
                 var BDGGEmoteFormatter = (function() {
                     function replacer(match, emote) {
                         emote = emote.replace(/[^\w-]/, '_');
-                        var s = '<div title="' + emote + '" class="chat-emote bdgg-chat-emote-' + emote;
+                        var s = '<div title="' + emote + '" class="chat-emote';
+
+                        if (SUBONLY.indexOf(emote) > -1) {
+                            s = s + ' chat-emote-' + emote;
+                        } else {
+                            s = s + ' bdgg-chat-emote-' + emote;
+                        }
+
                         if (xmasOn) {
                             s = s + ' bdgg-xmas';
                         }
+
                         return s + '"></div>';
                     };
 
@@ -102,10 +112,21 @@
                     fnHandleCommand.apply(this, arguments);
                     if (/^emotes ?/.test(str)) {
                         this.gui.push(new ChatInfoMessage("Better Destiny.gg: "+ emoticons.join(", ")));
-                        this.gui.push(new ChatInfoMessage("NEW: "+ NEW.sort().join(", ")));
-                        this.gui.push(new ChatInfoMessage("RIP: "+ RIP.sort().join(", ")));
-                        if (override) {
-                            this.gui.push(new ChatInfoMessage("Overrides: "+ OVERRIDES.join(", ")));
+
+                        if (NEW.length > 0) {
+                            this.gui.push(new ChatInfoMessage("NEW: "+ NEW.sort().join(", ")));
+                        }
+
+                        if (SUBONLY.length > 0) {
+                            this.gui.push(new ChatInfoMessage("Unlocked: "+ SUBONLY.sort().join(", ")));
+                        }
+
+                        if (RIP.length > 0) {
+                            this.gui.push(new ChatInfoMessage("RIP: "+ RIP.sort().join(", ")));
+                        }
+
+                        if (override && OVERRIDES.length > 0) {
+                            this.gui.push(new ChatInfoMessage("Overrides: "+ OVERRIDES.sort().join(", ")));
                         }
                     }
                 };

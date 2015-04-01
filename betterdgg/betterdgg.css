@@ -169,6 +169,13 @@
     background: url('images/emoticons/TopCake.png');
 }
 
+.chat-emote.bdgg-chat-emote-WEOW {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/WEOW.png');
+}
+
 .chat-emote.bdgg-chat-emote-YEE {
     width: 23px;
     height: 32px;

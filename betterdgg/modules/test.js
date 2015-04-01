@@ -34,11 +34,13 @@
         destiny.chat.sock.close();
     };
 
-    bdgg.test.chat.combo = function(emote, count) {
+    bdgg.test.chat.combo = function(emote, flair, nick, count) {
         emote = emote || 'DESBRO';
+        features = flair ? [ flair ] : [];
+        nick = nick || 'BetterDGG';
         count = count || 5;
         for (var i=0; i<count; i++) {
-            var m = destiny.chat.onMSG({data:emote, nick:'BetterDGG', features:[]});
+            var m = destiny.chat.onMSG({data:emote, nick:nick, features:features});
             m && destiny.chat.gui.push(m);
         }
     };
