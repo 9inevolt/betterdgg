@@ -12,7 +12,7 @@
             "dayJoy", "kaceyFace", "aaaChamp", "CheekerZ"
         ];
 
-        var NEW = [ "SourPls" ].sort();
+        var NEW = [ "SourPls", "D:" ].sort();
 
         var OVERRIDES = [ "SoSad" ].sort();
 
@@ -43,31 +43,38 @@
                 $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addEmote(v) });
                 bdgg.emoticons.all = emoticons;
 
-                var bdggemoteregex = new RegExp('\\b('+emoticons.join('|')+')\\b', 'gm');
-                var bdggemotereplacement = '<div title="$1" class="chat-emote bdgg-chat-emote-$1"></div>';
-                if (xmasOn) {
-                    bdggemotereplacement = '<div title="$1" class="chat-emote bdgg-chat-emote-$1 bdgg-xmas"></div>';
-                }
+                var bdggemoteregex = new RegExp('\\b('+emoticons.join('|')+')(?:\\b|\\s|$)', 'gm');
 
-                var BDGGEmoteFormatter = {
-                    format: function(str, user) {
-                        // use jQuery to parse str as html and only replace in text nodes
-                        var wrapped = $('<span>').append(str);
-                        wrapped.find('span').addBack().contents().filter(function() { return this.nodeType == 3})
-                            .replaceWith(function() {
-                                return this.data
-                                    .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
-                                    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                                    .replace(bdggemoteregex, bdggemotereplacement);
-                            });
-
-                        if (override) {
-                            wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
+                var BDGGEmoteFormatter = (function() {
+                    function replacer(match, emote) {
+                        emote = emote.replace(/[^\w-]/, '_');
+                        var s = '<div title="' + emote + '" class="chat-emote bdgg-chat-emote-' + emote;
+                        if (xmasOn) {
+                            s = s + ' bdgg-xmas';
                         }
+                        return s + '"></div>';
+                    };
 
-                        return wrapped.html();
-                    }
-                };
+                    return {
+                        format: function(str, user) {
+                            // use jQuery to parse str as html and only replace in text nodes
+                            var wrapped = $('<span>').append(str);
+                            wrapped.find('span').addBack().contents().filter(function() { return this.nodeType == 3})
+                                .replaceWith(function() {
+                                    return this.data
+                                        .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+                                        .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                                        .replace(bdggemoteregex, replacer);
+                                });
+
+                            if (override) {
+                                wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
+                            }
+
+                            return wrapped.html();
+                        }
+                    };
+                })();
 
                 destiny.chat.gui.formatters.push(BDGGEmoteFormatter);
 

@@ -197,6 +197,13 @@
     background: url('images/emoticons/BabyRage.png');
 }
 
+.chat-emote.bdgg-chat-emote-D_ {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/D_.png');
+}
+
 .chat-emote.bdgg-chat-emote-DansGame {
     width: 24px;
     height: 31px;
