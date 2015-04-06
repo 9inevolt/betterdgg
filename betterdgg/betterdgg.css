@@ -92,6 +92,20 @@
     background: url('images/emoticons/CheekerZ.png');
 }
 
+.chat-emote.bdgg-chat-emote-Depresstiny {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/Depresstiny.png');
+}
+
+.chat-emote.bdgg-chat-emote-HerbPerve {
+    width: 28px;
+    height: 28px;
+    margin-top: -28px !important;
+    background: url('images/emoticons/HerbPerve.png');
+}
+
 .chat-emote.bdgg-chat-emote-NiceMeMe {
     width: 27px;
     height: 30px;
