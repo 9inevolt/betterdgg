@@ -12,7 +12,8 @@
             "dayJoy", "kaceyFace", "aaaChamp", "CheekerZ"
         ];
 
-        var NEW = [ "SourPls", "D:", "WEOW", "Depresstiny", "HerbPerve" ];
+        var NEW = [ "SourPls", "D:", "WEOW", "Depresstiny", "HerbPerve",
+            "CARBUCKS", "Jewstiny", "PEPE" ];
 
         var OVERRIDES = [ "SoSad" ];
 

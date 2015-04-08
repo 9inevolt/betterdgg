@@ -78,6 +78,13 @@
     margin-top: -32px !important;
 }
 
+.chat-emote.bdgg-chat-emote-CARBUCKS {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/CARBUCKS.png');
+}
+
 .chat-emote.bdgg-chat-emote-ChanChamp {
     width: 23px;
     height: 30px;
@@ -86,9 +93,9 @@
 }
 
 .chat-emote.bdgg-chat-emote-CheekerZ {
-    width: 30px;
-    height: 30px;
-    margin-top: -30px !important;
+    width: 28px;
+    height: 32px;
+    margin-top: -28px !important;
     background: url('images/emoticons/CheekerZ.png');
 }
 
@@ -104,6 +111,13 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/HerbPerve.png');
+}
+
+.chat-emote.bdgg-chat-emote-Jewstiny {
+    width: 27px;
+    height: 32px;
+    margin-top: -32px !important;
+    background: url('images/emoticons/Jewstiny.png');
 }
 
 .chat-emote.bdgg-chat-emote-NiceMeMe {
@@ -125,6 +139,13 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/GabeN.png');
+}
+
+.chat-emote.bdgg-chat-emote-PEPE {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/PEPE.png');
 }
 
 .chat-emote.bdgg-chat-emote-POTATO {
