@@ -85,7 +85,7 @@
             var json_data = JSON.parse(evt.data);
             
             if (json_data.Type === "s") {
-              var strings = JSON.parse(json_data.Data);
+              var strings = json_data.Data;
               
               for (var i = 0; i < strings.length; i++) {
                 PushUserMessage(strings[i]);
@@ -142,8 +142,6 @@
             if (!user) {
                 user = new ChatUser({ nick: nick });
             }
-
-            msg = JSON.parse('"' + msg + '"');
 
             destiny.chat.gui.push(new BDGGChatStalkMessage(msg, user, time));
         }
