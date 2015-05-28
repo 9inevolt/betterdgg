@@ -75,46 +75,6 @@
             this.timestampformat = 'MMM DD HH:mm:ss';
         }
 
-        //stalk command and all supporting code. 
-        function MySocket()
-        {
-          var ws = new WebSocket("ws://ws.overrustlelogs.net:13373/ws");
-          //console.log(ws.readyState);
-          
-          ws.onmessage = function(evt) {
-            var json_data = JSON.parse(evt.data);
-            
-            if (json_data.Type === "s") {
-              var strings = json_data.Data;
-              
-              for (var i = 0; i < strings.length; i++) {
-                PushUserMessage(strings[i]);
-              }
-            }
-            else if (json_data.Type === "e") {
-              PushError("Error: " + json_data.Error);
-            }
-            ws.close();
-          };
-          
-          ws.onclose = function(evt) {
-            //console.log("Connection closed.");
-            //console.log("Code: " + evt.code + ", Reason: " + evt.reason);
-            if (evt.code == 1005) {
-              // not supposed to happen but does when we initiate close
-            }
-            else if (evt.code == 1006) {
-              // not supposed to happen but does when nick doesn't match
-              PushChat("Nick not found. Note: Nicks are case-sensitive.");
-            }
-            else if (evt.code > 1000 && evt.code < 1016) {
-              PushError("Error stalking: Connection closed unexpectedly.");
-            }
-          };
-          
-          return ws;
-        }
-
         function PushChat(string) {
             destiny.chat.gui.push(new ChatInfoMessage(string));
         }
@@ -165,6 +125,32 @@
                   return this.html();
               };
 
+            var listener = function(e) {
+                if (window != e.source) {
+                    return;
+                }
+                
+                if (e.data.type == 'bdgg_stalk_reply') {
+                    var reply = e.data.reply;
+                    
+                    if (reply.Type === "s") {
+                      var strings = reply.Data;
+                      
+                      for (var i = 0; i < strings.length; i++) {
+                        PushUserMessage(strings[i]);
+                      }
+                    }
+                    else if (reply.Type === "e") {
+                      PushError("Error: " + reply.Error);
+                    }
+                } else if (e.data.type == 'bdgg_stalk_message') {
+                    PushChat(e.data.message);
+                } else if (e.data.type == 'bdgg_stalk_error') {
+                    PushError(e.data.error);
+                }
+            };
+            window.addEventListener('message', listener);
+
               // hook into handle command
               var fnHandleCommand = destiny.chat.handleCommand;
               destiny.chat.handleCommand = function(str) {
@@ -186,7 +172,7 @@
                       // Stalk
                       querystr["QueryType"] = "s";
                       querystr["Name"] = match[1];
-                      querystr["Number"] = "3";
+                      querystr["Number"] = 3;
                     } else {
                       // Multi
                       var Names = [];
@@ -195,34 +181,21 @@
                       }
                       querystr["QueryType"] = "m";
                       querystr["Names"] = Names;
-                      querystr["Number"] = "10";
+                      querystr["Number"] = 10;
                     }
 
                     if (lastIsNum) {
-                      querystr["Number"] = Math.min(200, num).toString();
+                      querystr["Number"] = Math.min(200, num);
                     }
 
-                    var sock = MySocket();
-                    sock.onopen = function() {
-                      sock.send(JSON.stringify(querystr));
-                    };
-                    setTimeout(function() {
-                      if (sock.readyState < 2) {
-                        if (nickCount > 1) {
-                          PushChat("Timed out stalking multiple people.");
-                        } else {
-                          PushChat("Timed out stalking " + match[1]);
-                        }
-                        sock.close();
-                      }
-                    }, 5000);
+                    window.postMessage({type: 'bdgg_stalk_request', query: querystr}, '*');
                   } else if (sendstr.match(/^s(?:talk)?\s*$/)) {
                     PushChat("Command not understood.");
                     PushChat("Format: /stalk {username} {optional username} #");
                     PushChat("up to 4 usernames, # optional, /stalk alias: /s");
                   } else {
                     fnHandleCommand.apply(this, arguments);
-                  } 
+                  }
               };
             }
         }
