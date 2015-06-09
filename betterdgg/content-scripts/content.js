@@ -23,7 +23,7 @@ window.addEventListener("message", function(e) {
     } else if (e.data.type == 'bdgg_ustream_url') {
         var xhr = {
             onload: function(responseText) {
-                if (match = /"cid":(\d+)/.exec(responseText)) {
+                if (match = /cId=(\d+)/.exec(responseText)) {
                     //console.log("ustream cid is " + match[1]);
                     window.postMessage({ type: 'bdgg_ustream_channel', text: e.data.text, id: match[1] }, '*');
                 }
