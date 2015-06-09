@@ -28,6 +28,13 @@
             'type': 'boolean'
         },
 
+        'bdgg_flair_country_display': {
+            'name': 'Show my country flair',
+            'description': "Show your profile country's flag as flair",
+            'value': false,
+            'type': 'boolean'
+        },
+
         'bdgg_filter_words': {
             'name': 'Custom ignore words',
             'description': 'Comma-separated list of words to filter messages from chat (case-insensitive)',
