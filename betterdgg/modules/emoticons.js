@@ -9,11 +9,11 @@
             "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS",
             "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ",
             "lirikThump", "SpookerZ", "Riperino", "NiceMeMe", "YEE", "BabyRage",
-            "dayJoy", "kaceyFace", "aaaChamp", "CheekerZ"
+            "dayJoy", "kaceyFace", "aaaChamp", "CheekerZ", "SourPls", "D:",
+            "WEOW", "Depresstiny", "HerbPerve", "CARBUCKS", "Jewstiny", "PEPE"
         ];
 
-        var NEW = [ "SourPls", "D:", "WEOW", "Depresstiny", "HerbPerve",
-            "CARBUCKS", "Jewstiny", "PEPE" ];
+        var NEW = [ "ITSRAWWW", "EleGiggle", "SwiftRage" ];
 
         var OVERRIDES = [ "SoSad" ];
 
