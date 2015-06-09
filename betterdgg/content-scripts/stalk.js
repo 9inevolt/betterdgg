@@ -25,7 +25,14 @@ window.addEventListener("message", function(e) {
     }
 
     if (e.data.type == 'bdgg_stalk_request') {
-        wamp.call('bdgg.stalk', e.data.query, {
+        var query = {
+            QueryType: e.data.query.QueryType,
+            Name: e.data.query["Name"],
+            Names: e.data.query["Names"],
+            Number: e.data.query["Number"],
+            Session: e.data.query["Session"]
+        };
+        wamp.call('bdgg.stalk', query, {
             onSuccess: function(response) {
                 postReply(response);
             },
