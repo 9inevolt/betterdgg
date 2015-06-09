@@ -50,8 +50,8 @@
 
                 var BDGGEmoteFormatter = (function() {
                     function replacer(match, emote) {
-                        emote = emote.replace(/[^\w-]/, '_');
                         var s = '<div title="' + emote + '" class="chat-emote';
+                        emote = emote.replace(/[^\w-]/, '_');
 
                         if (SUBONLY.indexOf(emote) > -1) {
                             s = s + ' chat-emote-' + emote;
