@@ -42,6 +42,16 @@ window.addEventListener("message", function(e) {
             url: 'http://api.overrustle.com/api'
         };
         doXHR(xhr);
+    } else if (e.data.type == 'bdgg_get_profile_info') {
+        var xhr = {
+            onload: function(responseText) {
+                var info = JSON.parse(responseText);
+                window.postMessage({ type: 'bdgg_profile_info', info: info }, '*');
+            },
+            method: 'GET',
+            url: 'https://www.destiny.gg/profile/info'
+        };
+        doXHR(xhr);
     }
 });
 
