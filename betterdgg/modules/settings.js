@@ -30,7 +30,7 @@
 
         'bdgg_flair_country_display': {
             'name': 'Display my country flair',
-            'description': "Display your profile country's flag to others as flair",
+            'description': "Display your destiny.gg/profile nationality flag to others as flair",
             'value': false,
             'type': 'boolean'
         },
