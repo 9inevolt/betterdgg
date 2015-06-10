@@ -29,9 +29,16 @@
         },
 
         'bdgg_flair_country_display': {
-            'name': 'Show my country flair',
-            'description': "Show your profile country's flag as flair",
+            'name': 'Display my country flair',
+            'description': "Display your profile country's flag to others as flair",
             'value': false,
+            'type': 'boolean'
+        },
+
+        'bdgg_flair_all_country_display': {
+            'name': "Show all country flairs",
+            'description': "Show everyone's flag flairs",
+            'value': true,
             'type': 'boolean'
         },
 

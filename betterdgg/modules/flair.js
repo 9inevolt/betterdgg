@@ -52,6 +52,7 @@
 
     var _tid = null;
     var _displayCountry = false;
+    var _displayAllCountries = true;
     var _listener = null;
 
     bdgg.flair = (function() {
@@ -63,15 +64,17 @@
                 icons += '<i class="icon-bdgg-contributor" title="Better Destiny.gg Contributor"/>';
             }
 
-            if (user = bdgg.users.get(this.user.username)) {
-                var a2 = user.country.substring(0, 2).toUpperCase();
-                var flagClass = "icon-bdgg-flag flag-" + a2.toLowerCase();
-                var country = bdgg.countries.get(a2);
-                icons += '<i class="' + flagClass + '"';
-                if (country) {
-                    icons += ' title="' + country['name'] + '"';
+            if (_displayAllCountries) {
+                if (user = bdgg.users.get(this.user.username)) {
+                    var a2 = user.country.substring(0, 2).toUpperCase();
+                    var flagClass = "icon-bdgg-flag flag-" + a2.toLowerCase();
+                    var country = bdgg.countries.get(a2);
+                    if (country) {
+                        var flagIcon = '<i class="' + flagClass + '" '
+                            + 'title="' + country['name'] + '"/>';
+                        icons = flagIcon + icons;
+                    }
                 }
-                icons += '/>';
             }
             return icons;
         };
@@ -79,9 +82,12 @@
         return {
             init: function() {
                 bdgg.flair.displayCountry(bdgg.settings.get('bdgg_flair_country_display'), 3000);
+                bdgg.flair.displayAllCountries(bdgg.settings.get('bdgg_flair_all_country_display'));
                 bdgg.settings.addObserver(function(key, value) {
                     if (key == 'bdgg_flair_country_display') {
                         bdgg.flair.displayCountry(value);
+                    } else if (key == 'bdgg_flair_all_country_display') {
+                        bdgg.flair.displayAllCountries(value);
                     }
                 });
             },
@@ -96,6 +102,9 @@
                 } else {
                     _processFlair();
                 }
+            },
+            displayAllCountries: function(value) {
+                _displayAllCountries = value;
             }
         };
     })();
