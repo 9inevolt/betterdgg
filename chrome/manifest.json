@@ -16,7 +16,7 @@
     ],
 
     "background": {
-        "scripts": [ "lib/xhr.js" ],
+        "scripts": [ "lib/jsbn.js", "lib/xhr.js", "lib/wampy.js", "lib/service.js" ],
         "persistent": false
     },
 
