@@ -21,6 +21,10 @@ chrome.runtime.onConnect.addListener(function(port) {
         }
     });
 
+    port.onDisconnect.addListener(function() {
+        wamp.disconnect();
+    });
+
     port.onMessage.addListener(function(e) {
         if (!e.data || !e.data.type) {
             return;
