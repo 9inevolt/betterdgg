@@ -1,13 +1,31 @@
 ;(function(bdgg) {
     var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
 
-    function _getSid() {
+    function _getToken() {
         try {
-            $.cookie.json = false;
-            return $.cookie('sid');
+            var response = $.ajax(window.location.origin + '/profile/authentication', {
+                async: false,
+                timeout: 3000
+            });
+
+            if (response.status == 200) {
+                var tokenLinks = $(response.responseText).find("a[href^='/profile/authtoken/']");
+                if (tokenLinks.length > 0) {
+                    var href = tokenLinks[0].getAttribute('href');
+                    var matches;
+                    if (matches = /^\/profile\/authtoken\/(\w+)/.exec(href)) {
+                        return matches[1];
+                    }
+                } else {
+                    _createToken();
+                }
+            }
         } finally {
-            $.cookie.json = true;
         }
+    }
+
+    function _createToken() {
+        $.ajax(window.location.origin + '/profile/authtoken/create');
     }
 
     function _getCountry() {
@@ -25,7 +43,7 @@
             type: 'bdgg_flair_update',
             displayCountry: _displayCountry,
             username: destiny.chat.user.username,
-            sid: _getSid()
+            token: _getToken()
         };
 
         if (!_displayCountry || !currentUser) {

@@ -49,14 +49,15 @@ chrome.runtime.onConnect.addListener(function(port) {
             });
         } else if (e.data.type == 'bdgg_flair_update') {
             //console.log("Flair update received: " + e.data);
-            if (!e.data.sid) {
+            if (!e.data.token) {
                 return;
             }
 
             var body = {
-                esid: encrypt(e.data.sid),
+                etoken: encrypt(e.data.token),
                 username: e.data.username
             }
+
             var proc = e.data.displayCountry ? 'bdgg.flair.update' : 'bdgg.flair.remove';
 
             wamp.call(proc, body, {
