@@ -1,5 +1,4 @@
 const data = require("sdk/self").data;
-const pageMod = require("sdk/page-mod");
 const styleUtils = require("sdk/stylesheet/utils");
 //const events = require("sdk/system/events");
 const winUtils = require("sdk/window/utils");
@@ -11,13 +10,6 @@ const { pipe } = require('sdk/event/utils');
 const { Cc, Ci } = require("chrome");
 const wm = Cc["@mozilla.org/appshell/window-mediator;1"].
            getService(Ci.nsIWindowMediator);
-
-var mod = pageMod.PageMod({
-    include: "*.destiny.gg",
-    contentScriptFile: data.url("betterdgg.js"),
-    contentStyleFile: [ data.url("betterdgg.css"), data.url("emoticons.css") ],
-    attachTo: [ "top", "frame" ]
-});
 
 var windowListener = {
     //DO NOT EDIT HERE
