@@ -396,6 +396,7 @@
 .bdgg-menu {
     background: #1A1A1A;
     font-size: 12px;
+    z-index: 220;
 }
 
 .bdgg-menu .toolbar {
@@ -426,6 +427,15 @@
 
 .bdgg-menu label {
     font-weight: normal !important;
+}
+
+.bdgg-menu label:hover {
+    color: white;
+}
+
+.bdgg-menu label.checkbox {
+    cursor: pointer;
+    padding-left: 20px;
 }
 
 .bdgg-menu label.text input {

@@ -224,8 +224,10 @@
     text-shadow: none !important;
 }
 
-.chat-theme-light .chat-menu label:hover {
-    color: #262626 !important;
+.chat-theme-light .chat-menu label:hover,
+.chat-theme-light .bdgg-menu label:hover {
+    color: black !important;
+    text-decoration: underline !important;
 }
 
 .chat-theme-light .chat-menu .list-wrap,
