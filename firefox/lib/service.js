@@ -32,7 +32,7 @@ var workerAttached = function(worker) {
 var mod = pageMod.PageMod({
     include: "*.destiny.gg",
     contentScriptFile: data.url("betterdgg.js"),
-    contentStyleFile: [ data.url("betterdgg.css"), data.url("emoticons.css") ],
+    contentStyleFile: [ data.url("betterdgg.css") ],
     attachTo: [ "top", "frame" ],
     onAttach: workerAttached
 });

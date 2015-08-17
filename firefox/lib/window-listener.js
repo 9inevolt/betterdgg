@@ -98,7 +98,6 @@ var windowListener = {
                 sidebarWindow.addEventListener('load', function () {
                     sidebarWindow.removeEventListener('load', arguments.callee, true);
                     styleUtils.loadSheet(sidebarWindow, data.url('betterdgg.css'));
-                    styleUtils.loadSheet(sidebarWindow, data.url('emoticons.css'));
                     let worker = Worker({
                         window: sidebarWindow,
                         contentScript: pagemod.contentScript,
