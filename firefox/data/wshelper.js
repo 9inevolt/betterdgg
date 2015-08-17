@@ -24,6 +24,11 @@ onAttach = function(e) {
     });
 
     self.port.on("detach", function() {
+        console.log("websocket pageWorker port detached");
+        wamp.disconnect();
+    });
+
+    self.on("detach", function() {
         console.log("websocket pageWorker detached");
         wamp.disconnect();
     });
@@ -126,4 +131,4 @@ onAttach = function(e) {
 // Delay attaching to self because of some race condition
 setTimeout(function() {
     self.port.on('attach', onAttach);
-}, 2000);
+}, 0);
