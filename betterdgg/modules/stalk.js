@@ -19,13 +19,19 @@
  * Jan 01 00:26:01 UTC
  * Jan 19 21:00:51 UTC
  *
- * -Current
+ * -New Old
  * Jan 19 2015 21:16:04 UTC
  * Feb 09 2015 17:46:40 UTC
  * Feb 10 2015 02:52:31 UTC
+ *
+ * -Current
+ * 2015-08-17 20:11:55 UTC
  */
 ;(function(bdgg) {
     var FORMATTERS = [
+        function(ts) {
+            return moment.utc(ts, 'YYYY-MM-DD H:mm:ss [UTC]', true);
+        },
         function(ts) {
             return moment.utc(ts, 'MMM DD YYYY H:mm:ss [UTC]', true);
         },

@@ -217,4 +217,8 @@
     bdgg.test.stalk7 = function() {
         bdgg.test.stalk('Feb 09 2015 17:46:40 UTC', moment.unix(1423504000));
     };
+
+    bdgg.test.stalk8 = function() {
+        bdgg.test.stalk('2015-08-17 20:11:55 UTC', moment.unix(1439842315));
+    };
 }(window.BetterDGG = window.BetterDGG || {}));
