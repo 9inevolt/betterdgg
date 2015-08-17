@@ -82,6 +82,8 @@
         var msg = str || "hi there";
         destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'ILiedAboutCake', features:[]}));
         destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'mellipelli', features:[]}));
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'Zanshin314', features:[]}));
+        destiny.chat.gui.push(destiny.chat.onMSG({data:msg, nick:'Mannekino', features:[]}));
     };
 
     bdgg.test.chat.highlight = function(str) {

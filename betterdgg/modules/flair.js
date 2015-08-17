@@ -1,5 +1,7 @@
 ;(function(bdgg) {
     var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
+    var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
+                    'Zanshin314' ];
 
     function _getToken() {
         try {
@@ -75,11 +77,17 @@
 
     bdgg.flair = (function() {
         destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
+        destiny.UserFeatures['BDGG_MOOBIE'] = 'bdgg_moobie';
+
         var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
         var bdggGetFeatureHTML = function() {
             var icons = fnGetFeatureHTML.apply(this, arguments);
             if (CONTRIBUTORS.indexOf(this.user.username) > -1) {
                 icons += '<i class="icon-bdgg-contributor" title="Better Destiny.gg Contributor"/>';
+            }
+
+            if (MOOBIES.indexOf(this.user.username) > -1) {
+                icons += '<i class="icon-bdgg-moobie" title="Movie Streamer"/>';
             }
 
             if (_displayAllCountries) {
