@@ -221,4 +221,10 @@
     bdgg.test.stalk8 = function() {
         bdgg.test.stalk('2015-08-17 20:11:55 UTC', moment.unix(1439842315));
     };
+
+    bdgg.test.subreddit = function(str) {
+        var msg = destiny.chat.onMSG({data:str || '/r/destiny! also /r/fallout_shelter, /r/starcraft? maybe /r/games',
+            nick:'BetterDGG', features:['flair1']});
+        destiny.chat.gui.push(msg);
+    };
 }(window.BetterDGG = window.BetterDGG || {}));

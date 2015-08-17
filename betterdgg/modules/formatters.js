@@ -22,7 +22,25 @@
                     }
                 }
 
+                var _sr_url = function(url) {
+                    return "http://www.reddit.com" + url;
+                };
+
+                var _sr_replacer = function(match, p1, url, p3) {
+                    return p1 + '<a target="_blank" class="externallink" href="'
+                        + _sr_url(url) + '">' + url + '</a>' + p3;
+                };
+
+                var bdggsubredditregex = /(^|\s)(\/r\/[A-Za-z]\w{1,20})($|\s|[\.\?!,])/g;
+
+                var BDGGSubredditFormatter = {
+                    format: function(str, user) {
+                        return str.replace(bdggsubredditregex, _sr_replacer);
+                    }
+                }
+
                 destiny.chat.gui.formatters.push(BDGGGreenTextFormatter);
+                destiny.chat.gui.formatters.push(BDGGSubredditFormatter);
             }
         };
     })();
