@@ -561,7 +561,8 @@
 }
 
 .chat.focus-user .chat-lines > [class$="-msg"],
-.chat.focus-user .chat-lines > [class*="-msg "] {
+.chat.focus-user .chat-lines > [class*="-msg "],
+.chat.focus-user .chat-lines > .user-msg.highlight:not(.focused) {
     opacity: 0.3;
 }
 
