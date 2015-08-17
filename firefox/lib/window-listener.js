@@ -11,6 +11,8 @@ const { Cc, Ci } = require("chrome");
 const wm = Cc["@mozilla.org/appshell/window-mediator;1"].
            getService(Ci.nsIWindowMediator);
 
+const mod = require("service").pagemod;
+
 var windowListener = {
     //DO NOT EDIT HERE
     onOpenWindow: function (aXULWindow) {

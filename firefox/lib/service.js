@@ -29,3 +29,5 @@ var mod = pageMod.PageMod({
     attachTo: [ "top", "frame" ],
     onAttach: workerAttached
 });
+
+exports.pagemod = mod;

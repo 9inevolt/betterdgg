@@ -6,15 +6,15 @@ const { Cc, Ci, components } = require("chrome");
 
 require('./service.js');
 
-//var button = ToggleButton({
-//    id: "sidebar_toggle_button",
-//    label: "Sidebar",
-//    icon: "./icon.png",
-//    onChange: function(state) {
-//        if (state.checked) {
-//            windowListener.loadIntoWindow(winUtils.getMostRecentBrowserWindow());
-//        } else {
-//            windowListener.unloadFromWindow(winUtils.getMostRecentBrowserWindow());
-//        }
-//    }
-//});
+var button = ToggleButton({
+    id: "bdgg-siderbar-button",
+    label: "Sidebar",
+    icon: "./icon.png",
+    onChange: function(state) {
+        if (state.checked) {
+            windowListener.loadIntoWindow(winUtils.getMostRecentBrowserWindow());
+        } else {
+            windowListener.unloadFromWindow(winUtils.getMostRecentBrowserWindow());
+        }
+    }
+});
