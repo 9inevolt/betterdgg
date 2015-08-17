@@ -38,3 +38,4 @@ var mod = pageMod.PageMod({
 });
 
 exports.pagemod = mod;
+exports.workerAttached = workerAttached;

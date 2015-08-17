@@ -11,7 +11,7 @@ const { Cc, Ci } = require("chrome");
 const wm = Cc["@mozilla.org/appshell/window-mediator;1"].
            getService(Ci.nsIWindowMediator);
 
-const mod = require("service").pagemod;
+const { pagemod, workerAttached } = require("service");
 
 var windowListener = {
     //DO NOT EDIT HERE
@@ -101,15 +101,16 @@ var windowListener = {
                     styleUtils.loadSheet(sidebarWindow, data.url('emoticons.css'));
                     let worker = Worker({
                         window: sidebarWindow,
-                        contentScript: mod.contentScript,
-                        contentScriptFile: mod.contentScriptFile,
-                        contentScriptOptions: mod.contentScriptOptions,
+                        contentScript: pagemod.contentScript,
+                        contentScriptFile: pagemod.contentScriptFile,
+                        contentScriptOptions: pagemod.contentScriptOptions,
                         // Bug 980468: Syntax errors from scripts can happen before the worker
                         // can set up an error handler. They are per-mod rather than per-worker
                         // so are best handled at the mod level.
-                        onError: (e) => emit(mod, 'error', e)
+                        onError: (e) => emit(pagemod, 'error', e)
                     });
-                    pipe(worker, mod);
+                    pipe(worker, pagemod);
+                    workerAttached(worker);
                     // do we need these?
                     //emit(mod, 'attach', worker);
                     //once(worker, 'detach', function detach() {
