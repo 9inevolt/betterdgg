@@ -16,11 +16,11 @@ var workerAttached = function(worker) {
 
     setTimeout(function() {
         worker.on('message', function(e) {
-            console.log('worker.onmessage: ' + JSON.stringify(e, null, 4));
+            //console.log('worker.onmessage: ' + JSON.stringify(e, null, 4));
             wspage.postMessage(e);
         });
         wspage.on('message', function(e) {
-            console.log('wspage.onmessage: ' + JSON.stringify(e, null, 4));
+            //console.log('wspage.onmessage: ' + JSON.stringify(e, null, 4));
             worker.postMessage(e);
         });
         wspage.port.emit('attach');
