@@ -1,7 +1,9 @@
 ;(function(bdgg) {
     var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
     var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
-                    'Zanshin314' ];
+                    'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
+                    'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'CleanupGuy14'
+                  ];
 
     function _getToken() {
         try {
