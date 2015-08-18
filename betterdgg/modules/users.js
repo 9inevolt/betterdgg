@@ -18,7 +18,7 @@
         return {
             init: function() {
                 _initUsers();
-                bdgg.users.refresh();
+                setTimeout(bdgg.users.refresh, 1000);
             },
             get: function(username) {
                 return _users[username];
