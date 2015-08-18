@@ -127,6 +127,34 @@
     background: url('images/emoticons/NiceMeMe.png');
 }
 
+.chat-emote.bdgg-chat-emote-CallHafu {
+    width: 36px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/CallHafu.png');
+}
+
+.chat-emote.bdgg-chat-emote-ChibiDesti {
+    width: 40px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/ChibiDesti.png');
+}
+
+.chat-emote.bdgg-chat-emote-CORAL {
+    width: 25px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/CORAL.png');
+}
+
+.chat-emote.bdgg-chat-emote-CUX {
+    width: 76px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/CUX.png');
+}
+
 .chat-emote.bdgg-chat-emote-DSPstiny {
     width: 22px;
     height: 32px;
@@ -160,6 +188,13 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/POTATO.png');
+}
+
+.chat-emote.bdgg-chat-emote-RaveDoge {
+    width: 44px;
+    height: 30px;
+    margin-top: -30px !important;
+    background: url('images/emoticons/RaveDoge.gif');
 }
 
 .chat-emote.bdgg-chat-emote-Riperino {
@@ -335,6 +370,20 @@
     height: 28px;
     margin-top: -28px !important;
     background: url('images/emoticons/emoticons.png') no-repeat -212px -28px;
+}
+
+.chat-emote.bdgg-chat-emote-SMOrc {
+    width: 32px;
+    height: 32px;
+    margin-top: -32px !important;
+    background: url('images/emoticons/emoticons.png') no-repeat -25px -123px;
+}
+
+.chat-emote.bdgg-chat-emote-SSSsss {
+    width: 24px;
+    height: 24px;
+    margin-top: -24px !important;
+    background: url('images/emoticons/emoticons.png') no-repeat -239px 0;
 }
 
 .chat-emote.bdgg-chat-emote-SwiftRage {
