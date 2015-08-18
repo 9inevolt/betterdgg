@@ -115,10 +115,6 @@
                     if (/^emotes ?/.test(str)) {
                         this.gui.push(new ChatInfoMessage("Better Destiny.gg: "+ emoticons.join(", ")));
 
-                        if (NEW.length > 0) {
-                            this.gui.push(new ChatInfoMessage("NEW: "+ NEW.sort().join(", ")));
-                        }
-
                         if (SUBONLY.length > 0) {
                             this.gui.push(new ChatInfoMessage("Unlocked: "+ SUBONLY.sort().join(", ")));
                         }
@@ -129,6 +125,10 @@
 
                         if (override && OVERRIDES.length > 0) {
                             this.gui.push(new ChatInfoMessage("Overrides: "+ OVERRIDES.sort().join(", ")));
+                        }
+
+                        if (NEW.length > 0) {
+                            this.gui.push(new ChatInfoMessage("NEW: "+ NEW.sort().join(", ")));
                         }
                     }
                 };
