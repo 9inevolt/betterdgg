@@ -11,5 +11,4 @@ window.BetterDGG.users.init();
 window.BetterDGG.filter.init();
 window.BetterDGG.help.init();
 window.BetterDGG.theme.init();
-window.BetterDGG.window.init();
 window.BetterDGG.firstrun.init();
