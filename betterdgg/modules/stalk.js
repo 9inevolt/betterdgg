@@ -24,11 +24,17 @@
  * Feb 09 2015 17:46:40 UTC
  * Feb 10 2015 02:52:31 UTC
  *
- * -Current
+ * -Newer Old
  * 2015-08-17 20:11:55 UTC
+ *
+ * -Current
+ * 1442431468
  */
 ;(function(bdgg) {
     var FORMATTERS = [
+        function(ts) {
+            return moment.unix(ts);
+        },
         function(ts) {
             return moment.utc(ts, 'YYYY-MM-DD H:mm:ss [UTC]', true);
         },
@@ -89,9 +95,18 @@
             destiny.chat.gui.push(new ChatErrorMessage(string));
         }
 
+        function PushUserMessage(msg) {
+            if (typeof msg === "string") {
+                PushUserMessageString(msg);
+            } else {
+                var time = _parseTime(msg['timestamp']);
+                DoPush(msg['text'], msg['nick'], time);
+            }
+        }
+
         timeRegExp = /^\[([^\]]*)\]\s*/;
         nickRegExp = /^<?(\w+)>?: /;
-        function PushUserMessage(msg) {
+        function PushUserMessageString(msg) {
             var timeMatch = msg.match(timeRegExp);
             msg = msg.replace(timeRegExp, '');
             var nickMatch = msg.match(nickRegExp);
@@ -102,8 +117,11 @@
             }
 
             var time = _parseTime(timeMatch[1]);
-
             var nick = nickMatch[1];
+            DoPush(msg, nick, time);
+        }
+
+        function DoPush(msg, nick, time) {
             var user = destiny.chat.users[nick];
             if (!user) {
                 user = new ChatUser({ nick: nick });
