@@ -78,6 +78,13 @@
     margin-top: -32px !important;
 }
 
+.chat-emote-SpookerZ.bdgg-chat-emote-override {
+    width: 30px !important;
+    height: 30px !important;
+    margin-top: -30px !important;
+    background: url('images/emoticons/SpookerZ.png') !important;
+}
+
 .chat-emote.bdgg-chat-emote-CARBUCKS {
     width: 30px;
     height: 30px;
@@ -225,13 +232,6 @@
     background: url('images/emoticons/SourPls.gif');
 }
 
-.chat-emote.bdgg-chat-emote-SpookerZ {
-    width: 30px;
-    height: 30px;
-    margin-top: -30px !important;
-    background: url('images/emoticons/SpookerZ.png');
-}
-
 .chat-emote.bdgg-chat-emote-SuccesS {
     width: 28px;
     height: 28px;
@@ -267,11 +267,11 @@
     background: url('images/emoticons/emoticons.png') no-repeat -242px -123px;
 }
 
-.chat-emote.bdgg-chat-emote-aaaChamp {
+.chat-emote.bdgg-chat-emote-AlisherZ {
     width: 28px;
     height: 28px;
     margin-top: -28px !important;
-    background: url('images/emoticons/aaaChamp.png');
+    background: url('images/emoticons/AlisherZ.png');
 }
 
 .chat-emote.bdgg-chat-emote-BabyRage {

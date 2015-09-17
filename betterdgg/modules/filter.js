@@ -38,7 +38,7 @@
                         }
                     }
 
-                    fnGuiPush.apply(this, arguments);
+                    return fnGuiPush.apply(this, arguments);
                 };
             }
         }

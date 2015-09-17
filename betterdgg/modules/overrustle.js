@@ -160,22 +160,6 @@
         var _enabled = false;
         return {
             init: function() {
-                var BDGGOverrustleFormatter = {
-                    format: function(str, user) {
-                        if (!_enabled)
-                            return str;
-
-                        var wrapped = $('<span>').append(str);
-                        wrapped.find('a[href]').each(function(i, elem) {
-                            _convert(elem);
-                        });
-
-                        return wrapped.html();
-                    }
-                };
-
-                destiny.chat.gui.formatters.push(BDGGOverrustleFormatter);
-
                 bdgg.overrustle.convertLinks(bdgg.settings.get('bdgg_convert_overrustle_links'));
                 bdgg.settings.addObserver(function(key, value) {
                     if (key == 'bdgg_convert_overrustle_links') {
@@ -187,6 +171,14 @@
             },
             convertLinks: function(value) {
                 _enabled = value;
+            },
+            wrapMessage: function(elem, message) {
+                if (!_enabled)
+                    return;
+
+                elem.find('a[href]').each(function(i, a) {
+                    _convert(a);
+                });
             }
         }
     })();

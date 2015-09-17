@@ -8,15 +8,15 @@
             "ResidentSleeper", "WinWaker", "ChanChamp",
             "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS",
             "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ",
-            "lirikThump", "SpookerZ", "Riperino", "NiceMeMe", "YEE", "BabyRage",
-            "dayJoy", "kaceyFace", "aaaChamp", "CheekerZ", "SourPls", "D:",
+            "lirikThump", "Riperino", "NiceMeMe", "YEE", "BabyRage",
+            "dayJoy", "kaceyFace", "AlisherZ", "CheekerZ", "SourPls", "D:",
             "WEOW", "Depresstiny", "HerbPerve", "CARBUCKS", "Jewstiny", "PEPE",
             "ITSRAWWW", "EleGiggle", "SwiftRage"
         ];
 
         var NEW = [ "SMOrc", "SSSsss", "CallHafu", "ChibiDesti", "CORAL", "CUX", "RaveDoge" ];
 
-        var OVERRIDES = [ "SoSad" ];
+        var OVERRIDES = [ "SoSad", "SpookerZ" ];
 
         var SUBONLY = [ "nathanDad" ];
 
@@ -37,58 +37,35 @@
             };
         };
 
+        var emoticons, bdggemoteregex;
+        function replacer(match, emote) {
+            var s = '<div title="' + emote + '" class="chat-emote';
+            emote = emote.replace(/[^\w-]/, '_');
+
+            if (SUBONLY.indexOf(emote) > -1) {
+                s = s + ' chat-emote-' + emote;
+            } else {
+                s = s + ' bdgg-chat-emote-' + emote;
+            }
+
+            if (xmasOn) {
+                s = s + ' bdgg-xmas';
+            }
+
+            return s + '"></div>';
+        };
+
         return {
             all: [],
             init: function() {
-                var emoticons = EMOTICONS.concat(NEW).concat(SUBONLY)
+                emoticons = EMOTICONS.concat(NEW).concat(SUBONLY)
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 })
                     .sort();
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();
                 $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addEmote(v) });
                 bdgg.emoticons.all = emoticons;
 
-                var bdggemoteregex = new RegExp('\\b('+emoticons.join('|')+')(?:\\b|\\s|$)', 'gm');
-
-                var BDGGEmoteFormatter = (function() {
-                    function replacer(match, emote) {
-                        var s = '<div title="' + emote + '" class="chat-emote';
-                        emote = emote.replace(/[^\w-]/, '_');
-
-                        if (SUBONLY.indexOf(emote) > -1) {
-                            s = s + ' chat-emote-' + emote;
-                        } else {
-                            s = s + ' bdgg-chat-emote-' + emote;
-                        }
-
-                        if (xmasOn) {
-                            s = s + ' bdgg-xmas';
-                        }
-
-                        return s + '"></div>';
-                    };
-
-                    return {
-                        format: function(str, user) {
-                            // use jQuery to parse str as html and only replace in text nodes
-                            var wrapped = $('<span>').append(str);
-                            wrapped.find('span').addBack().contents().filter(function() { return this.nodeType == 3})
-                                .replaceWith(function() {
-                                    return this.data
-                                        .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
-                                        .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                                        .replace(bdggemoteregex, replacer);
-                                });
-
-                            if (override) {
-                                wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
-                            }
-
-                            return wrapped.html();
-                        }
-                    };
-                })();
-
-                destiny.chat.gui.formatters.push(BDGGEmoteFormatter);
+                bdggemoteregex = new RegExp('\\b('+emoticons.join('|')+')(?:\\b|\\s|$)', 'gm');
 
                 // multi-emote
                 $.each(destiny.chat.gui.formatters, function(i, f) {
@@ -141,6 +118,19 @@
             },
             overrideEmotes: function(value) {
                 override = value;
+            },
+            wrapMessage: function(wrapped, message) {
+                wrapped.find('span').addBack().contents().filter(function() { return this.nodeType == 3})
+                    .replaceWith(function() {
+                        return this.data
+                            .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+                            .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                            .replace(bdggemoteregex, replacer);
+                    });
+
+                if (override) {
+                    wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
+                }
             }
         }
     })();
