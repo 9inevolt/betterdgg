@@ -41,6 +41,19 @@
 
                 destiny.chat.gui.formatters.push(BDGGGreenTextFormatter);
                 destiny.chat.gui.formatters.push(BDGGSubredditFormatter);
+            },
+            wrapMessage: function(elem, message) {
+                elem.find('a[href]').each(function(i, a) {
+                    var href = a.getAttribute('href');
+                    var scheme = /(https?|ftp):\/\//gi;
+                    var match;
+                    while (match = scheme.exec(href)) {
+                        if (match.index > 6) {
+                            a.setAttribute('href', href.substring(0, match.index));
+                            break;
+                        }
+                    }
+                });
             }
         };
     })();
