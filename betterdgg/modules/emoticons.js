@@ -11,10 +11,11 @@
             "lirikThump", "Riperino", "NiceMeMe", "YEE", "BabyRage",
             "dayJoy", "kaceyFace", "AlisherZ", "CheekerZ", "SourPls", "D:",
             "WEOW", "Depresstiny", "HerbPerve", "CARBUCKS", "Jewstiny", "PEPE",
-            "ITSRAWWW", "EleGiggle", "SwiftRage"
+            "ITSRAWWW", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "CallHafu",
+            "ChibiDesti", "CORAL", "CUX", "RaveDoge"
         ];
 
-        var NEW = [ "SMOrc", "SSSsss", "CallHafu", "ChibiDesti", "CORAL", "CUX", "RaveDoge" ];
+        var NEW = [ ];
 
         var OVERRIDES = [ "SoSad", "SpookerZ" ];
 
