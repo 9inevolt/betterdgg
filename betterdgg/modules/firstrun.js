@@ -19,6 +19,7 @@
                 $('body').on('click', '.bdgg-whatsnew', function() {
                     $('#bdgg-about').show();
                     bdgg.settings.hide();
+                    bdgg.alert.hide();
                 });
 
                 $('#bdgg-about .close').on('click', function() {

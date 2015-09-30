@@ -503,7 +503,7 @@
     list-style-type: none;
 }
 
-#bdgg-about {
+#bdgg-about, #bdgg-alert {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -524,6 +524,10 @@
     font-family: Helvetica, Arial, sans-serif !important;
     margin: 0;
     padding: 5px 5px 0 !important;
+}
+
+#bdgg-alert p {
+    padding: 10px;
 }
 
 #bdgg-popup {

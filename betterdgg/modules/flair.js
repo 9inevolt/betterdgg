@@ -4,6 +4,9 @@
                     'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
                     'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'CleanupGuy14'
                   ];
+    var ALERT_MSG = '<p>To display or hide your country flair, please '
+        + '<a target="_blank" href="https://www.destiny.gg/profile/authentication">create</a> '
+        + 'a destiny.gg login key.</p>';
 
     function _getToken() {
         try {
@@ -21,15 +24,11 @@
                         return matches[1];
                     }
                 } else {
-                    _createToken();
+                    bdgg.alert.show(ALERT_MSG);
                 }
             }
         } finally {
         }
-    }
-
-    function _createToken() {
-        $.ajax(window.location.origin + '/profile/authtoken/create');
     }
 
     function _getCountry() {
