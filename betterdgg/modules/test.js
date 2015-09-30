@@ -83,7 +83,7 @@
     };
 
     bdgg.test.chat.flair = function(str) {
-        var msg = str || "hi there";
+        var msg = str || "hi there don't forget to try hiding all flair";
         push(destiny.chat.onMSG({data:msg, nick:'ILiedAboutCake', features:[]}));
         push(destiny.chat.onMSG({data:msg, nick:'mellipelli', features:[]}));
         push(destiny.chat.onMSG({data:msg, nick:'Zanshin314', features:[]}));

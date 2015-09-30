@@ -28,6 +28,13 @@
             'type': 'boolean'
         },
 
+        'bdgg_flair_hide_all': {
+            'name': 'Hide all flair',
+            'description': 'Hide all Better Destiny.gg flair',
+            'value': false,
+            'type': 'boolean'
+        },
+
         'bdgg_flair_country_display': {
             'name': 'Display my country flair',
             'description': "Display your destiny.gg/profile nationality flag to others as flair",

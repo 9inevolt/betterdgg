@@ -74,6 +74,7 @@
     var _tid = null;
     var _displayCountry = false;
     var _displayAllCountries = true;
+    var _hideAll = false;
     var _listener = null;
 
     bdgg.flair = (function() {
@@ -83,6 +84,11 @@
         var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
         var bdggGetFeatureHTML = function() {
             var icons = fnGetFeatureHTML.apply(this, arguments);
+
+            if (_hideAll) {
+                return icons;
+            }
+
             if (CONTRIBUTORS.indexOf(this.user.username) > -1) {
                 icons += '<i class="icon-bdgg-contributor" title="Better Destiny.gg Contributor"/>';
             }
@@ -110,11 +116,15 @@
             init: function() {
                 bdgg.flair.displayCountry(bdgg.settings.get('bdgg_flair_country_display'), 3000);
                 bdgg.flair.displayAllCountries(bdgg.settings.get('bdgg_flair_all_country_display'));
+                bdgg.flair.hideAll(bdgg.settings.get('bdgg_flair_hide_all'));
+
                 bdgg.settings.addObserver(function(key, value) {
                     if (key == 'bdgg_flair_country_display') {
                         bdgg.flair.displayCountry(value);
                     } else if (key == 'bdgg_flair_all_country_display') {
                         bdgg.flair.displayAllCountries(value);
+                    } else if (key == 'bdgg_flair_hide_all') {
+                        bdgg.flair.hideAll(value);
                     }
                 });
             },
@@ -132,6 +142,9 @@
             },
             displayAllCountries: function(value) {
                 _displayAllCountries = value;
+            },
+            hideAll: function(value) {
+                _hideAll = value;
             }
         };
     })();
