@@ -5,14 +5,14 @@
             <Seq>
                 <li>
                     <Description>
-                        <em:version>1.3</em:version>
+                        <em:version>1.3.1</em:version>
                         <em:targetApplication>
                             <Description>
                                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                                 <em:minVersion>31.0</em:minVersion>
                                 <em:maxVersion>40.0</em:maxVersion>
-                                <em:updateLink>http://9inevolt.github.io/betterdgg/firefox/releases/v1.3/betterdgg.xpi</em:updateLink>
-                                <em:updateHash>sha1:0a04093a8f088df5f85e44f5731a09d473f7038f</em:updateHash>
+                                <em:updateLink>http://9inevolt.github.io/betterdgg/firefox/releases/v1.3.1/betterdgg.xpi</em:updateLink>
+                                <em:updateHash>sha1:314a163588bdfda0ee818dbdb1f6501578c9aaeb</em:updateHash>
                             </Description>
                         </em:targetApplication>
                     </Description>
