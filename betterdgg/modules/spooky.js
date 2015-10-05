@@ -81,13 +81,29 @@
             });
         }
 
+        function ownMessage(message) {
+            return message && message['user'] && destiny.chat['user']
+                    && destiny.chat.user['username'] == message.user['username'];
+        }
+
         return {
             init: function() {
                 var m = moment();
                 on = m.isAfter(BEGIN) && m.isBefore(END);
+
+                var fnResolveMessage = destiny.chat.gui.resolveMessage;
+                destiny.chat.gui.resolveMessage = function(data) {
+                    var message = fnResolveMessage.apply(this, arguments);
+
+                    if (message && message['ui'] && ownMessage(message)) {
+                        bdgg.spooky.wrapMessage(message.ui, message, true);
+                    }
+
+                    return message;
+                }
             },
-            wrapMessage: function(elem, message) {
-                if (on) {
+            wrapMessage: function(elem, message, force) {
+                if (on && (force || !ownMessage(message))) {
                     spookyFormat(elem, message.timestamp);
                 }
             },

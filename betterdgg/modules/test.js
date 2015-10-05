@@ -1,6 +1,6 @@
 ;(function(bdgg) {
-    function push(msg) {
-        msg && destiny.chat.gui.push(msg);
+    function push(msg, state) {
+        msg && destiny.chat.gui.push(msg, state);
     };
 
     bdgg.test = { chat: {}, or: {} },
@@ -100,10 +100,14 @@
         push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
     };
 
-    bdgg.test.chat.self = function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'Message from self WhoahDude',
-            nick:destiny.chat.user.username, features:destiny.chat.user.features});
-        push(msg);
+    bdgg.test.chat.self = function(str, delay) {
+        var msgText = str || 'Message from self WhoahDude WhoahDude WhoahDude WhoahDude WhoahDude';
+        delay = delay || 1000;
+        push(new ChatUserMessage(msgText, destiny.chat.user), 'pending');
+        setTimeout(function() {
+            destiny.chat.onMSG({data:msgText, nick:destiny.chat.user.username, features:destiny.chat.user.features,
+                    timestamp:moment().valueOf()});
+        }, delay);
     };
 
     bdgg.test.chat.inject = function(str) {
