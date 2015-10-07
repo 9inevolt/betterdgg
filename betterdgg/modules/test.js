@@ -44,7 +44,7 @@
         nick = nick || 'BetterDGG';
         count = count || 5;
         for (var i=0; i<count; i++) {
-            var m = destiny.chat.onMSG({data:emote, nick:nick, features:features});
+            var m = destiny.chat.onMSG({data:emote, nick:nick, features:features, timestamp:moment().valueOf()});
             push(m);
         }
     };
@@ -97,16 +97,23 @@
 
     bdgg.test.chat.ignore = function(str) {
         var msg = str || " ^nsfw$ ";
-        push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+        push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[], timestamp:moment().valueOf()}));
     };
 
-    bdgg.test.chat.self = function(str, delay) {
+    bdgg.test.chat.self = function(str, delay, timestamp) {
         var msgText = str || 'Message from self WhoahDude WhoahDude WhoahDude WhoahDude WhoahDude';
-        delay = delay || 1000;
-        push(new ChatUserMessage(msgText, destiny.chat.user), 'pending');
+        delay = delay || 100;
+        var m = new ChatUserMessage(msgText, destiny.chat.user);
+
+        // Don't push self messages if they will combo (from gui.send)
+        if (!$.inArray(msgText, destiny.chat.gui.emoticons)
+                || !destiny.chat.previousemote || destiny.chat.previousemote.message != msgText) {
+            push(m, 'pending');
+        }
+
         setTimeout(function() {
-            destiny.chat.onMSG({data:msgText, nick:destiny.chat.user.username, features:destiny.chat.user.features,
-                    timestamp:moment().valueOf()});
+            push(destiny.chat.onMSG({data:msgText, nick:destiny.chat.user.username, features:destiny.chat.user.features,
+                    timestamp: timestamp || moment().valueOf()}));
         }, delay);
     };
 
@@ -187,6 +194,10 @@
         var msg = destiny.chat.onMSG({data:str || 'no http before destiny.gg',
             nick:'BetterDGG', features:['flair1']});
         push(msg);
+    };
+
+    bdgg.test.slot = function(str, delay, timestamp) {
+        bdgg.test.chat.self(str || 'BAR BAR BAR', delay, timestamp);
     };
 
     bdgg.test.stalk = function(ts, expected) {

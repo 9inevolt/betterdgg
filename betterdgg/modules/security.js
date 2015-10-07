@@ -10,6 +10,7 @@
                 bdgg.emoticons.wrapMessage(elem, this);
                 bdgg.formatters.wrapMessage(elem, this);
                 bdgg.spooky.wrapMessage(elem, this);
+                bdgg.casino.wrapMessage(elem, this);
 
                 elem.find('applet, body, base, embed, frame, frameset,'
                     + 'head, html, iframe, link, meta, object, script, style, title,'

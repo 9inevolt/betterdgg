@@ -15,7 +15,7 @@
             "ChibiDesti", "CORAL", "CUX", "RaveDoge"
         ];
 
-        var NEW = [ ];
+        var NEW = [ "BAR" ];
 
         var OVERRIDES = [ "SoSad", "SpookerZ" ];
 

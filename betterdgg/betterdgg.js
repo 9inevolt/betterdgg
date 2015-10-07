@@ -3,6 +3,7 @@ window.BetterDGG.settings.init();
 window.BetterDGG.formatters.init();
 window.BetterDGG.emoticons.init();
 window.BetterDGG.spooky.init();
+window.BetterDGG.casino.init();
 window.BetterDGG.overrustle.init();
 window.BetterDGG.countries.init();
 window.BetterDGG.stalk.init();
