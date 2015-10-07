@@ -1,24 +1,24 @@
 ;(function(bdgg) {
-    PROC_MAX = 0.4;
-    PROC_MIN = 0.02;
-    EMOTES = {
-        "ASLAN": [ 'fadeIn' ],
-        "BabyRage": [ 'spin' ],
-        "D_": [ 'blink' ],
-        "DAFUK": [ 'fadeIn', 'blink' ],
-        "Hhhehhehe": [ 'fadeIn', 'spin' ],
-        "INFESTINY": [ 'crawl' ],
-        "NoTears": [ 'pulse' ],
-        "PEPE": [ 'pulse' ],
-        "Riperino": [ 'fadeIn' ],
-        "SSSsss": [ 'pulse' ],
-        "SURPRISE": [ 'fadeIn', 'pulse', 'spin' ],
-        "WhoahDude": [ 'blink' ],
-        "YEE": [ 'pulse' ],
-    };
-    EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
-
     bdgg.spooky = (function() {
+        var PROC_MAX = 0.4;
+        var PROC_MIN = 0.02;
+        var EMOTES = {
+            "ASLAN": [ 'fadeIn' ],
+            "BabyRage": [ 'spin' ],
+            "D_": [ 'blink' ],
+            "DAFUK": [ 'fadeIn', 'blink' ],
+            "Hhhehhehe": [ 'fadeIn', 'spin' ],
+            "INFESTINY": [ 'crawl' ],
+            "NoTears": [ 'pulse' ],
+            "PEPE": [ 'pulse' ],
+            "Riperino": [ 'fadeIn' ],
+            "SSSsss": [ 'pulse' ],
+            "SURPRISE": [ 'fadeIn', 'pulse', 'spin' ],
+            "WhoahDude": [ 'blink' ],
+            "YEE": [ 'pulse' ],
+        };
+        var EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
+
         var BEGIN = moment('2015-10-01 05:00');
         var END = moment('2015-11-01 05:00');
         var on = false;
@@ -96,15 +96,15 @@
                     var message = fnResolveMessage.apply(this, arguments);
 
                     if (message && message['ui'] && ownMessage(message)) {
-                        bdgg.spooky.wrapMessage(message.ui, message, true);
+                        bdgg.spooky.wrapMessage(message.ui, message, true, data.timestamp);
                     }
 
                     return message;
                 }
             },
-            wrapMessage: function(elem, message, force) {
+            wrapMessage: function(elem, message, force, forceTime) {
                 if (on && (force || !ownMessage(message))) {
-                    spookyFormat(elem, message.timestamp);
+                    spookyFormat(elem, forceTime || message.timestamp);
                 }
             },
         };
