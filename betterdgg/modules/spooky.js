@@ -19,10 +19,10 @@
         };
         var EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
 
-        var BEGIN = moment('2015-10-01 05:00');
-        var END = moment('2015-11-01 05:00');
+        var BEGIN = moment('2015-10-01T13:00Z');
+        var END = moment('2015-11-01T13:00Z');
         var on = false;
-        var PROC_CHANCE = procChance();
+        var PROC_CHANCE;
 
         function Random(seed) {
             this._seed = seed % 2147483647;
@@ -86,10 +86,15 @@
                     && destiny.chat.user['username'] == message.user['username'];
         }
 
+        function refresh() {
+            var m = moment();
+            on = m.isAfter(BEGIN) && m.isBefore(END);
+            PROC_CHANCE = procChance();
+        }
+
         return {
             init: function() {
-                var m = moment();
-                on = m.isAfter(BEGIN) && m.isBefore(END);
+                refresh();
 
                 var fnResolveMessage = destiny.chat.gui.resolveMessage;
                 destiny.chat.gui.resolveMessage = function(data) {
@@ -101,6 +106,8 @@
 
                     return message;
                 }
+
+                setInterval(refresh, 300000);
             },
             wrapMessage: function(elem, message, force, forceTime) {
                 if (on && (force || !ownMessage(message))) {
