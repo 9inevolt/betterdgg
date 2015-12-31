@@ -12,7 +12,7 @@
                                 <em:minVersion>31.0</em:minVersion>
                                 <em:maxVersion>40.0</em:maxVersion>
                                 <em:updateLink>http://9inevolt.github.io/betterdgg/firefox/releases/v1.4/betterdgg.xpi</em:updateLink>
-                                <em:updateHash>sha1:921a3bf77e5c5d0fd6b33fa673bc53d07b27a967</em:updateHash>
+                                <em:updateHash>sha1:1a1a314e4c61b04ee53345b41b84c39ea9cc1437</em:updateHash>
                             </Description>
                         </em:targetApplication>
                     </Description>
