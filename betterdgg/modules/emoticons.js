@@ -2,24 +2,30 @@
     bdgg.emoticons = (function() {
         var override, emoteTabPriority;
 
-        var EMOTICONS = [ "ASLAN", "CallChad", "DJAslan", "FIDGETLOL",
+        var EMOTICONS = [ "CallChad", "FIDGETLOL",
             "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
             "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
             "ResidentSleeper", "WinWaker", "ChanChamp",
             "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS",
             "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ",
             "lirikThump", "Riperino", "NiceMeMe", "YEE", "BabyRage",
-            "dayJoy", "kaceyFace", "AlisherZ", "CheekerZ", "SourPls", "D:",
+            "dayJoy", "kaceyFace", "AlisherZ", "D:",
             "WEOW", "Depresstiny", "HerbPerve", "CARBUCKS", "Jewstiny", "PEPE",
             "ITSRAWWW", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "CallHafu",
-            "ChibiDesti", "CORAL", "CUX", "RaveDoge"
+            "ChibiDesti", "CORAL", "CUX", "KappaPride", "DJAslan",
+            "MingLee", "OhMyDog", "CoolCat", "FeelsBadMan", "FeelsGoodMan" 
         ];
 
         var NEW = [ ];
 
-        var OVERRIDES = [ "SoSad", "SpookerZ" ];
+        var ANIMATED = [ "CuckCrab", "SourPls", "RaveDoge" ];
 
-        var SUBONLY = [ "nathanDad" ];
+        var OVERRIDES = [ "SoSad", "SpookerZ", "Kappa", "OhKrappa", "DappaKappa", "Klappa" ];
+
+        var TEXT = [ "OuO", "XD" ];
+
+        var SUBONLY = [ "nathanDad", "nathanFeels", "nathanFather", "nathanDank",
+            "nathanEww", "nathanDubs1", "nathanDubs2", "nathanDubs3", "nathanParty" ];
 
         var RIP = [ ].sort();
 
@@ -43,23 +49,42 @@
             var s = '<div title="' + emote + '" class="chat-emote';
             emote = emote.replace(/[^\w-]/, '_');
 
+            //Disable Animated Emotes
+            if (ANIMATED.indexOf(emote) > -1 && bdgg.settings.get('bdgg_animate_disable') == true) {
+                return emote;
+            }
+
+            //Disable TEXT Emotes
+            if (TEXT.indexOf(emote) > -1 && bdgg.settings.get('bdgg_text_disable') == true) {
+                return emote;
+            }
+
+            //Injecct class
             if (SUBONLY.indexOf(emote) > -1) {
                 s = s + ' chat-emote-' + emote;
-            } else {
+            }else {
                 s = s + ' bdgg-chat-emote-' + emote;
             }
+            
 
             if (xmasOn) {
                 s = s + ' bdgg-xmas';
             }
+            
+            if (TEXT.indexOf(emote) > -1){
+                s = emote+'<div title="' + emote + '" class="chat-emote';
+                s = s + ' bdgg-chat-emote-' + emote +'"></div>';
+                return s;
+            }
 
             return s + '"></div>';
+
         };
 
         return {
             all: [],
             init: function() {
-                emoticons = EMOTICONS.concat(NEW).concat(SUBONLY)
+                emoticons = EMOTICONS.concat(NEW).concat(SUBONLY).concat(TEXT).concat(ANIMATED)
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) == -1 })
                     .sort();
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();

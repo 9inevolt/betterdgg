@@ -156,7 +156,7 @@ gulp.task('firefox', [ 'firefox:css', 'firefox:manifest', 'js' ], function() {
 
 gulp.task('firefox:xpi', [ 'firefox' ], function() {
     run('mkdir -p ./dist && cd ./build/firefox && cfx xpi'
-	+ ' --update-url https://9inevolt.github.io/betterdgg/firefox/update.rdf'
+    + ' --update-url https://9inevolt.github.io/betterdgg/firefox/update.rdf'
         + ' --output-file=../../dist/betterdgg.xpi').exec();
 });
 

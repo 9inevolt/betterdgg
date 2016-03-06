@@ -1,8 +1,10 @@
 ;(function(bdgg) {
+
+    var BOTS = [ 'Logs', 'OPbot', 'Bot', 'HighlightBot' ];
     var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
     var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
                     'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
-                    'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'CleanupGuy14'
+                    'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'DerFaba'
                   ];
     var ALERT_MSG = '<p>To display or hide your country flair, please '
         + '<a target="_blank" href="https://www.destiny.gg/profile/authentication">create</a> '
@@ -75,15 +77,27 @@
     var _displayCountry = false;
     var _displayAllCountries = true;
     var _hideAll = false;
+    var _hideEvery = false;
     var _listener = null;
 
     bdgg.flair = (function() {
         destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
         destiny.UserFeatures['BDGG_MOOBIE'] = 'bdgg_moobie';
+        destiny.UserFeatures['BOT'] = '';
 
         var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
         var bdggGetFeatureHTML = function() {
             var icons = fnGetFeatureHTML.apply(this, arguments);
+
+            //This comes first because Bot wasn't getting his flair sometimes
+            if (BOTS.indexOf(this.user.username) > -1) {
+                    icons += '<i class="icon-bot" title="Bot"/>';
+            }
+
+            if (_hideEvery) {
+                icons = ''; //Clear the emote string to set to nothing
+                return icons;
+            }
 
             if (_hideAll) {
                 return icons;
@@ -96,6 +110,7 @@
             if (MOOBIES.indexOf(this.user.username) > -1) {
                 icons += '<i class="icon-bdgg-moobie" title="Movie Streamer"/>';
             }
+
 
             if (_displayAllCountries) {
                 if (user = bdgg.users.get(this.user.username)) {
@@ -111,6 +126,7 @@
             }
             return icons;
         };
+
         ChatUserMessage.prototype.getFeatureHTML = bdggGetFeatureHTML;
         return {
             init: function() {
@@ -125,6 +141,8 @@
                         bdgg.flair.displayAllCountries(value);
                     } else if (key == 'bdgg_flair_hide_all') {
                         bdgg.flair.hideAll(value);
+                    } else if (key == 'bdgg_flair_hide_every') {
+                        bdgg.flair.hideEvery(value);
                     }
                 });
             },
@@ -145,6 +163,9 @@
             },
             hideAll: function(value) {
                 _hideAll = value;
+            },
+            hideEvery: function(value) {
+                _hideEvery = value;
             }
         };
     })();

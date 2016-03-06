@@ -14,6 +14,7 @@ function doXHR(xhr) {
 }
 
 window.addEventListener("message", function(e) {
+
     if (!isWindow(e.source) || !e.data.type) {
         return;
     }

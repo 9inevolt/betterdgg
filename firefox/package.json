@@ -1,15 +1,16 @@
 {
-  "name": "betterdgg",
-  "title": "Better Destiny.gg",
-  "id": "better@destiny.gg",
-  "description": "Restores emotes and faith in humanity to users of destiny.gg",
-  "author": "9inevolt",
-  "version": "development",
+  "name": "betterbetterdgg",
+  "title": "Better Better Destiny.gg",
+  "id": "betterbetter@destiny.gg",
+  "description": "Make Destiny.GG Great Again!",
+  "author": "downthecrop/9inevolt",
+  "version": "1.3.2",
   "icon": "data/icon.png",
   "permissions": {
     "cross-domain-content": [
       "http://ustream.tv",
       "http://www.ustream.tv",
+      "http://downthecrop.xyz",
       "http://api.overrustle.com"
     ]
   }

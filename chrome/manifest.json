@@ -1,9 +1,9 @@
 {
-    "name": "Better Destiny.gg",
-    "version": "development",
+    "name": "Better Better Destiny.gg",
+    "version": "1.0.1",
     "manifest_version": 2,
 
-    "description": "Restores emotes and faith in humanity to users of destiny.gg",
+    "description": "Make Destiny.gg Great Again",
     "icons": {
         "48":  "icon.png",
         "128": "icon128.png"
@@ -12,7 +12,9 @@
     "permissions": [
         "*://*.destiny.gg/*",
         "*://*.ustream.tv/*",
-        "*://*.overrustle.com/*"
+        "*://*.overrustle.com/*",
+        "*://*.downthecrop.xyz/*"
+
     ],
 
     "background": {

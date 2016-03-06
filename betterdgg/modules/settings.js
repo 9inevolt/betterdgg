@@ -14,6 +14,27 @@
             'type': 'boolean'
         },
 
+        'bdgg_disable_combos': {
+            'name': 'Disable All Combos',
+            'description': 'Shut off combos',
+            'value': false,
+            'type': 'boolean'
+        },
+
+        'bdgg_animate_disable': {
+            'name': 'Disable GIF Emotes',
+            'description': 'Remove RaveDoge and the likes',
+            'value': false,
+            'type': 'boolean'
+        },
+
+        'bdgg_text_disable': {
+            'name': 'Disable Text Combos',
+            'description': 'Remove OuO combos and the likes',
+            'value': false,
+            'type': 'boolean'
+        },
+
         'bdgg_light_theme': {
             'name': 'Light theme',
             'description': 'Light chat theme',
@@ -29,8 +50,15 @@
         },
 
         'bdgg_flair_hide_all': {
-            'name': 'Hide all flair',
-            'description': 'Hide all Better Destiny.gg flair',
+            'name': 'Hide all BetterD.GG flair',
+            'description': 'Hide all Better Destiny.gg flairs',
+            'value': false,
+            'type': 'boolean'
+        },
+
+        'bdgg_flair_hide_every': {
+            'name': 'Hide all D.GG flair',
+            'description': 'Hide all Destiny.gg flairs',
             'value': false,
             'type': 'boolean'
         },

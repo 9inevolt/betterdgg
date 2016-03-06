@@ -13,3 +13,4 @@ window.BetterDGG.security.init();
 window.BetterDGG.help.init();
 window.BetterDGG.theme.init();
 window.BetterDGG.firstrun.init();
+window.BetterDGG.chat.init();
