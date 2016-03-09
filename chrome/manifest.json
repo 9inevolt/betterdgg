@@ -26,7 +26,7 @@
         {
             "matches": ["*://*.destiny.gg/*"],
             "css": ["betterdgg.css"],
-            "js": ["betterdgg.js"],
+            "js": ["betterdgg.js","lib/panscroll.js"],
             "all_frames":true
         }
     ],
