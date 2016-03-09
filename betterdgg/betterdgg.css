@@ -12,6 +12,27 @@
     margin-top: -30px;
 }
 
+.chat-emote-NOBULLY, .chat-emote.bdgg-chat-emote-NOBULLY {
+    background-image:url('images/emoticons/NOBULLY.png');
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+}
+
+.chat-emote-gachiGASM, .chat-emote.bdgg-chat-emote-gachiGASM {
+    background-image:url('images/emoticons/gachiGASM.png');
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+}
+
+.chat-emote-haHAA, .chat-emote.bdgg-chat-emote-haHAA {
+    background-image:url('images/emoticons/haHAA.png');
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+}
+
 .chat-emote-OhMyDog, .chat-emote.bdgg-chat-emote-OhMyDog {
     background-image:url('images/emoticons/OhMyDog.png');
     width: 30px;
