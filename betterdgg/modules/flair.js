@@ -1,7 +1,6 @@
 ;(function(bdgg) {
 
     var BOTS = [ 'Logs', 'OPbot', 'Bot', 'HighlightBot' ];
-	var ANIME = [ 'PurpleCow', 'Saraghz', 'Sweetie_Belle', 'Axik_', 'Biogilas'];
     var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
     var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
                     'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
@@ -84,7 +83,6 @@
     bdgg.flair = (function() {
         destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
         destiny.UserFeatures['BDGG_MOOBIE'] = 'bdgg_moobie';
-		destiny.UserFeatures['BDGG_ANIME'] = 'bdgg_anime';
         destiny.UserFeatures['BOT'] = '';
 
         var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
@@ -109,10 +107,6 @@
                 icons += '<i class="icon-bdgg-contributor" title="Better Destiny.gg Contributor"/>';
             }
 
-			if (ANIME.indexOf(this.user.username) > -1) {
-                icons += '<i class="icon-bdgg-anime" title="OuO"/>';
-            }
-			
             if (MOOBIES.indexOf(this.user.username) > -1) {
                 icons += '<i class="icon-bdgg-moobie" title="Movie Streamer"/>';
             }

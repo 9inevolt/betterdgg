@@ -82,15 +82,7 @@
             'description': 'Comma-separated list of words to filter messages from chat (case-insensitive)',
             'value': '',
             'type': 'string'
-        },
-		
-		'bdgg_stalk_targets': {
-            'name': 'Custom stalk targets',
-            'description': 'Comma-separated list of stalk targets(case-insensitive)',
-            'value': '',
-            'type': 'string'
         }
-		
     };
 
     bdgg.settings = (function() {
