@@ -15,7 +15,7 @@
             "ITSRAWWW", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "CallHafu",
             "ChibiDesti", "CORAL", "CUX", "KappaPride", "DJAslan",
             "MingLee", "OhMyDog", "CoolCat", "FeelsBadMan", "FeelsGoodMan",
-            "NOBULLY", "haHAA", "gachiGASM"
+            "NOBULLY", "haHAA", "gachiGASM", "GetBullied"
 
         ];
 
