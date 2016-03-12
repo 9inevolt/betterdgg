@@ -276,35 +276,6 @@
     height: 30px;
     margin-top: -30px;
     background: url('images/emoticons/ITSRAWWW.png');
-	animation: ITSRAWWW 100ms 7
-}
-
-.chat-emote-ITSRAWWW, .chat-emote.bdgg-chat-emote-ITSRAWWW:hover {
-    width: 25px;
-    height: 30px;
-    margin-top: -30px;
-    background: url('images/emoticons/ITSRAWWW.png');
-	animation: ITSRAWWW-hover 100ms infinite
-}
-
-@keyframes ITSRAWWW {
-	  from {
-        left: 0px
-    }
-
-    to {
-        left: 2px
-    }
-}
-
-@keyframes ITSRAWWW-hover {
-	  from {
-        left: 0px
-    }
-
-    to {
-        left: 2px
-    }
 }
 
 .chat-emote.bdgg-chat-emote-PEPE {
