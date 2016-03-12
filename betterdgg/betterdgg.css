@@ -19,6 +19,11 @@
     margin-top: -30px;
 }
 
+.chat-emote-NOBULLY:hover, .bdgg-chat-emote-NOBULLY:hover {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
 .chat-emote-gachiGASM, .chat-emote.bdgg-chat-emote-gachiGASM {
     background-image:url('images/emoticons/gachiGASM.png');
     width: 30px;
