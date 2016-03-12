@@ -1,7 +1,7 @@
 ;(function(bdgg) {
 
     var muted = false;
-    var muteMessage = "Bot didn't say how long you were muted, DaFellas";
+    var muteMessage = "";
     var lastMute = 0;
 
     function _timeDiff( tstart, tend ) {
@@ -27,7 +27,6 @@
             var bdggMUTE = fnChatMUTE.apply(this, arguments);
             if (data.data.toLowerCase() == this.user.username.toLowerCase()){
                 muted = true;
-                console.log("You were muted at: "+_timeConverter(data.timestamp));
             }
             //console.log(data);
             return bdggMUTE;
@@ -45,7 +44,7 @@
                 ChatEmoteMessage=function(emote,timestamp){return this.emotecount=-999,this.emotecountui=null,this}
             }
 
-            if (data.nick == "Bot" && muted == true){
+            if (data.nick == "Bot" && muted){
                 console.log("Mute Message found");
                 lastMute = data.timestamp;
                 muteMessage = data.data;
@@ -73,7 +72,11 @@
                     var newDate = new Date();
                     var currentStamp = newDate.getTime();
                     this.gui.push(new ChatInfoMessage("You are still muted for: "+_timeDiff(currentStamp, muteLength)));
-                }
+                }    
+
+                else{
+                    this.gui.push(new ChatInfoMessage("No mute timestamp recorded."));
+                }    
             }
             return bdggERR;
         };

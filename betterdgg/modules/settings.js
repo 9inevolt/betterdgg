@@ -35,20 +35,6 @@
             'type': 'boolean'
         },
 
-        'bdgg_light_theme': {
-            'name': 'Light theme',
-            'description': 'Light chat theme',
-            'value': false,
-            'type': 'boolean'
-        },
-
-        'bdgg_convert_overrustle_links': {
-            'name': 'Convert stream links to overrustle',
-            'description': 'Auto-converts stream links to use overrustle.com',
-            'value': false,
-            'type': 'boolean'
-        },
-
         'bdgg_flair_hide_all': {
             'name': 'Hide all BetterD.GG flair',
             'description': 'Hide all Better Destiny.gg flairs',
@@ -59,6 +45,20 @@
         'bdgg_flair_hide_every': {
             'name': 'Hide all D.GG flair',
             'description': 'Hide all Destiny.gg flairs',
+            'value': false,
+            'type': 'boolean'
+        },
+
+        'bdgg_light_theme': {
+            'name': 'Light theme',
+            'description': 'Light chat theme',
+            'value': false,
+            'type': 'boolean'
+        },
+
+        'bdgg_convert_overrustle_links': {
+            'name': 'Convert stream links to overrustle',
+            'description': 'Auto-converts stream links to use overrustle.com',
             'value': false,
             'type': 'boolean'
         },
@@ -75,6 +75,13 @@
             'description': "Show everyone's flag flairs",
             'value': true,
             'type': 'boolean'
+        },
+
+        'bgg_passive_stalk': {
+            'name': 'Passive stalk targets',
+            'description': 'Sweetie_Belle\'s passive stalk highlighting',
+            'value':'',
+            'type':'string'
         },
 
         'bdgg_filter_words': {
