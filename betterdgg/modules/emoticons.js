@@ -143,7 +143,7 @@
                 
                 var editEmoteList;
 
-                if (value == true){
+                if (value){
 
                     editEmoteList = EMOTICONS.concat(NEW).concat(SUBONLY).concat(ANIMATED)
                     .filter(function(e) { return baseEmotes.indexOf(e) == -1 })
