@@ -39,7 +39,7 @@
         var bdggChatMSG = function(data) {
             var bdggMessage = fnChatMSG.apply(this, arguments);
 
-            if (bdgg.settings.get('bdgg_disable_combos') == true){
+            if (bdgg.settings.get('bdgg_disable_combos') === true){
                 //I copied this from Dicedlemming it might suck but it works.
                 ChatEmoteMessage=function(emote,timestamp){return this.emotecount=-999,this.emotecountui=null,this}
             }
@@ -64,7 +64,7 @@
                 //console.log(data);
                 //console.log(muteMessage);
                 var n = muteMessage.match(/[0-9]*[0-9]m/);  //find mute timestamp
-                if (n != null){
+                if (n !== null){
                     var nString = n.toString();
                     var muteLength = nString.substr(0, nString.length-1);
                     muteLength = parseInt(muteLength);
@@ -72,11 +72,11 @@
                     var newDate = new Date();
                     var currentStamp = newDate.getTime();
                     this.gui.push(new ChatInfoMessage("You are still muted for: "+_timeDiff(currentStamp, muteLength)));
-                }    
+                }
 
                 else{
                     this.gui.push(new ChatInfoMessage("No mute timestamp recorded."));
-                }    
+                }
             }
             return bdggERR;
         };
