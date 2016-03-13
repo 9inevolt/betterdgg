@@ -611,6 +611,7 @@
 
 .bdgg-menu label {
     font-weight: normal !important;
+    width: 100%;
 }
 
 .bdgg-menu label:hover {
