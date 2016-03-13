@@ -1,4 +1,5 @@
 li
   label.text(title=setting.description)
     = setting.name
-    input(id=setting.key type="text" title=setting.description, value=setting.value)
+    input.form-control.input-sm(id=setting.key type="text"
+      title=setting.description, value=setting.value)
