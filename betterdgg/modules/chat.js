@@ -4,6 +4,9 @@
     var muteMessage = "";
     var lastMute = 0;
 
+    // save original ChatEmoteMessage now so that we can revert back to it later
+    var OriginalChatEmoteMessage = ChatEmoteMessage;
+
     function _timeDiff( tstart, tend ) {
         var diff = Math.floor((tend - tstart) / 1000), units = [
             { d: 60, l: "seconds" },
@@ -39,9 +42,12 @@
         var bdggChatMSG = function(data) {
             var bdggMessage = fnChatMSG.apply(this, arguments);
 
-            if (bdgg.settings.get('bdgg_disable_combos') === true){
+            if (bdgg.settings.get('bdgg_disable_combos')) {
                 //I copied this from Dicedlemming it might suck but it works.
                 ChatEmoteMessage=function(emote,timestamp){return this.emotecount=-999,this.emotecountui=null,this}
+            }
+            else {
+                ChatEmoteMessage = OriginalChatEmoteMessage;
             }
 
             if (data.nick == "Bot" && muted){
