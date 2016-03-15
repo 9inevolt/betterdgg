@@ -56,6 +56,13 @@
             'type': 'boolean'
         },
 
+        'bdgg_left_chat': {
+            'name': 'Left chat',
+            'description': 'Moves chat to the left',
+            'value': false,
+            'type': 'boolean'
+        },
+
         'bdgg_convert_overrustle_links': {
             'name': 'Convert stream links to overrustle',
             'description': 'Auto-converts stream links to use overrustle.com',
