@@ -194,13 +194,6 @@
     background: url('images/emoticons/ChanChamp.png');
 }
 
-.chat-emote.bdgg-chat-emote-CheekerZ {
-    width: 28px;
-    height: 32px;
-    margin-top: -28px !important;
-    background: url('images/emoticons/CheekerZ.png');
-}
-
 .chat-emote-Depresstiny, .chat-emote.bdgg-chat-emote-Depresstiny {
     width: 28px;
     height: 28px;
@@ -382,13 +375,6 @@
     height: 28px;
     margin-top: -28px;
     background: url('images/emoticons/WEOW.png');
-}
-
-.chat-emote.bdgg-chat-emote-YEE {
-    width: 23px;
-    height: 32px;
-    margin-top: -32px !important;
-    background: url('images/emoticons/YEE.png');
 }
 
 .chat-emote-4Head, .chat-emote.bdgg-chat-emote-4Head {
