@@ -16,7 +16,9 @@
         	},
         	update: function(userList) {
         		var res = ''
-        		userList = userList.toLowerCase().split(' ').join('').split(',')
+                if (userList.length != 0) { 
+                    userList = userList.toLowerCase().split(' ').join('').split(',')
+                }
         		for (var i = 0; i < userList.length;i++)
         			res += template.replace('{}', userList[i]) + ','
         		res = res.substring(0, res.length - 1)
