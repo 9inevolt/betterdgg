@@ -1,15 +1,15 @@
 ;(function(bdgg) {
 		console.log('ready');
-		bdgg.zleft = (function() {
+		bdgg.left = (function() {
 			var chat, stream
 			return {
 				init: function() {
 					stream = window.parent.document.querySelector("div#stream-panel");
 					chat = window.parent.document.querySelector("div#chat-panel");
-					bdgg.zleft.leftBoys(bdgg.settings.get('bdgg_left_chat'));
+					bdgg.left.leftBoys(bdgg.settings.get('bdgg_left_chat'));
 					bdgg.settings.addObserver(function(key, val) {
 						if (key == 'bdgg_left_chat')
-							bdgg.zleft.leftBoys(val);
+						bdgg.left.leftBoys(val)
 					})
 				},
 				leftBoys: function(val) {
