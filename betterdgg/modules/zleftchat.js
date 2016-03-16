@@ -6,11 +6,10 @@
 				init: function() {
 					stream = window.parent.document.querySelector("div#stream-panel");
 					chat = window.parent.document.querySelector("div#chat-panel");
-					bdgg.zleft.leftBoys(bdgg.settings.get('bgg_left_chat'));
+					bdgg.zleft.leftBoys(bdgg.settings.get('bdgg_left_chat'));
 					bdgg.settings.addObserver(function(key, val) {
 						if (key == 'bdgg_left_chat')
-							console.log('changed')
-						bdgg.zleft.leftBoys(val)
+							bdgg.zleft.leftBoys(val);
 					})
 				},
 				leftBoys: function(val) {
