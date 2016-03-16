@@ -91,13 +91,6 @@
             'type':'string'
         },
 
-        'bdgg_user_ignore': {
-            'name': 'Users to ignore',
-            'description': 'List of users to ignore without removing their mentions',
-            'value':'',
-            'type':'string'
-        },
-
         'bdgg_filter_words': {
             'name': 'Custom ignore words',
             'description': 'Comma-separated list of words to filter messages from chat (case-insensitive)',
