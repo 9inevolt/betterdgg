@@ -1,21 +1,16 @@
 ;(function(bdgg) {
-		bdgg.left = (function() {
+		bdgg.zleft = (function() {
 			var chat, stream
 			return {
 				init: function() {
-					var URL = document.referrer;
-					if(URL.search("overrustle")) {
-
-					} else {
-						stream = $('#stream-panel', parent.document);
-						chat = $('#chat-panel', parent.document);
-						bdgg.left.leftBoys(bdgg.settings.get('bdgg_left_chat'));
-						bdgg.left.resizeTakeOver();
-						bdgg.settings.addObserver(function(key, val) {
-							if (key == 'bdgg_left_chat')
-								bdgg.left.leftBoys(val);
-						})
-					}
+					stream = $('#stream-panel', parent.document);
+					chat = $('#chat-panel', parent.document);
+					bdgg.zleft.leftBoys(bdgg.settings.get('bdgg_left_chat'));
+					bdgg.zleft.resizeTakeOver();
+					bdgg.settings.addObserver(function(key, val) {
+						if (key == 'bdgg_left_chat')
+							bdgg.zleft.leftBoys(val);
+					})
 				},
 				leftBoys: function(val) {
 					var resizeBar = $('#chat-panel-resize-bar', parent.document);
