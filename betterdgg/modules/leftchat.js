@@ -1,5 +1,5 @@
 ;(function(bdgg) {
-		bdgg.left = (function() {
+		bdgg.leftchat = (function() {
 			var chat, stream
 			return {
 				init: function() {
@@ -9,11 +9,11 @@
 					} else {
 						stream = $('#stream-panel', parent.document);
 						chat = $('#chat-panel', parent.document);
-						bdgg.left.leftBoys(bdgg.settings.get('bdgg_left_chat'));
-						bdgg.left.resizeTakeOver();
+						bdgg.leftchat.leftBoys(bdgg.settings.get('bdgg_left_chat'));
+						bdgg.leftchat.resizeTakeOver();
 						bdgg.settings.addObserver(function(key, val) {
 							if (key == 'bdgg_left_chat')
-								bdgg.left.leftBoys(val);
+								bdgg.leftchat.leftBoys(val);
 						})
 					}
 				},
