@@ -5,8 +5,6 @@ const { setTimeout } = require("sdk/timers");
 
 // Attach to chat page and relay all messages
 var workerAttached = function(worker) {
-    console.log("pageMod worker attached");
-
     // Create background page worker to use websockets
     var wspage = pageWorker.Page({
         contentScriptFile: [ data.url("jsbn.js"), data.url("wampy.js"), data.url("wshelper.js") ],
@@ -16,11 +14,9 @@ var workerAttached = function(worker) {
 
     setTimeout(function() {
         worker.on('message', function(e) {
-            //console.log('worker.onmessage: ' + JSON.stringify(e, null, 4));
             wspage.postMessage(e);
         });
         wspage.on('message', function(e) {
-            //console.log('wspage.onmessage: ' + JSON.stringify(e, null, 4));
             worker.postMessage(e);
         });
         wspage.port.emit('attach');
