@@ -35,8 +35,6 @@
 						});
 					}
 				},
-				
-				//Polecat's resize code
 				resizeTakeOver: function() {
 					var resizeBar = $('#chat-panel-resize-bar', parent.document);
 					var clone = resizeBar.clone();
