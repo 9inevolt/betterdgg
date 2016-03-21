@@ -13,5 +13,6 @@
       "http://downthecrop.xyz",
       "http://api.overrustle.com"
     ]
-  }
+  },
+  "main": "lib/main.js"
 }

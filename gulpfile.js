@@ -155,9 +155,7 @@ gulp.task('firefox', [ 'firefox:css', 'firefox:manifest', 'js' ], function() {
 });
 
 gulp.task('firefox:xpi', [ 'firefox' ], function() {
-    run('mkdir -p ./dist && cd ./build/firefox && cfx xpi'
-    + ' --update-url https://downthecrop.xyz/bbdgg/firefox/update.rdf'
-        + ' --output-file=../../dist/betterdgg.xpi').exec();
+    run('mkdir -p ./dist && cd ./build/firefox && jpm xpi').exec();
 });
 
 gulp.task('safari:plist', function() {
