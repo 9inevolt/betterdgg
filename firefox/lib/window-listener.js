@@ -11,7 +11,7 @@ const { Cc, Ci } = require("chrome");
 const wm = Cc["@mozilla.org/appshell/window-mediator;1"].
            getService(Ci.nsIWindowMediator);
 
-const { pagemod, workerAttached } = require("service");
+const { pagemod, workerAttached } = require("./service");
 
 var windowListener = {
     //DO NOT EDIT HERE
