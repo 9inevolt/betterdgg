@@ -730,3 +730,25 @@
 .chat.focus-user .chat-lines > .user-msg.highlight:not(.focused) {
     opacity: 0.3;
 }
+
+/* Selectable emotes */
+.chat-emote {
+    text-indent: 0 !important;
+    color: transparent;
+}
+
+.msg {
+    text-shadow: none;
+}
+
+.chat-emote::selection {
+    color: transparent;
+}
+
+.chat-emote::-moz-selection { 
+    color: transparent; 
+}
+
+.chat-emote::-webkit-selection { 
+    color: transparent;
+}
