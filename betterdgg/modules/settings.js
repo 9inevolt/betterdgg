@@ -36,14 +36,14 @@
         },
 
         'bdgg_flair_hide_all': {
-            'name': 'Hide all BetterD.GG flair',
+            'name': 'Hide all BetterD.GG flairs',
             'description': 'Hide all Better Destiny.gg flairs',
             'value': false,
             'type': 'boolean'
         },
 
         'bdgg_flair_hide_every': {
-            'name': 'Hide all D.GG flair',
+            'name': 'Hide all D.GG flairs',
             'description': 'Hide all Destiny.gg flairs',
             'value': false,
             'type': 'boolean'
@@ -91,7 +91,7 @@
             'type': 'boolean'
         },
 
-        'bgg_passive_stalk': {
+        'bdgg_passive_stalk': {
             'name': 'Passive stalk targets',
             'description': 'Sweetie_Belle\'s passive stalk highlighting',
             'value':'',
@@ -99,7 +99,7 @@
         },
 
         'bdgg_user_ignore': {
-            'name': 'Users to ignore',
+            'name': 'Ignore user messages',
             'description': 'List of users to ignore without removing their mentions',
             'value':'',
             'type':'string'
