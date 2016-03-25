@@ -84,9 +84,23 @@
             'type': 'boolean'
         },
 
+        'bdgg_Private_Message_Notifications': {
+            'name': "Private message desktop notifications",
+            'description': "Show desktop notifications on receipt of a private message",
+            'value': true,
+            'type': 'boolean'
+        },
+
         'bgg_passive_stalk': {
             'name': 'Passive stalk targets',
             'description': 'Sweetie_Belle\'s passive stalk highlighting',
+            'value':'',
+            'type':'string'
+        },
+
+        'bdgg_user_ignore': {
+            'name': 'Users to ignore',
+            'description': 'List of users to ignore without removing their mentions',
             'value':'',
             'type':'string'
         },
