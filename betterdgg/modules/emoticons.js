@@ -67,7 +67,7 @@
                 s = s + ' bdgg-chat-emote-' + emote;
             }
 
-            return s + '"></div>';
+            return s + '">' + emote + ' </div>';
 
         };
 
