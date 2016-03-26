@@ -22,8 +22,7 @@
                 bdgg.settings.put('bdgg_passive_stalk', r.join(','))
                 document.querySelector('#bdgg_passive_stalk').value = bdgg.settings.get('bdgg_passive_stalk')
             } else if (sendstr.match(/^(ps|passivestalk)\s*$/)) {
-                PushChat("Command not understood.")
-                PushChat("Format: /ps {username}")
+                PushChat("Passively stalking the following users: " + bdgg.settings.get('bdgg_passive_stalk').split(',').join(', '))
             } else {
                 fnHandleCommand.apply(this, arguments)
             }
