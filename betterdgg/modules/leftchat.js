@@ -1,13 +1,11 @@
 ;(function(bdgg) {
 	bdgg.left = (function() {
-		var chat, streamzz
+		var chat, stream
 		return {
 			init: function() {
 				var URL = document.referrer;
 				console.log(URL);
-				if(URL.search("overrustle")) {
-
-				} else {
+				if(URL.search("overrustle") < 0) {
 					stream = $('#stream-panel', parent.document);
 					chat = $('#chat-panel', parent.document);
 					bdgg.left.leftBoys(bdgg.settings.get('bdgg_left_chat'));
