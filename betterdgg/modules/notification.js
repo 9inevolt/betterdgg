@@ -12,7 +12,7 @@
 					if (bdgg.settings.get('bdgg_Private_Message_Notifications')) {
 						if (Notification.permission === 'granted' && isChrome){
 							var memes = {
-								body: data.nick + " sent you a private message, Click me to view the chat!",
+								body: data.nick + " sent you a private message. Click here to view the chat!",
 								icon: destiny.cdn + '/chat/img/notifyicon.png'
 							}
 							notif = new Notification("Better Better Destiny.GG", memes)

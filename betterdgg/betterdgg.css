@@ -554,7 +554,7 @@
     background-image:url('images/platform_ustream.png');
 }
 
-#bdgg-settings {
+#bdgg-settings, #bdgg-advanced{
     position: absolute;
     bottom: 0;
     right: 20px;
@@ -613,15 +613,15 @@
     width: 100%;
 }
 
-#bdgg-settings ul {
+#bdgg-settings ul, #bdgg-advanced ul {
     padding: 0 5px;
 }
 
-#bdgg-settings li {
+#bdgg-settings li, #bdgg-advanced li {
     list-style-type: none;
 }
 
-#bdgg-about, #bdgg-alert {
+#bdgg-about, #bdgg-alert{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -729,4 +729,26 @@
 
 .chat.focus-user .chat-lines > .user-msg.highlight:not(.focused) {
     opacity: 0.3;
+}
+
+/* Selectable emotes */
+.chat-emote {
+    text-indent: 0 !important;
+    color: transparent;
+}
+
+.msg {
+    text-shadow: none;
+}
+
+.chat-emote::selection {
+    color: transparent;
+}
+
+.chat-emote::-moz-selection { 
+    color: transparent; 
+}
+
+.chat-emote::-webkit-selection { 
+    color: transparent;
 }

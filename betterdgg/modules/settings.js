@@ -36,14 +36,14 @@
         },
 
         'bdgg_flair_hide_all': {
-            'name': 'Hide all BetterD.GG flair',
+            'name': 'Hide all BetterD.GG flairs',
             'description': 'Hide all Better Destiny.gg flairs',
             'value': false,
             'type': 'boolean'
         },
 
         'bdgg_flair_hide_every': {
-            'name': 'Hide all D.GG flair',
+            'name': 'Hide all D.GG flairs',
             'description': 'Hide all Destiny.gg flairs',
             'value': false,
             'type': 'boolean'
@@ -87,11 +87,11 @@
         'bdgg_Private_Message_Notifications': {
             'name': "Private message desktop notifications",
             'description': "Show desktop notifications on receipt of a private message",
-            'value': true,
+            'value': false,
             'type': 'boolean'
         },
 
-        'bgg_passive_stalk': {
+        'bdgg_passive_stalk': {
             'name': 'Passive stalk targets',
             'description': 'Sweetie_Belle\'s passive stalk highlighting',
             'value':'',
@@ -99,7 +99,7 @@
         },
 
         'bdgg_user_ignore': {
-            'name': 'Users to ignore',
+            'name': 'Ignore user messages',
             'description': 'List of users to ignore without removing their mentions',
             'value':'',
             'type':'string'
@@ -128,11 +128,20 @@
                 $('#chat-bottom-frame').append(
                     $(bdgg.templates.menu()).append(
                         bdgg.templates.menu_footer({version: bdgg.version})));
+                $('#chat-bottom-frame').append(bdgg.templates.advanced());
 
                 $('#bdgg-settings-btn').on('click', function(e) {
                     $('#bdgg-settings').toggle();
                     $(this).toggleClass('active');
                     window.cMenu.closeMenus(destiny.chat.gui);
+                });
+
+                $('#bdgg-settings').on('click', '.bdgg-advanced', function() {
+                    $('#bdgg-advanced').show();
+                });
+
+                $('#bdgg-advanced .close').on('click', function(e) {
+                    $('#bdgg-advanced').hide();
                 });
 
                 $('#bdgg-settings .close').on('click', function(e) {
@@ -164,12 +173,13 @@
             },
             hide: function() {
                 $('#bdgg-settings').hide();
+                $('#bdgg-advanced').hide();
                 $('#bdgg-settings-btn').removeClass('active');
             },
             add: function(setting) {
                 if (setting.type == 'string') {
-                    $('#bdgg-settings ul').append(bdgg.templates.menu_text({setting: setting}));
-                    $('#bdgg-settings input[type="text"]#' + setting.key).on('blur', function(e) {
+                    $('#bdgg-advanced ul').append(bdgg.templates.advanced_text({setting: setting}));
+                    $('#bdgg-advanced input[type="text"]#' + setting.key).on('blur', function(e) {
                         var value = $(this).val();
                         bdgg.settings.put(setting.key, value);
                     });

@@ -2,11 +2,9 @@ const winUtils = require("sdk/window/utils");
 const { ToggleButton } = require("sdk/ui/button/toggle");
 const windowListener = require("./window-listener.js");
 
-const { Cc, Ci, components } = require("chrome");
-
 require('./service.js');
 
-var button = ToggleButton({
+ToggleButton({
     id: "bdgg-siderbar-button",
     label: "Sidebar",
     icon: "./icon.png",
