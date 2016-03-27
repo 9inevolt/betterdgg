@@ -737,8 +737,8 @@
     color: transparent;
 }
 
-.msg {
-    text-shadow: none;
+.msg, .chat-lines>.highlight .msg {
+    text-shadow: none !important;
 }
 
 .chat-emote::selection {
