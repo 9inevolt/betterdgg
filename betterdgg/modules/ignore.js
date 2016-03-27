@@ -34,13 +34,16 @@
 			chatLines: function() {
 				var setting = JSON.parse(localStorage.getItem('chatoptions'))
 				if (setting.maxlines) {
-					 if (setting.maxlines < 200) {
-					 	setting.maxlines = 600
-					 	setting = JSON.stringify(setting)
-					 	localStorage.setItem('chatoptions', setting)
-					 }
+					if (setting.maxlines < 200) {
+						setting.maxlines = 600
+						setting = JSON.stringify(setting)
+						localStorage.setItem('chatoptions', setting)
+					}
 				} else {
-					console.log('User has no maxlines setting ')
+					setting.maxlines = 600
+					setting = JSON.stringify(setting)
+					localStorage.setItem('chatoptions', setting)
+
 				}
 				
 			}
