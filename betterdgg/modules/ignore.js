@@ -5,7 +5,7 @@
 		template = '.user-msg[data-username="{}"]'
 		return {
 			init: function() {
-				bdgg.ignore.chatLines();
+				//bdgg.ignore.chatLines();
 				style = document.createElement('style')
 				style.type = 'text/css'
 				document.head.appendChild(style)
@@ -29,7 +29,8 @@
 					style.innerHTML = ''
 					style.appendChild(document.createTextNode(res + cssBody))
 				}
-			},
+			}
+			/**
 			chatLines: function() {
 				var chatSetting = bdgg.settings.get('chatoptions');
 				var finalSet = chatSetting.substr(chatSetting.length - 4);
@@ -40,6 +41,7 @@
 					bdgg.settings.put('chatoptions', chatSetting);
 				}
 			}
+			*/
 		}
 	})()
 }(window.BetterDGG = window.BetterDGG || {}))

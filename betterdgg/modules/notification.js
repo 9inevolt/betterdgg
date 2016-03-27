@@ -2,8 +2,6 @@
 	bdgg.notification = (function() {
 		return {
 			init: function() {
-				var isChrome
-				isChrome = !!window.chrome && !!window.chrome.webstore
 				var fnChatPRIVMSG = destiny.chat.onPRIVMSG
 				var bdggChatPRIVMSG = function(data) {
 					var bdggPRIVMSG = fnChatPRIVMSG.apply(this, arguments);
