@@ -26,7 +26,7 @@ var workerAttached = function(worker) {
 };
 
 var mod = pageMod.PageMod({
-    include: "*.destiny.gg",
+    include: /.*destiny\.gg\/embed\/chat.*/,
     contentScriptFile: data.url("betterdgg.js"),
     contentStyleFile: [ data.url("betterdgg.css") ],
     attachTo: [ "top", "frame" ],
