@@ -146,6 +146,7 @@
 
                 $('#bdgg-settings .close').on('click', function(e) {
                     bdgg.settings.hide();
+                    $('#bdgg-advanced').hide();
                 });
 
                 for (var key in SETTINGS) {
