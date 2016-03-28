@@ -4,9 +4,6 @@ Requirements
 ### node.js
 Install [node.js](http://nodejs.org/download/)
 
-### Mozilla Add-on SDK (for Firefox)
-Install [Mozilla Add-on SDK](https://developer.mozilla.org/en-US/Add-ons/SDK/Tutorials/Installation)
-
 Building
 ====================
 
@@ -20,6 +17,12 @@ $ npm install
 
 ```sh
 $ npm install --global gulp
+```
+
+### Install jpm
+
+```sh
+$ npm install --global jpm
 ```
 
 ### Run gulp clean
