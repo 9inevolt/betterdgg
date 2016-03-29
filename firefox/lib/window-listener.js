@@ -21,8 +21,8 @@ const windowListener = {
             windowListener.loadIntoWindow(aDOMWindow, aXULWindow);
         }, false);
     },
-    onCloseWindow: function (aXULWindow) {},
-    onWindowTitleChange: function (aXULWindow, aNewTitle) {},
+    onCloseWindow: function () {},
+    onWindowTitleChange: function () {},
     register: function () {
         // Load into any existing windows
         const XULWindows = wm.getXULWindowEnumerator(null);

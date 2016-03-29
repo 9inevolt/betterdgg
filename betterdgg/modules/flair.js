@@ -1,4 +1,4 @@
-;(function(bdgg) {
+(function(bdgg) {
 
     var BOTS = [ 'Logs', 'OPbot', 'Bot', 'HighlightBot' ];
     var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
@@ -17,7 +17,7 @@
                 timeout: 3000
             });
 
-            if (response.status == 200) {
+            if (response.status === 200) {
                 var tokenLinks = $(response.responseText).find("a[href^='/profile/authtoken/']");
                 if (tokenLinks.length > 0) {
                     var href = tokenLinks[0].getAttribute('href');
@@ -29,8 +29,7 @@
                     bdgg.alert.show(ALERT_MSG);
                 }
             }
-        } finally {
-        }
+        } catch (e) { console.warn(e); }
     }
 
     function _getCountry() {
@@ -59,11 +58,11 @@
             }, 7000);
 
             var listener = function(e) {
-                if (window != e.source || e.data.type != 'bdgg_profile_info' ) {
+                if (window !== e.source || e.data.type !== 'bdgg_profile_info') {
                     return;
                 }
 
-                if (e.data.info && e.data.info['country'] == currentUser.country) {
+                if (e.data.info && e.data.info['country'] === currentUser.country) {
                     // Avoid redundant on request
                     clearTimeout(_tid);
                 }
@@ -78,7 +77,6 @@
     var _displayAllCountries = true;
     var _hideAll = false;
     var _hideEvery = false;
-    var _listener = null;
 
     bdgg.flair = (function() {
         destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
@@ -91,7 +89,7 @@
 
             //This comes first because Bot wasn't getting his flair sometimes
             if (BOTS.indexOf(this.user.username) > -1) {
-                    icons += '<i class="icon-bot" title="Bot"/>';
+                icons += '<i class="icon-bot" title="Bot"/>';
             }
 
             if (_hideEvery) {
@@ -113,6 +111,7 @@
 
 
             if (_displayAllCountries) {
+                var user;
                 if (user = bdgg.users.get(this.user.username)) {
                     var a2 = user.country.substring(0, 2).toUpperCase();
                     var flagClass = "icon-bdgg-flag flag-" + a2.toLowerCase();
@@ -135,13 +134,16 @@
                 bdgg.flair.hideAll(bdgg.settings.get('bdgg_flair_hide_all'));
 
                 bdgg.settings.addObserver(function(key, value) {
-                    if (key == 'bdgg_flair_country_display') {
+                    if (key === 'bdgg_flair_country_display') {
                         bdgg.flair.displayCountry(value);
-                    } else if (key == 'bdgg_flair_all_country_display') {
+                    }
+                    else if (key === 'bdgg_flair_all_country_display') {
                         bdgg.flair.displayAllCountries(value);
-                    } else if (key == 'bdgg_flair_hide_all') {
+                    }
+                    else if (key === 'bdgg_flair_hide_all') {
                         bdgg.flair.hideAll(value);
-                    } else if (key == 'bdgg_flair_hide_every') {
+                    }
+                    else if (key === 'bdgg_flair_hide_every') {
                         bdgg.flair.hideEvery(value);
                     }
                 });
@@ -154,7 +156,8 @@
 
                 if (wait != null && wait > 0) {
                     setTimeout(_processFlair, wait);
-                } else {
+                }
+                else {
                     _processFlair();
                 }
             },

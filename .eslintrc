@@ -1,0 +1,36 @@
+extends:
+  - defaults
+
+env:
+  browser: true
+  node: true
+  es6: true
+
+rules:
+  no-console: [2, { allow: ["warn", "error"] }]
+  semi: 2
+  no-cond-assign: 0
+  indent: 2
+
+globals:
+  # stuff defined on destiny.gg
+  destiny: true
+  $: true
+  moment: true
+  ChatBroadcastMessage: true
+  ChatCommandMessage: true
+  ChatEmoteMessage: true
+  ChatErrorMessage: true
+  ChatInfoMessage: true
+  ChatStatusMessage: true
+  ChatUIMessage: true
+  ChatUserMessage: true
+  ChatUser: true
+
+  # stuff we define, just in a different file from the one that is using it
+  isWindow: true
+  unsafeWindow: true
+  injectedBetterDGG: true
+
+  # will be defined on Chrome
+  chrome: true

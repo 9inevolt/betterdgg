@@ -1,4 +1,4 @@
-;(function(bdgg) {
+(function(bdgg) {
     bdgg.templates = (function() {
         return {};
     })();

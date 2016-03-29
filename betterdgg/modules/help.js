@@ -1,4 +1,4 @@
-;(function(bdgg) {
+(function(bdgg) {
     bdgg.help = (function() {
         return {
             init: function() {
@@ -12,6 +12,6 @@
                     }
                 };
             }
-        }
+        };
     })();
 }(window.BetterDGG = window.BetterDGG || {}));
