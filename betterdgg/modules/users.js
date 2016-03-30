@@ -1,13 +1,13 @@
-;(function(bdgg) {
+(function(bdgg) {
     var _users = {};
 
     function _initUsers() {
         var listener = function(e) {
-            if (window != e.source) {
+            if (window !== e.source) {
                 return;
             }
 
-            if (e.data.type == 'bdgg_users_refreshed') {
+            if (e.data.type === 'bdgg_users_refreshed') {
                 _users = e.data.users;
             }
         };

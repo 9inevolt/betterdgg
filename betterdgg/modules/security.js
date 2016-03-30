@@ -1,4 +1,4 @@
-;(function(bdgg) {
+(function(bdgg) {
     bdgg.security = (function() {
         function secureWrap(proto, target) {
             var fnTarget = proto[target];
@@ -19,7 +19,7 @@
                     + '[onsubmit], [onunload]').remove();
 
                 return elem.get(0).outerHTML;
-            }
+            };
         }
         return {
             init: function() {

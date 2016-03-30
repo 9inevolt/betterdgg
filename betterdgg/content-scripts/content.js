@@ -7,7 +7,7 @@ function doXHR(xhr) {
         chrome.runtime.sendMessage(null, { xhr: xhr }, xhr.onload);
     } else {
         var req = new XMLHttpRequest();
-        req.onload = function() { xhr.onload(this.responseText) };
+        req.onload = function() { xhr.onload(this.responseText); };
         req.open(xhr.method, xhr.url);
         req.send();
     }
@@ -19,11 +19,14 @@ window.addEventListener("message", function(e) {
         return;
     }
 
+    var xhr;
+
     if (e.data.type == 'bdgg_hello_world') {
-        console.log("Content script received: " + e.data.text);
+        console.warn("Content script received: " + e.data.text);
     } else if (e.data.type == 'bdgg_ustream_url') {
-        var xhr = {
+        xhr = {
             onload: function(responseText) {
+                var match;
                 if (match = /cId=(\d+)/.exec(responseText)) {
                     //console.log("ustream cid is " + match[1]);
                     window.postMessage({ type: 'bdgg_ustream_channel', text: e.data.text, id: match[1] }, '*');
@@ -34,7 +37,7 @@ window.addEventListener("message", function(e) {
         };
         doXHR(xhr);
     } else if (e.data.type == 'bdgg_overrustle_get_strims') {
-        var xhr = {
+        xhr = {
             onload: function(responseText) {
                 var strims = parseStrims(responseText);
                 window.postMessage({ type: 'bdgg_overrustle_strims', strims: strims.slice(0, e.data.count) }, '*');
@@ -44,7 +47,7 @@ window.addEventListener("message", function(e) {
         };
         doXHR(xhr);
     } else if (e.data.type == 'bdgg_get_profile_info') {
-        var xhr = {
+        xhr = {
             onload: function(responseText) {
                 var info = JSON.parse(responseText);
                 window.postMessage({ type: 'bdgg_profile_info', info: info }, '*');

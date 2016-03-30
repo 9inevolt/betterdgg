@@ -7,7 +7,7 @@ for (var module in window.BetterDGG) {
             window.BetterDGG[module].init();
         }
         catch (e) {
-            console.log(e)
+            console.error(e);
         }
     }
 }

@@ -1,4 +1,4 @@
-;(function(bdgg) {
+(function(bdgg) {
     bdgg.alert = (function() {
         $('body').on('click', '#bdgg-alert .close', function() {
             bdgg.alert.hide();

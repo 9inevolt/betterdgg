@@ -1,16 +1,16 @@
-;(function(bdgg) {
-    PROC_MAX = 0.25;
-    PROC_MIN = 0.02;
-    EMOTES = {
+(function(bdgg) {
+    var PROC_MAX = 0.25;
+    var PROC_MIN = 0.02;
+    var EMOTES = {
         "ASLAN": [ 'fadeIn' ],
         "DAFUK": [ 'fadeIn' ],
         "Hhhehhehe": [ 'fadeIn', 'spin' ],
         "INFESTINY": [ 'crawl' ],
         "NoTears": [ 'pulse' ],
         "SURPRISE": [ 'fadeIn', 'pulse', 'spin' ],
-        "WhoahDude": [ 'blink' ],
+        "WhoahDude": [ 'blink' ]
     };
-    EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
+    var EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
 
     bdgg.spooky = (function() {
         var END = moment('2014-11-01 05:00');
@@ -25,8 +25,8 @@
         }
 
         function procChance() {
-           var daysLeft = Math.abs(END.diff(moment(), 'days')) + 1;
-           return PROC_MIN + 1/daysLeft * (PROC_MAX - PROC_MIN);
+            var daysLeft = Math.abs(END.diff(moment(), 'days')) + 1;
+            return PROC_MIN + 1/daysLeft * (PROC_MAX - PROC_MIN);
         }
 
         function proc() {
@@ -56,7 +56,7 @@
         return {
             init: function() {
                 var BDGGSpookyFormatter = {
-                    format: function(str, user) {
+                    format: function(str) {
                         var wrapped = $('<span>').append(str);
                         if (isOn() && proc()) {
                             var chosenEffects = {};
@@ -80,7 +80,7 @@
                 if (isOn()) {
                     destiny.chat.gui.formatters.push(BDGGSpookyFormatter);
                 }
-            },
+            }
         };
     })();
 }(window.BetterDGG = window.BetterDGG || {}));
