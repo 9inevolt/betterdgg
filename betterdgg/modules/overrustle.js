@@ -26,7 +26,7 @@
         };
 
         var listener = function(e) {
-            if (window != e.source || e.data.type != 'bdgg_overrustle_strims' ) {
+            if (window !== e.source || e.data.type !== 'bdgg_overrustle_strims') {
                 return;
             }
 
@@ -79,9 +79,9 @@
 
         BDGGChatStrimMessage.prototype.icon = function() {
             var ico = "icon-bdgg-play";
-            if (this.platform == 'twitch') {
+            if (this.platform === 'twitch') {
                 ico = "icon-bdgg-platform-twitch";
-            } else if (this.platform == 'ustream') {
+            } else if (this.platform === 'ustream') {
                 ico = "icon-bdgg-platform-ustream";
             }
 
@@ -127,8 +127,9 @@
                 elem.id = elemId;
 
                 var listener = function(e) {
-                    if (window != e.source ||
-                            e.data.type != 'bdgg_ustream_channel' || e.data.text != href) {
+                    if (window !== e.source
+                        || e.data.type !== 'bdgg_ustream_channel'
+                        || e.data.text !== href) {
                         return;
                     }
 
@@ -162,7 +163,7 @@
             init: function() {
                 bdgg.overrustle.convertLinks(bdgg.settings.get('bdgg_convert_overrustle_links'));
                 bdgg.settings.addObserver(function(key, value) {
-                    if (key == 'bdgg_convert_overrustle_links') {
+                    if (key === 'bdgg_convert_overrustle_links') {
                         bdgg.overrustle.convertLinks(value);
                     }
                 });

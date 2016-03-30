@@ -178,7 +178,7 @@
                 $('#bdgg-settings-btn').removeClass('active');
             },
             add: function(setting) {
-                if (setting.type == 'string') {
+                if (setting.type === 'string') {
                     $('#bdgg-advanced ul').append(bdgg.templates.advanced_text({setting: setting}));
                     $('#bdgg-advanced input[type="text"]#' + setting.key).on('blur', function() {
                         var value = $(this).val();
@@ -197,7 +197,7 @@
                 if (value == null) {
                     value = defValue;
                     bdgg.settings.put(key, defValue);
-                } else if (SETTINGS[key] && SETTINGS[key].type == 'boolean') {
+                } else if (SETTINGS[key] && SETTINGS[key].type === 'boolean') {
                     value = value === 'true';
                 }
 

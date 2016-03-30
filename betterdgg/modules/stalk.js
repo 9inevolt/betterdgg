@@ -150,11 +150,11 @@
                 };
 
                 var listener = function(e) {
-                    if (window != e.source) {
+                    if (window !== e.source) {
                         return;
                     }
 
-                    if (e.data.type == 'bdgg_stalk_reply') {
+                    if (e.data.type === 'bdgg_stalk_reply') {
                         var reply = e.data.reply;
 
                         if (reply.Type === "s") {
@@ -167,9 +167,9 @@
                         else if (reply.Type === "e") {
                             PushError("Error: " + reply.Error);
                         }
-                    } else if (e.data.type == 'bdgg_stalk_message') {
+                    } else if (e.data.type === 'bdgg_stalk_message') {
                         PushChat(e.data.message);
-                    } else if (e.data.type == 'bdgg_stalk_error') {
+                    } else if (e.data.type === 'bdgg_stalk_error') {
                         PushError(e.data.error);
                     }
                 };
@@ -192,7 +192,7 @@
 
                         if (nickCount < 1) {
                             return;
-                        } else if (nickCount == 1) {
+                        } else if (nickCount === 1) {
                             // Stalk
                             querystr["QueryType"] = "s";
                             querystr["Name"] = match[1];
