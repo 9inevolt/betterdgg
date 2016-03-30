@@ -1,9 +1,9 @@
-;(function(bdgg) {
-    TWITCH_URL  = /http:\/\/(?:www\.)?twitch.tv\/(\w+)\/?$/;
-    HITBOX_URL  = /http:\/\/(?:www\.)?hitbox.tv\/(\w+)\/?$/;
-    CASTAMP_URL = /http:\/\/(?:www\.)?castamp.com\/live\/(\w+)$/;
-    USTREAM_CHANNEL_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:channel\/)?([\w-]+)\/?$/;
-    USTREAM_EMBED_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:embed|channel\/id)\/(\d+)\/?$/;
+(function(bdgg) {
+    var TWITCH_URL  = /http:\/\/(?:www\.)?twitch.tv\/(\w+)\/?$/;
+    var HITBOX_URL  = /http:\/\/(?:www\.)?hitbox.tv\/(\w+)\/?$/;
+    var CASTAMP_URL = /http:\/\/(?:www\.)?castamp.com\/live\/(\w+)$/;
+    var USTREAM_CHANNEL_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:channel\/)?([\w-]+)\/?$/;
+    var USTREAM_EMBED_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:embed|channel\/id)\/(\d+)\/?$/;
 
     var _channels = {};
 
@@ -45,7 +45,7 @@
             this.name = strim['name'] || strim['channel'];
             this.title = strim['title'];
             this.platform = strim['platform'];
-        };
+        }
         BDGGChatStrimMessage.prototype = Object.create(ChatUIMessage.prototype);
         BDGGChatStrimMessage.prototype.constructor = BDGGChatStrimMessage;
 
@@ -87,7 +87,7 @@
 
             return '<i class="' + ico + '"></i>';
         };
-    };
+    }
 
     function _randString(len) {
         var s = '';
@@ -95,12 +95,12 @@
             s += String.fromCharCode(Math.floor(97 + Math.random() * (123 - 97)));
         }
         return s;
-    };
+    }
 
     function _link(s, stream) {
         return 'http://overrustle.com/destinychat?s='
             + s + '&stream=' + stream;
-    };
+    }
 
     function _convert(elem) {
         var href = elem.getAttribute('href');
@@ -148,13 +148,13 @@
                 return;
             }
         } else {
-          // Don't prepend http to other urls
-          return;
+            // Don't prepend http to other urls
+            return;
         }
 
         elem.setAttribute('href', href);
         elem.textContent = href;
-    };
+    }
 
     bdgg.overrustle = (function() {
         var _enabled = false;
@@ -172,7 +172,7 @@
             convertLinks: function(value) {
                 _enabled = value;
             },
-            wrapMessage: function(elem, message) {
+            wrapMessage: function(elem) {
                 if (!_enabled)
                     return;
 
@@ -180,6 +180,6 @@
                     _convert(a);
                 });
             }
-        }
+        };
     })();
 }(window.BetterDGG = window.BetterDGG || {}));

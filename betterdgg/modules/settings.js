@@ -1,4 +1,4 @@
-;(function(bdgg) {
+(function(bdgg) {
     var SETTINGS = {
         'bdgg_emote_tab_priority': {
             'name': 'Prioritize emotes',
@@ -130,7 +130,7 @@
                         bdgg.templates.menu_footer({version: bdgg.version})));
                 $('#chat-bottom-frame').append(bdgg.templates.advanced());
 
-                $('#bdgg-settings-btn').on('click', function(e) {
+                $('#bdgg-settings-btn').on('click', function() {
                     $('#bdgg-settings').toggle();
                     $(this).toggleClass('active');
                     window.cMenu.closeMenus(destiny.chat.gui);
@@ -140,11 +140,11 @@
                     $('#bdgg-advanced').show();
                 });
 
-                $('#bdgg-advanced .close').on('click', function(e) {
+                $('#bdgg-advanced .close').on('click', function() {
                     $('#bdgg-advanced').hide();
                 });
 
-                $('#bdgg-settings .close').on('click', function(e) {
+                $('#bdgg-settings .close').on('click', function() {
                     bdgg.settings.hide();
                     $('#bdgg-advanced').hide();
                 });
@@ -180,13 +180,13 @@
             add: function(setting) {
                 if (setting.type == 'string') {
                     $('#bdgg-advanced ul').append(bdgg.templates.advanced_text({setting: setting}));
-                    $('#bdgg-advanced input[type="text"]#' + setting.key).on('blur', function(e) {
+                    $('#bdgg-advanced input[type="text"]#' + setting.key).on('blur', function() {
                         var value = $(this).val();
                         bdgg.settings.put(setting.key, value);
                     });
                 } else { // boolean
                     $('#bdgg-settings ul').append(bdgg.templates.menu_checkbox({setting: setting}));
-                    $('#bdgg-settings input[type="checkbox"]#' + setting.key).on('change', function(e) {
+                    $('#bdgg-settings input[type="checkbox"]#' + setting.key).on('change', function() {
                         var value = $(this).prop('checked');
                         bdgg.settings.put(setting.key, value);
                     });

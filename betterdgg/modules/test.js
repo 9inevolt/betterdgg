@@ -1,14 +1,14 @@
-;(function(bdgg) {
+(function(bdgg) {
     function push(msg) {
         msg && destiny.chat.gui.push(msg);
-    };
+    }
 
     bdgg.test = { chat: {}, or: {} },
     bdgg.test1 = function(msg) {
         var m = destiny.chat.onMSG({data:msg || '>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
             nick:'BetterDGG', features:[]});
         push(m);
-        setTimeout(function() { destiny.chat.onMUTE({data: 'BetterDGG'}) }, 3000);
+        setTimeout(function() { destiny.chat.onMUTE({data: 'BetterDGG'}); }, 3000);
     };
 
     bdgg.test2 = function() {
@@ -40,7 +40,7 @@
 
     bdgg.test.chat.combo = function(emote, flair, nick, count) {
         emote = emote || 'DESBRO';
-        features = flair ? [ flair ] : [];
+        var features = flair ? [ flair ] : [];
         nick = nick || 'BetterDGG';
         count = count || 5;
         for (var i=0; i<count; i++) {
@@ -114,7 +114,7 @@
     };
 
     bdgg.test.chat.mention = function(user1, user2, msg) {
-        allUsers = Object.keys(destiny.chat.users);
+        var allUsers = Object.keys(destiny.chat.users);
         user1 = user1 || destiny.chat.users[allUsers[0]].username;
         user2 = user2 || destiny.chat.users[allUsers[1]].username;
         msg = msg || "hi there";
@@ -134,7 +134,7 @@
             destiny.chat.gui.put(msg);
             destiny.chat.gui.scrollPlugin.updateAndScroll(true);
         } finally {
-           destiny.chat.gui.formatters = f;
+            destiny.chat.gui.formatters = f;
         }
     };
 

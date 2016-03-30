@@ -1,9 +1,9 @@
-;(function(bdgg) {
+(function(bdgg) {
     bdgg.firstrun = (function() {
         return {
             init: function() {
                 var lastRun = bdgg.settings.get('bdgg_lastrun_version');
-                if (bdgg.version != lastRun) {
+                if (bdgg.version !== lastRun) {
                     $('body').append(bdgg.templates.popup({version: bdgg.version}));
                     var popup = $('#bdgg-popup');
                     popup.find('.bdgg-dismiss').on('click', function() {

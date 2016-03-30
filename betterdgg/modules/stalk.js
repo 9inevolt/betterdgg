@@ -30,7 +30,7 @@
  * -Current
  * 1442431468
  */
-;(function(bdgg) {
+(function(bdgg) {
     var FORMATTERS = [
         function(ts) {
             return moment.unix(ts);
@@ -79,7 +79,7 @@
         }
 
         return time;
-    };
+    }
 
     bdgg.stalk = (function() {
         function BDGGChatStalkMessage(message, user, timestamp) {
@@ -104,8 +104,8 @@
             }
         }
 
-        timeRegExp = /^\[([^\]]*)\]\s*/;
-        nickRegExp = /^<?(\w+)>?: /;
+        var timeRegExp = /^\[([^\]]*)\]\s*/;
+        var nickRegExp = /^<?(\w+)>?: /;
         function PushUserMessageString(msg) {
             var timeMatch = msg.match(timeRegExp);
             msg = msg.replace(timeRegExp, '');
@@ -136,92 +136,92 @@
                 return _parseTime(ts);
             },
             init: function() {
-              BDGGChatStalkMessage.prototype = Object.create(ChatUserMessage.prototype);
-              BDGGChatStalkMessage.prototype.constructor = BDGGChatStalkMessage;
+                BDGGChatStalkMessage.prototype = Object.create(ChatUserMessage.prototype);
+                BDGGChatStalkMessage.prototype.constructor = BDGGChatStalkMessage;
 
-              BDGGChatStalkMessage.prototype.wrap = function(html, css) {
-                  var elem = $(ChatUserMessage.prototype.wrap.call(this, html, css));
-                  elem.addClass('bdgg-stalk-msg');
-                  return elem[0].outerHTML;
-              };
+                BDGGChatStalkMessage.prototype.wrap = function(html, css) {
+                    var elem = $(ChatUserMessage.prototype.wrap.call(this, html, css));
+                    elem.addClass('bdgg-stalk-msg');
+                    return elem[0].outerHTML;
+                };
 
-              BDGGChatStalkMessage.prototype.addonHtml = function() {
-                  return this.html();
-              };
+                BDGGChatStalkMessage.prototype.addonHtml = function() {
+                    return this.html();
+                };
 
-            var listener = function(e) {
-                if (window != e.source) {
-                    return;
-                }
-                
-                if (e.data.type == 'bdgg_stalk_reply') {
-                    var reply = e.data.reply;
-                    
-                    if (reply.Type === "s") {
-                      var strings = reply.Data;
-                      
-                      for (var i = 0; i < strings.length; i++) {
-                        PushUserMessage(strings[i]);
-                      }
+                var listener = function(e) {
+                    if (window != e.source) {
+                        return;
                     }
-                    else if (reply.Type === "e") {
-                      PushError("Error: " + reply.Error);
+
+                    if (e.data.type == 'bdgg_stalk_reply') {
+                        var reply = e.data.reply;
+
+                        if (reply.Type === "s") {
+                            var strings = reply.Data;
+
+                            for (var i = 0; i < strings.length; i++) {
+                                PushUserMessage(strings[i]);
+                            }
+                        }
+                        else if (reply.Type === "e") {
+                            PushError("Error: " + reply.Error);
+                        }
+                    } else if (e.data.type == 'bdgg_stalk_message') {
+                        PushChat(e.data.message);
+                    } else if (e.data.type == 'bdgg_stalk_error') {
+                        PushError(e.data.error);
                     }
-                } else if (e.data.type == 'bdgg_stalk_message') {
-                    PushChat(e.data.message);
-                } else if (e.data.type == 'bdgg_stalk_error') {
-                    PushError(e.data.error);
-                }
-            };
-            window.addEventListener('message', listener);
+                };
+                window.addEventListener('message', listener);
 
-              // hook into handle command
-              var fnHandleCommand = destiny.chat.handleCommand;
-              destiny.chat.handleCommand = function(str) {
-                  var match;
-                  var sendstr = str.trim();
-                  if (match = sendstr.match(/^s(?:talk)?(?:\s+(\w+))(?:\s+(\w+))?(?:\s+(\w+))?(?:\s+(\w+))?(?:\s+(\d+))?\s*$/))
-                  {
-                    //debugger;
-                    var querystr = { "Session": destiny.chat.user.username };
-                    for (var i = 1; match[i] !== undefined; i++);
-                    var length = i;
-                    var num = Number(match[length-1]);
-                    var lastIsNum = !isNaN(num);
-                    var nickCount = length - (lastIsNum ? 2 : 1);
+                // hook into handle command
+                var fnHandleCommand = destiny.chat.handleCommand;
+                destiny.chat.handleCommand = function(str) {
+                    var match;
+                    var sendstr = str.trim();
+                    if (match = sendstr.match(/^s(?:talk)?(?:\s+(\w+))(?:\s+(\w+))?(?:\s+(\w+))?(?:\s+(\w+))?(?:\s+(\d+))?\s*$/))
+                    {
+                        //debugger;
+                        var querystr = { "Session": destiny.chat.user.username };
+                        for (var i = 1; match[i] !== undefined; i++);
+                        var length = i;
+                        var num = Number(match[length-1]);
+                        var lastIsNum = !isNaN(num);
+                        var nickCount = length - (lastIsNum ? 2 : 1);
 
-                    if (nickCount < 1) {
-                      return;
-                    } else if (nickCount == 1) {
-                      // Stalk
-                      querystr["QueryType"] = "s";
-                      querystr["Name"] = match[1];
-                      querystr["Number"] = 3;
+                        if (nickCount < 1) {
+                            return;
+                        } else if (nickCount == 1) {
+                            // Stalk
+                            querystr["QueryType"] = "s";
+                            querystr["Name"] = match[1];
+                            querystr["Number"] = 3;
+                        } else {
+                            // Multi
+                            var Names = [];
+                            for (i = 1; i <= nickCount; i++) {
+                                Names.push(match[i]);
+                            }
+                            querystr["QueryType"] = "m";
+                            querystr["Names"] = Names;
+                            querystr["Number"] = 10;
+                        }
+
+                        if (lastIsNum) {
+                            querystr["Number"] = Math.min(200, num);
+                        }
+
+                        window.postMessage({type: 'bdgg_stalk_request', query: querystr}, '*');
+                    } else if (sendstr.match(/^s(?:talk)?\s*$/)) {
+                        PushChat("Command not understood.");
+                        PushChat("Format: /stalk {username} {optional username} #");
+                        PushChat("up to 4 usernames, # optional, /stalk alias: /s");
                     } else {
-                      // Multi
-                      var Names = [];
-                      for (var i = 1; i <= nickCount; i++) {
-                        Names.push(match[i]);
-                      }
-                      querystr["QueryType"] = "m";
-                      querystr["Names"] = Names;
-                      querystr["Number"] = 10;
+                        fnHandleCommand.apply(this, arguments);
                     }
-
-                    if (lastIsNum) {
-                      querystr["Number"] = Math.min(200, num);
-                    }
-
-                    window.postMessage({type: 'bdgg_stalk_request', query: querystr}, '*');
-                  } else if (sendstr.match(/^s(?:talk)?\s*$/)) {
-                    PushChat("Command not understood.");
-                    PushChat("Format: /stalk {username} {optional username} #");
-                    PushChat("up to 4 usernames, # optional, /stalk alias: /s");
-                  } else {
-                    fnHandleCommand.apply(this, arguments);
-                  }
-              };
+                };
             }
-        }
+        };
     })();
 }(window.BetterDGG = window.BetterDGG || {}));
