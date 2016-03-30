@@ -110,7 +110,15 @@
             'description': 'Comma-separated list of words to filter messages from chat (case-insensitive)',
             'value': '',
             'type': 'string'
+        },
+
+        'bdgg_prohibited_phrase_filter': {
+            'name': 'Avoid prohibited phrases',
+            'description': 'Issue a warning when trying to post a known prohibited phrase (Do NOT rely on this, the list is not complete)',
+            'value': true,
+            'type': 'boolean'
         }
+
     };
 
     bdgg.settings = (function() {
