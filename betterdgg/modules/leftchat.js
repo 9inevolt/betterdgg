@@ -10,7 +10,7 @@
                     bdgg.left.leftBoys(bdgg.settings.get('bdgg_left_chat'));
                     bdgg.left.resizeTakeOver();
                     bdgg.settings.addObserver(function(key, val) {
-                        if (key == 'bdgg_left_chat')
+                        if (key === 'bdgg_left_chat')
                             bdgg.left.leftBoys(val);
                     });
                 }

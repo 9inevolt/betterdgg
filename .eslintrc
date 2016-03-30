@@ -11,6 +11,7 @@ rules:
   semi: 2
   no-cond-assign: 0
   indent: 2
+  eqeqeq: ["error", "allow-null"]
 
 globals:
   # stuff defined on destiny.gg

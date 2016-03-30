@@ -1,9 +1,11 @@
 function isWindow(src) {
-    return src == window || typeof unsafeWindow != "undefined" && src.wrappedJSObject == unsafeWindow;
+    return src === window
+        || typeof unsafeWindow !== "undefined"
+        && src.wrappedJSObject === unsafeWindow;
 }
 
 function doXHR(xhr) {
-    if (typeof chrome != "undefined" && chrome.runtime) {
+    if (typeof chrome !== "undefined" && chrome.runtime) {
         chrome.runtime.sendMessage(null, { xhr: xhr }, xhr.onload);
     } else {
         var req = new XMLHttpRequest();
@@ -21,9 +23,9 @@ window.addEventListener("message", function(e) {
 
     var xhr;
 
-    if (e.data.type == 'bdgg_hello_world') {
+    if (e.data.type === 'bdgg_hello_world') {
         console.warn("Content script received: " + e.data.text);
-    } else if (e.data.type == 'bdgg_ustream_url') {
+    } else if (e.data.type === 'bdgg_ustream_url') {
         xhr = {
             onload: function(responseText) {
                 var match;
@@ -36,7 +38,7 @@ window.addEventListener("message", function(e) {
             url: e.data.text
         };
         doXHR(xhr);
-    } else if (e.data.type == 'bdgg_overrustle_get_strims') {
+    } else if (e.data.type === 'bdgg_overrustle_get_strims') {
         xhr = {
             onload: function(responseText) {
                 var strims = parseStrims(responseText);
@@ -46,7 +48,7 @@ window.addEventListener("message", function(e) {
             url: 'http://api.overrustle.com/api'
         };
         doXHR(xhr);
-    } else if (e.data.type == 'bdgg_get_profile_info') {
+    } else if (e.data.type === 'bdgg_get_profile_info') {
         xhr = {
             onload: function(responseText) {
                 var info = JSON.parse(responseText);
@@ -71,7 +73,7 @@ function parseStrims(responseText) {
         return buildStrim(resp, k, enrich);
     }).sort(function(a, b) {
         // most to least or alphabetical
-        if (a.viewers != b.viewers) {
+        if (a.viewers !== b.viewers) {
             return b.viewers - a.viewers;
         }
 
