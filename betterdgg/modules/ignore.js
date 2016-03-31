@@ -34,7 +34,17 @@
             },
 
             chatLines: function() {
-                var setting = JSON.parse(localStorage.getItem('chatoptions'));
+
+                var chatoptions = localStorage.getItem('chatoptions');
+                if (chatoptions === null){
+                    /**
+                     * If the user never changed any destiny.gg settings, the options are null.
+                     * Work around this by setting it to an empty JSON string which we can opperate on.
+                     */
+                    chatoptions = "{}";
+                }
+
+                var setting = JSON.parse(chatoptions);
                 if (setting.maxlines) {
                     if (setting.maxlines < 200) {
                         setting.maxlines = 600;
