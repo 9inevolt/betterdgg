@@ -14,7 +14,13 @@
                         };
                         if (Notification.permission === 'granted' && isChrome){
                             notif = new Notification("Better Better Destiny.GG", memes);
-                            notif.onclick = function() { window.focus(); notif.close(); };
+                            notif.onclick = function() { 
+                                window.focus();
+                                notif.close();
+                                if ($(".mark-as-read")) {
+                                    $(".mark-as-read").click();
+                                }
+                            };
                             setTimeout(function(){ notif.close(); }, 5000);
                         } else if (Notification.permission === 'granted' && !isChrome){
                             notif = new Notification("Better Better Destiny.GG", memes);
