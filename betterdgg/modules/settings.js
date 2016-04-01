@@ -110,7 +110,15 @@
             'description': 'Comma-separated list of words to filter messages from chat (case-insensitive)',
             'value': '',
             'type': 'string'
+        },
+
+        'bdgg_prohibited_phrase_filter': {
+            'name': 'Avoid prohibited phrases',
+            'description': 'Issue a warning when trying to post a known prohibited phrase (Do NOT rely on this, the list is not complete)',
+            'value': true,
+            'type': 'boolean'
         }
+
     };
 
     bdgg.settings = (function() {
@@ -178,7 +186,7 @@
                 $('#bdgg-settings-btn').removeClass('active');
             },
             add: function(setting) {
-                if (setting.type == 'string') {
+                if (setting.type === 'string') {
                     $('#bdgg-advanced ul').append(bdgg.templates.advanced_text({setting: setting}));
                     $('#bdgg-advanced input[type="text"]#' + setting.key).on('blur', function() {
                         var value = $(this).val();
@@ -197,7 +205,7 @@
                 if (value == null) {
                     value = defValue;
                     bdgg.settings.put(key, defValue);
-                } else if (SETTINGS[key] && SETTINGS[key].type == 'boolean') {
+                } else if (SETTINGS[key] && SETTINGS[key].type === 'boolean') {
                     value = value === 'true';
                 }
 

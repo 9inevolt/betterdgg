@@ -13,6 +13,7 @@ var merge   = require('merge-stream');
 var map     = require('vinyl-map');
 var source  = require('vinyl-source-stream');
 var plist   = require('plist');
+var eslint  = require('gulp-eslint');
 
 var package = require('./package.json');
 
@@ -67,7 +68,18 @@ gulp.task('safari:css', function() {
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
 
-gulp.task('js', [ 'templates', 'version', 'content-scripts' ], function() {
+gulp.task('lint', function() {
+    var options = {
+        configFile: '.eslintrc'
+    };
+
+    return gulp.src(['./betterdgg/modules/*.js', './betterdgg/content-scripts/*.js', './betterdgg/*.js'])
+                .pipe(eslint(options))
+                .pipe(eslint.format())
+                .pipe(eslint.failOnError());
+});
+
+gulp.task('js', ['lint', 'templates', 'version', 'content-scripts' ], function() {
     return gulp.src([ './vendor/**/*.js',
             './betterdgg/modules/*.js', './build/templates.js', './build/version.js',
             './betterdgg/*.js' ])
