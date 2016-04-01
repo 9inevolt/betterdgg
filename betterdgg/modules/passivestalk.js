@@ -8,21 +8,38 @@
         function PushChat(string) {
             destiny.chat.gui.push(new ChatInfoMessage(string));
         }
+        function updatePs(r){
+            var psList = r.join(',');
+            bdgg.settings.put('bdgg_passive_stalk', psList);
+            PushChat("Your passivestalk list has been updated");
+            document.querySelector('#bdgg_passive_stalk').value = bdgg.settings.get('bdgg_passive_stalk');
+        }
         destiny.chat.handleCommand = function(str) {
             var match, sendstr;
             sendstr = str.trim();
-            if (match = sendstr.match(/(ps|passivestalk)\s(\w+)/)) {
-                var r = bdgg.settings.get('bdgg_passive_stalk');
-                r = r.split(' ').join('').split(',');
-                if (r.length === 1 && r[0] === '') r = [];
+            var r = bdgg.settings.get('bdgg_passive_stalk').split(',');
+            if (r.length === 1 && r[0] === '') r = [];
+
+            if (match = sendstr.match(/^(ps|passivestalk)\s(\w+)/)) {
                 r.push(match[2]);
                 r = r.filter(function(val, idx, self) {
                     return self.indexOf(val) === idx;
                 });
-                bdgg.settings.put('bdgg_passive_stalk', r.join(','));
-                document.querySelector('#bdgg_passive_stalk').value = bdgg.settings.get('bdgg_passive_stalk');
+                updatePs(r);
+            } else if (match = sendstr.match(/^(unps|unpassivestalk)\s(\w+)/)){
+                var matchIndex = r.indexOf(match[2]);
+                if (matchIndex === -1){
+                    PushChat("User not found in your passivestalk list");
+                } else {
+                    r.splice(matchIndex, 1);
+                    updatePs(r);
+                }
             } else if (sendstr.match(/^(ps|passivestalk)\s*$/)) {
-                PushChat("Passively stalking the following users: " + bdgg.settings.get('bdgg_passive_stalk').split(',').join(', '));
+                if (bdgg.settings.get('bdgg_passive_stalk').length === 0){
+                    PushChat("Your passivestalk list is empty");    
+                } else {
+                    PushChat("Passively stalking the following users: " + bdgg.settings.get('bdgg_passive_stalk').split(',').join(', '));
+                }            
             } else {
                 fnHandleCommand.apply(this, arguments);
             }
