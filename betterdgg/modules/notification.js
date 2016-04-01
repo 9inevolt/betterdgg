@@ -2,6 +2,9 @@
     bdgg.notification = (function() {
         return {
             init: function() {
+                if (bdgg.settings.get('bdgg_Private_Message_Notifications')){
+                    bdgg.notification.checkPerms();
+                }
                 var fnChatPRIVMSG = destiny.chat.onPRIVMSG;
                 var bdggChatPRIVMSG = function(data) {
                     var bdggPRIVMSG = fnChatPRIVMSG.apply(this, arguments);
@@ -26,6 +29,23 @@
                     return bdggPRIVMSG;
                 };
                 destiny.chat.onPRIVMSG = bdggChatPRIVMSG;
+            },
+            checkPerms: function() {
+                if (Notification.permission === 'default') {
+                    Notification.requestPermission().then(function(result) {
+                        if (result === 'denied') {
+                            destiny.chat.gui.push(new ChatInfoMessage('You have refused permission to present notifications, You will be unable to use the private message notifications feature.'));
+                            bdgg.settings.put('bdgg_Private_Message_Notifications', false);
+                            return;
+                        }
+                        if (result === 'default') {
+                            destiny.chat.gui.push(new ChatInfoMessage('You have dismissed the request for permission to present notifications, You will be unable to use private message notifications feature.'));
+                            bdgg.settings.put('bdgg_Private_Message_Notifications', false);
+                            return;
+                        }
+                        
+                    });
+                }
             }
         };
     })();
