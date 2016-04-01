@@ -84,7 +84,7 @@
             'type': 'boolean'
         },
 
-        'bdgg_Private_Message_Notifications': {
+        'bdgg_private_message_notifications': {
             'name': "Private message desktop notifications",
             'description': "Show desktop notifications on receipt of a private message",
             'value': false,
