@@ -5,6 +5,10 @@
                 if (bdgg.settings.get('bdgg_Private_Message_Notifications')){
                     bdgg.notification.checkPerms();
                 }
+                bdgg.settings.addObserver(function(key, val) {
+                    if (key === 'bdgg_Private_Message_Notifications' && val)
+                        bdgg.notification.checkPerms();
+                });
                 var fnChatPRIVMSG = destiny.chat.onPRIVMSG;
                 var bdggChatPRIVMSG = function(data) {
                     var bdggPRIVMSG = fnChatPRIVMSG.apply(this, arguments);
