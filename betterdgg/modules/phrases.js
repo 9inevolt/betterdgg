@@ -29,7 +29,7 @@
             /tinyurl\.com/,
 
             //for debugging
-            /(^|\b)JUSTATEST($|\b)/
+            /(^|\b)JUSTATESTSTRINGNOONEUSES($|\b)/
         ];
 
         function _checkMessage(phrases, line) {

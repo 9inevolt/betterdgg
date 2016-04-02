@@ -5,24 +5,41 @@
         template = '.user-msg[data-username="{}"]';
         fnHandleCommand = destiny.chat.handleCommand;
 
-        function PushChat(string) {
+        function pushChat(string) {
             destiny.chat.gui.push(new ChatInfoMessage(string));
+        }
+        function updatePassivestalk(psList){
+            var psTargets = psList.join(','); //in the settings the names are stored as "user1,user2,user3,..."
+            bdgg.settings.put('bdgg_passive_stalk', psTargets);
+            pushChat("Your passivestalk list has been updated");
+            document.querySelector('#bdgg_passive_stalk').value = psTargets;
         }
         destiny.chat.handleCommand = function(str) {
             var match, sendstr;
             sendstr = str.trim();
-            if (match = sendstr.match(/(ps|passivestalk)\s(\w+)/)) {
-                var r = bdgg.settings.get('bdgg_passive_stalk');
-                r = r.split(' ').join('').split(',');
-                if (r.length === 1 && r[0] === '') r = [];
-                r.push(match[2]);
-                r = r.filter(function(val, idx, self) {
+            var psList = bdgg.settings.get('bdgg_passive_stalk').split(',');
+            if (psList.length === 1 && psList[0] === '') psList = [];
+
+            if (match = sendstr.match(/^(ps|passivestalk)\s(\w+)/)) {
+                psList.push(match[2]);
+                psList = psList.filter(function(val, idx, self) {
                     return self.indexOf(val) === idx;
                 });
-                bdgg.settings.put('bdgg_passive_stalk', r.join(','));
-                document.querySelector('#bdgg_passive_stalk').value = bdgg.settings.get('bdgg_passive_stalk');
+                updatePassivestalk(psList);
+            } else if (match = sendstr.match(/^(unps|unpassivestalk)\s(\w+)/)){
+                var matchIndex = psList.indexOf(match[2]);
+                if (matchIndex === -1){
+                    pushChat("User not found in your passivestalk list");
+                } else {
+                    psList.splice(matchIndex, 1);
+                    updatePassivestalk(psList);
+                }
             } else if (sendstr.match(/^(ps|passivestalk)\s*$/)) {
-                PushChat("Passively stalking the following users: " + bdgg.settings.get('bdgg_passive_stalk').split(',').join(', '));
+                if (psList.length === 0){
+                    pushChat("Your passivestalk list is empty");    
+                } else {
+                    pushChat("Passively stalking the following users: " + psList.join(', '));
+                }            
             } else {
                 fnHandleCommand.apply(this, arguments);
             }

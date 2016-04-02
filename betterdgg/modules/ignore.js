@@ -39,7 +39,7 @@
                 if (chatoptions === null){
                     /**
                      * If the user never changed any destiny.gg settings, the options are null.
-                     * Work around this by setting it to an empty JSON string which we can opperate on.
+                     * Work around this by setting it to an empty JSON string which we can operate on.
                      */
                     chatoptions = "{}";
                 }
