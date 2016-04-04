@@ -1,7 +1,7 @@
 (function(bdgg) {
 
     var BOTS = [ 'Logs', 'OPbot', 'Bot', 'HighlightBot' ];
-    var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
+    var CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat' ];
     var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
                     'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
                     'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'DerFaba'
@@ -102,7 +102,10 @@
             }
 
             if (CONTRIBUTORS.indexOf(this.user.username) > -1) {
-                icons += '<i class="icon-bdgg-contributor" title="Better Destiny.gg Contributor"/>';
+                icons += '<i class="icon-bdgg-contributor" title="Better Better Destiny.gg Contributor"/>';
+                if (this.user.username === 'downthecrop'){
+                    icons = icons.replace('<i class="icon-evenotable" title="Eve Notable"/>','');
+                }
             }
 
             if (MOOBIES.indexOf(this.user.username) > -1) {
@@ -132,6 +135,7 @@
                 bdgg.flair.displayCountry(bdgg.settings.get('bdgg_flair_country_display'), 3000);
                 bdgg.flair.displayAllCountries(bdgg.settings.get('bdgg_flair_all_country_display'));
                 bdgg.flair.hideAll(bdgg.settings.get('bdgg_flair_hide_all'));
+                bdgg.flair.hideEvery(bdgg.settings.get('bdgg_flair_hide_every'));
 
                 bdgg.settings.addObserver(function(key, value) {
                     if (key === 'bdgg_flair_country_display') {

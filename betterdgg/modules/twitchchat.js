@@ -12,7 +12,10 @@
                 // add toggle button to upper-right
                 var toprightbar = $('ul.nav.navbar-nav.navbar-right', document);
                 var twitchButton = $('<li><a href="#">Twitch Chat</a></li>');
-                toprightbar.prepend(twitchButton);
+
+                if(toprightbar.prop('outerHTML').indexOf('Chat') < 0){
+                    toprightbar.prepend(twitchButton);
+                }
 
                 var dggchat = $('#chat-wrap', document);
                 dggchat.addClass('tab-pane fade active in');

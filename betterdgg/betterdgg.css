@@ -81,6 +81,10 @@
     display:none;
 }
 
+.chat-emote-xD, .chat-emote.bdgg-chat-emote-xD {
+    display:none;
+}
+
 .chat-emote-KappaPride, .chat-emote.bdgg-chat-emote-KappaPride {
     background-image:url('images/emoticons/KappaPride.png');
     width: 22px;
