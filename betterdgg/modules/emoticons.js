@@ -135,6 +135,10 @@
 
                 var fnSortResults = destiny.chat.gui.autoCompletePlugin.sortResults;
                 destiny.chat.gui.autoCompletePlugin.sortResults = bdggSortResults(fnSortResults);
+                
+                $(function() {
+                    bdgg.emoticons.organizeEmotes();
+                });
             },
             giveTabPriority: function(value) {
                 emoteTabPriority = value;
@@ -184,6 +188,40 @@
                 if (override) {
                     wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
                 }
+            },
+            organizeEmotes: function() {
+                // Show the emote menu
+                $('#emoticon-btn').click();
+                
+                var $emotesBox = $('#destiny-emotes');
+                
+                // Delete the spacing because I personally think it's ugly
+                $emotesBox.parent().find('hr').remove();
+                
+                $emotesBox.prepend('<div id="TwitchEmoteContainer"><h6>Twitch Emotes (Non Sub)</h6></div>');
+                $emotesBox.prepend('<div id="BTTVEmoteContainer"><h6>BTTV Emotes</h6></div>');
+                $emotesBox.prepend('<div id="BBDGGEmoteContainer"><h6>BBDGG Emotes</h6></div>');
+                $emotesBox.prepend('<div id="DGGEmoteContainer"><h6>DGG Emotes</h6></div>');
+                
+                $emotesBox.find('.chat-emote').each(function(id, elem) {
+                    var $emoteName = $(elem).attr('title');
+                    var $emoteClone = $(elem).parent().clone();
+                    
+                    // Remove old emote
+                    $(elem).parent().remove();
+                    
+                    // Filter emotes into their respective containers
+                    if ($.inArray($emoteName, EMOTICONS) > -1) { $('#DGGEmoteContainer').append($emoteClone); }
+                    else if ($.inArray($emoteName, TWITCH_EMOTICONS) > -1) { $('#TwitchEmoteContainer').append($emoteClone); }
+                    else if ($.inArray($emoteName, BTTV_EMOTICONS) > -1) { $('#BTTVEmoteContainer').append($emoteClone); }
+                    else if ($.inArray($emoteName, BBDGG_EMOTICONS) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }
+                    else if ($.inArray($emoteName, ANIMATED) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }
+                    else if ($.inArray($emoteName, SUBONLY) > -1) {;}
+                    else { $('#DGGEmoteContainer').append($emoteClone); }
+                });
+                
+                // Hide emote menu
+                $('#emoticon-btn').click();
             }
         };
     })();
