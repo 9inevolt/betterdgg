@@ -58,11 +58,7 @@ window.addEventListener("message", function(e) {
             url: 'https://www.destiny.gg/profile/info'
         };
         doXHR(xhr);
-    }else if (e.data.type === 'bdgg_stalk_request') {
-
-        console.error("it just werks: " + e);
-        console.error(e);
-        console.error(e.data);
+    } else if (e.data.type === 'bdgg_stalk_request') {
 
         var userName = e.data.data["userName"];
         var lines = e.data.data["lines"];

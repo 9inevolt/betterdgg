@@ -46,14 +46,8 @@
                     //after sending the "bdgg_stalk_request", the content script get the logs for us and replies here
                     if (e.data.type === 'bdgg_stalk_reply') {
 
-                        console.error("final debug: " + e);
-                        console.error(e);
-                        console.error(e.data.response);
                         var messages = e.data.response;
                         for (var i = 0; i < messages.lines.length; i++) {
-                            console.error(messages.lines[i].text);
-                            console.error( messages.nick);
-                            console.error(moment.unix(messages.lines[i].timestamp));
                             DoPush(messages.lines[i].text, messages.nick, moment.unix(messages.lines[i].timestamp));
                         }
 
