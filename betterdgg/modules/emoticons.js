@@ -74,6 +74,7 @@
             all: [],
             init: function() {
                 emoticons = EMOTICONS.concat(NEW).concat(SUBONLY).concat(TEXT).concat(ANIMATED)
+                    .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) === -1; })
                     .sort();
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();
@@ -148,6 +149,7 @@
                 if (value) {
 
                     editEmoteList = EMOTICONS.concat(NEW).concat(SUBONLY).concat(ANIMATED)
+                    .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
                     .filter(function(e) { return baseEmotes.indexOf(e) === -1; })
                     .sort();
 
@@ -159,6 +161,7 @@
                 else {
 
                     editEmoteList = EMOTICONS.concat(NEW).concat(SUBONLY).concat(ANIMATED).concat(TEXT)
+                    .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
                     .filter(function(e) { return baseEmotes.indexOf(e) === -1; })
                     .sort();
 
