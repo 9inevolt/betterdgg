@@ -4,20 +4,22 @@
         var baseEmotes = destiny.chat.gui.emoticons;
 
         var EMOTICONS = [ "CallChad", "FIDGETLOL",
-            "CallCatz", "DESBRO", "Dravewin", "TooSpicy",
-            "BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
-            "ResidentSleeper", "WinWaker", "ChanChamp",
-            "OpieOP", "4Head", "DatSheffy", "GabeN", "SuccesS",
-            "TopCake", "DSPstiny", "SephURR", "Keepo", "POTATO", "ShibeZ",
-            "lirikThump", "Riperino", "NiceMeMe", "YEE", "BabyRage",
-            "dayJoy", "kaceyFace", "AlisherZ", "D:",
-            "WEOW", "Depresstiny", "HerbPerve", "CARBUCKS", "Jewstiny", "PEPE",
-            "ITSRAWWW", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "CallHafu",
-            "ChibiDesti", "CORAL", "CUX", "KappaPride", "DJAslan",
-            "MingLee", "OhMyDog", "CoolCat", "FeelsBadMan", "FeelsGoodMan",
-            "NOBULLY", "haHAA", "gachiGASM"
-
+            "CallCatz", "Dravewin", "YEE", "PEPE", "DJAslan",
         ];
+        
+        var BBDGG_EMOTICONS = ["DESBRO", "ChanChamp", "SuccesS", "TopCake", "DSPstiny", "SephURR", 
+            "POTATO", "Riperino", "NiceMeMe", "dayJoy", "kaceyFace",
+            "AlisherZ", "WEOW", "Depresstiny", "HerbPerve", "CARBUCKS", "Jewstiny",
+            "ITSRAWWW", "CallHafu", "ChibiDesti", "CORAL", "CUX", "NOBULLY"
+        ];
+        
+        var TWITCH_EMOTICONS = ["BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
+            "ResidentSleeper", "WinWaker", "OpieOP", "4Head", "DatSheffy", "TooSpicy", "Keepo",
+            "lirikThump", "BabyRage", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "KappaPride", 
+            "MingLee", "OhMyDog", "CoolCat", "gachiGASM"
+        ];
+        
+        var BTTV_EMOTICONS = ["GabeN", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA"];
 
         var NEW = [ ];
 
