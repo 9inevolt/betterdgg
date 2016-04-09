@@ -4,7 +4,7 @@
         var baseEmotes = destiny.chat.gui.emoticons;
 
         var EMOTICONS = [ "CallChad", "FIDGETLOL",
-            "CallCatz", "Dravewin", "YEE", "PEPE", "DJAslan",
+            "CallCatz", "Dravewin", "YEE", "PEPE", "DJAslan"
         ];
         
         var BBDGG_EMOTICONS = ["DESBRO", "ChanChamp", "SuccesS", "TopCake", "DSPstiny", "SephURR", 
@@ -216,7 +216,7 @@
                     else if ($.inArray($emoteName, BTTV_EMOTICONS) > -1) { $('#BTTVEmoteContainer').append($emoteClone); }
                     else if ($.inArray($emoteName, BBDGG_EMOTICONS) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }
                     else if ($.inArray($emoteName, ANIMATED) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }
-                    else if ($.inArray($emoteName, SUBONLY) > -1) {;}
+                    else if ($.inArray($emoteName, SUBONLY) > -1) { null; }
                     else { $('#DGGEmoteContainer').append($emoteClone); }
                 });
                 
