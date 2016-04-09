@@ -9,7 +9,6 @@
             //from addmute or addban
             /used my safeword/,
             /just can't nod and smile/,
-            /(^|\s)momo\s.*\sbanned($|\s)|(^|\s)momo banned($|\s)/,
             /([\s\S]+?)?play([\s\S]+?)?undertale([\s\S]+?)?/,
             /([\s\S]+?)?dest[il]ny([\s\S]+?)?underta[il]e([\s\S]+?)?/,
             /!logs Eschkapade/,
@@ -17,6 +16,7 @@
             /卐/,
             /\/r\/bliutwo/,
             /\/ScYx17/,
+            /\/xj9/,
 
             //links
             /puu\.sh\/iHbP6/, //knock knock

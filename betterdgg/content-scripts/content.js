@@ -58,7 +58,32 @@ window.addEventListener("message", function(e) {
             url: 'https://www.destiny.gg/profile/info'
         };
         doXHR(xhr);
+    }else if (e.data.type === 'bdgg_stalk_request') {
+
+        console.error("it just werks: " + e);
+        console.error(e);
+        console.error(e.data);
+
+        var userName = e.data.data["userName"];
+        var lines = e.data.data["lines"];
+        var stalkUrl = "https://overrustlelogs.net/api/v1/stalk/Destinygg chatlog/"+userName+".json?limit="+lines;
+
+        xhr = {
+            onload: function(responseText) {
+                var messages = JSON.parse(responseText);
+                if (messages.error){
+                    window.postMessage({ type: 'bdgg_stalk_error', error: "Stalk error: " + messages.error }, '*');
+                } else {
+                    window.postMessage({ type: 'bdgg_stalk_reply', response: messages }, '*');
+                }
+            },
+            method: 'GET',
+            url: stalkUrl
+        };
+        doXHR(xhr);
+
     }
+
 });
 
 function parseStrims(responseText) {
