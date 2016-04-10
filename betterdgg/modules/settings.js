@@ -122,7 +122,7 @@
         'bdgg_highlight_selected_mentions': {
             'name': 'Highlight mentions of selected user',
             'description': 'Clicking a username will highlight the user\'s mentions as well as their own messages',
-            'value': false,
+            'value': true,
             'type': 'boolean'
         }
     };
