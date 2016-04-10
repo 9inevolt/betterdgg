@@ -217,7 +217,7 @@
                     else if ($.inArray($emoteName, BBDGG_EMOTICONS) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }
                     else if ($.inArray($emoteName, ANIMATED) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }
                     else if ($.inArray($emoteName, SUBONLY) > -1) { null; }
-                    else { $('#DGGEmoteContainer').append($emoteClone); }
+                    else if ($.inArray($emoteName, TEXT) < 0){ $('#DGGEmoteContainer').append($emoteClone); }
                 });
                 
                 // Hide emote menu
