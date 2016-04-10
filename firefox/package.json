@@ -11,7 +11,9 @@
       "http://ustream.tv",
       "http://www.ustream.tv",
       "http://downthecrop.xyz",
-      "http://api.overrustle.com"
+      "http://api.overrustle.com",
+      "http://overrustlelogs.net/",
+      "https://overrustlelogs.net/"
     ]
   },
   "main": "lib/main.js"
