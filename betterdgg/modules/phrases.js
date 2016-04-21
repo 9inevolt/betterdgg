@@ -55,7 +55,7 @@
 
                     var message = destiny.chat.gui.input.val();
                     //If the message starts with any prefix that would make it a private message, do not check for prohibited phrases.
-                    var isPublicMessage = (message.match(/^\s*(\/w|\/msg|\/message)/i) === null);
+                    var isPublicMessage = (message.match(/^\s*\/(?:m(?:essage|sg)|w(?:hisper)?|t(?:ell)?|notify)/i) === null);
 
                     if (isPublicMessage && bdgg.settings.get('bdgg_prohibited_phrase_filter')){
 
