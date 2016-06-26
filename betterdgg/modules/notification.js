@@ -12,19 +12,14 @@
                 var fnChatPRIVMSG = destiny.chat.onPRIVMSG;
                 var bdggChatPRIVMSG = function(data) {
                     var ignoreList = bdgg.settings.get('bdgg_user_ignore');
-                    var ignoreArray = ignoreList.toLowerCase().split(' ').join('').split(',');
-                    console.error(ignoreList);
-                    console.error(ignoreArray);
-                    console.error(data.nick);
-
-
-
+                    if (ignoreList !== "") {
+                        var ignoreArray = ignoreList.toLowerCase().split(' ').join('').split(',');
+                    }
                     var bdggPRIVMSG = fnChatPRIVMSG.apply(this, arguments);
                     var notif;
                     if (ignoreArray.indexOf(data.nick.toLowerCase()) === -1) {
 
                         if (bdgg.settings.get('bdgg_private_message_notifications')) {
-                            console.error("wew");
                             var memes = {
                                 body: data.nick + " sent you a private message. Click here to view the chat!",
                                 icon: destiny.cdn + '/chat/img/notifyicon.png'
