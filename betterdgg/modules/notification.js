@@ -15,12 +15,13 @@
                     var ignoreArray = ignoreList.toLowerCase().split(' ').join('').split(',');
                     console.error(ignoreList);
                     console.error(ignoreArray);
+                    console.error(data.nick);
 
 
 
                     var bdggPRIVMSG = fnChatPRIVMSG.apply(this, arguments);
                     var notif;
-                    if (ignoreArray.indexOf(data.nick.toLowerCase()) !== -1) {
+                    if (ignoreArray.indexOf(data.nick.toLowerCase()) === -1) {
 
                         if (bdgg.settings.get('bdgg_private_message_notifications')) {
                             console.error("wew");
