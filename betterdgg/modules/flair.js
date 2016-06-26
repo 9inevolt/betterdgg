@@ -1,7 +1,7 @@
 (function(bdgg) {
 
     var BOTS = [ 'Logs', 'OPbot', 'Bot', 'HighlightBot' ];
-    var CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat' ];
+    var CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat', 'Dashh' ];
     var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
                     'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
                     'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'DerFaba'

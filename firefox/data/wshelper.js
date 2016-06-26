@@ -41,24 +41,7 @@ onAttach = function(e) {
             return;
         }
 
-        if (e.data.type == 'bdgg_stalk_request') {
-            var query = {
-                QueryType: e.data.query.QueryType,
-                Name: e.data.query["Name"],
-                Names: e.data.query["Names"],
-                Number: e.data.query["Number"],
-                Session: e.data.query["Session"]
-            };
-            wamp.call('bdgg.stalk', query, {
-                onSuccess: function(response) {
-                    postReply(response);
-                },
-                onError: function(err) {
-                    console.error('RPC error: ' + err);
-                    postError("Error stalking", err);
-                }
-            });
-        } else if (e.data.type == 'bdgg_flair_update') {
+        if (e.data.type == 'bdgg_flair_update') {
             //console.log("Flair update received: " + e.data);
             if (!e.data.token) {
                 return;
@@ -101,26 +84,6 @@ onAttach = function(e) {
     function postUsers(data)
     {
         pushMessage({ type: 'bdgg_users_refreshed', users: data });
-    }
-
-    function postReply(data)
-    {
-        pushMessage({ type: 'bdgg_stalk_reply', reply: data });
-    }
-
-    function postOutput(msg)
-    {
-        pushMessage({ type: 'bdgg_stalk_message', message: msg });
-    }
-
-    function postError(msg, detail)
-    {
-        if (typeof detail === 'string') {
-            msg = msg + ": " + detail;
-        } else if (detail && typeof detail[0] === 'string') {
-            msg = msg + ": " + detail[0];
-        }
-        pushMessage({ type: 'bdgg_stalk_error', error: msg });
     }
 
     function pushMessage(obj)

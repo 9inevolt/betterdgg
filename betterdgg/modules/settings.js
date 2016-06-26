@@ -113,12 +113,18 @@
         },
 
         'bdgg_prohibited_phrase_filter': {
-            'name': 'Avoid prohibited phrases',
+            'name': 'Try to avoid prohibited phrases',
             'description': 'Issue a warning when trying to post a known prohibited phrase (Do NOT rely on this, the list is not complete)',
             'value': true,
             'type': 'boolean'
-        }
+        },
 
+        'bdgg_highlight_selected_mentions': {
+            'name': 'Highlight mentions of selected user',
+            'description': 'Clicking a username will highlight the user\'s mentions as well as their own messages',
+            'value': true,
+            'type': 'boolean'
+        }
     };
 
     bdgg.settings = (function() {
