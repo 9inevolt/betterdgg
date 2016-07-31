@@ -31,6 +31,13 @@
     margin-top: -30px;
 }
 
+.chat-emote-NotLikeThis, .chat-emote.bdgg-chat-emote-NotLikeThis {
+    background-image:url('images/emoticons/NotLikeThis.png');
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+}
+
 .chat-emote-haHAA, .chat-emote.bdgg-chat-emote-haHAA {
     background-image:url('images/emoticons/haHAA.png');
     width: 30px;
@@ -755,4 +762,7 @@
 
 .chat-emote::-webkit-selection { 
     color: transparent;
+}
+#chat-input-wrap{
+    margin: 0 90px 0 0 !important;
 }

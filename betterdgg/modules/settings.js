@@ -170,8 +170,36 @@
                     bdgg.settings.add(s);
                 }
 
-                destiny.chat.gui.chatsettings.btn.on('click', bdgg.settings.hide);
-                destiny.chat.gui.userslist.btn.on('click', bdgg.settings.hide);
+                try{
+                    //Chat update fix
+                    destiny.chat.gui.chatsettings.btn.on('click', bdgg.settings.hide);
+                    destiny.chat.gui.userslist.btn.on('click', bdgg.settings.hide);
+                }
+                catch (e){
+                    $('#chat-tools-wrap').prepend(bdgg.templates.menu_button());
+                    $('#chat-bottom-frame').append(
+                    $(bdgg.templates.menu()).append(
+                        bdgg.templates.menu_footer({version: bdgg.version})));
+                    $('#chat-bottom-frame').append(bdgg.templates.advanced());
+
+                    $('#bdgg-settings-btn').on('click', function() {
+                        $('#bdgg-settings').toggle();
+                        $(this).toggleClass('active');
+                        window.cMenu.closeMenus(destiny.chat.gui);
+                    });
+                    $('#bdgg-settings').on('click', '.bdgg-advanced', function() {
+                        $('#bdgg-advanced').show();
+                    });
+
+                    $('#bdgg-advanced .close').on('click', function() {
+                        $('#bdgg-advanced').hide();
+                    });
+
+                    $('#bdgg-settings .close').on('click', function() {
+                        bdgg.settings.hide();
+                        $('#bdgg-advanced').hide();
+                    });
+                }
             },
             addObserver: function(obs) {
                 if (_observers.indexOf(obs) < 0) {

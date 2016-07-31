@@ -11,31 +11,24 @@
                 });
                 var fnChatPRIVMSG = destiny.chat.onPRIVMSG;
                 var bdggChatPRIVMSG = function(data) {
-                    var ignoreList = bdgg.settings.get('bdgg_user_ignore');
-                    if (ignoreList !== "") {
-                        var ignoreArray = ignoreList.toLowerCase().split(' ').join('').split(',');
-                    }
                     var bdggPRIVMSG = fnChatPRIVMSG.apply(this, arguments);
                     var notif;
-                    if (ignoreArray.indexOf(data.nick.toLowerCase()) === -1) {
-
-                        if (bdgg.settings.get('bdgg_private_message_notifications')) {
-                            var memes = {
-                                body: data.nick + " sent you a private message. Click here to view the chat!",
-                                icon: destiny.cdn + '/chat/img/notifyicon.png'
+                    if (bdgg.settings.get('bdgg_private_message_notifications')) {
+                        var memes = {
+                            body: data.nick + " sent you a private message. Click here to view the chat!",
+                            icon: destiny.cdn + '/chat/img/notifyicon.png'
+                        };
+                        if (Notification.permission === 'granted'){
+                            notif = new Notification("Better Better Destiny.GG", memes);
+                            notif.onclick = function() { 
+                                window.focus();
+                                notif.close();
+                                if ($(".mark-as-read")) {
+                                    $(".mark-as-read").click();
+                                }
                             };
-                            if (Notification.permission === 'granted'){
-                                notif = new Notification("Better Better Destiny.GG", memes);
-                                notif.onclick = function() { 
-                                    window.focus();
-                                    notif.close();
-                                    if ($(".mark-as-read")) {
-                                        $(".mark-as-read").click();
-                                    }
-                                };
-                                setTimeout(function(){ notif.close(); }, 5000);
-                            } 
-                        }
+                            setTimeout(function(){ notif.close(); }, 5000);
+                        } 
                     }
                     return bdggPRIVMSG;
                 };

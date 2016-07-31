@@ -16,7 +16,7 @@
         var TWITCH_EMOTICONS = ["BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
             "ResidentSleeper", "WinWaker", "OpieOP", "4Head", "DatSheffy", "TooSpicy", "Keepo",
             "lirikThump", "BabyRage", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "KappaPride", 
-            "MingLee", "OhMyDog", "CoolCat", "gachiGASM"
+            "MingLee", "OhMyDog", "CoolCat", "gachiGASM", "NotLikeThis"
         ];
         
         var BTTV_EMOTICONS = ["GabeN", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA"];
