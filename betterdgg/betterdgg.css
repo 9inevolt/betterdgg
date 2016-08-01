@@ -731,7 +731,7 @@
 }
 
 .chat-lines div.bdgg-muted {
-    opacity: 0.5;
+    opacity: 0.5 !important;
 }
 
 .chat-lines div.bdgg-muted a.externallink {
