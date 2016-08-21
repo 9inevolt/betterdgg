@@ -45,6 +45,13 @@
     margin-top: -30px;
 }
 
+.chat-emote-FeelsAmazingMan, .chat-emote.bdgg-chat-emote-FeelsAmazingMan {
+    background-image:url('images/emoticons/FeelsAmazingMan.png');
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+}
+
 .chat-emote-OhMyDog, .chat-emote.bdgg-chat-emote-OhMyDog {
     background-image:url('images/emoticons/OhMyDog.png');
     width: 30px;

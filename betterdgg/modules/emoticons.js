@@ -19,7 +19,7 @@
             "MingLee", "OhMyDog", "CoolCat", "gachiGASM", "NotLikeThis"
         ];
         
-        var BTTV_EMOTICONS = ["GabeN", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA"];
+        var BTTV_EMOTICONS = ["GabeN", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA", "FeelsAmazingMan"];
 
         var NEW = [ ];
 
