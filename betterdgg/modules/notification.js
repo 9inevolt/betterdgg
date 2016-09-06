@@ -12,8 +12,12 @@
                 var fnChatPRIVMSG = destiny.chat.onPRIVMSG;
                 var bdggChatPRIVMSG = function(data) {
                     var ignoreList = bdgg.settings.get('bdgg_user_ignore');
+                    var ignoreArray;
                     if (ignoreList !== "") {
-                        var ignoreArray = ignoreList.toLowerCase().split(' ').join('').split(',');
+                        ignoreArray = ignoreList.toLowerCase().split(' ').join('').split(',');
+                    }
+                    else {
+                        ignoreArray = [""];
                     }
                     var bdggPRIVMSG = fnChatPRIVMSG.apply(this, arguments);
                     var notif;
