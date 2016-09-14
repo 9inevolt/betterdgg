@@ -1,5 +1,5 @@
 extends:
-  - defaults
+  - eslint:recommended
 
 env:
   browser: true
