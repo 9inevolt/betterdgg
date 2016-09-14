@@ -78,8 +78,21 @@ window.addEventListener("message", function(e) {
         };
         doXHR(xhr);
 
+    } else if (e.data.type === 'bdgg_phrase_request') {
+        xhr = {
+            onload: function(responseText) {
+                try {
+                    var phrase = JSON.parse(responseText);
+                    window.postMessage({ type: 'bdgg_phrase_reply', response: phrase }, '*');
+                } catch(e) {
+                    window.postMessage({ type: 'bdgg_phrase_error'}, '*');
+                }
+            },
+            method: 'GET',
+            url: 'http://downthecrop.xyz/bbdgg/api/phrases.json'
+        };
+        doXHR(xhr); 
     }
-
 });
 
 function parseStrims(responseText) {

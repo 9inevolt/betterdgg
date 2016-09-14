@@ -1,38 +1,7 @@
 (function(bdgg) {
     bdgg.phrases = (function() {
 
-        var PHRASES = [ 
-            //old phrases
-            /(^|\b)BAR($|\b)/, 
-            /.*?twitter\.com\/antibullyranger.*?/,
-
-            //from addmute or addban
-            /used my safeword/,
-            /just can't nod and smile/,
-            /([\s\S]+?)?play([\s\S]+?)?undertale([\s\S]+?)?/,
-            /([\s\S]+?)?dest[il]ny([\s\S]+?)?underta[il]e([\s\S]+?)?/,
-            /!logs Eschkapade/,
-            /\/scyx/,
-            /卐/,
-            /\/r\/bliutwo/,
-            /\/ScYx17/,
-            /\/xj9/,
-
-            //links
-            /puu\.sh\/iHbP6/, //knock knock
-            /OSCiMbMVDLI/, //wake me up
-            /SUdVyW0tcSo/, //wake me up
-            /dQw4w9WgXcQ/, //rick
-            /puu\.sh\/k0Hki\.jpg/, //knock knock
-            /wbcPKaCSw7k/, //loud
-            /xWObJuha4Ys/, //loud
-            /twitter\.com\/steven__bonnell/,
-            /twitter\.com\/Sc2Destiny/,
-            /tinyurl\.com/,
-
-            //for debugging
-            /(^|\b)JUSTATESTSTRINGNOONEUSES($|\b)/
-        ];
+        var PHRASES = [];
 
         function _checkMessage(phrases, line) {
 
@@ -42,13 +11,29 @@
                     return phrases[i]; //return whatever the message matched so we can give feedback
                 }
             }
-
             //no match found, message seems good.
             return false;
         }
 
         return {
             init: function() {
+
+                var listner = function(e){
+                    if (window !== e.source) {
+                        return;
+                    }
+
+                    if (e.data.type === 'bdgg_phrase_reply') {
+                        PHRASES = e.data.response.phrases;
+                    }
+                    else if (e.data.type === 'bdgg_phrase_error') {
+                        destiny.chat.gui.push(new ChatErrorMessage("BBDGG could not load the prohibited phrases list"));
+                    }
+
+                };
+
+                window.addEventListener('message', listner);
+                window.postMessage({type: 'bdgg_phrase_request'}, '*');
 
                 var fnSendCommand = destiny.chat.gui.send;
                 destiny.chat.gui.send = function() {
