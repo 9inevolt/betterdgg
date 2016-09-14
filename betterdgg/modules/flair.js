@@ -81,7 +81,6 @@
     bdgg.flair = (function() {
         destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
         destiny.UserFeatures['BDGG_MOOBIE'] = 'bdgg_moobie';
-        destiny.UserFeatures['BOT'] = '';
 
         var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
         var bdggGetFeatureHTML = function() {
