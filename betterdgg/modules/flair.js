@@ -1,6 +1,6 @@
 (function(bdgg) {
 
-    var BOTS = [ 'Logs', 'OPbot', 'Bot', 'HighlightBot' ];
+    var BOTS = [];
     var CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat', 'Dashh' ];
     var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
                     'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
