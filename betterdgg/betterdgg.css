@@ -732,20 +732,20 @@
     background: #302b29;
 }
 
-.chat-theme-dark .chat-lines .bdgg-stalk-msg time {
+.chat-theme-dark #chat-lines .bdgg-stalk-msg time {
     display: inline-block !important;
     color: #888;
 }
 
-.chat-lines div.bdgg-muted {
+#chat-lines div.bdgg-muted {
     opacity: 0.5 !important;
 }
 
-.chat-lines div.bdgg-muted a.externallink {
+#chat-lines div.bdgg-muted a.externallink {
     text-decoration: line-through !important;
 }
 
-.chat.focus-user .chat-lines > .user-msg.highlight:not(.focused) {
+.chat.focus-user #chat-lines > .user-msg.highlight:not(.focused) {
     opacity: 0.3;
 }
 
@@ -755,7 +755,7 @@
     color: transparent;
 }
 
-.msg, .chat-lines>.highlight .msg {
+.msg, #chat-lines>.highlight .msg {
     text-shadow: none !important;
 }
 
