@@ -12,7 +12,9 @@
     "permissions": [
         "*://*.destiny.gg/*",
         "*://*.ustream.tv/*",
-        "*://*.overrustle.com/*"
+        "*://*.overrustle.com/*",
+        "*://*.downthecrop.xyz/*",
+        "*://*.overrustlelogs.net/*"
     ],
 
     "background": {

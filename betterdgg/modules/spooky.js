@@ -19,8 +19,8 @@
         };
         var EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
 
-        var BEGIN = moment('2015-10-01T13:00Z');
-        var END = moment('2015-11-01T13:00Z');
+        var BEGIN = moment('2016-10-01T13:00Z');
+        var END = moment('2016-11-01T13:00Z');
         var on = false;
         var PROC_CHANCE;
 

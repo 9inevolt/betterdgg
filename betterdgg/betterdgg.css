@@ -400,7 +400,7 @@
     background: url('images/emoticons/emoticons.png') no-repeat -23px -59px;
 }
 
-.chat-input-wrap {
+#chat-input-wrap {
     margin-right: 90px !important;
 }
 

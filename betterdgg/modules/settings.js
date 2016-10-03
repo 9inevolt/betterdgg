@@ -68,7 +68,7 @@
 
         return {
             init: function() {
-                $('#destinychat .chat-tools-wrap').prepend(bdgg.templates.menu_button());
+                $('#chat-tools-wrap').prepend(bdgg.templates.menu_button());
                 $('#chat-bottom-frame').append(
                     $(bdgg.templates.menu()).append(
                         bdgg.templates.menu_footer({version: bdgg.version})));
@@ -76,7 +76,7 @@
                 $('#bdgg-settings-btn').on('click', function(e) {
                     $('#bdgg-settings').toggle();
                     $(this).toggleClass('active');
-                    window.cMenu.closeMenus(destiny.chat.gui);
+                    window.ChatMenu.closeMenus(destiny.chat.gui);
                 });
 
                 $('#bdgg-settings .close').on('click', function(e) {
@@ -90,8 +90,7 @@
                     bdgg.settings.add(s);
                 }
 
-                destiny.chat.gui.chatsettings.btn.on('click', bdgg.settings.hide);
-                destiny.chat.gui.userslist.btn.on('click', bdgg.settings.hide);
+                destiny.chat.gui.ui.find('#chat-settings-btn, #chat-users-btn').on('click', bdgg.settings.hide);
             },
             addObserver: function(obs) {
                 if (_observers.indexOf(obs) < 0) {
