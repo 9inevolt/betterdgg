@@ -53,11 +53,13 @@ gulp.task('chrome:css', function() {
         .pipe(gulp.dest('./build/chrome/'));
 });
 
-gulp.task('firefox:css', function() {
-    return gulp.src('./betterdgg/*.css')
-        .pipe(encode64)
-        .pipe(concat('betterdgg.css'))
-        .pipe(gulp.dest('./build/firefox/data/'));
+gulp.task('firefox:css', [ 'chrome:css' ], function() {
+    return gulp.src('./build/chrome/betterdgg.css')
+        .pipe(map(function(code) {
+            code = code.toString();
+            return code.replace(/chrome-extension:/g, 'moz-extension:');
+        }))
+        .pipe(gulp.dest('./build/firefox/'));
 });
 
 gulp.task('safari:css', function() {
@@ -134,30 +136,25 @@ gulp.task('chrome:zip', [ 'chrome' ], function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('firefox:manifest', function() {
-    return gulp.src('./firefox/package.json')
-        .pipe(map(function(code) {
-            var obj = JSON.parse(code.toString());
-            obj.version = package.version;
-            return JSON.stringify(obj);
-        }))
+gulp.task('firefox:manifest', [ 'chrome:manifest' ], function() {
+    return gulp.src('./build/chrome/manifest.json')
         .pipe(gulp.dest('./build/firefox/'));
 });
 
 gulp.task('firefox', [ 'firefox:css', 'firefox:manifest', 'js' ], function() {
-    var assets = gulp.src([ './firefox/**/*', '!./firefox/data/inject.js',
-            '!./firefox/package.json' ])
+    var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
+            './chrome/**/*', '!./chrome/inject.js', '!./chrome/manifest.json' ])
         .pipe(gulp.dest('./build/firefox/'));
-    var js = gulp.src([ './build/betterdgg.js', './firefox/data/inject.js', './build/content.js' ])
+    var js = gulp.src([ './build/betterdgg.js', './chrome/inject.js', './build/content.js' ])
         .pipe(concat('betterdgg.js'))
-        .pipe(gulp.dest('./build/firefox/data/'));
+        .pipe(gulp.dest('./build/firefox/'));
     return merge(assets, js);
 });
 
 gulp.task('firefox:xpi', [ 'firefox' ], function() {
-    run('mkdir -p ./dist && cd ./build/firefox && cfx xpi'
-	+ ' --update-url https://9inevolt.github.io/betterdgg/firefox/update.rdf'
-        + ' --output-file=../../dist/betterdgg.xpi').exec();
+    gulp.src('./build/firefox/**/*')
+        .pipe(zip('betterdgg-firefox.xpi'))
+        .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('safari:plist', function() {
