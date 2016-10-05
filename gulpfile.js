@@ -13,6 +13,7 @@ var merge   = require('merge-stream');
 var map     = require('vinyl-map');
 var source  = require('vinyl-source-stream');
 var plist   = require('plist');
+var webpack = require('webpack');
 
 var package = require('./package.json');
 
@@ -69,10 +70,22 @@ gulp.task('safari:css', function() {
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
 
-gulp.task('js', [ 'templates', 'version', 'content-scripts' ], function() {
-    return gulp.src([ './vendor/**/*.js',
-            './betterdgg/modules/*.js', './build/templates.js', './build/version.js',
-            './betterdgg/*.js' ])
+gulp.task('webpack', [ 'version' ], function(done) {
+    webpack(require('./webpack.config')).run(function(err, stats) {
+        if (err) {
+            return done(err);
+        } else if (stats.hasErrors()) {
+            return done(stats.toString('errors-only'));
+        }
+
+        console.log(stats.toString());
+        done();
+    });
+});
+
+gulp.task('js', [ 'templates', 'content-scripts', 'webpack' ], function() {
+    return gulp.src([ './vendor/**/*.js', './build/betterdgg-pack.js',
+            './build/templates.js' ])
         .pipe(concat('betterdgg.js'))
         .pipe(header('var injectedBetterDGG = function() {\n'))
         .pipe(footer('\n};'))
@@ -93,15 +106,15 @@ gulp.task('templates', function() {
         .pipe(gulp.dest('./build/'));
 });
 
+//TODO: rearrange file structure
 gulp.task('version', function() {
     var stream = source('version.js');
-    stream.write(';(function(bdgg) {');
-    stream.write('bdgg.version = "' + package.version + '";');
-    stream.write('}(window.BetterDGG = window.BetterDGG || {}));');
+    stream.write('const VERSION = "' + package.version + '";');
+    stream.write('export default VERSION');
 
     return gulp.src('version.js')
         .pipe(stream)
-        .pipe(gulp.dest('./build/'));
+        .pipe(gulp.dest('./betterdgg/modules/'));
 });
 
 gulp.task('content-scripts', function() {

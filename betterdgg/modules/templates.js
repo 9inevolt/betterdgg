@@ -1,5 +1,3 @@
-;(function(bdgg) {
-    bdgg.templates = (function() {
-        return {};
-    })();
-}(window.BetterDGG = window.BetterDGG || {}));
+let templates = {};
+
+export default templates;

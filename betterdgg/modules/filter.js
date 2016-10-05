@@ -1,46 +1,46 @@
-;(function(bdgg) {
-    bdgg.filter = (function() {
-        var _filterRe;
+import settings from './settings';
 
-        function _filterWords(value) {
-            var words = value.split(',')
-                .map(function(val) {
-                    return val.trim().replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-                })
-                .reduce(function(prev, curr) {
-                    if (curr.length > 0) {
-                        prev.push(curr);
-                    }
-                    return prev;
-                }, []);
+var _filterRe;
 
-            if (words.length > 0) {
-                _filterRe = new RegExp("(?:^|\\b|\\s)(?:"+words.join("|")+")(?:$|\\b|\\s)", "i");
-            } else {
-                _filterRe = null;
+function _filterWords(value) {
+    var words = value.split(',')
+        .map(function(val) {
+            return val.trim().replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        })
+        .reduce(function(prev, curr) {
+            if (curr.length > 0) {
+                prev.push(curr);
             }
-        }
+            return prev;
+        }, []);
 
-        return {
-            init: function() {
-                _filterWords(bdgg.settings.get('bdgg_filter_words'));
-                bdgg.settings.addObserver(function(key, value) {
-                    if (key == 'bdgg_filter_words') {
-                        _filterWords(value);
-                    }
-                });
+    if (words.length > 0) {
+        _filterRe = new RegExp("(?:^|\\b|\\s)(?:"+words.join("|")+")(?:$|\\b|\\s)", "i");
+    } else {
+        _filterRe = null;
+    }
+}
 
-                var fnGuiPush = destiny.chat.gui.push;
-                destiny.chat.gui.push = function(msg) {
-                    if (_filterRe != null && msg instanceof ChatUserMessage) {
-                        if (_filterRe.test(msg.message)) {
-                            return;
-                        }
-                    }
-
-                    return fnGuiPush.apply(this, arguments);
-                };
+let filter = {
+    init: function() {
+        _filterWords(settings.get('bdgg_filter_words'));
+        settings.addObserver((key, value) => {
+            if (key == 'bdgg_filter_words') {
+                _filterWords(value);
             }
-        }
-    })();
-}(window.BetterDGG = window.BetterDGG || {}));
+        });
+
+        var fnGuiPush = destiny.chat.gui.push;
+        destiny.chat.gui.push = function(msg) {
+            if (_filterRe != null && msg instanceof ChatUserMessage) {
+                if (_filterRe.test(msg.message)) {
+                    return;
+                }
+            }
+
+            return fnGuiPush.apply(this, arguments);
+        };
+    }
+};
+
+export default filter
