@@ -70,7 +70,7 @@ gulp.task('safari:css', function() {
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
 
-gulp.task('webpack', [ 'version' ], function(done) {
+gulp.task('webpack', [ 'templates', 'version' ], function(done) {
     webpack(require('./webpack.config')).run(function(err, stats) {
         if (err) {
             return done(err);
@@ -83,30 +83,32 @@ gulp.task('webpack', [ 'version' ], function(done) {
     });
 });
 
-gulp.task('js', [ 'templates', 'content-scripts', 'webpack' ], function() {
-    return gulp.src([ './vendor/**/*.js', './build/betterdgg-pack.js',
-            './build/templates.js' ])
+gulp.task('js', [ 'content-scripts', 'webpack' ], function() {
+    return gulp.src([ './vendor/**/*.js', './build/betterdgg-pack.js' ])
         .pipe(concat('betterdgg.js'))
         .pipe(header('var injectedBetterDGG = function() {\n'))
         .pipe(footer('\n};'))
         .pipe(gulp.dest('./build/'));
 });
 
+//TODO: rearrange file structure for this and version
 gulp.task('templates', function() {
     var nameTemplate = map(function(code, filename) {
         code = code.toString();
-        var declaration = 'window.BetterDGG.templates.' + path.basename(filename, '.js') + ' = function(';
-        return code.replace(/^function template\(/, declaration);
+        var declaration = path.basename(filename, '.js') + ': function(';
+        return code.replace(/^function template\(/, declaration) + ',';
     });
 
     return gulp.src([ './betterdgg/templates/**/*.jade' ])
         .pipe(jade({ client: true }))
         .pipe(nameTemplate)
         .pipe(concat('templates.js'))
-        .pipe(gulp.dest('./build/'));
+        .pipe(header('let templates = {\n'))
+        .pipe(footer('\n};\n'))
+        .pipe(footer('\nexport default templates'))
+        .pipe(gulp.dest('./betterdgg/modules/'));
 });
 
-//TODO: rearrange file structure
 gulp.task('version', function() {
     var stream = source('version.js');
     stream.write('const VERSION = "' + package.version + '";');
