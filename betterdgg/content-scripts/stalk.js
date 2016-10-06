@@ -1,3 +1,5 @@
+import { isWindow } from './content';
+
 var port = null;
 
 if (typeof chrome != "undefined" && chrome.runtime) {

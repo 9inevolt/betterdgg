@@ -37,7 +37,7 @@ let init = function() {
     firstrun.init();
 };
 
-let bdgg = window.BetterDGG = window.BetterDGG || {
+let BetterDGG = {
     init,
     alert,
     casino,
@@ -58,4 +58,8 @@ let bdgg = window.BetterDGG = window.BetterDGG || {
     theme,
     users,
     version,
-}
+};
+
+window.BetterDGG = window.BetterDGG || BetterDGG;
+
+export default BetterDGG

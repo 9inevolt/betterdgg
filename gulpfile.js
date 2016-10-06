@@ -17,7 +17,7 @@ var webpack = require('webpack');
 
 var package = require('./package.json');
 
-gulp.task('default', [ 'chrome:zip', 'firefox:xpi', 'safari' ], function() {
+gulp.task('default', [ 'chrome:zip', 'firefox:xpi' ], function() {
 });
 
 gulp.task('clean', function() {
@@ -43,14 +43,13 @@ var encode64 = map(function(code, filename) {
     });
 });
 
-gulp.task('chrome:css', function() {
+gulp.task('chrome:css', [ 'webpack' ], function() {
     var extPath = map(function(code) {
         code = code.toString();
         return code.replace(rImages, '$1chrome-extension://__MSG_@@extension_id__/$2');
     });
-    return gulp.src('./betterdgg/*.css')
+    return gulp.src('./build/betterdgg.css')
         .pipe(extPath)
-        .pipe(concat('betterdgg.css'))
         .pipe(gulp.dest('./build/chrome/'));
 });
 
@@ -83,14 +82,6 @@ gulp.task('webpack', [ 'templates', 'version' ], function(done) {
     });
 });
 
-gulp.task('js', [ 'content-scripts', 'webpack' ], function() {
-    return gulp.src([ './build/betterdgg-pack.js' ])
-        .pipe(concat('betterdgg.js'))
-        .pipe(header('var injectedBetterDGG = function() {\n'))
-        .pipe(footer('\n};'))
-        .pipe(gulp.dest('./build/'));
-});
-
 //TODO: rearrange file structure for this and version
 gulp.task('templates', function() {
     var nameTemplate = map(function(code, filename) {
@@ -120,12 +111,6 @@ gulp.task('version', function() {
         .pipe(gulp.dest('./betterdgg/modules/'));
 });
 
-gulp.task('content-scripts', function() {
-    return gulp.src([ './betterdgg/content-scripts/*.js' ])
-        .pipe(concat('content.js'))
-        .pipe(gulp.dest('./build/'));
-});
-
 gulp.task('chrome:manifest', function() {
     return gulp.src('./chrome/manifest.json')
         .pipe(map(function(code) {
@@ -136,12 +121,11 @@ gulp.task('chrome:manifest', function() {
         .pipe(gulp.dest('./build/chrome/'));
 });
 
-gulp.task('chrome', [ 'chrome:css', 'chrome:manifest', 'js' ], function() {
+gulp.task('chrome', [ 'chrome:css', 'chrome:manifest', 'webpack' ], function() {
     var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
-            './chrome/**/*', '!./chrome/inject.js', '!./chrome/manifest.json' ])
+            './chrome/**/*', '!./chrome/manifest.json' ])
         .pipe(gulp.dest('./build/chrome/'));
-    var js = gulp.src([ './build/betterdgg.js', './chrome/inject.js', './build/content.js' ])
-        .pipe(concat('betterdgg.js'))
+    var js = gulp.src([ './build/betterdgg.js', './build/injected.js' ])
         .pipe(gulp.dest('./build/chrome/'));
     return merge(assets, js);
 });
@@ -157,14 +141,9 @@ gulp.task('firefox:manifest', [ 'chrome:manifest' ], function() {
         .pipe(gulp.dest('./build/firefox/'));
 });
 
-gulp.task('firefox', [ 'firefox:css', 'firefox:manifest', 'js' ], function() {
-    var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
-            './chrome/**/*', '!./chrome/inject.js', '!./chrome/manifest.json' ])
+gulp.task('firefox', [ 'firefox:css', 'chrome' ], function() {
+    return gulp.src([ './build/chrome/**/*', '!./build/chrome/betterdgg.css' ])
         .pipe(gulp.dest('./build/firefox/'));
-    var js = gulp.src([ './build/betterdgg.js', './chrome/inject.js', './build/content.js' ])
-        .pipe(concat('betterdgg.js'))
-        .pipe(gulp.dest('./build/firefox/'));
-    return merge(assets, js);
 });
 
 gulp.task('firefox:xpi', [ 'firefox' ], function() {
@@ -184,7 +163,7 @@ gulp.task('safari:plist', function() {
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
 
-gulp.task('safari', [ 'safari:css', 'safari:plist', 'js' ], function() {
+gulp.task('safari', [ 'safari:css', 'safari:plist', 'webpack' ], function() {
     var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
             './safari/**/*', '!./safari/inject.js', '!./safari/Info.plist' ])
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));

@@ -1,9 +1,17 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var glob = require('glob');
+var path = require('path');
+
+var workDir = path.join(__dirname, '/betterdgg');
+
 module.exports = {
-  context: __dirname,
-  entry: './betterdgg/betterdgg.js',
+  context: workDir,
+  entry: {
+    injected: glob.sync('./betterdgg.{js,css}', { cwd: workDir }),
+    betterdgg: glob.sync('./content-scripts/*.js', { cwd: workDir })
+  },
   output: {
-    filename: 'betterdgg-pack.js',
-    library: 'BetterDGG',
+    filename: '[name].js',
     path: './build'
   },
   module: {
@@ -16,10 +24,24 @@ module.exports = {
             ['es2015', { loose: true, modules: false }]
           ]
         }
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('css-loader')
+      },
+      {
+        test: /\.(png|gif)$/,
+        loader: 'file-loader',
+        query: {
+          name: '[path][name].[ext]'
+        }
       }
     ]
   },
   node: {
     fs: 'empty'
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin({ filename: 'betterdgg.css', allChunks: true })
+  ]
 };
