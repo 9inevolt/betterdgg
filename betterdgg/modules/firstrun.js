@@ -1,6 +1,6 @@
 import alert from './alert';
 import settings from './settings';
-import templates from './templates';
+import * as templates from './templates';
 import version from './version';
 
 let firstrun = {

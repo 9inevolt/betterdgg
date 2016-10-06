@@ -1,6 +1,6 @@
 import emoticons from './emoticons';
 import stalk from './stalk';
-import templates from './templates';
+import * as templates from './templates';
 
 function push(msg, state) {
     msg && destiny.chat.gui.push(msg, state);

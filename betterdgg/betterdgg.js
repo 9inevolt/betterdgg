@@ -12,7 +12,7 @@ import security from './modules/security';
 import settings from './modules/settings';
 import spooky from './modules/spooky';
 import stalk from './modules/stalk';
-import templates from './modules/templates';
+import * as templates from './modules/templates';
 import test from './modules/test';
 import theme from './modules/theme';
 import users from './modules/users';

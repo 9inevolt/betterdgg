@@ -3,5 +3,4 @@
 build/
 dist/
 node_modules/
-betterdgg/modules/templates.js
 betterdgg/modules/version.js

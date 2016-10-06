@@ -6,7 +6,6 @@ var clean   = require('gulp-clean');
 var concat  = require('gulp-concat');
 var footer  = require('gulp-footer');
 var header  = require('gulp-header');
-var jade    = require('gulp-jade');
 var run     = require('gulp-run');
 var zip     = require('gulp-zip');
 var merge   = require('merge-stream');
@@ -69,7 +68,7 @@ gulp.task('safari:css', function() {
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
 
-gulp.task('webpack', [ 'templates', 'version' ], function(done) {
+gulp.task('webpack', [ 'version' ], function(done) {
     webpack(require('./webpack.config')).run(function(err, stats) {
         if (err) {
             return done(err);
@@ -80,25 +79,6 @@ gulp.task('webpack', [ 'templates', 'version' ], function(done) {
         console.log(stats.toString());
         done();
     });
-});
-
-//TODO: rearrange file structure for this and version
-gulp.task('templates', function() {
-    var nameTemplate = map(function(code, filename) {
-        code = code.toString();
-        var declaration = path.basename(filename, '.js') + ': function(';
-        return code.replace(/^function template\(/, declaration) + ',';
-    });
-
-    return gulp.src([ './betterdgg/templates/**/*.jade' ])
-        .pipe(jade({ client: true }))
-        .pipe(nameTemplate)
-        .pipe(concat('templates.js'))
-        .pipe(header('let templates = {\n'))
-        .pipe(header('import jade from "jade/lib/runtime";\n'))
-        .pipe(footer('\n};\n'))
-        .pipe(footer('\nexport default templates'))
-        .pipe(gulp.dest('./betterdgg/modules/'));
 });
 
 gulp.task('version', function() {

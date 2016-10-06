@@ -35,6 +35,10 @@ module.exports = {
         query: {
           name: '[path][name].[ext]'
         }
+      },
+      {
+        test: /\.jade$/,
+        loader: 'jade-loader'
       }
     ]
   },
