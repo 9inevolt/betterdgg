@@ -84,7 +84,7 @@ gulp.task('webpack', [ 'templates', 'version' ], function(done) {
 });
 
 gulp.task('js', [ 'content-scripts', 'webpack' ], function() {
-    return gulp.src([ './vendor/**/*.js', './build/betterdgg-pack.js' ])
+    return gulp.src([ './build/betterdgg-pack.js' ])
         .pipe(concat('betterdgg.js'))
         .pipe(header('var injectedBetterDGG = function() {\n'))
         .pipe(footer('\n};'))
@@ -104,6 +104,7 @@ gulp.task('templates', function() {
         .pipe(nameTemplate)
         .pipe(concat('templates.js'))
         .pipe(header('let templates = {\n'))
+        .pipe(header('import jade from "jade/lib/runtime";\n'))
         .pipe(footer('\n};\n'))
         .pipe(footer('\nexport default templates'))
         .pipe(gulp.dest('./betterdgg/modules/'));

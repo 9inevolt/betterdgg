@@ -24,6 +24,7 @@
     "gulp-jade": "^0.8.0",
     "gulp-run": "^1.6.4",
     "gulp-zip": "^2.0.1",
+    "jade": "^1.6.0",
     "merge-stream": "^0.1.5",
     "mime": "^1.2.11",
     "plist": "^1.1.0",
