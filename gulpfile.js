@@ -13,10 +13,36 @@ var map     = require('vinyl-map');
 var source  = require('vinyl-source-stream');
 var plist   = require('plist');
 var webpack = require('webpack');
+var jeditor = require('gulp-json-editor');
 
 var package = require('./package.json');
 
+var env = {
+    dev: {
+        webpack: './webpack.config',
+        manifest: {
+            version: package.version,
+            version_name: 'development'
+        }
+    },
+    prod: {
+        webpack: './webpack.prod.config',
+        manifest: {
+            version: package.version
+        }
+    }
+};
+
+var config = env.dev;
+
+gulp.task('env:prod', function() {
+    config = env.prod;
+});
+
 gulp.task('default', [ 'chrome:zip', 'firefox:xpi' ], function() {
+});
+
+gulp.task('prod', [ 'env:prod', 'default' ], function() {
 });
 
 gulp.task('clean', function() {
@@ -42,23 +68,20 @@ var encode64 = map(function(code, filename) {
     });
 });
 
-gulp.task('chrome:css', [ 'webpack' ], function() {
-    var extPath = map(function(code) {
+var extPath = function(scheme) {
+    return map(function(code) {
         code = code.toString();
-        return code.replace(rImages, '$1chrome-extension://__MSG_@@extension_id__/$2');
+        return code.replace(rImages, '$1' + scheme + '://__MSG_@@extension_id__/$2');
     });
-    return gulp.src('./build/betterdgg.css')
-        .pipe(extPath)
-        .pipe(gulp.dest('./build/chrome/'));
-});
+};
 
-gulp.task('firefox:css', [ 'chrome:css' ], function() {
-    return gulp.src('./build/chrome/betterdgg.css')
-        .pipe(map(function(code) {
-            code = code.toString();
-            return code.replace(/chrome-extension:/g, 'moz-extension:');
-        }))
-        .pipe(gulp.dest('./build/firefox/'));
+gulp.task('css', [ 'webpack' ], function() {
+    var src = gulp.src('./build/betterdgg.css');
+    var chrome = src.pipe(extPath('chrome-extension'))
+        .pipe(gulp.dest('./build/chrome'));
+    var firefox = src.pipe(extPath('moz-extension'))
+        .pipe(gulp.dest('./build/firefox'));
+    return merge(chrome, firefox);
 });
 
 gulp.task('safari:css', function() {
@@ -69,7 +92,7 @@ gulp.task('safari:css', function() {
 });
 
 gulp.task('webpack', function(done) {
-    webpack(require('./webpack.config')).run(function(err, stats) {
+    webpack(require(config.webpack)).run(function(err, stats) {
         if (err) {
             return done(err);
         } else if (stats.hasErrors()) {
@@ -83,15 +106,11 @@ gulp.task('webpack', function(done) {
 
 gulp.task('chrome:manifest', function() {
     return gulp.src('./chrome/manifest.json')
-        .pipe(map(function(code) {
-            var obj = JSON.parse(code.toString());
-            obj.version = package.version;
-            return JSON.stringify(obj);
-        }))
+        .pipe(jeditor(config.manifest))
         .pipe(gulp.dest('./build/chrome/'));
 });
 
-gulp.task('chrome', [ 'chrome:css', 'chrome:manifest', 'webpack' ], function() {
+gulp.task('chrome', [ 'css', 'chrome:manifest', 'webpack' ], function() {
     var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
             './chrome/**/*', '!./chrome/manifest.json' ])
         .pipe(gulp.dest('./build/chrome/'));
@@ -106,12 +125,7 @@ gulp.task('chrome:zip', [ 'chrome' ], function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('firefox:manifest', [ 'chrome:manifest' ], function() {
-    return gulp.src('./build/chrome/manifest.json')
-        .pipe(gulp.dest('./build/firefox/'));
-});
-
-gulp.task('firefox', [ 'firefox:css', 'chrome' ], function() {
+gulp.task('firefox', [ 'chrome' ], function() {
     return gulp.src([ './build/chrome/**/*', '!./build/chrome/betterdgg.css' ])
         .pipe(gulp.dest('./build/firefox/'));
 });
@@ -126,8 +140,8 @@ gulp.task('safari:plist', function() {
     return gulp.src('./safari/Info.plist')
         .pipe(map(function(code) {
             var obj = plist.parse(code.toString());
-            obj.CFBundleVersion = package.version;
-            obj.CFBundleShortVersionString = package.version.replace(/^(\d+\.\d+)\..*/, '$1');
+            obj.CFBundleVersion = config.manifest.version;
+            obj.CFBundleShortVersionString = config.manifest.version.replace(/^(\d+\.\d+)\..*/, '$1');
             return plist.build(obj);
         }))
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
