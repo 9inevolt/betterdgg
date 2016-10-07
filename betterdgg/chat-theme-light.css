@@ -16,56 +16,56 @@
   background: #666 !important;
 }
 
-.chat-theme-light .chat-lines > .info-msg,
-.chat-theme-light .chat-lines > .status-msg {
+.chat-theme-light #chat-lines > .info-msg,
+.chat-theme-light #chat-lines > .status-msg {
   color: #88738a;
 }
 
-.chat-theme-light .chat-lines > .error-msg {
+.chat-theme-light #chat-lines > .error-msg {
   color: #a94442;
 }
 
-.chat-theme-light .chat-lines > .command-msg {
+.chat-theme-light #chat-lines > .command-msg {
   color: #70511b;
 }
 
-.chat-theme-light .chat-lines > .ui-msg,
-.chat-theme-light .chat-lines > .own-msg,
-.chat-theme-light .chat-lines > .highlight {
+.chat-theme-light #chat-lines > .ui-msg,
+.chat-theme-light #chat-lines > .own-msg,
+.chat-theme-light #chat-lines > .highlight {
   color: black;
 }
 
-.chat-theme-light .chat-lines > .highlight {
+.chat-theme-light #chat-lines > .highlight {
   background: linear-gradient(to right,  rgba(0,180,255,0.3) 0%,rgba(100,242,255,0) 100%);
 }
 
-.chat-theme-light .chat-lines > .broadcast-msg .msg {
+.chat-theme-light #chat-lines > .broadcast-msg .msg {
   color: #70511b;
 }
-.chat-theme-light .chat-lines > .broadcast-msg {
+.chat-theme-light #chat-lines > .broadcast-msg {
   background: linear-gradient(to right, rgba(255, 255, 21, 0.25) 0%,rgba(255, 255, 100, 0.1));
 }
 
-.chat-theme-light .chat-lines > .command-msg,
-.chat-theme-light .chat-lines > .own-msg,
-.chat-theme-light .chat-lines > .highlight .msg,
-.chat-theme-light .chat-lines > .broadcast-msg .msg {
+.chat-theme-light #chat-lines > .command-msg,
+.chat-theme-light #chat-lines > .own-msg,
+.chat-theme-light #chat-lines > .highlight .msg,
+.chat-theme-light #chat-lines > .broadcast-msg .msg {
   text-shadow: 0 1px 0 rgba(255,255,255,.2);
 }
 
-.chat-theme-light .chat-lines a.externallink {
+.chat-theme-light #chat-lines a.externallink {
   color: #4476b3 !important;
 }
 
-.chat-theme-light .chat-lines a.externallink:visited {
+.chat-theme-light #chat-lines a.externallink:visited {
   color: #003388 !important; 
 }
 
-.chat-theme-light .chat-lines a.externallink:hover, 
-.chat-theme-light .chat-lines a.externallink:focus {
+.chat-theme-light #chat-lines a.externallink:hover, 
+.chat-theme-light #chat-lines a.externallink:focus {
 }
 
-.chat-theme-light .chat-lines a.nsfw-link {
+.chat-theme-light #chat-lines a.nsfw-link {
   border-bottom: 1px dashed red !important;
 }
 
@@ -180,7 +180,7 @@
   color: black !important;
 }
 
-.chat-theme-light .chat-lines .emotecount {
+.chat-theme-light #chat-lines .emotecount {
   color: #191919 !important;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.9) !important;
   font-size: 10px !important;
@@ -191,7 +191,7 @@
   background: white !important;
 }
 
-.chat-theme-light .chat-lines .emotecount {
+.chat-theme-light #chat-lines .emotecount {
   text-shadow: none !important;
   animation: emotecount-light 600ms 1 !important;
   -webkit-animation: emotecount-light 600ms 1 !important;
@@ -260,7 +260,7 @@
     background: #d4c8bc;
 }
 
-.chat-theme-light .chat-lines .bdgg-stalk-msg time {
+.chat-theme-light #chat-lines .bdgg-stalk-msg time {
     display: inline-block !important;
     color: #888;
 }
