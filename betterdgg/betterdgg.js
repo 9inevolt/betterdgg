@@ -60,6 +60,10 @@ let BetterDGG = {
     version,
 };
 
-window.BetterDGG = window.BetterDGG || BetterDGG;
+if (DEBUG) {
+    window.BetterDGG = window.BetterDGG || BetterDGG;
+} else {
+    BetterDGG.init();
+}
 
 export default BetterDGG

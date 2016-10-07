@@ -68,7 +68,7 @@ gulp.task('safari:css', function() {
         .pipe(gulp.dest('./dist/betterdgg.safariextension/'));
 });
 
-gulp.task('webpack', [ 'version' ], function(done) {
+gulp.task('webpack', function(done) {
     webpack(require('./webpack.config')).run(function(err, stats) {
         if (err) {
             return done(err);
@@ -79,16 +79,6 @@ gulp.task('webpack', [ 'version' ], function(done) {
         console.log(stats.toString());
         done();
     });
-});
-
-gulp.task('version', function() {
-    var stream = source('version.js');
-    stream.write('const VERSION = "' + package.version + '";');
-    stream.write('export default VERSION');
-
-    return gulp.src('version.js')
-        .pipe(stream)
-        .pipe(gulp.dest('./betterdgg/modules/'));
 });
 
 gulp.task('chrome:manifest', function() {
