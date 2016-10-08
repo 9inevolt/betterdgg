@@ -22,7 +22,7 @@
 
     "content_scripts": [
         {
-            "matches": ["*://*.destiny.gg/*"],
+            "matches": ["*://*.destiny.gg/embed/chat*"],
             "css": ["betterdgg.css"],
             "js": ["betterdgg.js"],
             "all_frames":true
