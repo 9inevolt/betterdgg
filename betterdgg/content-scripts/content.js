@@ -3,7 +3,9 @@ function isWindow(src) {
 }
 
 function doXHR(xhr) {
-    if (typeof chrome != "undefined" && chrome.runtime) {
+    // Background page XHR not working in Firefox
+    // TODO: Better way to detect this?
+    if (typeof chrome != "undefined" && chrome.runtime && !chrome.runtime.getURL().startsWith('moz')) {
         chrome.runtime.sendMessage(null, { xhr: xhr }, xhr.onload);
     } else {
         var req = new XMLHttpRequest();
