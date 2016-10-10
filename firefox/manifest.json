@@ -1,0 +1,9 @@
+{
+    "applications": {
+        "gecko": {
+            "id": "better@destiny.gg",
+            "strict_min_version": "48.0",
+            "update_url": "https://9inevolt.github.io/betterdgg/firefox/update.rdf"
+        }
+    }
+}

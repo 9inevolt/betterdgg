@@ -4,6 +4,7 @@ var mime    = require('mime');
 var gulp    = require('gulp');
 var clean   = require('gulp-clean');
 var concat  = require('gulp-concat');
+var run     = require('gulp-run');
 var zip     = require('gulp-zip');
 var merge   = require('merge-stream');
 var map     = require('vinyl-map');
@@ -39,7 +40,10 @@ gulp.task('env:prod', function() {
 gulp.task('default', [ 'chrome', 'firefox' ], function() {
 });
 
-gulp.task('prod', [ 'env:prod', 'chrome:zip', 'firefox:xpi' ], function() {
+gulp.task('prod', [ 'env:prod', 'chrome', 'firefox' ], function() {
+});
+
+gulp.task('dist', [ 'env:prod', 'chrome:zip', 'firefox:xpi' ], function() {
 });
 
 gulp.task('clean', function() {
@@ -107,6 +111,12 @@ gulp.task('chrome:manifest', function() {
         .pipe(gulp.dest('./build/chrome/'));
 });
 
+gulp.task('firefox:manifest', [ 'chrome:manifest' ], function() {
+    return gulp.src('./build/chrome/manifest.json')
+        .pipe(jeditor(require('./firefox/manifest.json')))
+        .pipe(gulp.dest('./build/firefox/'));
+});
+
 gulp.task('chrome', [ 'css', 'chrome:manifest', 'webpack' ], function() {
     var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
             './chrome/**/*', '!./chrome/manifest.json' ])
@@ -122,15 +132,17 @@ gulp.task('chrome:zip', [ 'chrome' ], function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('firefox', [ 'chrome' ], function() {
-    return gulp.src([ './build/chrome/**/*', '!./build/chrome/betterdgg.css' ])
+gulp.task('firefox', [ 'chrome', 'firefox:manifest' ], function() {
+    return gulp.src([ './build/chrome/**/*',
+            '!./build/chrome/betterdgg.css',
+            '!./build/chrome/manifest.json' ])
         .pipe(gulp.dest('./build/firefox/'));
 });
 
 gulp.task('firefox:xpi', [ 'firefox' ], function() {
-    gulp.src('./build/firefox/**/*')
-        .pipe(zip('betterdgg-firefox.xpi'))
-        .pipe(gulp.dest('./dist/'));
+    return run('mkdir -p ./dist && $(npm bin)/web-ext sign'
+        + ' --source-dir ./build/firefox'
+        + ' --artifacts-dir ./dist').exec();
 });
 
 gulp.task('safari:plist', function() {
