@@ -36,10 +36,10 @@ gulp.task('env:prod', function() {
     config = env.prod;
 });
 
-gulp.task('default', [ 'chrome:zip', 'firefox:xpi' ], function() {
+gulp.task('default', [ 'chrome', 'firefox' ], function() {
 });
 
-gulp.task('prod', [ 'env:prod', 'default' ], function() {
+gulp.task('prod', [ 'env:prod', 'chrome:zip', 'firefox:xpi' ], function() {
 });
 
 gulp.task('clean', function() {
