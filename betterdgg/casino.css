@@ -21,7 +21,7 @@
 .chat-emote.bdgg-chat-emote-BAR {
     height: 30px;
     width: 30px;
-    margin-top: -30px !important;
+    margin-top: -30px;
     background: url('images/emoticons/BAR.png') no-repeat;
     -webkit-animation: bdgg-BAR-spin 0.5s linear infinite;
             animation: bdgg-BAR-spin 0.5s linear infinite;

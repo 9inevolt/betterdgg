@@ -2,7 +2,6 @@ import settings from './settings';
 
 const TWITCH_URL  = /http:\/\/(?:www\.)?twitch.tv\/(\w+)\/?$/;
 const HITBOX_URL  = /http:\/\/(?:www\.)?hitbox.tv\/(\w+)\/?$/;
-const CASTAMP_URL = /http:\/\/(?:www\.)?castamp.com\/live\/(\w+)$/;
 const USTREAM_CHANNEL_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:channel\/)?([\w-]+)\/?$/;
 const USTREAM_EMBED_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:embed|channel\/id)\/(\d+)\/?$/;
 
@@ -88,7 +87,7 @@ function _initStrims() {
 
         return '<i class="' + ico + '"></i>';
     };
-};
+}
 
 function _randString(len) {
     var s = '';
@@ -96,12 +95,12 @@ function _randString(len) {
         s += String.fromCharCode(Math.floor(97 + Math.random() * (123 - 97)));
     }
     return s;
-};
+}
 
 function _link(s, stream) {
     return 'http://overrustle.com/destinychat?s='
         + s + '&stream=' + stream;
-};
+}
 
 function _convert(elem) {
     var href = elem.getAttribute('href');
@@ -112,9 +111,6 @@ function _convert(elem) {
     }
     else if (match = HITBOX_URL.exec(href)) {
         href = _link('hitbox', match[1]);
-    }
-    else if (match = CASTAMP_URL.exec(href)) {
-        href = _link('castamp', match[1]);
     }
     else if (match = USTREAM_EMBED_URL.exec(href)) {
         href = _link('ustream', match[1]);
@@ -155,7 +151,7 @@ function _convert(elem) {
 
     elem.setAttribute('href', href);
     elem.textContent = href;
-};
+}
 
 var _enabled = false;
 

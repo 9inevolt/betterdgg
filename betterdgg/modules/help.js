@@ -6,7 +6,7 @@ let help = {
             fnHandleCommand.apply(this, arguments);
             if (/^help ?/.test(str)) {
                 this.gui.push(new ChatInfoMessage("Better Destiny.gg: "
-                    + "/stalk /strims"));
+                    + "/stalk /strims /ps /passivestalk (Without arguments to list stalked users)"));
             }
         };
     }

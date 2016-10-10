@@ -1,88 +1,10 @@
-/*
- * Example timestamps
- * -Unparseable
- * 07:04:05 PM
- *
- * -Oldest (CST/CDT implied)
- * 01/17/2014 01:29:41
- * 01/07/2014 14:18:47
- *
- * -Older (CST/CDT)
- * 03/07/2014 11:12:39 AM
- * 03/28/2014 10:33:26 PM
- *
- * -Interim
- * Fri Sep 05 2014 01:38:01 UTC
- *
- * -Old
- * Sep 29 06:32:38 UTC
- * Jan 01 00:26:01 UTC
- * Jan 19 21:00:51 UTC
- *
- * -New Old
- * Jan 19 2015 21:16:04 UTC
- * Feb 09 2015 17:46:40 UTC
- * Feb 10 2015 02:52:31 UTC
- *
- * -Newer Old
- * 2015-08-17 20:11:55 UTC
- *
- * -Current
- * 1442431468
- */
-var FORMATTERS = [
-    function(ts) {
-        return moment.unix(ts);
-    },
-    function(ts) {
-        return moment.utc(ts, 'YYYY-MM-DD H:mm:ss [UTC]', true);
-    },
-    function(ts) {
-        return moment.utc(ts, 'MMM DD YYYY H:mm:ss [UTC]', true);
-    },
-    function(ts) {
-        var m = moment.utc(ts, 'MMM DD H:mm:ss [UTC]', true);
-        if (m.isValid()) {
-            var y = m.month() < 8 ? 2015 : 2014;
-            m.year(y);
-        }
-
-        return m;
-    },
-    function(ts) {
-        return moment.utc(ts, 'ddd MMM DD H:mm:ss [UTC]', true);
-    },
-    function(ts) {
-        var m = moment(ts + ' -0500', [ 'MM/DD/YYYY hh:mm:ss A Z', 'MM/DD/YYYY HH:mm:ss Z' ], true);
-        if (m.isValid()) {
-            if (m.isBefore('2014-03-09 02:00-0600') || m.isAfter('2014-11-02 02:00-0500')) {
-                m.add(1, 'hours');
-            }
-        }
-
-        return m;
-    }
-];
-
-function _parseTime(ts) {
-    var time;
-    for (var i=0; i<FORMATTERS.length; i++) {
-        time = FORMATTERS[i].apply(this, arguments);
-        if (time != null && time.isValid()) {
-            break;
-        }
-    }
-
-    if (time == null || !time.isValid()) {
-        time = moment(ts);
-    }
-
-    return time;
-};
-
 function BDGGChatStalkMessage(message, user, timestamp) {
     ChatUserMessage.call(this, message, user, timestamp);
-    this.timestampformat = 'MMM DD HH:mm:ss';
+    if (moment().year() == moment(timestamp).year()) {
+        this.timestampformat = 'MMM DD HH:mm:ss';
+    } else {
+        this.timestampformat = 'MMM DD YYYY HH:mm:ss';
+    }
 }
 
 function PushChat(string) {
@@ -93,32 +15,14 @@ function PushError(string) {
     destiny.chat.gui.push(new ChatErrorMessage(string));
 }
 
+// All timestamps are unixtime
 function PushUserMessage(msg) {
-    if (typeof msg === "string") {
-        PushUserMessageString(msg);
-    } else {
-        var time = _parseTime(msg['timestamp']);
-        DoPush(msg['text'], msg['nick'], time);
-    }
+    var time = moment.unix(msg['timestamp']);
+    DoPush(msg['text'], msg['nick'], time);
 }
 
 const timeRegExp = /^\[([^\]]*)\]\s*/;
 const nickRegExp = /^<?(\w+)>?: /;
-
-function PushUserMessageString(msg) {
-    var timeMatch = msg.match(timeRegExp);
-    msg = msg.replace(timeRegExp, '');
-    var nickMatch = msg.match(nickRegExp);
-    msg = msg.replace(nickRegExp, '');
-
-    if (!timeMatch || !nickMatch) {
-        return;
-    }
-
-    var time = _parseTime(timeMatch[1]);
-    var nick = nickMatch[1];
-    DoPush(msg, nick, time);
-}
 
 function DoPush(msg, nick, time) {
     var user = destiny.chat.users[nick];
@@ -130,10 +34,6 @@ function DoPush(msg, nick, time) {
 }
 
 let stalk = {
-    // For testing
-    parseTime: function(ts) {
-        return _parseTime(ts);
-    },
     init: function() {
       BDGGChatStalkMessage.prototype = Object.create(ChatUserMessage.prototype);
       BDGGChatStalkMessage.prototype.constructor = BDGGChatStalkMessage;
