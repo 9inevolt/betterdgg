@@ -10,7 +10,10 @@
     "cross-domain-content": [
       "http://ustream.tv",
       "http://www.ustream.tv",
-      "http://api.overrustle.com"
+      "http://api.overrustle.com",
+      "http://downthecrop.xyz",
+      "http://overrustlelogs.net",
+      "https://overrustlelogs.net"
     ]
   }
 }

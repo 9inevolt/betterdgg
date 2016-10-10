@@ -1,9 +1,9 @@
-function inject(fn) {
+function inject(url) {
     var script = document.createElement('script');
     script.setAttribute("type", "application/javascript");
-    script.textContent = '(' + fn.toString() + ')();';
+    script.src = url;
     document.body.appendChild(script); // run the script
     document.body.removeChild(script); // clean up
 }
 
-inject(injectedBetterDGG);
+inject(chrome.extension.getURL('/injected.js'));

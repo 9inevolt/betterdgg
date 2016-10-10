@@ -1,18 +1,18 @@
-;(function(bdgg) {
-    bdgg.alert = (function() {
-        $('body').on('click', '#bdgg-alert .close', function() {
-            bdgg.alert.hide();
-        });
+import * as templates from './templates';
 
-        return {
-            show: function(message) {
-                bdgg.alert.hide();
-                $('#destinychat').append(bdgg.templates.alert({message: message}));
-                $('#bdgg-alert').show();
-            },
-            hide: function() {
-                $('#bdgg-alert').hide().remove();
-            }
-        };
-    })();
-}(window.BetterDGG = window.BetterDGG || {}));
+let alert = {
+    show: function(message) {
+        this.hide();
+        $('#destinychat').append(templates.alert({message: message}));
+        $('#bdgg-alert').show();
+    },
+    hide: function() {
+        $('#bdgg-alert').hide().remove();
+    }
+};
+
+$('body').on('click', '#bdgg-alert .close', function() {
+    alert.hide();
+});
+
+export default alert

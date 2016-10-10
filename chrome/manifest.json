@@ -1,6 +1,5 @@
 {
     "name": "Better Destiny.gg",
-    "version": "development",
     "manifest_version": 2,
 
     "description": "Restores emotes and faith in humanity to users of destiny.gg",
@@ -12,12 +11,13 @@
     "permissions": [
         "*://*.destiny.gg/*",
         "*://*.ustream.tv/*",
-        "*://*.overrustle.com/*"
+        "*://*.overrustle.com/*",
+        "*://*.downthecrop.xyz/*",
+        "*://*.overrustlelogs.net/*"
     ],
 
     "background": {
-        "scripts": [ "lib/jsbn.js", "lib/xhr.js", "lib/wampy.js", "lib/service.js" ],
-        "persistent": false
+        "scripts": [ "lib/jsbn.js", "lib/xhr.js", "lib/wampy.js", "lib/service.js" ]
     },
 
     "content_scripts": [
@@ -30,6 +30,7 @@
     ],
 
     "web_accessible_resources": [
-        "images/*"
+        "images/*",
+        "injected.js"
     ]
 }
