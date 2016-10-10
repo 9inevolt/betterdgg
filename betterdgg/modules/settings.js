@@ -9,6 +9,41 @@ var SETTINGS = {
         'type': 'boolean'
     },
 
+    'bdgg_disable_combos': {
+        'name': 'Disable All Combos',
+        'description': 'Shut off combos',
+        'value': false,
+        'type': 'boolean'
+    },
+
+    'bdgg_animate_disable': {
+        'name': 'Disable GIF Emotes',
+        'description': 'Remove RaveDoge and the likes',
+        'value': false,
+        'type': 'boolean'
+    },
+
+    'bdgg_text_disable': {
+        'name': 'Disable Text Combos',
+        'description': 'Remove OuO combos and the likes',
+        'value': false,
+        'type': 'boolean'
+    },
+
+    'bdgg_flair_hide_all': {
+        'name': 'Hide all BetterD.GG flairs',
+        'description': 'Hide all Better Destiny.gg flairs',
+        'value': false,
+        'type': 'boolean'
+    },
+
+    'bdgg_flair_hide_every': {
+        'name': 'Hide all D.GG flairs',
+        'description': 'Hide all Destiny.gg flairs',
+        'value': false,
+        'type': 'boolean'
+    },
+
     'bdgg_emote_override': {
         'name': 'Override emotes',
         'description': 'Override some emotes',
@@ -23,16 +58,16 @@ var SETTINGS = {
         'type': 'boolean'
     },
 
-    'bdgg_convert_overrustle_links': {
-        'name': 'Convert stream links to overrustle',
-        'description': 'Auto-converts stream links to use overrustle.com',
+    'bdgg_left_chat': {
+        'name': 'Left chat',
+        'description': 'Moves chat to the left',
         'value': false,
         'type': 'boolean'
     },
 
-    'bdgg_flair_hide_all': {
-        'name': 'Hide all flair',
-        'description': 'Hide all Better Destiny.gg flair',
+    'bdgg_convert_overrustle_links': {
+        'name': 'Convert stream links to overrustle',
+        'description': 'Auto-converts stream links to use overrustle.com',
         'value': false,
         'type': 'boolean'
     },
@@ -51,11 +86,46 @@ var SETTINGS = {
         'type': 'boolean'
     },
 
+    'bdgg_private_message_notifications': {
+        'name': "Private message desktop notifications",
+        'description': "Show desktop notifications on receipt of a private message",
+        'value': false,
+        'type': 'boolean'
+    },
+
+    'bdgg_passive_stalk': {
+        'name': 'Passive stalk targets',
+        'description': 'Sweetie_Belle\'s passive stalk highlighting',
+        'value':'',
+        'type':'string'
+    },
+
+    'bdgg_user_ignore': {
+        'name': 'Ignore user messages',
+        'description': 'List of users to ignore without removing their mentions',
+        'value':'',
+        'type':'string'
+    },
+
     'bdgg_filter_words': {
         'name': 'Custom ignore words',
         'description': 'Comma-separated list of words to filter messages from chat (case-insensitive)',
         'value': '',
         'type': 'string'
+    },
+
+    'bdgg_prohibited_phrase_filter': {
+        'name': 'Try to avoid prohibited phrases',
+        'description': 'Issue a warning when trying to post a known prohibited phrase (Do NOT rely on this, the list is not complete)',
+        'value': true,
+        'type': 'boolean'
+    },
+
+    'bdgg_highlight_selected_mentions': {
+        'name': 'Highlight mentions of selected user',
+        'description': 'Clicking a username will highlight the user\'s mentions as well as their own messages',
+        'value': true,
+        'type': 'boolean'
     }
 };
 
@@ -72,7 +142,8 @@ let settings = {
         $('#chat-tools-wrap').prepend(templates.menu_button());
         $('#chat-bottom-frame').append(
             $(templates.menu()).append(
-                templates.menu_footer({version: version})));
+                templates.menu_footer({version: version})))
+            .append(templates.advanced());
 
         $('#bdgg-settings-btn').on('click', function(e) {
             $('#bdgg-settings').toggle();
@@ -80,9 +151,15 @@ let settings = {
             window.ChatMenu.closeMenus(destiny.chat.gui);
         });
 
-        $('#bdgg-settings .close').on('click', (e) => {
-            this.hide();
+        $('#bdgg-settings').on('click', '.bdgg-advanced', function() {
+            $('#bdgg-advanced').show();
         });
+
+        $('#bdgg-advanced .close').on('click', function() {
+            $('#bdgg-advanced').hide();
+        });
+
+        $('#bdgg-settings .close').on('click', this.hide.bind(this));
 
         for (var key in SETTINGS) {
             var s = SETTINGS[key];
@@ -91,8 +168,8 @@ let settings = {
             this.add(s);
         }
 
-        //TODO: bound function?
-        destiny.chat.gui.ui.find('#chat-settings-btn, #chat-users-btn').on('click', () => this.hide());
+        destiny.chat.gui.ui.find('#chat-settings-btn, #chat-users-btn, #emoticon-btn').on(
+            'click', this.hide.bind(this));
     },
     addObserver: function(obs) {
         if (_observers.indexOf(obs) < 0) {
@@ -109,12 +186,13 @@ let settings = {
     },
     hide: function() {
         $('#bdgg-settings').hide();
+        $('#bdgg-advanced').hide();
         $('#bdgg-settings-btn').removeClass('active');
     },
     add: function(setting) {
-        if (setting.type == 'string') {
-            $('#bdgg-settings ul').append(templates.menu_text({setting: setting}));
-            $('#bdgg-settings input[type="text"]#' + setting.key).on('blur', e => {
+        if (setting.type === 'string') {
+            $('#bdgg-advanced ul').append(templates.advanced_text({setting: setting}));
+            $('#bdgg-advanced input[type="text"]#' + setting.key).on('blur', e => {
                 var value = $(e.currentTarget).val();
                 this.put(setting.key, value);
             });
@@ -131,7 +209,7 @@ let settings = {
         if (value == null) {
             value = defValue;
             this.put(key, defValue);
-        } else if (SETTINGS[key] && SETTINGS[key].type == 'boolean') {
+        } else if (SETTINGS[key] && SETTINGS[key].type === 'boolean') {
             value = value === 'true';
         }
 

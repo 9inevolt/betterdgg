@@ -3,10 +3,12 @@ import countries from './countries';
 import settings from './settings';
 import users from './users';
 
+var BOTS = [];
 var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
+var BBDGG_CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat', 'Dashh' ];
 var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
                 'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
-                'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'CleanupGuy14'
+                'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'DerFaba', 'ShawarmaFury'
               ];
 var ALERT_MSG = '<p>To display or hide your country flair, please '
     + '<a target="_blank" href="https://www.destiny.gg/profile/authentication">create</a> '
@@ -31,7 +33,8 @@ function _getToken() {
                 alert.show(ALERT_MSG);
             }
         }
-    } finally {
+    } catch (e) {
+        console.warn(e);
     }
 }
 
@@ -79,7 +82,7 @@ var _tid = null;
 var _displayCountry = false;
 var _displayAllCountries = true;
 var _hideAll = false;
-var _listener = null;
+var _hideEvery = false;
 
 destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
 destiny.UserFeatures['BDGG_MOOBIE'] = 'bdgg_moobie';
@@ -88,12 +91,29 @@ var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
 var bdggGetFeatureHTML = function() {
     var icons = fnGetFeatureHTML.apply(this, arguments);
 
+    //This comes first because Bot wasn't getting his flair sometimes
+    if (BOTS.indexOf(this.user.username) > -1) {
+        icons += '<i class="icon-bot" title="Bot"/>';
+    }
+
+    if (_hideEvery) {
+        icons = ''; //Clear the emote string to set to nothing
+        return icons;
+    }
+
     if (_hideAll) {
         return icons;
     }
 
     if (CONTRIBUTORS.indexOf(this.user.username) > -1) {
         icons += '<i class="icon-bdgg-contributor" title="Better Destiny.gg Contributor"/>';
+    }
+
+    if (BBDGG_CONTRIBUTORS.indexOf(this.user.username) > -1) {
+        icons += '<i class="icon-bbdgg-contributor" title="Better Better Destiny.gg Contributor"/>';
+        if (this.user.username === 'downthecrop') {
+            icons = icons.replace('<i class="icon-evenotable" title="Eve Notable"/>', '');
+        }
     }
 
     if (MOOBIES.indexOf(this.user.username) > -1) {
@@ -115,6 +135,7 @@ var bdggGetFeatureHTML = function() {
     }
     return icons;
 };
+
 ChatUserMessage.prototype.getFeatureHTML = bdggGetFeatureHTML;
 
 let flair = {
@@ -122,6 +143,7 @@ let flair = {
         this.displayCountry(settings.get('bdgg_flair_country_display'), 3000);
         this.displayAllCountries(settings.get('bdgg_flair_all_country_display'));
         this.hideAll(settings.get('bdgg_flair_hide_all'));
+        this.hideEvery(settings.get('bdgg_flair_hide_every'));
 
         settings.addObserver((key, value) => {
             if (key == 'bdgg_flair_country_display') {
@@ -130,6 +152,8 @@ let flair = {
                 this.displayAllCountries(value);
             } else if (key == 'bdgg_flair_hide_all') {
                 this.hideAll(value);
+            } else if (key === 'bdgg_flair_hide_every') {
+                this.hideEvery(value);
             }
         });
     },
@@ -150,6 +174,9 @@ let flair = {
     },
     hideAll: function(value) {
         _hideAll = value;
+    },
+    hideEvery: function(value) {
+        _hideEvery = value;
     }
 };
 

@@ -25,7 +25,7 @@ function secureWrap(proto, target) {
             + '[onsubmit], [onunload]').remove();
 
         return elem.get(0).outerHTML;
-    }
+    };
 }
 
 let security = {

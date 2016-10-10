@@ -1,5 +1,4 @@
 import emoticons from './emoticons';
-import stalk from './stalk';
 import * as templates from './templates';
 
 function push(msg, state) {
@@ -41,9 +40,21 @@ let chat = {
         destiny.chat.sock.close();
     },
 
+    login: function() {
+        this.disconnect();
+        $('#destinychat').replaceWith(templates.test_chat());
+        ChatGui.prototype.emoticons = [];
+        ChatGui.prototype.formatters = [];
+        $('#destinychat').ChatGui({
+            "nick": "BetterDGG", "features": []
+        }, {"host":"www.destiny.gg","port":9998,"maxlines":150,"emoticons":["Abathur","AngelThump","ASLAN","AYYYLMAO","BasedGod","BASEDWATM8","BERN","BibleThump","CallCatz","CallChad","CheekerZ","DaFeels","DAFUK","DANKMEMES","DappaKappa","DatGeoff","DestiSenpaii","Disgustiny","DJAslan","Dravewin","DuckerZ","DURRSTINY","FeedNathan","FerretLOL","FIDGETLOL","FrankerZ","GameOfThrows","Heimerdonger","Hhhehhehe","HmmStiny","INFESTINY","Kappa","KappaRoss","Klappa","LeRuse","LIES","LUL","MASTERB8","Memegasm","MLADY","MotherFuckinGame","Nappa","NoTears","NOTMYTEMPO","OhKrappa","OverRustle","PEPE","PICNIC","Sippy","SLEEPSTINY","SoDoge","SoSad","SOTRIGGERED","SpookerZ","SURPRISE","SWEATSTINY","TRUMPED","UWOTM8","WEEWOO","WhoahDude","WORTH","YEE"],"twitchemotes":["nathanDad","nathanDank","nathanDubs1","nathanDubs2","nathanDubs3","nathanFather","nathanFeels","nathanParty"],"pmcountnum":0});
+        //TODO: module?
+        window.BetterDGG.init();
+    },
+
     combo: function(emote, flair, nick, count) {
         emote = emote || 'DESBRO';
-        features = flair ? [ flair ] : [];
+        var features = flair ? [ flair ] : [];
         nick = nick || 'BetterDGG';
         count = count || 5;
         for (var i=0; i<count; i++) {
@@ -91,6 +102,7 @@ let chat = {
         push(destiny.chat.onMSG({data:msg, nick:'mellipelli', features:[]}));
         push(destiny.chat.onMSG({data:msg, nick:'Zanshin314', features:[]}));
         push(destiny.chat.onMSG({data:msg, nick:'Mannekino', features:[]}));
+        push(destiny.chat.onMSG({data:msg, nick:'downthecrop', features:[]}));
     },
 
     highlight: function(str) {
@@ -101,6 +113,14 @@ let chat = {
     ignore: function(str) {
         var msg = str || " ^nsfw$ ";
         push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[], timestamp:moment().valueOf()}));
+    },
+
+    ignoreUser: function(user1, user2, msg) {
+        var allUsers = Object.keys(destiny.chat.users);
+        user1 = user1 || destiny.chat.users[allUsers[0]].username;
+        user2 = user2 || destiny.chat.users[allUsers[1]].username;
+        this.info('Ignore user messages from either ' + user1 + ' or ' + user2);
+        this.mention(user1, user2, msg);
     },
 
     self: function(str, delay, timestamp) {
@@ -128,12 +148,21 @@ let chat = {
     },
 
     mention: function(user1, user2, msg) {
-        allUsers = Object.keys(destiny.chat.users);
+        var allUsers = Object.keys(destiny.chat.users);
         user1 = user1 || destiny.chat.users[allUsers[0]].username;
         user2 = user2 || destiny.chat.users[allUsers[1]].username;
         msg = msg || "hi there";
         push(destiny.chat.onMSG({data:msg + " " + user2, nick:user1, features:[]}));
         push(destiny.chat.onMSG({data:msg + " " + user1, nick:user2, features:[]}));
+    },
+
+    highlightMentions: function(user1, user2, msg) {
+        var allUsers = Object.keys(destiny.chat.users);
+        user1 = user1 || destiny.chat.users[allUsers[0]].username;
+        user2 = user2 || destiny.chat.users[allUsers[1]].username;
+        this.info('See if mentions of ' + user1 + ' or ' + user2 +
+                ' are highlighted when selected');
+        this.mention(user1, user2, msg);
     },
 
     // fake injected content in message
@@ -155,6 +184,21 @@ let chat = {
     override: function(str) {
         var msg = str || "SoSad";
         push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+    },
+
+    muted: function(str) {
+        destiny.chat.onMUTE({data: 'BetterDGG'});
+        var msg = str || "10m your past text";
+        push(destiny.chat.onMSG({data:msg, nick:'Bot', features:[],
+                timestamp:moment().valueOf()}));
+        destiny.chat.onERR('muted');
+    },
+
+    privmsg: function(messageid, msg, nick) {
+        msg = msg || 'private message Memegasm';
+        nick = nick || 'BetterDGG';
+        messageid = messageid || 12345;
+        push(destiny.chat.onPRIVMSG({data:msg, nick:nick, messageid: messageid, features:[]}));
     },
 };
 
@@ -206,57 +250,12 @@ let slot = function(str, delay, timestamp) {
     chat.self(str || 'BAR BAR BAR', delay, timestamp);
 };
 
-let _stalk = {
-    stalk: function(ts, expected) {
-        var t = stalk.parseTime(ts);
-        if (!t.isValid()) {
-            chat.error("invalid timestamp");
-        } else if (!t.isSame(expected)) {
-            chat.error("timestamp mismatch");
-        } else {
-            chat.info("success");
-        }
-    },
-
-    stalk1: function() {
-        this.stalk('01/17/2014 01:29:41', moment.unix(1389943781));
-    },
-
-    stalk2: function() {
-        this.stalk('03/07/2014 11:12:39 AM', moment.unix(1394212359));
-    },
-
-    stalk3: function() {
-        this.stalk('03/28/2014 10:33:26 AM', moment.unix(1396020806));
-    },
-
-    stalk4: function() {
-        this.stalk('Fri Sep 05 2014 01:38:01 UTC', moment.unix(1409881081));
-    },
-
-    stalk5: function() {
-        this.stalk('Sep 29 06:32:38 UTC', moment.unix(1411972358));
-    },
-
-    stalk6: function() {
-        this.stalk('Jan 19 21:00:51 UTC', moment.unix(1421701251));
-    },
-
-    stalk7: function() {
-        this.stalk('Feb 09 2015 17:46:40 UTC', moment.unix(1423504000));
-    },
-
-    stalk8: function() {
-        this.stalk('2015-08-17 20:11:55 UTC', moment.unix(1439842315));
-    },
-};
-
 let subreddit = function(str) {
     var msg = destiny.chat.onMSG({data:str || '/r/destiny! also /r/fallout_shelter, /r/starcraft? maybe /r/games',
         nick:'BetterDGG', features:['flair1']});
     push(msg);
 };
 
-let test = { chat, or, slot, stalk: _stalk, subreddit, test1, test2, test3, test4 };
+let test = { chat, or, slot, subreddit, test1, test2, test3, test4 };
 
 export default test
