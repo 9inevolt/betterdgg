@@ -2,10 +2,7 @@
 
     var BOTS = [];
     var CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat', 'Dashh' ];
-    var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
-                    'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
-                    'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'DerFaba', 'ShawarmaFury'
-                  ];
+    var MOOBIES = [ 'loldamar', 'Nate', 'Overpowered', 'Mannekino', 'DaeNda', 'Fancysloth', 'ShawarmaFury' ];
     var ALERT_MSG = '<p>To display or hide your country flair, please '
         + '<a target="_blank" href="https://www.destiny.gg/profile/authentication">create</a> '
         + 'a destiny.gg login key.</p>';
