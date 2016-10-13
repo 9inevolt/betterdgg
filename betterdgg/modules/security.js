@@ -7,7 +7,6 @@
 
                 // Let these formatters see the elements to avoid re-parsing html
                 bdgg.overrustle.wrapMessage(elem, this);
-                bdgg.emoticons.wrapMessage(elem, this);
                 bdgg.formatters.wrapMessage(elem, this);
 
                 elem.find('applet, body, base, embed, frame, frameset,'

@@ -8,12 +8,14 @@
         "INFESTINY": [ 'crawl' ],
         "NoTears": [ 'pulse' ],
         "SURPRISE": [ 'fadeIn', 'pulse', 'spin' ],
-        "WhoahDude": [ 'blink' ]
+        "WhoahDude": [ 'blink' ],
+        "YEE": [ 'crawl' ],
+        "NOBULLY": [ 'blink' ] //TODO change effect
     };
     var EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
 
     bdgg.spooky = (function() {
-        var END = moment('2014-11-01 05:00');
+        var END = moment('2016-11-01 05:00'); //TODO verify time and possibly take care of timezones
         var on = true;
         var PROC_CHANCE = procChance();
 
@@ -29,7 +31,7 @@
             return PROC_MIN + 1/daysLeft * (PROC_MAX - PROC_MIN);
         }
 
-        function proc() {
+        function proc() { //TODO global sync
             return Math.random() < PROC_CHANCE;
         }
 

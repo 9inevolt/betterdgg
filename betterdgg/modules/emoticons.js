@@ -139,6 +139,27 @@
                 $(function() {
                     bdgg.emoticons.organizeEmotes();
                 });
+
+                //add bbdgg emotes as a proper formatter
+                var bbdggformatter = {
+                    format: function(str) {
+                        var wrapped = $('<span>').append(str);
+                        wrapped.find('span').addBack().contents().filter(function() { return this.nodeType === 3; })
+                            .replaceWith(function() {
+                                return this.data
+                                    .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+                                    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                                    .replace(bdggemoteregex, replacer);
+                            });
+
+                        if (override) {
+                            wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
+                        }
+                        return wrapped.html();
+                    }
+                };
+                destiny.chat.gui.formatters.push(bbdggformatter);
+
             },
             giveTabPriority: function(value) {
                 emoteTabPriority = value;
@@ -175,19 +196,6 @@
                 }
 
 
-            },
-            wrapMessage: function(wrapped) {
-                wrapped.find('span').addBack().contents().filter(function() { return this.nodeType === 3; })
-                    .replaceWith(function() {
-                        return this.data
-                            .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
-                            .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                            .replace(bdggemoteregex, replacer);
-                    });
-
-                if (override) {
-                    wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
-                }
             },
             organizeEmotes: function() {
                 // Show the emote menu
