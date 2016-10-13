@@ -29,8 +29,8 @@
 
         var TEXT = [ "OuO", "XD", "xD" ];
 
-        var SUBONLY = [ "nathanDad", "nathanFeels", "nathanFather", "nathanDank",
-        "nathanDubs1", "nathanDubs2", "nathanDubs3", "nathanParty" ];
+        var SUBONLY = [ "nathanD", "nathanF", "nathanNotears", "nathanPepe",
+        "nathanTowel", "nathanRustle", "nathanWat", "nathanYee" ];
 
         var RIP = [ ].sort();
 

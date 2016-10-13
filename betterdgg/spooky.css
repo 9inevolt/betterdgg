@@ -33,6 +33,45 @@
   100% {opacity: 0.5;}
 }
 
+
+.bdgg-spooker {
+  -webkit-animation-name: bdgg-spooker;
+          animation-name: bdgg-spooker;
+  -webkit-animation-duration: 3s;
+                animation-duration: 3s;
+
+}
+
+@keyframes bdgg-spooker {
+  0% {filter: invert(100%);}
+  10%{filter: invert(0%);}
+  30%{filter: invert(100%);}
+  40%{filter: invert(0%);}
+
+  50% {-webkit-transform: rotate(0deg); transform: rotate(0deg);}
+  60% {-webkit-transform: rotate(20deg); transform: rotate(20deg);}
+  70% {-webkit-transform: rotate(140deg); transform: rotate(140deg);}
+  80% {-webkit-transform: rotate(150deg); transform: rotate(150deg);}
+  90% {-webkit-transform: rotate(360deg); transform: rotate(360deg);}
+
+  100%{filter: invert(100%);}
+}
+
+@-webkit-keyframes bdgg-spooker {
+  0% {filter: invert(100%);}
+  10%{filter: invert(0%);}
+  30%{filter: invert(100%);}
+  40%{filter: invert(0%);}
+
+  50% {-webkit-transform: rotate(0deg); transform: rotate(0deg);}
+  60% {-webkit-transform: rotate(20deg); transform: rotate(20deg);}
+  70% {-webkit-transform: rotate(140deg); transform: rotate(140deg);}
+  80% {-webkit-transform: rotate(150deg); transform: rotate(150deg);}
+  90% {-webkit-transform: rotate(360deg); transform: rotate(360deg);}
+  
+  100%{filter: invert(100%);}
+}
+
 .bdgg-fadeIn {
   opacity: 0;
   -webkit-animation-name: bdgg-fadeIn;

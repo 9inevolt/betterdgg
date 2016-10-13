@@ -10,24 +10,24 @@
         "SURPRISE": [ 'fadeIn', 'pulse', 'spin' ],
         "WhoahDude": [ 'blink' ],
         "YEE": [ 'crawl' ],
-        "NOBULLY": [ 'blink' ] //TODO change effect
+        "NOBULLY": [ 'spooker' ]
     };
     var EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
 
     bdgg.spooky = (function() {
-        var END = moment('2016-11-01 05:00'); //TODO verify time and possibly take care of timezones
+        var END = moment.utc('2016-11-01 05:00');
         var on = true;
         var PROC_CHANCE = procChance();
 
         function isOn() {
             if (on) {
-                on = moment().isBefore(END);
+                on = moment.utc().isBefore(END);
             }
             return on;
         }
 
         function procChance() {
-            var daysLeft = Math.abs(END.diff(moment(), 'days')) + 1;
+            var daysLeft = Math.abs(END.diff(moment.utc(), 'days')) + 1;
             return PROC_MIN + 1/daysLeft * (PROC_MAX - PROC_MIN);
         }
 

@@ -47,6 +47,7 @@
                         var blackListMatch = _checkMessage(PHRASES, message);
                         //If the content of the chat input box matches any prohibited phrase, do not call the send function.
                         if (blackListMatch) {
+                            blackListMatch = blackListMatch.replace(/<\/?[^>]+(>|$)/g, "");
                             var errorMessage = new ChatErrorMessage("BBDGG prevented your message from being sent because it matched the following prohibited phrase: " + blackListMatch.toString());
                             destiny.chat.gui.push(errorMessage);
                             return;
