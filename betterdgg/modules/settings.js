@@ -124,6 +124,13 @@
             'description': 'Clicking a username will highlight the user\'s mentions as well as their own messages',
             'value': true,
             'type': 'boolean'
+        },
+
+        'bdgg_spooker_switch': {
+            'name': 'Disable Halloween',
+            'description': 'Disable Halloween bonus animations',
+            'value': false,
+            'type': 'boolean'
         }
     };
 
