@@ -99,15 +99,11 @@
 
             if (CONTRIBUTORS.indexOf(this.user.username) > -1) {
                 icons += '<i class="icon-bdgg-contributor" title="Better Better Destiny.gg Contributor"/>';
-                if (this.user.username === 'downthecrop'){
-                    icons = icons.replace('<i class="icon-evenotable" title="Eve Notable"/>','');
-                }
             }
 
             if (MOOBIES.indexOf(this.user.username) > -1) {
                 icons += '<i class="icon-bdgg-moobie" title="Movie Streamer"/>';
             }
-
 
             if (_displayAllCountries) {
                 var user;

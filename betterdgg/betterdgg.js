@@ -1,8 +1,8 @@
-// load settings module before everything else
+// Load settings module before everything else
 window.BetterDGG.settings.init();
 
 for (var module in window.BetterDGG) {
-    if (module !== 'settings' && window.BetterDGG[module].init) {
+    if (module !== 'settings' && module !== 'backlog' && window.BetterDGG[module].init) {
         try {
             window.BetterDGG[module].init();
         }
@@ -11,3 +11,8 @@ for (var module in window.BetterDGG) {
         }
     }
 }
+
+// Load backlog module last
+window.BetterDGG.backlog.init();
+
+
