@@ -1,6 +1,6 @@
 (function(bdgg) {
-    var PROC_MAX = 0.75;
-    var PROC_MIN = 0.52;
+    var PROC_MAX = 0.25;
+    var PROC_MIN = 0.02;
     var EMOTES = {
         "ASLAN": [ 'fadeIn' ],
         "DAFUK": [ 'fadeIn' ],
@@ -41,7 +41,6 @@
 
         function proc() {
             var p = rng() < procChance();
-            console.error("proc: " + p);
             return p;
         }
 
@@ -71,13 +70,6 @@
                     format: function(str) {
                         var wrapped = $('<span>').append(str);
 
-                        // Very non-ideal solution for global syncing.
-                        // Take the timestamp of the last message in chat (the one before you post) and seed the rng with that.
-                        // Because of how chat handles your own messages (adds them instantly instead of taking the one from the server),
-                        // any message that comes directly after the one you posted yourself will be out of sync.
-                        seed = destiny.chat.gui.userMessages[destiny.chat.gui.userMessages.length-1].timestamp._i;
-                        console.error("new seed: " + seed);
-
                         if (isOn() && !bdgg.settings.get('bdgg_spooker_switch')) {
                             var chosenEffects = {};
                             wrapped.find('.chat-emote').each(function(i, elem) {
@@ -95,6 +87,11 @@
                                 }
                             });
                         }
+                        // Very non-ideal solution for global syncing.
+                        // Take the timestamp of the last message in chat (the one before you post) and seed the rng with that.
+                        // Because of how chat handles your own messages (adds them instantly instead of taking the one from the server),
+                        // any message that comes directly after the one you posted yourself will be out of sync.
+                        seed = destiny.chat.gui.userMessages[destiny.chat.gui.userMessages.length-1].timestamp._i;
                         return wrapped.html();
                     }
                 };

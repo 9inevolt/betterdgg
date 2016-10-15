@@ -38,7 +38,9 @@
   -webkit-animation-name: bdgg-spooker;
           animation-name: bdgg-spooker;
   -webkit-animation-duration: 3s;
-                animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-fill-mode: forwards; /* Chrome, Safari, Opera */
+          animation-fill-mode: forwards;              
 
 }
 
@@ -74,12 +76,12 @@
 
 .bdgg-fadeIn {
   opacity: 0;
-  -webkit-animation-name: bdgg-fadeIn;
-          animation-name: bdgg-fadeIn;
-  -webkit-animation-duration: 1s;
-          animation-duration: 1s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  -webkit-animation-name: bdgg-fadeIn !important;
+          animation-name: bdgg-fadeIn !important;
+  -webkit-animation-duration: 1s !important;
+          animation-duration: 1s !important;
+  -webkit-animation-fill-mode: forwards !important;
+          animation-fill-mode: forwards !important;
 }
 
 @-webkit-keyframes bdgg-pulse {
@@ -242,12 +244,12 @@
 }
 
 .bdgg-spin {
-  -webkit-animation-name: bdgg-spin;
-          animation-name: bdgg-spin;
-  -webkit-animation-duration: 3s;
-          animation-duration: 3s;
-  -webkit-animation-timing-function: ease-in;
-          animation-timing-function: ease-in;
+  -webkit-animation-name: bdgg-spin !important;
+          animation-name: bdgg-spin !important;
+  -webkit-animation-duration: 3s !important;
+          animation-duration: 3s !important;
+  -webkit-animation-timing-function: ease-in !important;
+          animation-timing-function: ease-in !important;
 }
 
 @-webkit-keyframes bdgg-crawl {
