@@ -1,3 +1,5 @@
+import settings from './settings';
+
 var PROC_MAX = 0.4;
 var PROC_MIN = 0.02;
 var EMOTES = {
@@ -13,12 +15,13 @@ var EMOTES = {
     "SSSsss": [ 'pulse' ],
     "SURPRISE": [ 'fadeIn', 'pulse', 'spin' ],
     "WhoahDude": [ 'blink' ],
-    "YEE": [ 'pulse' ],
+    "YEE": [ 'crawl' ],
+    "NOBULLY": [ 'spooker' ],
+    "Riperino": [ 'spooker' ]
 };
 var EMOTE_RE = new RegExp("\\b(?:bdgg-)?chat-emote-(" + Object.keys(EMOTES).join('|') + ")");
 
-var BEGIN = moment('2016-10-01T13:00Z');
-var END = moment('2016-11-01T13:00Z');
+var BEGIN, END;
 var on = false;
 var PROC_CHANCE;
 
@@ -90,8 +93,23 @@ function refresh() {
     PROC_CHANCE = procChance();
 }
 
+function isOn() {
+    return on && !_disabled;
+}
+
+var _disabled = false;
+
 let spooky = {
     init: function() {
+        BEGIN = moment('2016-10-01T13:00Z');
+        END = moment('2016-11-01T13:00Z');
+
+        this.disable(settings.get('bdgg_spooker_switch'));
+        settings.addObserver((key, value) => {
+            if (key == 'bdgg_spooker_switch') {
+                this.disable(value);
+            }
+        });
         refresh();
 
         var fnResolveMessage = destiny.chat.gui.resolveMessage;
@@ -107,8 +125,11 @@ let spooky = {
 
         setInterval(refresh, 300000);
     },
+    disable: function(value) {
+        _disabled = value;
+    },
     wrapMessage: function(elem, message, force, forceTime) {
-        if (on && (force || !ownMessage(message))) {
+        if (isOn() && (force || !ownMessage(message))) {
             spookyFormat(elem, forceTime || message.timestamp);
         }
     },

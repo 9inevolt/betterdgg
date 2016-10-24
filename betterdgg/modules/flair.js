@@ -6,10 +6,7 @@ import users from './users';
 var BOTS = [];
 var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
 var BBDGG_CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat', 'Dashh' ];
-var MOOBIES = [ 'Humankillerx', 'loldamar', 'Nate', 'Overpowered', 'Mannekino',
-                'Zanshin314', 'Tassadar', 'Bombjin', 'DaeNda', 'StoopidMonkey',
-                'Funnyguy17', 'Derugo', 'Fancysloth', 'dawigas', 'DerFaba', 'ShawarmaFury'
-              ];
+var MOOBIES = [ 'loldamar', 'Nate', 'Overpowered', 'Mannekino', 'DaeNda', 'Fancysloth', 'ShawarmaFury' ];
 var ALERT_MSG = '<p>To display or hide your country flair, please '
     + '<a target="_blank" href="https://www.destiny.gg/profile/authentication">create</a> '
     + 'a destiny.gg login key.</p>';
@@ -84,10 +81,7 @@ var _displayAllCountries = true;
 var _hideAll = false;
 var _hideEvery = false;
 
-destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
-destiny.UserFeatures['BDGG_MOOBIE'] = 'bdgg_moobie';
-
-var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
+var fnGetFeatureHTML;
 var bdggGetFeatureHTML = function() {
     var icons = fnGetFeatureHTML.apply(this, arguments);
 
@@ -111,9 +105,6 @@ var bdggGetFeatureHTML = function() {
 
     if (BBDGG_CONTRIBUTORS.indexOf(this.user.username) > -1) {
         icons += '<i class="icon-bbdgg-contributor" title="Better Better Destiny.gg Contributor"/>';
-        if (this.user.username === 'downthecrop') {
-            icons = icons.replace('<i class="icon-evenotable" title="Eve Notable"/>', '');
-        }
     }
 
     if (MOOBIES.indexOf(this.user.username) > -1) {
@@ -136,10 +127,13 @@ var bdggGetFeatureHTML = function() {
     return icons;
 };
 
-ChatUserMessage.prototype.getFeatureHTML = bdggGetFeatureHTML;
-
 let flair = {
     init: function() {
+        destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
+        destiny.UserFeatures['BDGG_MOOBIE'] = 'bdgg_moobie';
+        fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
+        ChatUserMessage.prototype.getFeatureHTML = bdggGetFeatureHTML;
+
         this.displayCountry(settings.get('bdgg_flair_country_display'), 3000);
         this.displayAllCountries(settings.get('bdgg_flair_all_country_display'));
         this.hideAll(settings.get('bdgg_flair_hide_all'));

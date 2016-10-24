@@ -4,9 +4,6 @@ var muted = false;
 var muteMessage = "";
 var lastMute = 0;
 
-// save original ChatEmoteMessage now so that we can revert back to it later
-var OriginalChatEmoteMessage = ChatEmoteMessage;
-
 function _timeDiff(tstart, tend) {
     var diff = Math.floor((tend - tstart) / 1000);
     var units = [
@@ -26,6 +23,9 @@ let _disableCombos = false;
 
 let chat = {
     init: function() {
+        // save original ChatEmoteMessage now so that we can revert back to it later
+        var OriginalChatEmoteMessage = ChatEmoteMessage;
+
         this.disableCombos(settings.get('bdgg_disable_combos'));
         settings.addObserver((key, value) => {
             if (key === 'bdgg_disable_combos') {

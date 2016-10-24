@@ -28,13 +28,12 @@ var OVERRIDES = [ "SoSad", "SpookerZ", "Kappa", "OhKrappa", "DappaKappa", "Klapp
 
 var TEXT = [ "OuO", "XD", "xD" ];
 
-var SUBONLY = [ "nathanDad", "nathanFeels", "nathanFather", "nathanDank",
-"nathanDubs1", "nathanDubs2", "nathanDubs3", "nathanParty" ];
+var SUBONLY = [ "nathanD", "nathanF", "nathanNotears", "nathanPepe",
+"nathanTowel", "nathanRustle", "nathanWat", "nathanYee" ];
 
 var RIP = [ ].sort();
 
-var xmasEND = moment('2014-12-29 05:00');
-var xmasOn = moment().isBefore(xmasEND);
+var xmasEND, xmasOn;
 
 var bdggSortResults = function(fnSortResults) {
     return function(a, b) {
@@ -79,6 +78,9 @@ function replacer(match, emote) {
 let bdgg_emoticons = {
     all: [],
     init: function() {
+        xmasEND = moment('2014-12-29 05:00');
+        xmasOn = moment().isBefore(xmasEND);
+
         baseEmotes = destiny.chat.gui.emoticons;
         emoticons = EMOTICONS.concat(NEW).concat(SUBONLY).concat(TEXT).concat(ANIMATED)
             .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)

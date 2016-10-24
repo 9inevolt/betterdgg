@@ -1,6 +1,11 @@
 import * as templates from './templates';
 
 let alert = {
+    init: function() {
+        $('body').on('click', '#bdgg-alert .close', function() {
+            alert.hide();
+        });
+    },
     show: function(message) {
         this.hide();
         $('#destinychat').append(templates.alert({message: message}));
@@ -10,9 +15,5 @@ let alert = {
         $('#bdgg-alert').hide().remove();
     }
 };
-
-$('body').on('click', '#bdgg-alert .close', function() {
-    alert.hide();
-});
 
 export default alert

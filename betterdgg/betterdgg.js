@@ -1,4 +1,5 @@
 import alert from './modules/alert';
+import backlog from './modules/backlog';
 import casino from './modules/casino';
 import chat from './modules/chat';
 import countries from './modules/countries';
@@ -48,6 +49,8 @@ let init = function() {
     phrases.init();
     twitchchat.init();
     security.init();
+    backlog.init();
+    alert.init();
     help.init();
     theme.init();
     firstrun.init();
@@ -56,6 +59,7 @@ let init = function() {
 let BetterDGG = {
     init,
     alert,
+    backlog,
     casino,
     chat,
     countries,
@@ -86,8 +90,8 @@ let BetterDGG = {
 
 if (DEBUG) {
     window.BetterDGG = window.BetterDGG || BetterDGG;
-} else {
-    BetterDGG.init();
 }
+
+BetterDGG.init();
 
 export default BetterDGG

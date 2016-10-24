@@ -4,7 +4,6 @@ import settings from './settings';
 var style, cssBody, template, fnHandleCommand;
 cssBody = '{background-color:rgba(18,144,117,0.25);color:rgba(255,255,255,0.8);}';
 template = '.user-msg[data-username="{}"]';
-fnHandleCommand = destiny.chat.handleCommand;
 
 function pushChat(string) {
     destiny.chat.gui.push(new ChatInfoMessage(string));
@@ -17,7 +16,7 @@ function updatePassivestalk(psList){
     document.querySelector('#bdgg_passive_stalk').value = psTargets;
 }
 
-destiny.chat.handleCommand = function(str) {
+function psHandleCommand(str) {
     var match, sendstr;
     sendstr = str.trim();
     var psList = settings.get('bdgg_passive_stalk').split(',');
@@ -46,10 +45,13 @@ destiny.chat.handleCommand = function(str) {
     } else {
         fnHandleCommand.apply(this, arguments);
     }
-};
+}
 
 let passivestalk = {
     init: function() {
+        fnHandleCommand = destiny.chat.handleCommand;
+        destiny.chat.handleCommand = psHandleCommand;
+
         style = document.createElement('style');
         style.type = 'text/css';
         document.head.appendChild(style);
