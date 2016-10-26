@@ -33,3 +33,17 @@ $ gulp clean
 ```sh
 $ gulp
 ```
+
+Credits
+====================
+
+[All Contributors](https://github.com/9inevolt/betterdgg/contributors)
+
+License
+====================
+
+Please read [LICENSE.txt](LICENSE.txt)
+
+[twemoji](https://github.com/twitter/twemoji) by Twitter
+
+[Emoji One](https://github.com/Ranks/emojione) by EmojiOne
