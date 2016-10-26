@@ -5,6 +5,10 @@ function push(msg, state) {
     msg && destiny.chat.gui.push(msg, state);
 };
 
+function bdgg_push(msg) {
+    push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+};
+
 let test1 = function(msg) {
     var m = destiny.chat.onMSG({data:msg || '>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
         nick:'BetterDGG', features:[]});
@@ -256,6 +260,30 @@ let subreddit = function(str) {
     push(msg);
 };
 
-let test = { chat, or, slot, subreddit, test1, test2, test3, test4 };
+let emoji = {
+    test: function(msg = "Gun: \ud83d\udd2b") {
+        bdgg_push(msg);
+    },
+
+    uc9: function(msg = "Raised Hand: \ud83e\udd1a, Pancakes: \ud83e\udd5e")
+    {
+        bdgg_push(msg);
+    },
+
+    // https://github.com/Ranks/emojione/issues/320
+    variant: function(msg = "Stadium: \ud83c\udfdf, Stadium2: \ud83c\udfdf\ufe0f") {
+        bdgg_push(msg);
+    },
+
+    diversity: function(msg = "\u26f9, w: \u26f9\ud83c\udffb, lb: \u26f9\ud83c\udffc") {
+        bdgg_push(msg);
+    },
+
+    join: function(msg = "\ud83d\udc69\u200d\u2764\ufe0f\u200d\ud83d\udc69") {
+        bdgg_push(msg);
+    },
+};
+
+let test = { chat, emoji, or, slot, subreddit, test1, test2, test3, test4 };
 
 export default test

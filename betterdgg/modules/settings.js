@@ -133,6 +133,18 @@ var SETTINGS = {
         'description': 'Disable Halloween bonus animations',
         'value': false,
         'type': 'boolean'
+    },
+
+    'bdgg_emoji_theme': {
+        'name': 'Emoji Theme',
+        'description': 'Theme set to use for emoji',
+        'value': 'twemoji',
+        'type': 'select',
+        'options': [
+            { 'name': 'Disabled', 'value': 'disabled' },
+            { 'name': 'Twitter', 'value': 'twemoji' },
+            { 'name': 'EmojiOne', 'value': 'emojione' }
+        ]
     }
 };
 
@@ -200,6 +212,12 @@ let settings = {
         if (setting.type === 'string') {
             $('#bdgg-advanced ul').append(templates.advanced_text({setting: setting}));
             $('#bdgg-advanced input[type="text"]#' + setting.key).on('blur', e => {
+                var value = $(e.currentTarget).val();
+                this.put(setting.key, value);
+            });
+        } else if (setting.type === 'select') {
+            $('#bdgg-advanced ul').append(templates.advanced_select({setting: setting}));
+            $('#bdgg-advanced select#' + setting.key).on('change', e => {
                 var value = $(e.currentTarget).val();
                 this.put(setting.key, value);
             });

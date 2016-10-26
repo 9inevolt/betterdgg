@@ -3,6 +3,7 @@ import backlog from './modules/backlog';
 import casino from './modules/casino';
 import chat from './modules/chat';
 import countries from './modules/countries';
+import emoji from './modules/emoji';
 import emoticons from './modules/emoticons';
 import filter from './modules/filter';
 import firstrun from './modules/firstrun';
@@ -32,6 +33,7 @@ let init = function() {
     settings.init();
     formatters.init();
     emoticons.init();
+    emoji.init();
     chat.init();
     ignore.init();
     spooky.init();
@@ -63,6 +65,7 @@ let BetterDGG = {
     casino,
     chat,
     countries,
+    emoji,
     emoticons,
     filter,
     firstrun,

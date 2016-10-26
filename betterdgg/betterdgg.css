@@ -781,6 +781,14 @@
     opacity: 1 !important;
 }
 
+.bdgg-emoji, .emojione {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 0.15em;
+    display: inline-block;
+    vertical-align: -0.2em;
+}
+
 /* Selectable emotes */
 .chat-emote {
     text-indent: 0 !important;

@@ -9,8 +9,10 @@ let backlog = {
         // Remove the backlog
         destiny.chat.gui.lines.children(':has(>hr)').prevAll().remove();
 
-        // Now load the backlog
-        destiny.chat.gui.loadBacklog();
+        // Now load the backlog on a slight delay
+        setTimeout(() => {
+            destiny.chat.gui.loadBacklog();
+        }, 1000);
     }
 };
 

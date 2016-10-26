@@ -69,6 +69,9 @@ window.addEventListener("message", function(e) {
             url: 'http://downthecrop.xyz/bbdgg/api/phrases.json'
         };
         doXHR(xhr);
+    } else if (e.data.type === 'bdgg_get_url') {
+        let url = chrome.runtime.getURL(e.data.path);
+        window.postMessage({ type: 'bdgg_url', path: e.data.path, url: url }, '*');
     }
 });
 

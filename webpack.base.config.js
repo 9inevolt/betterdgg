@@ -1,3 +1,4 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var glob = require('glob');
 var path = require('path');
@@ -30,7 +31,7 @@ module.exports = {
         loader: ExtractTextPlugin.extract('css-loader')
       },
       {
-        test: /\.(png|gif)$/,
+        test: /\.(png|gif|svg)$/,
         loader: 'file-loader',
         query: {
           name: '[path][name].[ext]'
@@ -46,6 +47,18 @@ module.exports = {
     fs: 'empty'
   },
   plugins: [
-    new ExtractTextPlugin({ filename: 'betterdgg.css', allChunks: true })
+    new ExtractTextPlugin({ filename: 'betterdgg.css', allChunks: true }),
+    new CopyWebpackPlugin([
+        {
+          from: 'node_modules/twemoji/2/svg',
+          to: 'images/emoji',
+          context: __dirname
+        },
+        {
+          from: 'node_modules/emojione/assets/svg',
+          to: 'images/emojione',
+          context: __dirname
+        }
+    ])
   ]
 };

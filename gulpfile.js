@@ -118,7 +118,7 @@ gulp.task('firefox:manifest', [ 'chrome:manifest' ], function() {
 });
 
 gulp.task('chrome', [ 'css', 'chrome:manifest', 'webpack' ], function() {
-    var assets = gulp.src([ './betterdgg/**/*.{gif,png}',
+    var assets = gulp.src([ './build/**/*.{gif,png,svg}',
             './chrome/**/*', '!./chrome/manifest.json' ])
         .pipe(gulp.dest('./build/chrome/'));
     var js = gulp.src([ './build/betterdgg.js', './build/injected.js' ])

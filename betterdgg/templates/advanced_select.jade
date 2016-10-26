@@ -1,0 +1,6 @@
+li
+  label.select(title=setting.description)
+    = setting.name
+    select(id=setting.key title=setting.description).form-control.input-sm
+      each opt in setting.options
+        option(value=opt.value selected=opt.value == setting.value)= opt.name
