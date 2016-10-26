@@ -165,8 +165,13 @@ let settings = {
             .append(templates.advanced());
 
         $('#bdgg-settings-btn').on('click', function(e) {
-            $('#bdgg-settings').toggle();
             $(this).toggleClass('active');
+            if ($(this).hasClass('active')) {
+                $('#bdgg-settings').show();
+                $('#bdgg-settings .nano').nanoScroller();
+            } else {
+                settings.hide();
+            }
             window.ChatMenu.closeMenus(destiny.chat.gui);
         });
 
@@ -179,6 +184,8 @@ let settings = {
         });
 
         $('#bdgg-settings .close').on('click', this.hide.bind(this));
+        destiny.chat.gui.input.on('keydown mousedown', this.hide.bind(this));
+        destiny.chat.gui.output.on('mousedown', this.hide.bind(this));
 
         for (var key in SETTINGS) {
             var s = SETTINGS[key];
