@@ -152,9 +152,14 @@
                 $('#chat-bottom-frame').append(bdgg.templates.advanced());
 
                 $('#bdgg-settings-btn').on('click', function() {
-                    $('#bdgg-settings').toggle();
                     $(this).toggleClass('active');
-                    window.cMenu.closeMenus(destiny.chat.gui);
+                    if ($(this).hasClass('active')) {
+                        $('#bdgg-settings').show();
+                        $('#bdgg-settings .nano').nanoScroller();
+                    } else {
+                        bdgg.settings.hide();
+                    }
+                    window.ChatMenu.closeMenus(destiny.chat.gui);
                 });
 
                 $('#bdgg-settings').on('click', '.bdgg-advanced', function() {
@@ -169,6 +174,9 @@
                     bdgg.settings.hide();
                     $('#bdgg-advanced').hide();
                 });
+
+                destiny.chat.gui.input.on('keydown mousedown', bdgg.settings.hide);
+                destiny.chat.gui.output.on('mousedown', bdgg.settings.hide);
 
                 for (var key in SETTINGS) {
                     var s = SETTINGS[key];

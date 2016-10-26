@@ -600,8 +600,7 @@
 }
 
 .bdgg-menu hr {
-    margin-top: 20px;
-    margin-bottom: 5px;
+    margin: 0 0 5px;
 }
 
 .bdgg-menu .toolbar .close {
@@ -629,6 +628,10 @@
 
 .bdgg-menu label.text input {
     width: 100%;
+}
+
+#bdgg-settings .nano {
+    max-height: 300px;
 }
 
 #bdgg-settings ul, #bdgg-advanced ul {
