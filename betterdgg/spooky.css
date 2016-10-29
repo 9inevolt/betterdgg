@@ -80,8 +80,7 @@
           animation-name: bdgg-fadeIn !important;
   -webkit-animation-duration: 1s !important;
           animation-duration: 1s !important;
-  -webkit-animation-fill-mode: forwards !important;
-          animation-fill-mode: forwards !important;
+  /* Removed the fill mode as the animation only puts the emote to 0.5 opacity, so it has to be left to return to how it started */
 }
 
 @-webkit-keyframes bdgg-pulse {
