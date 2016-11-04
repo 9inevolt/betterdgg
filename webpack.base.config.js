@@ -9,7 +9,8 @@ module.exports = {
   context: workDir,
   entry: {
     injected: glob.sync('./betterdgg.{js,css}', { cwd: workDir }),
-    betterdgg: glob.sync('./content-scripts/*.js', { cwd: workDir })
+    betterdgg: glob.sync('./content-scripts/*.js', { cwd: workDir }),
+    background: '../chrome/lib/background.js'
   },
   output: {
     filename: '[name].js',

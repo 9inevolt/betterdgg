@@ -118,13 +118,15 @@ gulp.task('firefox:manifest', [ 'chrome:manifest' ], function() {
 });
 
 gulp.task('chrome', [ 'css', 'chrome:manifest', 'webpack' ], function() {
-    var assets = gulp.src([ './chrome/**/*', '!./chrome/manifest.json' ])
+    var assets = gulp.src([ './chrome/**/*', '!./chrome/manifest.json', '!./chrome/**/*.js' ])
         .pipe(gulp.dest('./build/chrome/'));
     var images = gulp.src('./build/images/**/*.{gif,png,svg}')
         .pipe(gulp.dest('./build/chrome/images/'));
     var js = gulp.src([ './build/betterdgg.js', './build/injected.js' ])
         .pipe(gulp.dest('./build/chrome/'));
-    return merge(assets, images, js);
+    var bg = gulp.src('./build/background.js')
+        .pipe(gulp.dest('./build/chrome/lib/'));
+    return merge(assets, images, js, bg);
 });
 
 gulp.task('chrome:zip', [ 'chrome' ], function() {

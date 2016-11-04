@@ -867,3 +867,5 @@ function b64toBA(s) {
   }
   return a;
 }
+
+export { RSAKey, hex2b64, b64tohex, b64toBA };

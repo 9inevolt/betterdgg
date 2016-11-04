@@ -39,6 +39,7 @@
     "twemoji": "^2.2.0",
     "vinyl-map": "^1.0.1",
     "vinyl-source-stream": "^1.0.0",
+    "wampy": "^1.0.6",
     "web-ext": "^1.5.0",
     "webpack": "^2.1.0-beta.25"
   }

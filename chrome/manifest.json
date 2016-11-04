@@ -17,7 +17,7 @@
     ],
 
     "background": {
-        "scripts": [ "lib/jsbn.js", "lib/xhr.js", "lib/wampy.js", "lib/service.js" ]
+        "scripts": [ "lib/background.js" ]
     },
 
     "content_scripts": [
