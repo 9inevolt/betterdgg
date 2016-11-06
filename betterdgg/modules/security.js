@@ -5,6 +5,16 @@ import formatters from './formatters';
 import overrustle from './overrustle';
 import spooky from './spooky';
 
+function sanitize(elem) {
+    elem.find('applet, body, base, embed, frame, frameset,'
+        + 'head, html, iframe, link, meta, object, script, style, title,'
+        + '[onblur], [onchange], [onclick], [ondblclick], [onfocus],'
+        + '[onkeydown], [onkeyup], [onload], [onmousedown],'
+        + '[onmousemove], [onmouseout], [onmouseover],'
+        + '[onmouseup], [onreset], [onscroll], [onselect],'
+        + '[onsubmit], [onunload]').remove();
+}
+
 function secureWrap(proto, target) {
     var fnTarget = proto[target];
     proto[target] = function() {
@@ -18,13 +28,7 @@ function secureWrap(proto, target) {
         casino.wrapMessage(elem, this);
         emoji.wrapMessage(elem, this);
 
-        elem.find('applet, body, base, embed, frame, frameset,'
-            + 'head, html, iframe, link, meta, object, script, style, title,'
-            + '[onblur], [onchange], [onclick], [ondblclick], [onfocus],'
-            + '[onkeydown], [onkeyup], [onload], [onmousedown],'
-            + '[onmousemove], [onmouseout], [onmouseover],'
-            + '[onmouseup], [onreset], [onscroll], [onselect],'
-            + '[onsubmit], [onunload]').remove();
+        sanitize(elem);
 
         return elem.get(0).outerHTML;
     };
@@ -35,7 +39,8 @@ let security = {
         secureWrap(ChatUserMessage.prototype, 'wrapMessage');
         secureWrap(ChatEmoteMessage.prototype, 'wrapMessage');
         secureWrap(ChatBroadcastMessage.prototype, 'wrapMessage');
-    }
+    },
+    sanitize
 };
 
 export default security

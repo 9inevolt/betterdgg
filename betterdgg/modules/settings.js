@@ -145,7 +145,14 @@ var SETTINGS = {
             { 'name': 'Twitter', 'value': 'twemoji' },
             { 'name': 'EmojiOne', 'value': 'emojione' }
         ]
-    }
+    },
+
+    'bdgg_show_linkinfo': {
+        'name': 'Show link info popup',
+        'description': 'Hovering over links will show additional info if available',
+        'value': true,
+        'type': 'boolean'
+    },
 };
 
 var _observers = [];

@@ -12,6 +12,7 @@ import formatters from './modules/formatters';
 import help from './modules/help';
 import ignore from './modules/ignore';
 import leftchat from './modules/leftchat';
+import linkinfo from './modules/linkinfo';
 import mentions from './modules/mentions';
 import notification from './modules/notification';
 import overrustle from './modules/overrustle';
@@ -39,6 +40,7 @@ let init = function() {
     spooky.init();
     casino.init();
     leftchat.init();
+    linkinfo.init();
     overrustle.init();
     mentions.init();
     notification.init();
@@ -74,6 +76,7 @@ let BetterDGG = {
     help,
     ignore,
     leftchat,
+    linkinfo,
     mentions,
     notification,
     overrustle,
