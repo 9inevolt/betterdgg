@@ -6,13 +6,12 @@ function push(msg, state) {
 };
 
 function bdgg_push(msg) {
-    push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+    destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]});
 };
 
 let test1 = function(msg) {
-    var m = destiny.chat.onMSG({data:msg || '>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
+    destiny.chat.onMSG({data:msg || '>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
         nick:'BetterDGG', features:[]});
-    push(m);
     setTimeout(function() { destiny.chat.onMUTE({data: 'BetterDGG'}) }, 3000);
 };
 
@@ -21,21 +20,18 @@ let test2 = function() {
     destiny.chat.gui.autoCompletePlugin.promoteNick('GamerzKit_TV');
     destiny.chat.gui.autoCompletePlugin.addNick('OverRustla');
     destiny.chat.gui.autoCompletePlugin.promoteNick('OverRustla');
-    var m = m=destiny.chat.onMSG({data:'Check tab completion of GameOfThrows and OverRustle',
+    destiny.chat.onMSG({data:'Check tab completion of GameOfThrows and OverRustle',
         nick:'BetterDGG', features:[]});
-    push(m);
 };
 
 let test3 = function() {
-    var m = destiny.chat.onMSG({data:'ChanChamp http://GabeN.com/foo?s=Riperino&p=DESBRO PJSalt',
+    destiny.chat.onMSG({data:'ChanChamp http://GabeN.com/foo?s=Riperino&p=DESBRO PJSalt',
         nick:'BetterDGG', features:[]});
-    push(m);
 };
 
 let test4 = function() {
-    var m = destiny.chat.onMSG({data:'>green ChanChamp http://GabeN.com/foo?s=Riperino&p=DESBRO PJSalt',
+    destiny.chat.onMSG({data:'>green ChanChamp http://GabeN.com/foo?s=Riperino&p=DESBRO PJSalt',
         nick:'BetterDGG', features:['flair3']});
-    push(m);
 };
 
 let chat = {
@@ -62,22 +58,20 @@ let chat = {
         nick = nick || 'BetterDGG';
         count = count || 5;
         for (var i=0; i<count; i++) {
-            var m = destiny.chat.onMSG({data:emote, nick:nick, features:features, timestamp:moment().valueOf()});
-            push(m);
+            destiny.chat.onMSG({data:emote, nick:nick, features:features, timestamp:moment().valueOf()});
         }
     },
 
     emotes: function() {
         var all = emoticons.all;
         for (var i=0; i<all.length; i++) {
-            var m = destiny.chat.onMSG({data:all[i], nick:'BetterDGG', features:[]});
-            push(m);
+            destiny.chat.onMSG({data:all[i], nick:'BetterDGG', features:[]});
         }
     },
 
     broadcast: function(str) {
         str = str || 'BetterDGG is now a Tier II subscriber! gifted by 9inevolt OverRustle';
-        push(destiny.chat.onBROADCAST({data:str}));
+        destiny.chat.onBROADCAST({data:str});
     },
 
     info: function(str) {
@@ -102,21 +96,21 @@ let chat = {
 
     flair: function(str) {
         var msg = str || "hi there don't forget to try hiding all flair";
-        push(destiny.chat.onMSG({data:msg, nick:'ILiedAboutCake', features:[]}));
-        push(destiny.chat.onMSG({data:msg, nick:'mellipelli', features:[]}));
-        push(destiny.chat.onMSG({data:msg, nick:'Zanshin314', features:[]}));
-        push(destiny.chat.onMSG({data:msg, nick:'Mannekino', features:[]}));
-        push(destiny.chat.onMSG({data:msg, nick:'downthecrop', features:[]}));
+        destiny.chat.onMSG({data:msg, nick:'ILiedAboutCake', features:[]});
+        destiny.chat.onMSG({data:msg, nick:'mellipelli', features:[]});
+        destiny.chat.onMSG({data:msg, nick:'Zanshin314', features:[]});
+        destiny.chat.onMSG({data:msg, nick:'Mannekino', features:[]});
+        destiny.chat.onMSG({data:msg, nick:'downthecrop', features:[]});
     },
 
     highlight: function(str) {
         var msg = destiny.chat.user.username + " " + (str || "hi there");
-        push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+        destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]});
     },
 
     ignore: function(str) {
         var msg = str || " ^nsfw$ ";
-        push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[], timestamp:moment().valueOf()}));
+        destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[], timestamp:moment().valueOf()});
     },
 
     ignoreUser: function(user1, user2, msg) {
@@ -139,16 +133,15 @@ let chat = {
         }
 
         setTimeout(function() {
-            push(destiny.chat.onMSG({data:msgText, nick:destiny.chat.user.username, features:destiny.chat.user.features,
-                    timestamp: timestamp || moment().valueOf()}));
+            destiny.chat.onMSG({data:msgText, nick:destiny.chat.user.username, features:destiny.chat.user.features,
+                    timestamp: timestamp || moment().valueOf()});
         }, delay);
     },
 
     inject: function(str) {
-        var msg = destiny.chat.onMSG({data:(str || destiny.chat.user.username + ' <script type="text/javascript">' +
+        destiny.chat.onMSG({data:(str || destiny.chat.user.username + ' <script type="text/javascript">' +
                 'alert("hi there");</script><b>hi</b><br>there'),
             nick:'BetterDGG', features:['flair3']});
-        push(msg);
     },
 
     mention: function(user1, user2, msg) {
@@ -156,8 +149,8 @@ let chat = {
         user1 = user1 || destiny.chat.users[allUsers[0]].username;
         user2 = user2 || destiny.chat.users[allUsers[1]].username;
         msg = msg || "hi there";
-        push(destiny.chat.onMSG({data:msg + " " + user2, nick:user1, features:[]}));
-        push(destiny.chat.onMSG({data:msg + " " + user1, nick:user2, features:[]}));
+        destiny.chat.onMSG({data:msg + " " + user2, nick:user1, features:[]});
+        destiny.chat.onMSG({data:msg + " " + user1, nick:user2, features:[]});
     },
 
     highlightMentions: function(user1, user2, msg) {
@@ -171,7 +164,8 @@ let chat = {
 
     // fake injected content in message
     security: function(str) {
-        var msg = destiny.chat.onMSG({data:' ', nick:'BetterDGG', features:['flair2']});
+        let usr = new ChatUser({nick:'BetterDGG', features:['flair2']});
+        let msg = new ChatUserMessage(' ', usr);
         var html = str || 'foo <b>abc</b> <script>alert("hi");</script> <div onload="javascript:alert(\"onload\");"></div> ...';
         var f = destiny.chat.gui.formatters;
         try {
@@ -187,14 +181,14 @@ let chat = {
 
     override: function(str) {
         var msg = str || "SoSad";
-        push(destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]}));
+        destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]});
     },
 
     muted: function(str) {
         destiny.chat.onMUTE({data: 'BetterDGG'});
         var msg = str || "10m your past text";
-        push(destiny.chat.onMSG({data:msg, nick:'Bot', features:[],
-                timestamp:moment().valueOf()}));
+        destiny.chat.onMSG({data:msg, nick:'Bot', features:[],
+                timestamp:moment().valueOf()});
         destiny.chat.onERR('muted');
     },
 
@@ -202,51 +196,44 @@ let chat = {
         msg = msg || 'private message Memegasm';
         nick = nick || 'BetterDGG';
         messageid = messageid || 12345;
-        push(destiny.chat.onPRIVMSG({data:msg, nick:nick, messageid: messageid, features:[]}));
+        destiny.chat.onPRIVMSG({data:msg, nick:nick, messageid: messageid, features:[]});
     },
 };
 
 let or = {
     twitch: function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'visit http://www.twitch.tv/9inevolt',
+        destiny.chat.onMSG({data:str || 'visit http://www.twitch.tv/9inevolt',
             nick:'BetterDGG', features:['flair1']});
-        push(msg);
     },
 
     hitbox: function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'visit http://www.hitbox.tv/9inevolt',
+        destiny.chat.onMSG({data:str || 'visit http://www.hitbox.tv/9inevolt',
             nick:'BetterDGG', features:['flair1']});
-        push(msg);
     },
 
     castamp: function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'visit http://castamp.com/live/9inevolt',
+        destiny.chat.onMSG({data:str || 'visit http://castamp.com/live/9inevolt',
             nick:'BetterDGG', features:['flair1']});
-        push(msg);
     },
 
     ustream: function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/embed/6299343',
+        destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/embed/6299343',
             nick:'BetterDGG', features:['flair1']});
-        push(msg);
     },
 
     ustream2: function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/channel/JoeRogan',
+        destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/channel/JoeRogan',
             nick:'BetterDGG', features:['flair1']});
-        push(msg);
     },
 
     ustream3: function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/z',
+        destiny.chat.onMSG({data:str || 'visit http://www.ustream.tv/z',
             nick:'BetterDGG', features:['flair1']});
-        push(msg);
     },
 
     not: function(str) {
-        var msg = destiny.chat.onMSG({data:str || 'no http before destiny.gg',
+        destiny.chat.onMSG({data:str || 'no http before destiny.gg',
             nick:'BetterDGG', features:['flair1']});
-        push(msg);
     },
 };
 
@@ -255,9 +242,8 @@ let slot = function(str, delay, timestamp) {
 };
 
 let subreddit = function(str) {
-    var msg = destiny.chat.onMSG({data:str || '/r/destiny! also /r/fallout_shelter, /r/starcraft? maybe /r/games',
+    destiny.chat.onMSG({data:str || '/r/destiny! also /r/fallout_shelter, /r/starcraft? maybe /r/games',
         nick:'BetterDGG', features:['flair1']});
-    push(msg);
 };
 
 let emoji = {
