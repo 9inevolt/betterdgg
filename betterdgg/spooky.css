@@ -37,8 +37,8 @@
 .bdgg-spooker {
   -webkit-animation-name: bdgg-spooker;
           animation-name: bdgg-spooker;
-  -webkit-animation-duration: 3s;
-          animation-duration: 3s;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
   -webkit-animation-fill-mode: forwards; /* Chrome, Safari, Opera */
           animation-fill-mode: forwards;
 }
@@ -50,12 +50,12 @@
   40%{filter: invert(0%);}
 
   50% {-webkit-transform: rotate(0deg); transform: rotate(0deg);}
-  60% {-webkit-transform: rotate(20deg); transform: rotate(20deg);}
-  70% {-webkit-transform: rotate(140deg); transform: rotate(140deg);}
-  80% {-webkit-transform: rotate(150deg); transform: rotate(150deg);}
-  90% {-webkit-transform: rotate(360deg); transform: rotate(360deg);}
+  60% {-webkit-transform: rotate(10deg); transform: rotate(10deg);}
+  70% {-webkit-transform: rotate(70deg); transform: rotate(70deg);}
+  80% {-webkit-transform: rotate(110deg); transform: rotate(110deg);}
+  90% {-webkit-transform: rotate(180deg); transform: rotate(180deg);}
 
-  100%{filter: invert(100%);}
+  100%{filter: invert(100%); -webkit-transform: rotate(180deg); transform: rotate(180deg);}
 }
 
 @-webkit-keyframes bdgg-spooker {
@@ -65,12 +65,12 @@
   40%{filter: invert(0%);}
 
   50% {-webkit-transform: rotate(0deg); transform: rotate(0deg);}
-  60% {-webkit-transform: rotate(20deg); transform: rotate(20deg);}
-  70% {-webkit-transform: rotate(140deg); transform: rotate(140deg);}
-  80% {-webkit-transform: rotate(150deg); transform: rotate(150deg);}
-  90% {-webkit-transform: rotate(360deg); transform: rotate(360deg);}
+  60% {-webkit-transform: rotate(10deg); transform: rotate(10deg);}
+  70% {-webkit-transform: rotate(70deg); transform: rotate(70deg);}
+  80% {-webkit-transform: rotate(110deg); transform: rotate(110deg);}
+  90% {-webkit-transform: rotate(180deg); transform: rotate(180deg);}
 
-  100%{filter: invert(100%);}
+  100%{filter: invert(100%); -webkit-transform: rotate(180deg); transform: rotate(180deg);}
 }
 
 .bdgg-fadeIn {
@@ -79,8 +79,7 @@
           animation-name: bdgg-fadeIn !important;
   -webkit-animation-duration: 1s !important;
           animation-duration: 1s !important;
-  -webkit-animation-fill-mode: forwards !important;
-          animation-fill-mode: forwards !important;
+  /* Removed the fill mode as the animation only puts the emote to 0.5 opacity, so it has to be left to return to how it started */
 }
 
 @-webkit-keyframes bdgg-pulse {
