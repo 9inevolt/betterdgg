@@ -29,8 +29,7 @@
 
         var TEXT = [ "OuO", "XD", "xD" ];
 
-        var SUBONLY = [ "nathanD", "nathanF", "nathanNotears", "nathanPepe",
-        "nathanTowel", "nathanRustle", "nathanWat", "nathanYee" ];
+        var SUBONLY = destiny.chat.gui.twitchemotes;
 
         var RIP = [ ].sort();
 
