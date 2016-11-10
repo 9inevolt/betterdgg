@@ -124,14 +124,16 @@
             'description': 'Clicking a username will highlight the user\'s mentions as well as their own messages',
             'value': true,
             'type': 'boolean'
-        },
+        }
 
+        /* Halloween Setting Toggle
         'bdgg_spooker_switch': {
             'name': 'Disable Halloween',
             'description': 'Disable Halloween bonus animations',
             'value': false,
-            'type': 'boolean'
+            'type': 'boolean'           
         }
+        */         
     };
 
     bdgg.settings = (function() {
@@ -145,23 +147,27 @@
 
         return {
             init: function() {
+
+                $('#chat-tools-wrap').prepend(bdgg.templates.menu_button());
                 $('#destinychat .chat-tools-wrap').prepend(bdgg.templates.menu_button());
                 $('#chat-bottom-frame').append(
                     $(bdgg.templates.menu()).append(
                         bdgg.templates.menu_footer({version: bdgg.version})));
                 $('#chat-bottom-frame').append(bdgg.templates.advanced());
 
+                for (var key in SETTINGS) {
+                    var s = SETTINGS[key];
+                    s.key = key;
+                    s.value = bdgg.settings.get(s.key, s.value);
+                    bdgg.settings.add(s);
+                }
+
                 $('#bdgg-settings-btn').on('click', function() {
+                    $('#bdgg-settings').toggle();
+                    $('#bdgg-settings .nano').nanoScroller();
                     $(this).toggleClass('active');
-                    if ($(this).hasClass('active')) {
-                        $('#bdgg-settings').show();
-                        $('#bdgg-settings .nano').nanoScroller();
-                    } else {
-                        bdgg.settings.hide();
-                    }
                     window.ChatMenu.closeMenus(destiny.chat.gui);
                 });
-
                 $('#bdgg-settings').on('click', '.bdgg-advanced', function() {
                     $('#bdgg-advanced').show();
                 });
@@ -172,49 +178,11 @@
 
                 $('#bdgg-settings .close').on('click', function() {
                     bdgg.settings.hide();
-                    $('#bdgg-advanced').hide();
                 });
 
+                destiny.chat.gui.ui.find('#chat-settings-btn, #chat-users-btn, #emoticon-btn').on('click', bdgg.settings.hide);
                 destiny.chat.gui.input.on('keydown mousedown', bdgg.settings.hide);
                 destiny.chat.gui.output.on('mousedown', bdgg.settings.hide);
-
-                for (var key in SETTINGS) {
-                    var s = SETTINGS[key];
-                    s.key = key;
-                    s.value = bdgg.settings.get(s.key, s.value);
-                    bdgg.settings.add(s);
-                }
-
-                try{
-                    //Chat update fix
-                    destiny.chat.gui.chatsettings.btn.on('click', bdgg.settings.hide);
-                    destiny.chat.gui.userslist.btn.on('click', bdgg.settings.hide);
-                }
-                catch (e){
-                    $('#chat-tools-wrap').prepend(bdgg.templates.menu_button());
-                    $('#chat-bottom-frame').append(
-                    $(bdgg.templates.menu()).append(
-                        bdgg.templates.menu_footer({version: bdgg.version})));
-                    $('#chat-bottom-frame').append(bdgg.templates.advanced());
-
-                    $('#bdgg-settings-btn').on('click', function() {
-                        $('#bdgg-settings').toggle();
-                        $(this).toggleClass('active');
-                        window.cMenu.closeMenus(destiny.chat.gui);
-                    });
-                    $('#bdgg-settings').on('click', '.bdgg-advanced', function() {
-                        $('#bdgg-advanced').show();
-                    });
-
-                    $('#bdgg-advanced .close').on('click', function() {
-                        $('#bdgg-advanced').hide();
-                    });
-
-                    $('#bdgg-settings .close').on('click', function() {
-                        bdgg.settings.hide();
-                        $('#bdgg-advanced').hide();
-                    });
-                }
             },
             addObserver: function(obs) {
                 if (_observers.indexOf(obs) < 0) {
