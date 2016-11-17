@@ -1,6 +1,6 @@
 (function(bdgg) {
     bdgg.emoticons = (function() {
-        var override, emoteTabPriority, everyEmote;
+        var detrumpedVal, override, emoteTabPriority, everyEmote;
         var baseEmotes = destiny.chat.gui.emoticons;
 
         var EMOTICONS = [ "CallChad", "FIDGETLOL",
@@ -95,12 +95,16 @@
 
                 bdgg.emoticons.giveTabPriority(bdgg.settings.get('bdgg_emote_tab_priority'));
                 bdgg.emoticons.overrideEmotes(bdgg.settings.get('bdgg_emote_override'));
+                bdgg.emoticons.detrumped(bdgg.settings.get('bdgg_trump_override'));
                 bdgg.settings.addObserver(function(key, value) {
                     if (key === 'bdgg_emote_tab_priority') {
                         bdgg.emoticons.giveTabPriority(value);
                     }
                     else if (key === 'bdgg_emote_override') {
                         bdgg.emoticons.overrideEmotes(value);
+                    }
+                    else if (key === 'bdgg_trump_override') {
+                        bdgg.emoticons.detrumped(value);
                     }
                     else if (key === 'bdgg_text_disable') {
                         bdgg.emoticons.textEmoteDisable(value);
@@ -154,6 +158,9 @@
                         if (override) {
                             wrapped.find('.chat-emote').addClass('bdgg-chat-emote-override');
                         }
+                        if (detrumpedVal) {
+                            wrapped.find('.chat-emote').addClass('detrumped');
+                        }
                         return wrapped.html();
                     }
                 };
@@ -165,6 +172,9 @@
             },
             overrideEmotes: function(value) {
                 override = value;
+            },
+            detrumped: function(value) {
+                detrumpedVal = value;
             },
             textEmoteDisable: function(value) {
 

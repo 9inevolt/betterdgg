@@ -14,6 +14,13 @@
             'type': 'boolean'
         },
 
+        'bdgg_trump_override': {
+            'name': 'Override Trump emotes',
+            'description': 'Override the Trump emotes',
+            'value': false,
+            'type': 'boolean'
+        },
+
         'bdgg_disable_combos': {
             'name': 'Disable All Combos',
             'description': 'Shut off combos',
