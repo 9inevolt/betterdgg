@@ -30,6 +30,7 @@
     ],
 
     "web_accessible_resources": [
+        "embed/*",
         "images/*",
         "injected.js"
     ]

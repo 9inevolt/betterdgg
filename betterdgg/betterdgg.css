@@ -614,7 +614,7 @@
 }
 
 .bdgg-menu {
-    background: #1A1A1A;
+    background: rgba(25,25,25,0.9);
     font-size: 12px;
     z-index: 220;
 }
@@ -812,4 +812,67 @@
 
 .chat-emote::-webkit-selection {
     color: transparent;
+}
+
+#bdgg-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    z-index: 200;
+    pointer-events: none;
+}
+
+#bdgg-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 0;
+}
+
+#bdgg-embed-panel {
+    margin: auto;
+    max-width: 600px;
+    pointer-events: auto;
+}
+
+.bdgg-strawpoll iframe {
+    height: 650px;
+}
+
+@media (min-width: 768px) {
+    #bdgg-embed-panel {
+        margin: 0 16px 0 0;
+        float: right;
+        max-width: none;
+    }
+
+    .bdgg-strawpoll .collapse.in {
+        width: 600px;
+    }
+}
+
+@media (min-width: 992px) {
+    .bdgg-strawpoll .collapse.in {
+        width: 690px;
+    }
+
+    .bdgg-strawpoll iframe {
+        height: 450px;
+    }
+}
+
+.bdgg-strawpoll .panel-collapse {
+    height: 300px;
+}
+
+.panel.bdgg-panel {
+    background-color: #353535;
+    border: 0;
+}
+
+.panel.bdgg-panel > .panel-heading {
+    background-color: #1a1a1a;
 }

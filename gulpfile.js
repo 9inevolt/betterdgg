@@ -118,7 +118,7 @@ gulp.task('firefox:manifest', [ 'chrome:manifest' ], function() {
 });
 
 gulp.task('chrome', [ 'css', 'chrome:manifest', 'webpack' ], function() {
-    var assets = gulp.src([ './chrome/**/*', '!./chrome/manifest.json', '!./chrome/**/*.js' ])
+    var assets = gulp.src([ './chrome/**/*', '!./chrome/manifest.json', '!./chrome/lib/*.js' ])
         .pipe(gulp.dest('./build/chrome/'));
     var images = gulp.src('./build/images/**/*.{gif,png,svg}')
         .pipe(gulp.dest('./build/chrome/images/'));

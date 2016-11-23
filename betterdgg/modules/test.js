@@ -5,8 +5,8 @@ function push(msg, state) {
     msg && destiny.chat.gui.push(msg, state);
 };
 
-function bdgg_push(msg) {
-    destiny.chat.onMSG({data:msg, nick:'BetterDGG', features:[]});
+function bdgg_push(msg, nick = 'BetterDGG') {
+    destiny.chat.onMSG({data:msg, nick, features:[]});
 };
 
 let test1 = function(msg) {
@@ -153,6 +153,12 @@ let chat = {
         destiny.chat.onMSG({data:msg + " " + user1, nick:user2, features:[]});
     },
 
+    msg: function(str, nick) {
+        str = str || "message";
+        nick = nick || 'BetterDGG';
+        destiny.chat.onMSG({data:msg, nick, features:[]});
+    },
+
     highlightMentions: function(user1, user2, msg) {
         var allUsers = Object.keys(destiny.chat.users);
         user1 = user1 || destiny.chat.users[allUsers[0]].username;
@@ -198,6 +204,11 @@ let chat = {
         messageid = messageid || 12345;
         destiny.chat.onPRIVMSG({data:msg, nick:nick, messageid: messageid, features:[]});
     },
+
+    poll: function(url, nick) {
+        url = url || "https://www.strawpoll.me/11574117";
+        this.msg(url, nick);
+    }
 };
 
 let or = {
@@ -270,6 +281,16 @@ let emoji = {
     },
 };
 
-let test = { chat, emoji, or, slot, subreddit, test1, test2, test3, test4 };
+let strawpoll = {
+    destiny(msg = "http://www.strawpoll.me/11590093") {
+        bdgg_push(msg, 'Destiny');
+    },
+
+    other(msg = "http://www.strawpoll.me/11590093") {
+        bdgg_push(msg);
+    },
+};
+
+let test = { chat, emoji, or, slot, strawpoll, subreddit, test1, test2, test3, test4 };
 
 export default test
