@@ -77,7 +77,7 @@
                     }
                 }
                 else if (e.data.type === 'bdgg_flair_error') {
-                    destiny.chat.gui.push(new ChatErrorMessage("Couldn't gather BBDGG flairs"));
+                    console.error("Couldn't gather BBDGG flairs");
                 }
                 if (window !== e.source || e.data.type !== 'bdgg_profile_info') {
                     return;
