@@ -1,0 +1,9 @@
+#bdgg-embed-panel.panel.bdgg-panel.bdgg-strawpoll
+  .panel-heading
+    span.panel-title
+    a(href=pollUrl target="blank" rel="noopener noreferrer")
+      | #{pollTitle}
+    span.close.glyphicon.glyphicon-remove
+  .panel-body.nano
+    .nano-content
+      iframe(src=src)

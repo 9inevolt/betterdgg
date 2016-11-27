@@ -1,4 +1,5 @@
 import casino from './casino';
+import embed from './embed';
 import emoji from './emoji';
 import emoticons from './emoticons';
 import formatters from './formatters';
@@ -22,6 +23,7 @@ function secureWrap(proto, target) {
 
         // Let these formatters see the elements to avoid re-parsing html
         overrustle.wrapMessage(elem, this);
+        embed.wrapMessage(elem, this);
         emoticons.wrapMessage(elem, this);
         formatters.wrapMessage(elem, this);
         spooky.wrapMessage(elem, this);

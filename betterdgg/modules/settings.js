@@ -165,7 +165,8 @@ var _notify = function(key, value) {
 
 let settings = {
     init: function() {
-        $('#chat-tools-wrap').prepend(templates.menu_button());
+        $('#chat-tools-wrap').prepend(templates.menu_button())
+            .insertBefore('#chat-input-wrap');
         $('#chat-bottom-frame').append(
             $(templates.menu()).append(
                 templates.menu_footer({version: version})))

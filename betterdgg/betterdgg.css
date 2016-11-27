@@ -564,15 +564,18 @@
 }
 
 #chat-input-wrap {
-    margin-right: 90px !important;
+    overflow: hidden;
+}
+
+#chat-tools-wrap {
+    float: right;
+    position: initial !important;
 }
 
 .bdgg-glyphicon-aslan {
-    background-image:url('images/glyphicon_aslan_grey.png');
-    display: inline-block;
-    height: 20px;
-    width: 24px;
-    vertical-align: baseline;
+    background: url('images/glyphicon_aslan_grey.png') center no-repeat;
+    height: 100%;
+    width: 100%;
 }
 
 .bdgg-glyphicon-aslan:hover,
@@ -814,6 +817,23 @@
     color: transparent;
 }
 
+.bdgg-flash-white {
+    animation-name: bdgg-flash-white;
+    animation-duration: 1.25s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+}
+
+@keyframes bdgg-flash-white {
+  to {
+    color: white;
+  }
+}
+
+#chat-lines a.bdgg-embed-link {
+    text-decoration: none;
+}
+
 #bdgg-embed {
     position: absolute;
     top: 0;
@@ -849,13 +869,13 @@
         max-width: none;
     }
 
-    .bdgg-strawpoll .collapse.in {
+    .panel.bdgg-strawpoll {
         width: 600px;
     }
 }
 
 @media (min-width: 992px) {
-    .bdgg-strawpoll .collapse.in {
+    .panel.bdgg-strawpoll {
         width: 690px;
     }
 
@@ -864,7 +884,7 @@
     }
 }
 
-.bdgg-strawpoll .panel-collapse {
+.bdgg-strawpoll .panel-body {
     height: 300px;
 }
 
@@ -873,6 +893,11 @@
     border: 0;
 }
 
-.panel.bdgg-panel > .panel-heading {
+.panel.bdgg-panel .panel-heading {
     background-color: #1a1a1a;
+}
+
+.panel.bdgg-panel .close {
+    color: inherit;
+    font-size: 16px;
 }
