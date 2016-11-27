@@ -2,10 +2,6 @@
     bdgg.emoticons = (function() {
         var detrumpedVal, override, emoteTabPriority, everyEmote;
         var baseEmotes = destiny.chat.gui.emoticons;
-
-        var EMOTICONS = [ "CallChad", "FIDGETLOL",
-            "CallCatz", "Dravewin", "YEE", "PEPE", "DJAslan"
-        ];
         
         var BBDGG_EMOTICONS = ["DESBRO", "ChanChamp", "SuccesS", "TopCake", "DSPstiny", "SephURR", 
             "POTATO", "Riperino", "NiceMeMe", "dayJoy", "kaceyFace",
@@ -13,15 +9,13 @@
             "ITSRAWWW", "CallHafu", "ChibiDesti", "CORAL", "CUX", "NOBULLY"
         ];
         
-        var TWITCH_EMOTICONS = ["BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
+        var TWITCH_EMOTICONS = ["DansGame", "Kreygasm", "PJSalt", "PogChamp",
             "ResidentSleeper", "WinWaker", "OpieOP", "4Head", "DatSheffy", "TooSpicy", "Keepo",
             "lirikThump", "BabyRage", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "KappaPride", 
-            "MingLee", "OhMyDog", "CoolCat", "gachiGASM", "NotLikeThis"
+            "MingLee", "OhMyDog", "CoolCat", "NotLikeThis"
         ];
         
-        var BTTV_EMOTICONS = ["GabeN", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA", "FeelsAmazingMan"];
-
-        var NEW = [ ];
+        var BTTV_EMOTICONS = ["GabeN", "gachiGASM", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA", "FeelsAmazingMan"];
 
         var ANIMATED = [ "CuckCrab", "SourPls", "RaveDoge" ];
 
@@ -30,8 +24,6 @@
         var TEXT = [ "OuO", "XD", "xD" ];
 
         var SUBONLY = destiny.chat.gui.twitchemotes;
-
-        var RIP = [ ].sort();
 
         var bdggSortResults = function(fnSortResults) {
             return function(a, b) {
@@ -72,8 +64,8 @@
         return {
             all: [],
             init: function() {
-                emoticons = EMOTICONS.concat(NEW).concat(SUBONLY).concat(TEXT).concat(ANIMATED)
-                    .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
+                emoticons = BBDGG_EMOTICONS.concat(SUBONLY).concat(TEXT).concat(ANIMATED)
+                .concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
                     .filter(function(e) { return destiny.chat.gui.emoticons.indexOf(e) === -1; })
                     .sort();
                 destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();
@@ -122,17 +114,10 @@
                             this.gui.push(new ChatInfoMessage("Unlocked: " + SUBONLY.sort().join(", ")));
                         }
 
-                        if (RIP.length > 0) {
-                            this.gui.push(new ChatInfoMessage("RIP: " + RIP.sort().join(", ")));
-                        }
-
                         if (override && OVERRIDES.length > 0) {
                             this.gui.push(new ChatInfoMessage("Overrides: " + OVERRIDES.sort().join(", ")));
                         }
 
-                        if (NEW.length > 0) {
-                            this.gui.push(new ChatInfoMessage("NEW: " + NEW.sort().join(", ")));
-                        }
                     }
                 };
 
@@ -182,8 +167,8 @@
 
                 if (value) {
 
-                    editEmoteList = EMOTICONS.concat(NEW).concat(SUBONLY).concat(ANIMATED)
-                    .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
+                    editEmoteList = BBDGG_EMOTICONS.concat(SUBONLY).concat(ANIMATED)
+                    .concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
                     .filter(function(e) { return baseEmotes.indexOf(e) === -1; })
                     .sort();
 
@@ -194,8 +179,8 @@
 
                 else {
 
-                    editEmoteList = EMOTICONS.concat(NEW).concat(SUBONLY).concat(ANIMATED).concat(TEXT)
-                    .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
+                    editEmoteList = BBDGG_EMOTICONS.concat(SUBONLY).concat(ANIMATED).concat(TEXT)
+                    .concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
                     .filter(function(e) { return baseEmotes.indexOf(e) === -1; })
                     .sort();
 
@@ -228,8 +213,7 @@
                     $(elem).parent().remove();
                     
                     // Filter emotes into their respective containers
-                    if ($.inArray($emoteName, EMOTICONS) > -1) { $('#DGGEmoteContainer').append($emoteClone); }
-                    else if ($.inArray($emoteName, TWITCH_EMOTICONS) > -1) { $('#TwitchEmoteContainer').append($emoteClone); }
+                    if ($.inArray($emoteName, TWITCH_EMOTICONS) > -1) { $('#TwitchEmoteContainer').append($emoteClone); }
                     else if ($.inArray($emoteName, BTTV_EMOTICONS) > -1) { $('#BTTVEmoteContainer').append($emoteClone); }
                     else if ($.inArray($emoteName, BBDGG_EMOTICONS) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }
                     else if ($.inArray($emoteName, ANIMATED) > -1) { $('#BBDGGEmoteContainer').append($emoteClone); }

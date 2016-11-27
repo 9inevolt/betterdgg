@@ -11,13 +11,13 @@
         var fnHandleCommand = destiny.chat.handleCommand;
         destiny.chat.handleCommand = function(str) {
             var cmd = str.trim();
-            if (/^strims\b/.test(cmd)) {
-                var match;
-                if (match = cmd.match(/^strims(?: (\d+))?$/)) {
-                    var count = match[1] || 5;
+            if (/^str.*\b/.test(cmd)) {
+                var match = cmd.match(/^str.*(?: (\d+))?$/);
+                var count = String(match.input).split(" ")[1] || 5;
+                if (!isNaN(String(match.input).split(" ")[1]  || String(match.input).split(" ").length === 1)) {
                     window.postMessage({type: 'bdgg_overrustle_get_strims', count: count}, '*');
                 } else {
-                    destiny.chat.gui.push(new ChatInfoMessage("Format: /strims {optional #}"));
+                    destiny.chat.gui.push(new ChatInfoMessage("Format: /str(ims) {optional #}"));
                 }
             } else {
                 fnHandleCommand.apply(this, arguments);

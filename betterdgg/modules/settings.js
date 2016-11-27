@@ -43,15 +43,8 @@
         },
 
         'bdgg_flair_hide_all': {
-            'name': 'Hide all BetterD.GG flairs',
-            'description': 'Hide all Better Destiny.gg flairs',
-            'value': false,
-            'type': 'boolean'
-        },
-
-        'bdgg_flair_hide_every': {
-            'name': 'Hide all D.GG flairs',
-            'description': 'Hide all Destiny.gg flairs',
+            'name': 'Hide BetterD.GG flairs',
+            'description': 'Hide all Better Destiny.gg flairs that are\'t flags',
             'value': false,
             'type': 'boolean'
         },

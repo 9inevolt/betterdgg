@@ -1,10 +1,3 @@
-.chat-emote-CallCatz, .chat-emote.bdgg-chat-emote-CallCatz {
-    background-image:url('images/emoticons/CallCatz.png');
-    width: 22px;
-    height: 30px;
-    margin-top: -30px;
-}
-
 .chat-emote-CoolCat, .chat-emote.bdgg-chat-emote-CoolCat {
     background-image:url('images/emoticons/CoolCat.png');
     width: 30px;
@@ -80,13 +73,6 @@
     margin-top: -30px;
 }
 
-.chat-emote-CallChad, .chat-emote.bdgg-chat-emote-CallChad {
-    background-image:url('images/emoticons/CallChad.png');
-    width: 24px;
-    height: 30px;
-    margin-top: -30px;
-}
-
 .chat-emote-OuO, .chat-emote.bdgg-chat-emote-OuO {
     display:none;
 }
@@ -113,32 +99,11 @@
     margin-top: -30px;
 }
 
-.chat-emote-Dravewin, .chat-emote.bdgg-chat-emote-Dravewin {
-    background-image:url('images/emoticons/Dravewin.png');
-    width: 30px;
-    height: 30px;
-    margin-top: -30px;
-}
-
-.chat-emote-FIDGETLOL, .chat-emote.bdgg-chat-emote-FIDGETLOL {
-    background-image:url('images/emoticons/FIDGETLOL.png');
-    width: 25px;
-    height: 25px;
-    margin-top: -25px;
-}
-
 .chat-emote-TooSpicy, .chat-emote.bdgg-chat-emote-TooSpicy {
     background-image:url('images/emoticons/TooSpicy.png');
     width: 23px;
     height: 30px;
     margin-top: -30px;
-}
-
-.chat-emote-BrainSlug, .chat-emote.bdgg-chat-emote-BrainSlug {
-    width: 18px;
-    height: 27px;
-    margin-top: -30px;
-    background: url('images/emoticons/BrainSlug.png');
 }
 
 .chat-emote-SoSad.bdgg-chat-emote-override {
@@ -168,21 +133,6 @@
     margin-top: -29px !important;
     background: url('images/emoticons/Kappa.png') !important;
 }
-
-.chat-emote-ASLAN, .chat-emote.bdgg-chat-emote-ASLAN  {
-    width: 37px;
-    height: 30px;
-    margin-top: -30px;
-    background-image:url('images/emoticons/ASLAN.png');
-}
-
-.chat-emote-DJAslan, .chat-emote.bdgg-chat-emote-DJAslan {
-    width: 29px;
-    height: 36px;
-    margin-top: -36px;
-    background-image:url('images/emoticons/DJAslan.png');
-}
-
 
 .chat-emote-OhKrappa.bdgg-chat-emote-override {
     width: 24px !important;
@@ -316,13 +266,6 @@
     to {
         left: 2px
     }
-}
-
-.chat-emote.bdgg-chat-emote-PEPE {
-    width: 30px;
-    height: 30px;
-    margin-top: -30px !important;
-    background: url('images/emoticons/PEPE.png');
 }
 
 .chat-emote-POTATO, .chat-emote.bdgg-chat-emote-POTATO {
@@ -558,6 +501,10 @@
 
 .icon-bdgg-moobie {
     background-image:url('images/moobie.png');
+}
+
+.icon-bdgg-rustle {
+    background-image:url('images/rustle.png');
 }
 
 .icon-bdgg-play {

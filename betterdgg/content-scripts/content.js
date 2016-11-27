@@ -92,6 +92,20 @@ window.addEventListener("message", function(e) {
             url: 'http://downthecrop.xyz/bbdgg/api/phrases.json'
         };
         doXHR(xhr); 
+    } else if (e.data.type === 'bdgg_flair_request') {
+        xhr = {
+            onload: function(responseText) {
+                try {
+                    var flairs = JSON.parse(responseText);
+                    window.postMessage({ type: 'bdgg_flair_reply', response: flairs }, '*');
+                } catch(e) {
+                    window.postMessage({ type: 'bdgg_flair_error'}, '*');
+                }
+            },
+            method: 'GET',
+            url: 'http://downthecrop.xyz/bbdgg/api/flairs.json'
+        };
+        doXHR(xhr); 
     }
 });
 

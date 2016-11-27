@@ -1,8 +1,6 @@
 (function(bdgg) {
 
-    var BOTS = [];
-    var CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat', 'Dashh' ];
-    var MOOBIES = [ 'loldamar', 'Nate', 'Overpowered', 'Mannekino', 'DaeNda', 'Fancysloth', 'ShawarmaFury' ];
+    var REMOTE_FLAIR, REMOTE_NICKNAMES = [];
     var ALERT_MSG = '<p>To display or hide your country flair, please '
         + '<a target="_blank" href="https://www.destiny.gg/profile/authentication">create</a> '
         + 'a destiny.gg login key.</p>';
@@ -27,6 +25,17 @@
                 }
             }
         } catch (e) { console.warn(e); }
+    }
+
+    function _stripSpecial(value){
+        return value.replace(/<\/?[^>]+(>|$)/g, "");
+    }
+
+    function _getRemoteFlairs() {
+        if (!_hideAll){
+            window.postMessage({type: 'bdgg_flair_request'}, '*');
+            setTimeout(_getRemoteFlairs,60000);
+        }
     }
 
     function _getCountry() {
@@ -55,6 +64,21 @@
             }, 7000);
 
             var listener = function(e) {
+                if (window !== e.source) {
+                    return;
+                }
+                if (e.data.type === 'bdgg_flair_reply') {
+                    REMOTE_FLAIR = e.data.response.users;
+                    if (REMOTE_FLAIR != null) {
+                        REMOTE_NICKNAMES = [];
+                        for (var i = 0; i < REMOTE_FLAIR.length; i++) {
+                            REMOTE_NICKNAMES.push(REMOTE_FLAIR[i].nick.toLowerCase());
+                        }
+                    }
+                }
+                else if (e.data.type === 'bdgg_flair_error') {
+                    destiny.chat.gui.push(new ChatErrorMessage("Couldn't gather BBDGG flairs"));
+                }
                 if (window !== e.source || e.data.type !== 'bdgg_profile_info') {
                     return;
                 }
@@ -73,7 +97,6 @@
     var _displayCountry = false;
     var _displayAllCountries = true;
     var _hideAll = false;
-    var _hideEvery = false;
 
     bdgg.flair = (function() {
         destiny.UserFeatures['BDGG_CONTRIBUTOR'] = 'bdgg_contributor';
@@ -82,28 +105,6 @@
         var fnGetFeatureHTML = ChatUserMessage.prototype.getFeatureHTML;
         var bdggGetFeatureHTML = function() {
             var icons = fnGetFeatureHTML.apply(this, arguments);
-
-            //This comes first because Bot wasn't getting his flair sometimes
-            if (BOTS.indexOf(this.user.username) > -1) {
-                icons += '<i class="icon-bot" title="Bot"/>';
-            }
-
-            if (_hideEvery) {
-                icons = ''; //Clear the emote string to set to nothing
-                return icons;
-            }
-
-            if (_hideAll) {
-                return icons;
-            }
-
-            if (CONTRIBUTORS.indexOf(this.user.username) > -1) {
-                icons += '<i class="icon-bdgg-contributor" title="Better Better Destiny.gg Contributor"/>';
-            }
-
-            if (MOOBIES.indexOf(this.user.username) > -1) {
-                icons += '<i class="icon-bdgg-moobie" title="Movie Streamer"/>';
-            }
 
             if (_displayAllCountries) {
                 var user;
@@ -118,16 +119,33 @@
                     }
                 }
             }
+
+            if (_hideAll) {
+                return icons;
+            }
+
+            if (REMOTE_NICKNAMES.indexOf(this.user.username.toLowerCase()) > -1) {
+                var nameIndex = REMOTE_NICKNAMES.indexOf(this.user.username.toLowerCase());
+                if (REMOTE_FLAIR[nameIndex].flairs.length != null){
+                    for (var i = 0; i < REMOTE_FLAIR[nameIndex].flairs.length; i++) {
+                        if (i%2 !== 1){
+                            icons += '<i class="icon-bdgg-'+_stripSpecial(REMOTE_FLAIR[nameIndex].flairs[i])+'" title="'+_stripSpecial(REMOTE_FLAIR[nameIndex].flairs[i+1])+'"/>';
+                        }
+                    }
+                }
+            }
+
             return icons;
         };
 
         ChatUserMessage.prototype.getFeatureHTML = bdggGetFeatureHTML;
         return {
             init: function() {
+
                 bdgg.flair.displayCountry(bdgg.settings.get('bdgg_flair_country_display'), 3000);
+                bdgg.flair.flairRequest(3500);
                 bdgg.flair.displayAllCountries(bdgg.settings.get('bdgg_flair_all_country_display'));
                 bdgg.flair.hideAll(bdgg.settings.get('bdgg_flair_hide_all'));
-                bdgg.flair.hideEvery(bdgg.settings.get('bdgg_flair_hide_every'));
 
                 bdgg.settings.addObserver(function(key, value) {
                     if (key === 'bdgg_flair_country_display') {
@@ -138,9 +156,7 @@
                     }
                     else if (key === 'bdgg_flair_hide_all') {
                         bdgg.flair.hideAll(value);
-                    }
-                    else if (key === 'bdgg_flair_hide_every') {
-                        bdgg.flair.hideEvery(value);
+                        bdgg.flair.flairRequest(2500);
                     }
                 });
             },
@@ -149,7 +165,6 @@
                 if (_tid != null) {
                     clearTimeout(_tid);
                 }
-
                 if (wait != null && wait > 0) {
                     setTimeout(_processFlair, wait);
                 }
@@ -157,14 +172,24 @@
                     _processFlair();
                 }
             },
+            flairRequest: function(wait) {
+                if (!_hideAll){
+                    if (_tid != null) {
+                        clearTimeout(_tid);
+                    }
+                    if (wait != null && wait > 0) {
+                        setTimeout(_getRemoteFlairs, wait);
+                    }
+                    else {
+                        _getRemoteFlairs();
+                    }
+                }
+            },
             displayAllCountries: function(value) {
                 _displayAllCountries = value;
             },
             hideAll: function(value) {
                 _hideAll = value;
-            },
-            hideEvery: function(value) {
-                _hideEvery = value;
             }
         };
     })();
