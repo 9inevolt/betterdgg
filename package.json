@@ -1,5 +1,6 @@
 {
   "name": "betterdgg",
+  "version": "1.4.4.2",
   "description": "Better Destiny.gg",
   "main": "index.js",
   "scripts": {
