@@ -3,30 +3,9 @@
 @import 'flags.css';
 @import 'spooky.css';
 
-.chat-emote.bdgg-chat-emote-ASLAN {
-    background-image:url('images/emoticons/ASLAN.png');
-    width: 37px;
-    height: 30px;
-    margin-top: -30px;
-}
-
 .chat-emote.bdgg-chat-emote-ASLAN.bdgg-xmas {
     background-image:url('images/emoticons/xmasASLAN.png');
     width: 35px;
-}
-
-.chat-emote.bdgg-chat-emote-CallCatz {
-    background-image:url('images/emoticons/CallCatz.png');
-    width: 22px;
-    height: 30px;
-    margin-top: -30px;
-}
-
-.chat-emote.bdgg-chat-emote-CallChad {
-    background-image:url('images/emoticons/CallChad.png');
-    width: 24px;
-    height: 30px;
-    margin-top: -30px;
 }
 
 .chat-emote.bdgg-chat-emote-DESBRO {
@@ -39,27 +18,6 @@
 .chat-emote.bdgg-chat-emote-DESBRO.bdgg-xmas {
     background-image:url('images/emoticons/xmasDESBRO.png');
     width: 32px;
-}
-
-.chat-emote.bdgg-chat-emote-DJAslan {
-    background-image:url('images/emoticons/DJAslan.png');
-    width: 29px;
-    height: 36px;
-    margin-top: -36px;
-}
-
-.chat-emote.bdgg-chat-emote-Dravewin {
-    background-image:url('images/emoticons/Dravewin.png');
-    width: 30px;
-    height: 30px;
-    margin-top: -30px;
-}
-
-.chat-emote.bdgg-chat-emote-FIDGETLOL {
-    background-image:url('images/emoticons/FIDGETLOL.png');
-    width: 25px;
-    height: 25px;
-    margin-top: -25px;
 }
 
 .chat-emote.bdgg-chat-emote-TooSpicy {
@@ -217,17 +175,10 @@
     }
 }
 
-.chat-emote.bdgg-chat-emote-PEPE {
-    width: 30px;
-    height: 30px;
-    margin-top: -30px;
-    background: url('images/emoticons/PEPE.png');
-}
-
 .chat-emote.bdgg-chat-emote-POTATO {
     width: 28px;
-    height: 28px;
-    margin-top: -28px;
+    height: 31px;
+    margin-top: -31px;
     background: url('images/emoticons/POTATO.png');
 }
 
@@ -285,13 +236,6 @@
     height: 28px;
     margin-top: -28px;
     background: url('images/emoticons/WEOW.png');
-}
-
-.chat-emote.bdgg-chat-emote-YEE {
-    width: 23px;
-    height: 32px;
-    margin-top: -32px;
-    background: url('images/emoticons/YEE.png');
 }
 
 .chat-emote.bdgg-chat-emote-4Head {
@@ -456,8 +400,8 @@
 .chat-emote.bdgg-chat-emote-gachiGASM {
     background-image:url('images/emoticons/gachiGASM.png');
     width: 30px;
-    height: 30px;
-    margin-top: -30px;
+    height: 33px;
+    margin-top: -33px;
 }
 
 .chat-emote.bdgg-chat-emote-NotLikeThis {
@@ -593,6 +537,10 @@
 
 .icon-bdgg-moobie {
     background-image:url('images/moobie.png');
+}
+
+.icon-bdgg-rustle {
+    background-image:url('images/rustle.png');
 }
 
 .icon-bdgg-play {

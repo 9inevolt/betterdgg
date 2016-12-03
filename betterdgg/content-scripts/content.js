@@ -54,6 +54,15 @@ window.addEventListener("message", function(e) {
         doXHR(xhr, phrase => {
             window.postMessage({ type: 'bdgg_phrase_reply', response: phrase }, '*');
         });
+    } else if (e.data.type === 'bdgg_flair_request') {
+        let xhr = {
+            method: 'GET',
+            url: 'http://downthecrop.xyz/bbdgg/api/flairs.json',
+            responseType: 'json'
+        };
+        doXHR(xhr, flairs => {
+            window.postMessage({ type: 'bdgg_flair_reply', response: flairs }, '*');
+        });
     } else if (e.data.type === 'bdgg_get_url') {
         let url = chrome.runtime.getURL(e.data.path);
         window.postMessage({ type: 'bdgg_url', path: e.data.path, url: url }, '*');

@@ -2,10 +2,6 @@ import settings from './settings';
 
 var override, emoteTabPriority, everyEmote, baseEmotes;
 
-var EMOTICONS = [ "CallChad", "FIDGETLOL", "ASLAN",
-    "CallCatz", "Dravewin", "YEE", "PEPE", "DJAslan"
-];
-
 var BBDGG_EMOTICONS = ["DESBRO", "ChanChamp", "SuccesS", "TopCake", "DSPstiny", "SephURR",
     "POTATO", "Riperino", "NiceMeMe", "dayJoy", "kaceyFace",
     "AlisherZ", "WEOW", "Depresstiny", "HerbPerve", "CARBUCKS", "Jewstiny",
@@ -15,10 +11,10 @@ var BBDGG_EMOTICONS = ["DESBRO", "ChanChamp", "SuccesS", "TopCake", "DSPstiny", 
 var TWITCH_EMOTICONS = ["BrainSlug", "DansGame", "Kreygasm", "PJSalt", "PogChamp",
     "ResidentSleeper", "WinWaker", "OpieOP", "4Head", "DatSheffy", "TooSpicy", "Keepo",
     "lirikThump", "BabyRage", "EleGiggle", "SwiftRage", "SMOrc", "SSSsss", "KappaPride",
-    "MingLee", "OhMyDog", "CoolCat", "gachiGASM", "NotLikeThis"
+    "MingLee", "OhMyDog", "CoolCat", "NotLikeThis"
 ];
 
-var BTTV_EMOTICONS = ["GabeN", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA", "FeelsAmazingMan"];
+var BTTV_EMOTICONS = ["GabeN", "gachiGASM", "ShibeZ", "D:", "FeelsBadMan", "FeelsGoodMan", "haHAA", "FeelsAmazingMan"];
 
 var NEW = [ ];
 
@@ -78,12 +74,14 @@ function replacer(match, emote) {
 let bdgg_emoticons = {
     all: [],
     init: function() {
-        xmasEND = moment('2014-12-29 05:00');
+        xmasEND = moment('2016-12-29 05:00');
         xmasOn = moment().isBefore(xmasEND);
 
+        SUBONLY = destiny.chat.gui.twitchemotes;
         baseEmotes = destiny.chat.gui.emoticons;
-        emoticons = EMOTICONS.concat(NEW).concat(SUBONLY).concat(TEXT).concat(ANIMATED)
-            .concat(BBDGG_EMOTICONS).concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
+
+        emoticons = BBDGG_EMOTICONS.concat(NEW).concat(SUBONLY).concat(TEXT).concat(ANIMATED)
+            .concat(TWITCH_EMOTICONS).concat(BTTV_EMOTICONS)
             .filter(function(e) { return baseEmotes.indexOf(e) === -1; })
             .sort();
         destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();

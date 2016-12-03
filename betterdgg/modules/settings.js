@@ -31,15 +31,8 @@ var SETTINGS = {
     },
 
     'bdgg_flair_hide_all': {
-        'name': 'Hide all BetterD.GG flairs',
-        'description': 'Hide all Better Destiny.gg flairs',
-        'value': false,
-        'type': 'boolean'
-    },
-
-    'bdgg_flair_hide_every': {
-        'name': 'Hide all D.GG flairs',
-        'description': 'Hide all Destiny.gg flairs',
+        'name': 'Hide BetterD.GG flairs',
+        'description': "Hide all Better Destiny.gg flairs that aren't flags",
         'value': false,
         'type': 'boolean'
     },
@@ -128,12 +121,14 @@ var SETTINGS = {
         'type': 'boolean'
     },
 
+    /*
     'bdgg_spooker_switch': {
         'name': 'Disable Halloween',
         'description': 'Disable Halloween bonus animations',
         'value': false,
         'type': 'boolean'
     },
+    */
 
     'bdgg_emoji_theme': {
         'name': 'Emoji Theme',

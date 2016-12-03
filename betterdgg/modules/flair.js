@@ -1,12 +1,11 @@
+import _get from 'lodash.get';
 import alert from './alert';
 import countries from './countries';
 import settings from './settings';
 import users from './users';
 
-var BOTS = [];
 var CONTRIBUTORS = [ '9inevolt', 'mellipelli' ];
-var BBDGG_CONTRIBUTORS = [ 'downthecrop', 'PurpleCow', 'SgtMaximum', 'Sweetie_Belle', 'Polecat', 'Dashh' ];
-var MOOBIES = [ 'loldamar', 'Nate', 'Overpowered', 'Mannekino', 'DaeNda', 'Fancysloth', 'ShawarmaFury' ];
+let REMOTE_NICKNAMES = new Map();
 var ALERT_MSG = '<p>To display or hide your country flair, please '
     + '<a target="_blank" href="https://www.destiny.gg/profile/authentication">create</a> '
     + 'a destiny.gg login key.</p>';
@@ -35,6 +34,13 @@ function _getToken() {
     }
 }
 
+function _getRemoteFlairs() {
+    if (!_hideAll) {
+        window.postMessage({type: 'bdgg_flair_request'}, '*');
+        _rtid = setTimeout(_getRemoteFlairs, 60000);
+    }
+}
+
 function _getCountry() {
     window.postMessage({type: 'bdgg_get_profile_info'}, '*');
 }
@@ -60,39 +66,52 @@ function _processFlair() {
             window.postMessage(data, '*');
         }, 7000);
 
-        var listener = function(e) {
-            if (window != e.source || e.data.type != 'bdgg_profile_info' ) {
-                return;
-            }
-
-            if (e.data.info && e.data.info['country'] == currentUser.country) {
-                // Avoid redundant on request
-                clearTimeout(_tid);
-            }
-        };
-        window.addEventListener('message', listener);
         _getCountry();
     }
 }
 
+function listener(e) {
+    if (window !== e.source) {
+        return;
+    }
+
+    if (e.data.type === 'bdgg_flair_reply') {
+        REMOTE_NICKNAMES.clear();
+        let remote_users = _get(e, 'data.response.users', []);
+        for (var i = 0; i < remote_users.length; i++) {
+            let user = remote_users[i];
+            REMOTE_NICKNAMES.set(_get(user, 'nick').toLowerCase(), _get(user, 'flairs', []));
+        }
+    } else if (e.data.type === 'bdgg_profile_info') {
+        if (e.data.info && e.data.info['country'] == currentUser.country) {
+            // Avoid redundant on request
+            clearTimeout(_tid);
+        }
+    }
+}
+
 var _tid = null;
+var _rtid = null;
 var _displayCountry = false;
 var _displayAllCountries = true;
 var _hideAll = false;
-var _hideEvery = false;
 
 var fnGetFeatureHTML;
 var bdggGetFeatureHTML = function() {
     var icons = fnGetFeatureHTML.apply(this, arguments);
 
-    //This comes first because Bot wasn't getting his flair sometimes
-    if (BOTS.indexOf(this.user.username) > -1) {
-        icons += '<i class="icon-bot" title="Bot"/>';
-    }
-
-    if (_hideEvery) {
-        icons = ''; //Clear the emote string to set to nothing
-        return icons;
+    if (_displayAllCountries) {
+        let user = users.get(this.user.username);
+        if (user) {
+            let a2 = user.country.substring(0, 2).toUpperCase();
+            let flagClass = "icon-bdgg-flag flag-" + a2.toLowerCase();
+            let country = countries.get(a2);
+            if (country) {
+                let flagIcon = '<i class="' + flagClass + '" '
+                    + 'title="' + country['name'] + '"/>';
+                icons = flagIcon + icons;
+            }
+        }
     }
 
     if (_hideAll) {
@@ -103,27 +122,17 @@ var bdggGetFeatureHTML = function() {
         icons += '<i class="icon-bdgg-contributor" title="Better Destiny.gg Contributor"/>';
     }
 
-    if (BBDGG_CONTRIBUTORS.indexOf(this.user.username) > -1) {
-        icons += '<i class="icon-bbdgg-contributor" title="Better Better Destiny.gg Contributor"/>';
-    }
-
-    if (MOOBIES.indexOf(this.user.username) > -1) {
-        icons += '<i class="icon-bdgg-moobie" title="Movie Streamer"/>';
-    }
-
-    if (_displayAllCountries) {
-        var user = users.get(this.user.username);
-        if (user) {
-            var a2 = user.country.substring(0, 2).toUpperCase();
-            var flagClass = "icon-bdgg-flag flag-" + a2.toLowerCase();
-            var country = countries.get(a2);
-            if (country) {
-                var flagIcon = '<i class="' + flagClass + '" '
-                    + 'title="' + country['name'] + '"/>';
-                icons = flagIcon + icons;
-            }
+    let flairs = REMOTE_NICKNAMES.get(this.user.username.toLowerCase());
+    if (flairs) {
+        for (let i = 0; i < flairs.length-1; i+=2) {
+            let feature = flairs[i];
+            let title = flairs[i+1];
+            let className = feature == 'contributor' ? 'icon-bbdgg-contributor' : `icon-bdgg-${feature}`;
+            let icon = $('<i>').addClass(className).attr('title', title);
+            icons += icon[0].outerHTML;
         }
     }
+
     return icons;
 };
 
@@ -135,9 +144,9 @@ let flair = {
         ChatUserMessage.prototype.getFeatureHTML = bdggGetFeatureHTML;
 
         this.displayCountry(settings.get('bdgg_flair_country_display'), 3000);
+        this.flairRequest(3500);
         this.displayAllCountries(settings.get('bdgg_flair_all_country_display'));
         this.hideAll(settings.get('bdgg_flair_hide_all'));
-        this.hideEvery(settings.get('bdgg_flair_hide_every'));
 
         settings.addObserver((key, value) => {
             if (key == 'bdgg_flair_country_display') {
@@ -146,10 +155,11 @@ let flair = {
                 this.displayAllCountries(value);
             } else if (key == 'bdgg_flair_hide_all') {
                 this.hideAll(value);
-            } else if (key === 'bdgg_flair_hide_every') {
-                this.hideEvery(value);
+                this.flairRequest(2500);
             }
         });
+
+        window.addEventListener('message', listener);
     },
     displayCountry: function(value, wait) {
         _displayCountry = value;
@@ -163,14 +173,24 @@ let flair = {
             _processFlair();
         }
     },
+    flairRequest: function(wait) {
+        if (!_hideAll){
+            if (_rtid != null) {
+                clearTimeout(_rtid);
+            }
+            if (wait != null && wait > 0) {
+                setTimeout(_getRemoteFlairs, wait);
+            }
+            else {
+                _getRemoteFlairs();
+            }
+        }
+    },
     displayAllCountries: function(value) {
         _displayAllCountries = value;
     },
     hideAll: function(value) {
         _hideAll = value;
-    },
-    hideEvery: function(value) {
-        _hideEvery = value;
     }
 };
 

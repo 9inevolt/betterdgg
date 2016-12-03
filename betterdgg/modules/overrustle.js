@@ -5,33 +5,33 @@ const HITBOX_URL  = /http:\/\/(?:www\.)?hitbox.tv\/(\w+)\/?$/;
 const USTREAM_CHANNEL_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:channel\/)?([\w-]+)\/?$/;
 const USTREAM_EMBED_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:embed|channel\/id)\/(\d+)\/?$/;
 
-var _channels = {};
+let _channels = {};
 
 function _initStrims() {
     // hook into handle command
-    var fnHandleCommand = destiny.chat.handleCommand;
+    let fnHandleCommand = destiny.chat.handleCommand;
     destiny.chat.handleCommand = function(str) {
-        var cmd = str.trim();
-        if (/^strims\b/.test(cmd)) {
-            var match;
-            if (match = cmd.match(/^strims(?: (\d+))?$/)) {
-                var count = match[1] || 5;
-                window.postMessage({type: 'bdgg_overrustle_get_strims', count: count}, '*');
+        let cmd = str.trim();
+        if (/^str(?:(?:ea|i)ms?)?\b/.test(cmd)) {
+            let match;
+            if (match = cmd.match(/^str(?:(?:ea|i)ms?)?(?: (\d+))?$/)) {
+                let count = match[1] || 5;
+                window.postMessage({type: 'bdgg_overrustle_get_strims', count}, '*');
             } else {
-                destiny.chat.gui.push(new ChatInfoMessage("Format: /strims {optional #}"));
+                destiny.chat.gui.push(new ChatInfoMessage("Format: /str(ims) {optional #}"));
             }
         } else {
             fnHandleCommand.apply(this, arguments);
         }
     };
 
-    var listener = function(e) {
+    let listener = function(e) {
         if (window != e.source || e.data.type != 'bdgg_overrustle_strims' ) {
             return;
         }
 
-        for (var i=0; i<e.data.strims.length; i++) {
-            var strim = e.data.strims[i];
+        for (let i=0; i<e.data.strims.length; i++) {
+            let strim = e.data.strims[i];
             //console.log(strim);
             destiny.chat.gui.push(new BDGGChatStrimMessage(strim));
         }
@@ -50,7 +50,7 @@ function _initStrims() {
     BDGGChatStrimMessage.prototype.constructor = BDGGChatStrimMessage;
 
     BDGGChatStrimMessage.prototype.html = function() {
-        var elem = $('<div class="ui-msg bdgg-strim-msg"></div>');
+        let elem = $('<div class="ui-msg bdgg-strim-msg"></div>');
         $('<a target="_blank" class="externallink"></a>').attr('href', this.url)
             .text(this.text())
             .prepend(this.icon())
@@ -59,7 +59,7 @@ function _initStrims() {
     };
 
     BDGGChatStrimMessage.prototype.text = function() {
-        var txt = ' ';
+        let txt = ' ';
         if (this.name) {
             txt += this.name;
         } else {
@@ -78,7 +78,7 @@ function _initStrims() {
     };
 
     BDGGChatStrimMessage.prototype.icon = function() {
-        var ico = "icon-bdgg-play";
+        let ico = "icon-bdgg-play";
         if (this.platform == 'twitch') {
             ico = "icon-bdgg-platform-twitch";
         } else if (this.platform == 'ustream') {
@@ -90,8 +90,8 @@ function _initStrims() {
 }
 
 function _randString(len) {
-    var s = '';
-    for (var i=0; i<len; i++) {
+    let s = '';
+    for (let i=0; i<len; i++) {
         s += String.fromCharCode(Math.floor(97 + Math.random() * (123 - 97)));
     }
     return s;
@@ -103,8 +103,8 @@ function _link(s, stream) {
 }
 
 function _convert(elem) {
-    var href = elem.getAttribute('href');
-    var match;
+    let href = elem.getAttribute('href');
+    let match;
 
     if (match = TWITCH_URL.exec(href)) {
         href = _link('twitch', match[1]);
@@ -120,19 +120,19 @@ function _convert(elem) {
             href = _channels[href];
         } else {
             // Set the id since the element gets re-parsed later
-            var elemId = _randString(5);
+            let elemId = _randString(5);
             elem.id = elemId;
 
-            var listener = function(e) {
+            let listener = function(e) {
                 if (window != e.source ||
                         e.data.type != 'bdgg_ustream_channel' || e.data.text != href) {
                     return;
                 }
 
-                var link = _link('ustream', e.data.id);
+                let link = _link('ustream', e.data.id);
                 _channels[href] = link;
 
-                var newElem = document.getElementById(elemId);
+                let newElem = document.getElementById(elemId);
                 if (newElem) {
                     newElem.setAttribute('href', link);
                     newElem.textContent = link;
@@ -153,7 +153,7 @@ function _convert(elem) {
     elem.textContent = href;
 }
 
-var _enabled = false;
+let _enabled = false;
 
 let overrustle = {
     init: function() {
