@@ -281,6 +281,24 @@ let emoji = {
     },
 };
 
+let link = {
+    yt(msg = "https://www.youtube.com/watch?v=qAl_-zxAcaI") {
+        bdgg_push(msg);
+    },
+
+    google(msg = "https://goo.gl/LVwpJa") {
+        bdgg_push(msg);
+    },
+
+    twitch(msg = "https://twitch.tv/destiny") {
+        bdgg_push(msg);
+    },
+
+    twitter(msg = "https://twitter.com/OmniDestiny/status/799009662574219264") {
+        bdgg_push(msg);
+    },
+}
+
 let strawpoll = {
     destiny(msg = "http://www.strawpoll.me/11590093") {
         bdgg_push(msg, 'Destiny');
@@ -291,6 +309,6 @@ let strawpoll = {
     },
 };
 
-let test = { chat, emoji, or, slot, strawpoll, subreddit, test1, test2, test3, test4 };
+let test = { chat, emoji, link, or, slot, strawpoll, subreddit, test1, test2, test3, test4 };
 
 export default test
