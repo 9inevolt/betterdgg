@@ -29,7 +29,7 @@ var SUBONLY = [ "nathanD", "nathanF", "nathanNotears", "nathanPepe",
 
 var RIP = [ ].sort();
 
-var xmasEND, xmasOn;
+let xmasOn;
 
 var bdggSortResults = function(fnSortResults) {
     return function(a, b) {
@@ -74,8 +74,10 @@ function replacer(match, emote) {
 let bdgg_emoticons = {
     all: [],
     init: function() {
-        xmasEND = moment('2016-12-29 05:00');
-        xmasOn = moment().isBefore(xmasEND);
+        let xmasBEGIN = moment('12-01T13:00Z', 'MM-DDTHH:mmZ');
+        let xmasEND = moment('12-29T13:00Z', 'MM-DDTHH:mmZ');
+        let m = moment();
+        xmasOn = m.isAfter(xmasBEGIN) && m.isBefore(xmasEND);
 
         SUBONLY = destiny.chat.gui.twitchemotes;
         baseEmotes = destiny.chat.gui.emoticons;
