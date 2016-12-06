@@ -1,5 +1,6 @@
 plugins:
   - import
+  - standard
 
 env:
   browser: true
@@ -75,6 +76,10 @@ rules:
   space-before-blocks: 2              # enforce consistent spacing before blocks
   space-before-function-paren: [2, never]   # enforce consistent spacing before function definition opening parenthesis
   # spaced-comment: 2                 # enforce consistent spacing after the // or /* in a comment
+
+# Standard: Stylistic Issues
+  standard/array-bracket-even-spacing: [2, either]  # Like array-bracket-even-spacing from ESLint except it has an either option
+  standard/object-curly-even-spacing: [2, either]   # Like object-curly-spacing from ESLint except it has an either option
 
 # ECMAScript 6
   # arrow-parens
