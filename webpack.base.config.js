@@ -20,7 +20,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: [
             ['es2015', { loose: true, modules: false }]
@@ -41,6 +41,10 @@ module.exports = {
       {
         test: /\.jade$/,
         loader: 'jade-loader'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },

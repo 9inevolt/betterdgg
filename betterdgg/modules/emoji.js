@@ -57,11 +57,7 @@ let emoji = {
         window.addEventListener('message', listener);
         window.postMessage({type: 'bdgg_get_url', path: PATH}, '*');
         this.theme(settings.get('bdgg_emoji_theme'));
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_emoji_theme') {
-                this.theme(value);
-            }
-        });
+        settings.on('bdgg_emoji_theme', value => { this.theme(value) });
 
         for (let e of Object.keys(emojione.emojioneList)) {
             destiny.chat.gui.autoCompletePlugin.addEmote(e);

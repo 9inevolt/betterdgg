@@ -27,11 +27,7 @@ let chat = {
         var OriginalChatEmoteMessage = ChatEmoteMessage;
 
         this.disableCombos(settings.get('bdgg_disable_combos'));
-        settings.addObserver((key, value) => {
-            if (key === 'bdgg_disable_combos') {
-                this.disableCombos(value);
-            }
-        });
+        settings.on('bdgg_disable_combos', value => { this.disableCombos(value) });
 
         var fnChatMUTE = destiny.chat.onMUTE;
 

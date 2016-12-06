@@ -10,10 +10,7 @@ let leftchat = {
             chat = $('#chat-panel', parent.document);
             this.leftBoys(settings.get('bdgg_left_chat'));
             this.resizeTakeOver();
-            settings.addObserver((key, val) => {
-                if (key === 'bdgg_left_chat')
-                    this.leftBoys(val);
-            });
+            settings.on('bdgg_left_chat', value => { this.leftBoys(value) });
         }
     },
     leftBoys: function(val) {

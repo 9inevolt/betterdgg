@@ -85,11 +85,7 @@ let hoverLink = debounce(function() {
 let linkinfo = {
     init() {
         this.enabled(settings.get('bdgg_show_linkinfo'));
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_show_linkinfo') {
-                this.enabled(value);
-            }
-        });
+        settings.on('bdgg_show_linkinfo', value => { this.enabled(value) });
         window.addEventListener('message', listener);
     },
     enabled(value) {

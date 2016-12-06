@@ -11,11 +11,7 @@ let ignore = {
         style = document.createElement('style');
         style.type = 'text/css';
         document.head.appendChild(style);
-        settings.addObserver((key, val) => {
-            if (key === 'bdgg_user_ignore') {
-                this.update(val);
-            }
-        });
+        settings.on('bdgg_user_ignore', value => { this.update(value) });
         this.update(settings.get('bdgg_user_ignore'));
     },
     update: function(userList) {

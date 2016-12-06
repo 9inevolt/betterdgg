@@ -19,11 +19,7 @@ var _enabled = false;
 let phrases = {
     init: function() {
         _enabled = settings.get('bdgg_prohibited_phrase_filter');
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_prohibited_phrase_filter') {
-                _enabled = value;
-            }
-        });
+        settings.on('bdgg_prohibited_phrase_filter', value => { _enabled = value });
 
         var listner = function(e){
             if (window !== e.source) {

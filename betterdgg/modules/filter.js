@@ -24,11 +24,7 @@ function _filterWords(value) {
 let filter = {
     init: function() {
         _filterWords(settings.get('bdgg_filter_words'));
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_filter_words') {
-                _filterWords(value);
-            }
-        });
+        settings.on('bdgg_filter_words', value => { _filterWords(value) });
 
         var fnGuiPush = destiny.chat.gui.push;
         destiny.chat.gui.push = function(msg) {

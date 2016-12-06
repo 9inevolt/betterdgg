@@ -105,15 +105,9 @@ let bdgg_emoticons = {
 
         this.giveTabPriority(settings.get('bdgg_emote_tab_priority'));
         this.overrideEmotes(settings.get('bdgg_emote_override'));
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_emote_tab_priority') {
-                this.giveTabPriority(value);
-            } else if (key == 'bdgg_emote_override') {
-                this.overrideEmotes(value);
-            } else if (key == 'bdgg_text_disable') {
-                this.textEmoteDisable(value);
-            }
-        });
+        settings.on('bdgg_emote_tab_priority', value => this.giveTabPriority(value));
+        settings.on('bdgg_emote_override', value => this.overrideEmotes(value));
+        settings.on('bdgg_text_disable', value => this.textEmoteDisable(value));
 
         // hook into emotes command
         var fnHandleCommand = destiny.chat.handleCommand;

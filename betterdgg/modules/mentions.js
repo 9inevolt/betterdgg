@@ -5,11 +5,7 @@ let _enabled = false;
 let mentions = {
     init: function() {
         this.highlightSelected(settings.get('bdgg_highlight_selected_mentions'));
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_highlight_selected_mentions') {
-                this.highlightSelected(value);
-            }
-        });
+        settings.on('bdgg_highlight_selected_mentions', value => { this.highlightSelected(value) });
 
         var gui = window.destiny.chat.gui;
 

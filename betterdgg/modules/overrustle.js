@@ -158,11 +158,7 @@ let _enabled = false;
 let overrustle = {
     init: function() {
         this.convertLinks(settings.get('bdgg_convert_overrustle_links'));
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_convert_overrustle_links') {
-                this.convertLinks(value);
-            }
-        });
+        settings.on('bdgg_convert_overrustle_links', value => { this.convertLinks(value) });
 
         _initStrims();
     },

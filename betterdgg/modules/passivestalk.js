@@ -55,10 +55,7 @@ let passivestalk = {
         style = document.createElement('style');
         style.type = 'text/css';
         document.head.appendChild(style);
-        settings.addObserver((key, val) => {
-            if (key === 'bdgg_passive_stalk')
-                this.update(val);
-        });
+        settings.on('bdgg_passive_stalk', value => { this.update(value) });
         this.update(settings.get('bdgg_passive_stalk'));
     },
     update: function(userList) {

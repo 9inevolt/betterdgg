@@ -148,15 +148,11 @@ let flair = {
         this.displayAllCountries(settings.get('bdgg_flair_all_country_display'));
         this.hideAll(settings.get('bdgg_flair_hide_all'));
 
-        settings.addObserver((key, value) => {
-            if (key == 'bdgg_flair_country_display') {
-                this.displayCountry(value);
-            } else if (key == 'bdgg_flair_all_country_display') {
-                this.displayAllCountries(value);
-            } else if (key == 'bdgg_flair_hide_all') {
-                this.hideAll(value);
-                this.flairRequest(2500);
-            }
+        settings.on('bdgg_flair_country_display', value => { this.displayCountry(value) });
+        settings.on('bdgg_flair_all_country_display', value => { this.displayAllCountries(value) });
+        settings.on('bdgg_flair_hide_all', value => {
+            this.hideAll(value);
+            this.flairRequest(2500);
         });
 
         window.addEventListener('message', listener);
