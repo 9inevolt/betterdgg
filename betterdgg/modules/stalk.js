@@ -52,13 +52,13 @@ let stalk = {
         if (window != e.source) {
             return;
         }
-        
+
         if (e.data.type == 'bdgg_stalk_reply') {
             var reply = e.data.reply;
-            
+
             if (reply.Type === "s") {
               var strings = reply.Data;
-              
+
               for (var i = 0; i < strings.length; i++) {
                 PushUserMessage(strings[i]);
               }
@@ -123,4 +123,4 @@ let stalk = {
     }
 };
 
-export default stalk
+export default stalk;

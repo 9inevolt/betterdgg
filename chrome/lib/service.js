@@ -1,5 +1,5 @@
-import { hex2b64, RSAKey } from './jsbn';
 import Wampy from 'wampy/build/wampy.min';
+import { hex2b64, RSAKey } from './jsbn';
 
 var address = "ws://ts.downthecrop.xyz:13374/ws";
 //var address = "ws://127.0.0.1:13374/ws"; //testing
@@ -59,7 +59,7 @@ chrome.runtime.onConnect.addListener(function(port) {
             var body = {
                 etoken: encrypt(e.data.token),
                 username: e.data.username
-            }
+            };
 
             var proc = e.data.displayCountry ? 'bdgg.flair.update' : 'bdgg.flair.remove';
 
@@ -118,5 +118,4 @@ chrome.runtime.onConnect.addListener(function(port) {
     {
         port.postMessage(obj);
     }
-
 });

@@ -1,0 +1,153 @@
+plugins:
+  - import
+
+env:
+  browser: true
+  commonjs: true
+  es6: true
+  jquery: true
+
+parserOptions:
+  sourceType: module
+
+settings:
+  import/resolver: webpack
+
+rules:
+# Possible Errors
+  # no-cond-assign
+  # no-console: [2, {allow: [warn, error]}] # disallow the use of console
+  no-debugger: 1                    # disallow the use of debugger
+  no-irregular-whitespace: 2        # disallow irregular whitespace outside of strings and comments
+  no-unexpected-multiline: 2        # disallow confusing multiline expressions
+  no-unreachable: 2                 # disallow unreachable code after return, throw, continue, and break statements
+
+# Best Practices
+  complexity: [1, 11]               # enforce a maximum cyclomatic complexity allowed in a program
+  # eqeqeq: [2, always, {null: ignore}]
+  # guard-for-in
+  no-alert: 2                       # disallow the use of alert, confirm, and prompt
+  no-caller: 2                      # disallow the use of arguments.caller or arguments.callee
+  no-extend-native: 2               # disallow extending native types
+  no-extra-bind: 2                  # disallow unnecessary calls to .bind()
+  no-multi-spaces: 2                # disallow multiple spaces
+  no-multi-str: 2                   # disallow multiline strings
+  no-new-wrappers: 2                # disallow new operators with the String, Number, and Boolean objects
+  no-throw-literal: 2               # disallow throwing literals as exceptions
+  no-with: 2                        # disallow with statements
+
+# Variables
+  no-shadow: 2                      # disallow variable declarations from shadowing variables declared in the outer scope
+  no-shadow-restricted-names: 2     # disallow identifiers from shadowing restricted names
+  no-undef: 2                       # disallow the use of undeclared variables unless mentioned in /*global */ comments
+  no-undef-init: 2                  # disallow initializing variables to undefined
+  # no-unused-vars: [2, {vars: local, args: none}] # disallow unused variables
+  # no-use-before-define: 2
+
+# Node.js and CommonJS
+  no-new-require: 2                   # disallow new operators with calls to require
+
+# Stylistic Issues
+  # brace-style: 2                    # enforce consistent brace style for blocks
+  # camelcase: [2, {properties: never}] # enforce camelcase naming convention
+  comma-dangle: [2, only-multiline]   # require or disallow trailing commas
+  # comma-spacing: 2                  # enforce consistent spacing before and after commas
+  comma-style: 2                      # enforce consistent comma style
+  computed-property-spacing: 2        # enforce consistent spacing inside computed property brackets
+  eol-last: 2                         # require or disallow newline at the end of files
+  func-call-spacing: 2                # require or disallow spacing between function identifiers and their invocations
+  # indent
+  # key-spacing: 2                    # enforce consistent spacing between keys and values in object literal properties
+  keyword-spacing: 2                  # enforce consistent spacing before and after keywords
+  linebreak-style: 2                  # enforce consistent linebreak style
+  # max-len                           # enforce a maximum line length
+  # new-cap: 2                        # require constructor names to begin with a capital letter
+  no-array-constructor: 2             # disallow Array constructors
+  no-mixed-spaces-and-tabs: 2         # disallow mixed spaces and tabs for indentation
+  no-multiple-empty-lines: 2          # disallow multiple empty lines
+  no-new-object: 2                    # disallow Object constructors
+  no-trailing-spaces: 2               # disallow trailing whitespace at the end of lines
+  padded-blocks: [2, never]           # require or disallow padding within blocks
+  quote-props: [2, consistent]        # require quotes around object literal property names
+  # quotes
+  semi-spacing: 2                     # enforce consistent spacing before and after semicolons
+  semi: 2                             # require or disallow semicolons instead of ASI
+  space-before-blocks: 2              # enforce consistent spacing before blocks
+  space-before-function-paren: [2, never]   # enforce consistent spacing before function definition opening parenthesis
+  # spaced-comment: 2                 # enforce consistent spacing after the // or /* in a comment
+
+# ECMAScript 6
+  # arrow-parens
+  arrow-spacing: 2                    # enforce consistent spacing before and after the arrow in arrow functions
+  no-confusing-arrow: 2               # disallow arrow functions where they could be confused with comparisons
+  no-dupe-class-members: 2            # disallow duplicate class members
+  no-duplicate-imports: 2             # disallow duplicate module imports
+  no-new-symbol: 2                    # disallow new operators with the Symbol object
+  no-this-before-super: 2             # disallow this/super before calling super() in constructors
+  no-useless-computed-key: 2          # disallow unnecessary computed property keys in object literals
+  no-useless-constructor: 2           # disallow unnecessary constructors
+  no-useless-rename: 2                # disallow renaming import, export, and destructured assignments to the same name
+  # no-var
+  # object-shorthand
+  # prefer-arrow-callback
+  # prefer-const
+  prefer-numeric-literals: 2          # disallow parseInt() in favor of binary, octal, and hexadecimal literals
+  # prefer-rest-params: 2               # require rest parameters instead of arguments
+  prefer-spread: 2                    # require spread operators instead of .apply()
+  require-yield: 2                    # require generator functions to contain yield
+  rest-spread-spacing: 2              # enforce spacing between rest and spread operators and their expressions
+  yield-star-spacing: 2               # require or disallow spacing around the * in yield* expressions
+
+# Imports: Static analysis
+  import/default: 2                   # Ensure a default export is present, given a default import
+  import/named: 2                     # Ensure named imports correspond to a named export in the remote file
+  # import/namespace: 2                 # Ensure imported namespaces contain dereferenced properties as they are dereferenced
+  import/no-unresolved: [2, {commonjs: true}] # Ensure imports point to a file/module that can be resolved
+
+# Imports: Helpful warnings
+  import/export: 2                    # Report any invalid exports, i.e. re-export of the same name
+  import/no-named-as-default: 2       # Report use of exported name as identifier of default export
+  import/no-named-as-default-member: 2  # Report use of exported name as property of default export
+  import/no-extraneous-dependencies:  # Forbid the use of extraneous packages
+    - 2
+    - devDependencies:
+      - 'spec/**'
+      - 'test/**'
+      - 'tests/**'
+      - '**/gulpfile.js'
+      - '**/webpack.config.js'
+      - '**/webpack.*.config.js'
+
+# Imports: Module systems
+  import/no-amd: 2                    # Report AMD require and define calls
+
+# Imports: Style guide
+  import/extensions: [2, always, {js: never}] # Ensure consistent use of file extension within the import path
+  import/first: [2, absolute-first]   # Ensure all imports appear before other statements
+  import/newline-after-import: 2      # Enforce a newline after import statements
+  import/no-duplicates: 2             # Report repeated import of the same module in multiple places
+  import/no-named-default: 2          # Forbid named default exports
+  # import/prefer-default-export: 2
+
+globals:
+  # stuff defined on destiny.gg
+  destiny: false
+  moment: true
+  ChatBroadcastMessage: true
+  ChatCommandMessage: true
+  ChatEmoteMessage: true
+  ChatErrorMessage: true
+  ChatGui: true
+  ChatInfoMessage: true
+  ChatStatusMessage: true
+  ChatUIMessage: true
+  ChatUserMessage: true
+  ChatUser: true
+
+  # extension API
+  chrome: false
+  unsafeWindow: false
+
+  # defined by build
+  DEBUG: false
+  VERSION: false

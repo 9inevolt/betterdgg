@@ -85,7 +85,7 @@ let hoverLink = debounce(function() {
 let linkinfo = {
     init() {
         this.enabled(settings.get('bdgg_show_linkinfo'));
-        settings.on('bdgg_show_linkinfo', value => { this.enabled(value) });
+        settings.on('bdgg_show_linkinfo', value => { this.enabled(value); });
         window.addEventListener('message', listener);
     },
     enabled(value) {
@@ -100,4 +100,4 @@ let linkinfo = {
     }
 };
 
-export default linkinfo
+export default linkinfo;

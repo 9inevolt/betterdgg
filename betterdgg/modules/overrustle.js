@@ -1,7 +1,7 @@
 import settings from './settings';
 
-const TWITCH_URL  = /http:\/\/(?:www\.)?twitch.tv\/(\w+)\/?$/;
-const HITBOX_URL  = /http:\/\/(?:www\.)?hitbox.tv\/(\w+)\/?$/;
+const TWITCH_URL = /http:\/\/(?:www\.)?twitch.tv\/(\w+)\/?$/;
+const HITBOX_URL = /http:\/\/(?:www\.)?hitbox.tv\/(\w+)\/?$/;
 const USTREAM_CHANNEL_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:channel\/)?([\w-]+)\/?$/;
 const USTREAM_EMBED_URL = /http:\/\/(?:www\.)?ustream.tv\/(?:embed|channel\/id)\/(\d+)\/?$/;
 
@@ -158,7 +158,7 @@ let _enabled = false;
 let overrustle = {
     init: function() {
         this.convertLinks(settings.get('bdgg_convert_overrustle_links'));
-        settings.on('bdgg_convert_overrustle_links', value => { this.convertLinks(value) });
+        settings.on('bdgg_convert_overrustle_links', value => { this.convertLinks(value); });
 
         _initStrims();
     },
@@ -175,4 +175,4 @@ let overrustle = {
     }
 };
 
-export default overrustle
+export default overrustle;

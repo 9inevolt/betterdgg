@@ -12,7 +12,7 @@ function bdgg_push(msg, nick = 'BetterDGG') {
 let test1 = function(msg) {
     destiny.chat.onMSG({data:msg || '>BetterDGG DESBRO ASLAN DJAslan LUL LUL LUL',
         nick:'BetterDGG', features:[]});
-    setTimeout(function() { destiny.chat.onMUTE({data: 'BetterDGG'}) }, 3000);
+    setTimeout(function() { destiny.chat.onMUTE({data: 'BetterDGG'}); }, 3000);
 };
 
 let test2 = function() {
@@ -156,7 +156,7 @@ let chat = {
     msg: function(str, nick) {
         str = str || "message";
         nick = nick || 'BetterDGG';
-        destiny.chat.onMSG({data:msg, nick, features:[]});
+        destiny.chat.onMSG({data:str, nick, features:[]});
     },
 
     highlightMentions: function(user1, user2, msg) {
@@ -297,7 +297,7 @@ let link = {
     twitter(msg = "https://twitter.com/OmniDestiny/status/799009662574219264") {
         bdgg_push(msg);
     },
-}
+};
 
 let strawpoll = {
     destiny(msg = "http://www.strawpoll.me/11590093") {
@@ -311,4 +311,4 @@ let strawpoll = {
 
 let test = { chat, emoji, link, or, slot, strawpoll, subreddit, test1, test2, test3, test4 };
 
-export default test
+export default test;

@@ -11,7 +11,7 @@ let ignore = {
         style = document.createElement('style');
         style.type = 'text/css';
         document.head.appendChild(style);
-        settings.on('bdgg_user_ignore', value => { this.update(value) });
+        settings.on('bdgg_user_ignore', value => { this.update(value); });
         this.update(settings.get('bdgg_user_ignore'));
     },
     update: function(userList) {
@@ -32,9 +32,8 @@ let ignore = {
     },
 
     chatLines: function() {
-
         var chatoptions = localStorage.getItem('chatoptions');
-        if (chatoptions === null){
+        if (chatoptions === null) {
             /**
              * If the user never changed any destiny.gg settings, the options are null.
              * Work around this by setting it to an empty JSON string which we can operate on.
@@ -58,4 +57,4 @@ let ignore = {
     }
 };
 
-export default ignore
+export default ignore;

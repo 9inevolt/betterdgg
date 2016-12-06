@@ -12,8 +12,8 @@ modification, are permitted provided that the following conditions are met:
 3. All advertising materials mentioning features or use of this software
    must display the following acknowledgement:
    This product includes software developed by Loren Segal.
-4. Neither the name of Loren Segal nor the names of its contributors may 
-   be used to endorse or promote products derived from this software without 
+4. Neither the name of Loren Segal nor the names of its contributors may
+   be used to endorse or promote products derived from this software without
    specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY LOREN SEGAL ''AS IS'' AND ANY
@@ -43,10 +43,10 @@ function startScroll(event) {
   var scrollHoriz = false;
   var scrollVert = false;
   var style = "position: absolute; width: 28px; height: 28px; z-index: 999999;";
-  
+
   var src = event.srcElement;
   while (src) { if (src.tagName == "A" && src.href) return; src = src.parentNode; }
-  
+
   src = event.srcElement;
   while (src) {
     if (src == document) src = document.body;
@@ -66,7 +66,7 @@ function startScroll(event) {
   }
   if (!src) return;
   panScrollElement = src;
-  
+
   if (scrollHoriz || scrollVert) {
     event.preventDefault();
     autoreleasePanScroll = false;

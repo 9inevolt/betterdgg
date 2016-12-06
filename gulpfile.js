@@ -41,7 +41,7 @@ gulp.task('default', [ 'chrome', 'firefox' ], function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('./betterdgg/**/*.{css,js,jade}', [ 'default' ]);
+    gulp.watch(['.eslintrc', './webpack.*.js', './betterdgg/**/*.{css,js,jade}'], [ 'default' ]);
 });
 
 gulp.task('prod', [ 'env:prod', 'chrome', 'firefox' ], function() {

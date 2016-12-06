@@ -103,4 +103,4 @@ if (DEBUG) {
 
 BetterDGG.init();
 
-export default BetterDGG
+export default BetterDGG;

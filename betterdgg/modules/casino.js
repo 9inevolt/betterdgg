@@ -102,7 +102,7 @@ let casino = {
             }
 
             return message;
-        }
+        };
     },
     wrapMessage: function(elem, message, force, forceTime) {
         if (force || !ownMessage(message)) {
@@ -111,4 +111,4 @@ let casino = {
     },
 };
 
-export default casino
+export default casino;

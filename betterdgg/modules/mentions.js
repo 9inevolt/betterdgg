@@ -1,11 +1,11 @@
-import settings from './settings'
+import settings from './settings';
 
 let _enabled = false;
 
 let mentions = {
     init: function() {
         this.highlightSelected(settings.get('bdgg_highlight_selected_mentions'));
-        settings.on('bdgg_highlight_selected_mentions', value => { this.highlightSelected(value) });
+        settings.on('bdgg_highlight_selected_mentions', value => { this.highlightSelected(value); });
 
         var gui = window.destiny.chat.gui;
 
@@ -38,4 +38,4 @@ let mentions = {
     }
 };
 
-export default mentions
+export default mentions;

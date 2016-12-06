@@ -13,7 +13,7 @@ let twitchchat = {
         var toprightbar = $('ul.nav.navbar-nav.navbar-right', document);
         var twitchButton = $('<li><a href="#">Twitch Chat</a></li>');
 
-        if(toprightbar.prop('outerHTML').indexOf('Chat') < 0){
+        if (toprightbar.prop('outerHTML').indexOf('Chat') < 0) {
             toprightbar.prepend(twitchButton);
         }
 
@@ -21,23 +21,21 @@ let twitchchat = {
         dggchat.addClass('tab-pane fade active in');
 
         var twitchSelected = false;
-        var twitchchat;
+        var twitchchatpanel;
 
         twitchButton.click(function onClick() {
-
             // lazily load twitch chat when it is actually desired
-            if (!twitchchat) {
-
+            if (!twitchchatpanel) {
                 // embed iframe
                 var chatpanel = $('#chat-panel', document);
-                twitchchat = $(templates.twitch_chat());
-                twitchchat.addClass('tab-pane fade');
-                chatpanel.append(twitchchat);
+                twitchchatpanel = $(templates.twitch_chat());
+                twitchchatpanel.addClass('tab-pane fade');
+                chatpanel.append(twitchchatpanel);
                 chatpanel.addClass('tab-content');
             }
 
             dggchat.toggleClass('active in');
-            twitchchat.toggleClass('active in');
+            twitchchatpanel.toggleClass('active in');
 
             if (twitchSelected) {
                 $('a', twitchButton).text('Twitch Chat');
@@ -51,4 +49,4 @@ let twitchchat = {
     }
 };
 
-export default twitchchat
+export default twitchchat;

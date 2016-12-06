@@ -12,4 +12,4 @@ let help = {
     }
 };
 
-export default help
+export default help;

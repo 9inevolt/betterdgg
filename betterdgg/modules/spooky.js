@@ -105,7 +105,7 @@ let spooky = {
         END = moment('2016-11-01T13:00Z');
 
         this.disable(settings.get('bdgg_spooker_switch'));
-        settings.on('bdgg_spooker_switch', value => { this.disable(value) });
+        settings.on('bdgg_spooker_switch', value => { this.disable(value); });
         refresh();
 
         var fnResolveMessage = destiny.chat.gui.resolveMessage;
@@ -117,7 +117,7 @@ let spooky = {
             }
 
             return message;
-        }
+        };
 
         setInterval(refresh, 300000);
     },
@@ -131,4 +131,4 @@ let spooky = {
     },
 };
 
-export default spooky
+export default spooky;

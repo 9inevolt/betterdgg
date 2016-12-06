@@ -45,4 +45,4 @@ let security = {
     sanitize
 };
 
-export default security
+export default security;

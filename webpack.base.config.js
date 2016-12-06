@@ -16,11 +16,24 @@ module.exports = {
     filename: '[name].js',
     path: './build'
   },
+  resolve: {
+    modules: [
+      path.resolve('./betterdgg'),
+      path.resolve('./node_modules')
+    ]
+  },
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        exclude: /node_modules/
+      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        exclude: /node_modules/,
         query: {
           presets: [
             ['es2015', { loose: true, modules: false }]

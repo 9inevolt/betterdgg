@@ -1,2 +1,2 @@
 // set by webpack
-export default VERSION
+export default VERSION;

@@ -9,7 +9,7 @@ function pushChat(string) {
     destiny.chat.gui.push(new ChatInfoMessage(string));
 }
 
-function updatePassivestalk(psList){
+function updatePassivestalk(psList) {
     var psTargets = psList.join(','); //in the settings the names are stored as "user1,user2,user3,..."
     settings.put('bdgg_passive_stalk', psTargets);
     pushChat("Your passivestalk list has been updated");
@@ -28,16 +28,16 @@ function psHandleCommand(str) {
             return self.indexOf(val) === idx;
         });
         updatePassivestalk(psList);
-    } else if (match = sendstr.match(/^(unps|unpassivestalk)\s(\w+)/)){
+    } else if (match = sendstr.match(/^(unps|unpassivestalk)\s(\w+)/)) {
         var matchIndex = psList.indexOf(match[2]);
-        if (matchIndex === -1){
+        if (matchIndex === -1) {
             pushChat("User not found in your passivestalk list");
         } else {
             psList.splice(matchIndex, 1);
             updatePassivestalk(psList);
         }
     } else if (sendstr.match(/^(ps|passivestalk)\s*$/)) {
-        if (psList.length === 0){
+        if (psList.length === 0) {
             pushChat("Your passivestalk list is empty");
         } else {
             pushChat("Passively stalking the following users: " + psList.join(', '));
@@ -55,7 +55,7 @@ let passivestalk = {
         style = document.createElement('style');
         style.type = 'text/css';
         document.head.appendChild(style);
-        settings.on('bdgg_passive_stalk', value => { this.update(value) });
+        settings.on('bdgg_passive_stalk', value => { this.update(value); });
         this.update(settings.get('bdgg_passive_stalk'));
     },
     update: function(userList) {
@@ -73,4 +73,4 @@ let passivestalk = {
     }
 };
 
-export default passivestalk
+export default passivestalk;

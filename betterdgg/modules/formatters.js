@@ -12,13 +12,13 @@ let formatters = {
         // >greentext
         var BDGGGreenTextFormatter = {
             format: function(str, user) {
-                var loc = str.indexOf("&gt;")
-                if(loc === 0){
+                var loc = str.indexOf("&gt;");
+                if (loc === 0) {
                     str = '<span class="greentext">'+str+'</span>';
                 }
                 return str;
             }
-        }
+        };
 
         var _sr_url = function(url) {
             return "http://www.reddit.com" + url;
@@ -35,7 +35,7 @@ let formatters = {
             format: function(str, user) {
                 return str.replace(bdggsubredditregex, _sr_replacer);
             }
-        }
+        };
 
         destiny.chat.gui.formatters.push(BDGGGreenTextFormatter);
         destiny.chat.gui.formatters.push(BDGGSubredditFormatter);
@@ -55,4 +55,4 @@ let formatters = {
     }
 };
 
-export default formatters
+export default formatters;

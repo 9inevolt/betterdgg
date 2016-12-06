@@ -5,12 +5,12 @@ var chat, stream;
 let leftchat = {
     init: function() {
         var URL = document.referrer;
-        if(URL.search("overrustle") < 0) {
+        if (URL.search("overrustle") < 0) {
             stream = $('#stream-panel', parent.document);
             chat = $('#chat-panel', parent.document);
             this.leftBoys(settings.get('bdgg_left_chat'));
             this.resizeTakeOver();
-            settings.on('bdgg_left_chat', value => { this.leftBoys(value) });
+            settings.on('bdgg_left_chat', value => { this.leftBoys(value); });
         }
     },
     leftBoys: function(val) {
@@ -62,15 +62,15 @@ let leftchat = {
             overlay.appendTo(parent.document.body);
 
 
-            var mouseMoveHandler = function(e) {
-                e.preventDefault();
+            var mouseMoveHandler = function(ev) {
+                ev.preventDefault();
 
-                var offset = (leftChat) ? (-1  * (e.clientX - offsetX)) : (sx + (e.clientX - offsetX));
+                var offset = (leftChat) ? (-1 * (ev.clientX - offsetX)) : (sx + (ev.clientX - offsetX));
                 resizeBar.css(side, offset);
             };
 
-            var mouseUpHandler = function(e) {
-                e.preventDefault();
+            var mouseUpHandler = function(ev) {
+                ev.preventDefault();
 
                 resizeBar.removeClass('active');
                 overlay.remove();
@@ -87,4 +87,4 @@ let leftchat = {
     }
 };
 
-export default leftchat
+export default leftchat;

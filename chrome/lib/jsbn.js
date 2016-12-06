@@ -1,3 +1,4 @@
+/* eslint-disable keyword-spacing  */
 // Copyright (c) 2005  Tom Wu
 // All Rights Reserved.
 // See "LICENSE" for details.
@@ -10,6 +11,8 @@ var dbits;
 // JavaScript engine analysis
 var canary = 0xdeadbeefcafe;
 var j_lm = ((canary&0xffffff)==0xefcafe);
+
+var v;
 
 // (public) Constructor
 function BigInteger(a,b,c) {
@@ -32,7 +35,7 @@ function nbi() { return new BigInteger(null); }
 // max internal value = 2*dvalue^2-2*dvalue (< 2^53)
 function am1(i,x,w,j,c,n) {
   while(--n >= 0) {
-    var v = x*this[i++]+w[j]+c;
+    v = x*this[i++]+w[j]+c;
     c = Math.floor(v/0x4000000);
     w[j++] = v&0x3ffffff;
   }
@@ -93,7 +96,7 @@ BigInteger.prototype.F2 = 2*dbits-BI_FP;
 
 // Digit conversions
 var BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
-var BI_RC = new Array();
+var BI_RC = [];
 var rr,vv;
 rr = "0".charCodeAt(0);
 for(vv = 0; vv <= 9; ++vv) BI_RC[rr++] = vv;
@@ -565,7 +568,7 @@ BigInteger.ONE = nbv(1);
 function Arcfour() {
   this.i = 0;
   this.j = 0;
-  this.S = new Array();
+  this.S = [];
 }
 
 // Initialize arcfour context from key, an array of ints, each from [0..255]
@@ -632,7 +635,7 @@ function rng_seed_time() {
 
 // Initialize the pool with junk if needed.
 if(rng_pool == null) {
-  rng_pool = new Array();
+  rng_pool = [];
   rng_pptr = 0;
   var t;
   if(window.crypto && window.crypto.getRandomValues) {
@@ -648,7 +651,7 @@ if(rng_pool == null) {
 //     var z = window.crypto.random(32);
 //     for(t = 0; t < z.length; ++t)
 //       rng_pool[rng_pptr++] = z.charCodeAt(t) & 255;
-//   }  
+//   }
   while(rng_pptr < rng_psize) {  // extract some randomness from Math.random()
     t = Math.floor(65536 * Math.random());
     rng_pool[rng_pptr++] = t >>> 8;
@@ -712,10 +715,10 @@ function byte2Hex(b) {
 // PKCS#1 (type 2, random) pad input string s to n bytes, and return a bigint
 function pkcs1pad2(s,n) {
   if(n < s.length + 11) { // TODO: fix for utf-8
-    alert("Message too long for RSA");
+    console.error("Message too long for RSA");
     return null;
   }
-  var ba = new Array();
+  var ba = [];
   var i = s.length - 1;
   while(i >= 0 && n > 0) {
     var c = s.charCodeAt(i--);
@@ -734,7 +737,7 @@ function pkcs1pad2(s,n) {
   }
   ba[--n] = 0;
   var rng = new SecureRandom();
-  var x = new Array();
+  var x = [];
   while(n > 2) { // random non-zero pad
     x[0] = 0;
     while(x[0] == 0) rng.nextBytes(x);
@@ -763,8 +766,9 @@ function RSASetPublic(N,E) {
     this.n = parseBigInt(N,16);
     this.e = parseInt(E,16);
   }
-  else
-    alert("Invalid RSA public key");
+  else {
+    throw new Error("Invalid RSA public key");
+  }
 }
 
 // Perform raw public operation on "x": return x^e (mod n)
@@ -821,7 +825,7 @@ function hex2b64(h) {
 
 // convert a base64 string to hex
 function b64tohex(s) {
-  var ret = ""
+  var ret = "";
   var i;
   var k = 0; // b64 state, 0-3
   var slop;
@@ -861,7 +865,7 @@ function b64toBA(s) {
   //piggyback on b64tohex for now, optimize later
   var h = b64tohex(s);
   var i;
-  var a = new Array();
+  var a = [];
   for(i = 0; 2*i < h.length; ++i) {
     a[i] = parseInt(h.substring(2*i,2*i+2),16);
   }

@@ -16,4 +16,4 @@ let backlog = {
     }
 };
 
-export default backlog
+export default backlog;

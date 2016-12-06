@@ -28,7 +28,7 @@ let notification = {
                         icon: destiny.cdn + '/chat/img/notifyicon.png',
                         data: { messageid: data.messageid }
                     };
-                    if (Notification.permission === 'granted'){
+                    if (Notification.permission === 'granted') {
                         notif = new Notification("Better Better Destiny.GG", memes);
                         notif.onclick = function() {
                             window.focus();
@@ -68,4 +68,4 @@ let notification = {
     }
 };
 
-export default notification
+export default notification;

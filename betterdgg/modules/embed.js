@@ -2,7 +2,7 @@ import _get from 'lodash.get';
 import * as templates from './templates';
 
 const PATH = 'embed/iframe.html';
-const STRAWPOLL_URL  = /https?:\/\/(?:www\.)?strawpoll\.me\/(\w+)\/?$/;
+const STRAWPOLL_URL = /https?:\/\/(?:www\.)?strawpoll\.me\/(\w+)\/?$/;
 const POLLSTERS = new Set(['Destiny']);
 const FLASH_DELAY = 60000;
 const HIDE_ALL_DELAY = 600000;
@@ -131,4 +131,4 @@ let embed = {
     }
 };
 
-export default embed
+export default embed;

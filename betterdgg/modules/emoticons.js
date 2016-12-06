@@ -87,7 +87,7 @@ let bdgg_emoticons = {
             .filter(function(e) { return baseEmotes.indexOf(e) === -1; })
             .sort();
         destiny.chat.gui.emoticons = destiny.chat.gui.emoticons.concat(emoticons).sort();
-        $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addEmote(v) });
+        $.each(emoticons, function(i, v) { destiny.chat.gui.autoCompletePlugin.addEmote(v); });
         this.all = emoticons;
         everyEmote = destiny.chat.gui.emoticons;
 
@@ -155,7 +155,7 @@ let bdgg_emoticons = {
         }
     },
     wrapMessage: function(wrapped, message) {
-        wrapped.find('span').addBack().contents().filter(function() { return this.nodeType == 3})
+        wrapped.find('span').addBack().contents().filter(function() { return this.nodeType == 3;})
             .replaceWith(function() {
                 return this.data
                     .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
@@ -213,6 +213,6 @@ let bdgg_emoticons = {
         // Hide emote menu
         $('#emoticon-btn').click();
     }
-}
+};
 
-export default bdgg_emoticons
+export default bdgg_emoticons;

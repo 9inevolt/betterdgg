@@ -83,6 +83,7 @@ function listener(e) {
             REMOTE_NICKNAMES.set(_get(user, 'nick').toLowerCase(), _get(user, 'flairs', []));
         }
     } else if (e.data.type === 'bdgg_profile_info') {
+        var currentUser = users.get(destiny.chat.user.username);
         if (e.data.info && e.data.info['country'] == currentUser.country) {
             // Avoid redundant on request
             clearTimeout(_tid);
@@ -148,8 +149,8 @@ let flair = {
         this.displayAllCountries(settings.get('bdgg_flair_all_country_display'));
         this.hideAll(settings.get('bdgg_flair_hide_all'));
 
-        settings.on('bdgg_flair_country_display', value => { this.displayCountry(value) });
-        settings.on('bdgg_flair_all_country_display', value => { this.displayAllCountries(value) });
+        settings.on('bdgg_flair_country_display', value => { this.displayCountry(value); });
+        settings.on('bdgg_flair_all_country_display', value => { this.displayAllCountries(value); });
         settings.on('bdgg_flair_hide_all', value => {
             this.hideAll(value);
             this.flairRequest(2500);
@@ -170,7 +171,7 @@ let flair = {
         }
     },
     flairRequest: function(wait) {
-        if (!_hideAll){
+        if (!_hideAll) {
             if (_rtid != null) {
                 clearTimeout(_rtid);
             }
@@ -190,4 +191,4 @@ let flair = {
     }
 };
 
-export default flair
+export default flair;

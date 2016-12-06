@@ -14,7 +14,7 @@ window.addEventListener("message", function(e) {
     if (e.data.type == 'bdgg_hello_world') {
         console.log("Content script received: " + e.data.text);
     } else if (e.data.type == 'bdgg_ustream_url') {
-        var xhr = {
+        let xhr = {
             method: 'GET',
             url: e.data.text
         };

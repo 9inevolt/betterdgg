@@ -31,4 +31,4 @@ let firstrun = {
     }
 };
 
-export default firstrun
+export default firstrun;

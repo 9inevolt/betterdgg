@@ -3,7 +3,7 @@ import settings from './settings';
 let theme = {
     init: function() {
         this.setLightTheme(settings.get('bdgg_light_theme'));
-        settings.on('bdgg_light_theme', value => { this.setLightTheme(value) });
+        settings.on('bdgg_light_theme', value => { this.setLightTheme(value); });
     },
     setLightTheme: function(value) {
         if (value) {
@@ -14,4 +14,4 @@ let theme = {
     }
 };
 
-export default theme
+export default theme;

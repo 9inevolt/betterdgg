@@ -16,4 +16,4 @@ let alert = {
     }
 };
 
-export default alert
+export default alert;
