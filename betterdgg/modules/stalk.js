@@ -1,3 +1,5 @@
+import { postMessage } from '../messaging';
+
 function BDGGChatStalkMessage(message, user, timestamp) {
     ChatUserMessage.call(this, message, user, timestamp);
     if (moment().year() == moment(timestamp).year()) {
@@ -33,6 +35,24 @@ function DoPush(msg, nick, time) {
     destiny.chat.gui.push(new BDGGChatStalkMessage(msg, user, time));
 }
 
+function doStalk(query) {
+    postMessage('bdgg_stalk_request', query)
+        .then(reply => {
+            if (reply.Type === "s") {
+                var strings = reply.Data;
+
+                for (let s of strings) {
+                    PushUserMessage(s);
+                }
+            } else if (reply.Type === "e") {
+                PushError(`Error: ${reply.Error}`);
+            }
+        })
+        .catch(err => {
+            PushError(`Error: ${err}`);
+        });
+}
+
 let stalk = {
     init: function() {
       BDGGChatStalkMessage.prototype = Object.create(ChatUserMessage.prototype);
@@ -47,32 +67,6 @@ let stalk = {
       BDGGChatStalkMessage.prototype.addonHtml = function() {
           return this.html();
       };
-
-    var listener = function(e) {
-        if (window != e.source) {
-            return;
-        }
-
-        if (e.data.type == 'bdgg_stalk_reply') {
-            var reply = e.data.reply;
-
-            if (reply.Type === "s") {
-              var strings = reply.Data;
-
-              for (var i = 0; i < strings.length; i++) {
-                PushUserMessage(strings[i]);
-              }
-            }
-            else if (reply.Type === "e") {
-              PushError("Error: " + reply.Error);
-            }
-        } else if (e.data.type == 'bdgg_stalk_message') {
-            PushChat(e.data.message);
-        } else if (e.data.type == 'bdgg_stalk_error') {
-            PushError(e.data.error);
-        }
-    };
-    window.addEventListener('message', listener);
 
       // hook into handle command
       var fnHandleCommand = destiny.chat.handleCommand;
@@ -111,7 +105,7 @@ let stalk = {
               querystr["Number"] = Math.min(200, num);
             }
 
-            window.postMessage({type: 'bdgg_stalk_request', query: querystr}, '*');
+            doStalk(querystr);
           } else if (sendstr.match(/^s(?:talk)?\s*$/)) {
             PushChat("Command not understood.");
             PushChat("Format: /stalk {username} {optional username} #");

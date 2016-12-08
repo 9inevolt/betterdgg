@@ -1,4 +1,5 @@
 import _get from 'lodash.get';
+import { postMessage } from '../messaging';
 import * as templates from './templates';
 
 const PATH = 'embed/iframe.html';
@@ -13,18 +14,6 @@ let embedUrl;
 let nextUrl, nextHtml;
 let flashTimer, hideAllTimer;
 
-function listener(e) {
-    if (window != e.source) {
-        return;
-    }
-
-    if (e.data.type === 'bdgg_url') {
-        if (e.data.path === PATH) {
-            baseUrl = e.data.url;
-            window.removeEventListener('message', listener);
-        }
-    }
-}
 
 function frameSrc(url) {
     return `${baseUrl}?url=${encodeURIComponent(url)}`;
@@ -37,8 +26,9 @@ function embedLinkClick() {
 
 let embed = {
     init() {
-        window.addEventListener('message', listener);
-        window.postMessage({type: 'bdgg_get_url', path: PATH}, '*');
+        postMessage('bdgg_get_url', PATH).then(url => {
+            baseUrl = url;
+        });
 
         destiny.chat.gui.lines.on('click', '.bdgg-embed-link', embedLinkClick);
         destiny.chat.gui.ui.append(templates.embed());

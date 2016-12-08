@@ -1,5 +1,6 @@
 import emojione from 'emojione';
 import twemoji from 'twemoji';
+import { postMessage } from '../messaging';
 import settings from './settings';
 
 const PATH = 'images/';
@@ -25,21 +26,6 @@ let tw_options = {
     }
 };
 
-function listener(e) {
-    if (window != e.source) {
-        return;
-    }
-
-    if (e.data.type === 'bdgg_url') {
-        if (e.data.path === PATH) {
-            tw_options.base = e.data.url;
-            emojione.imagePathSVG = e.data.url + 'emojione/';
-            emojione.imageType = 'svg';
-            window.removeEventListener('message', listener);
-        }
-    }
-}
-
 function replaceEmojiCodes(message) {
     return message.split(' ').map(str => {
         if (!str.startsWith(':') || !str.endsWith(':')) {
@@ -54,8 +40,11 @@ let _theme = 'disabled';
 
 let emoji = {
     init: function() {
-        window.addEventListener('message', listener);
-        window.postMessage({type: 'bdgg_get_url', path: PATH}, '*');
+        postMessage('bdgg_get_url', PATH).then(url => {
+            tw_options.base = url;
+            emojione.imagePathSVG = url + 'emojione/';
+            emojione.imageType = 'svg';
+        });
         this.theme(settings.get('bdgg_emoji_theme'));
         settings.on('bdgg_emoji_theme', value => { this.theme(value); });
 

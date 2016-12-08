@@ -1,4 +1,10 @@
+import { postMessage } from '../messaging';
+
 var _users = {};
+
+function refreshed(users) {
+    _users = users;
+}
 
 function _initUsers() {
     var listener = function(e) {
@@ -7,7 +13,7 @@ function _initUsers() {
         }
 
         if (e.data.type == 'bdgg_users_refreshed') {
-            _users = e.data.users;
+            refreshed(e.data.users);
         }
     };
     window.addEventListener('message', listener);
@@ -16,14 +22,15 @@ function _initUsers() {
 let users = {
     init: function() {
         _initUsers();
-        //TODO: bound function?
         setTimeout(() => this.refresh(), 1000);
     },
     get: function(username) {
         return _users[username];
     },
     refresh: function() {
-        window.postMessage({type: 'bdgg_users_refresh'}, '*');
+        postMessage('bdgg_users_refresh')
+            .then(data => { refreshed(data.users); })
+            .catch(err => { console.error(err); });
     }
 };
 

@@ -1,3 +1,4 @@
+import { postMessage } from '../messaging';
 import settings from './settings';
 
 var PHRASES = [];
@@ -20,21 +21,9 @@ let phrases = {
         _enabled = settings.get('bdgg_prohibited_phrase_filter');
         settings.on('bdgg_prohibited_phrase_filter', value => { _enabled = value; });
 
-        var listner = function(e) {
-            if (window !== e.source) {
-                return;
-            }
-
-            if (e.data.type === 'bdgg_phrase_reply') {
-                PHRASES = e.data.response.phrases;
-            }
-            else if (e.data.type === 'bdgg_phrase_error') {
-                destiny.chat.gui.push(new ChatErrorMessage("BBDGG could not load the prohibited phrases list"));
-            }
-        };
-
-        window.addEventListener('message', listner);
-        window.postMessage({type: 'bdgg_phrase_request'}, '*');
+        postMessage('bdgg_phrase_request').then(response => {
+            PHRASES = response.phrases;
+        });
 
         var fnSendCommand = destiny.chat.gui.send;
         destiny.chat.gui.send = function() {

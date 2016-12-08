@@ -22,6 +22,11 @@ rules:
   no-irregular-whitespace: 2        # disallow irregular whitespace outside of strings and comments
   no-unexpected-multiline: 2        # disallow confusing multiline expressions
   no-unreachable: 2                 # disallow unreachable code after return, throw, continue, and break statements
+  valid-jsdoc:                      # enforce valid JSDoc comments
+    - 2
+    - requireParamDescription: false
+      requireReturnDescription: false
+      requireReturn: false
 
 # Best Practices
   complexity: [1, 11]               # enforce a maximum cyclomatic complexity allowed in a program
@@ -151,7 +156,6 @@ globals:
 
   # extension API
   chrome: false
-  unsafeWindow: false
 
   # defined by build
   DEBUG: false

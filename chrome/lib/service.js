@@ -1,5 +1,6 @@
 import Wampy from 'wampy/build/wampy.min';
 import { hex2b64, RSAKey } from './jsbn';
+import { onMessage } from './messaging';
 
 var address = "ws://ts.downthecrop.xyz:13374/ws";
 //var address = "ws://127.0.0.1:13374/ws"; //testing
@@ -28,58 +29,53 @@ chrome.runtime.onConnect.addListener(function(port) {
         wamp.disconnect();
     });
 
-    port.onMessage.addListener(function(e) {
-        if (!e.data || !e.data.type) {
-            return;
-        }
-
-        if (e.data.type == 'bdgg_stalk_request') {
-            var query = {
-                QueryType: e.data.query.QueryType,
-                Name: e.data.query["Name"],
-                Names: e.data.query["Names"],
-                Number: e.data.query["Number"],
-                Session: e.data.query["Session"]
-            };
+    onMessage('bdgg_stalk_request', query => {
+        return new Promise((resolve, reject) => {
             wamp.call('bdgg.stalk', query, {
-                onSuccess: function(response) {
-                    postReply(response);
-                },
-                onError: function(err) {
+                onSuccess: resolve,
+                onError: err => {
                     console.error('RPC error: ' + err);
-                    postError("Error stalking", err);
+                    reject(`Error stalking: ${err}`);
                 }
             });
-        } else if (e.data.type == 'bdgg_flair_update') {
-            //console.log("Flair update received: " + e.data);
-            if (!e.data.token) {
+        });
+    });
+
+    onMessage('bdgg_flair_update', data => {
+        return new Promise((resolve, reject) => {
+            if (!data.token) {
+                reject('No token');
                 return;
             }
 
-            var body = {
-                etoken: encrypt(e.data.token),
-                username: e.data.username
+            const body = {
+                etoken: encrypt(data.token),
+                username: data.username
             };
 
-            var proc = e.data.displayCountry ? 'bdgg.flair.update' : 'bdgg.flair.remove';
+            const proc = data.displayCountry ? 'bdgg.flair.update' : 'bdgg.flair.remove';
 
             wamp.call(proc, body, {
-                onSuccess: function(response) {
-                    //console.log('flair success: ' + response);
-                },
-                onError: function(err) {
+                onSuccess: resolve,
+                onError: err => {
                     console.error('flair RPC error: ' + err);
-                    postError("Error updating flair", err);
+                    reject(`Error updating flair: ${err}`);
                 }
             });
-        } else if (e.data.type == 'bdgg_users_refresh') {
-            //console.log("Refresh users");
+        });
+    });
+
+    onMessage('bdgg_users_refresh', () => {
+        return new Promise((resolve, reject) => {
             wamp.call('bdgg.flair.get_all', null, {
-                onSuccess: function(response) {
-                    postUsers(response.users);
+                onSuccess: resolve,
+                onError: err => {
+                    console.error('flair RPC error: ' + err);
+                    reject(`Error refreshing users: ${err}`);
                 }
+                // postUsers(response.users);
             });
-        }
+        });
     });
 
     function encrypt(msg)
@@ -92,16 +88,6 @@ chrome.runtime.onConnect.addListener(function(port) {
     function postUsers(data)
     {
         pushMessage({ type: 'bdgg_users_refreshed', users: data });
-    }
-
-    function postReply(data)
-    {
-        pushMessage({ type: 'bdgg_stalk_reply', reply: data });
-    }
-
-    function postOutput(msg)
-    {
-        pushMessage({ type: 'bdgg_stalk_message', message: msg });
     }
 
     function postError(msg, detail)

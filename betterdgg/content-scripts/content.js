@@ -1,82 +1,78 @@
-function isWindow(src) {
-    return src == window || typeof unsafeWindow != "undefined" && src.wrappedJSObject == unsafeWindow;
+import { handleMessage, sendMessage } from '../messaging';
+
+function doXHR(xhr) {
+    return sendMessage('bdgg_xhr', xhr);
 }
 
-function doXHR(xhr, sendResponse) {
-    chrome.runtime.sendMessage({ xhr }, sendResponse);
-}
+handleMessage('bdgg_ustream_url', msg => {
+    let xhr = {
+        method: 'GET',
+        url: msg.text
+    };
 
-window.addEventListener("message", function(e) {
-    if (!isWindow(e.source) || !e.data.type) {
-        return;
-    }
+    return doXHR(xhr).then(responseText => {
+        var match = /cId=(\d+)/.exec(responseText);
+        if (match) {
+            //console.log("ustream cid is " + match[1]);
+            return {id: match[1]};
+        }
+    });
+});
 
-    if (e.data.type == 'bdgg_hello_world') {
-        console.log("Content script received: " + e.data.text);
-    } else if (e.data.type == 'bdgg_ustream_url') {
-        let xhr = {
-            method: 'GET',
-            url: e.data.text
-        };
-        let sendResponse = responseText => {
-            var match = /cId=(\d+)/.exec(responseText);
-            if (match) {
-                //console.log("ustream cid is " + match[1]);
-                window.postMessage({ type: 'bdgg_ustream_channel', text: e.data.text, id: match[1] }, '*');
-            }
-        };
-        doXHR(xhr, sendResponse);
-    } else if (e.data.type == 'bdgg_overrustle_get_strims') {
-        let xhr = {
-            method: 'GET',
-            url: 'http://api.overrustle.com/api',
-            responseType: 'json'
-        };
-        doXHR(xhr, response => {
-            var strims = sortStrims(response);
-            window.postMessage({ type: 'bdgg_overrustle_strims', strims: strims.slice(0, e.data.count) }, '*');
-        });
-    } else if (e.data.type == 'bdgg_get_profile_info') {
-        let xhr = {
-            method: 'GET',
-            url: 'https://www.destiny.gg/profile/info',
-            responseType: 'json'
-        };
-        doXHR(xhr, info => {
-            window.postMessage({ type: 'bdgg_profile_info', info: info }, '*');
-        });
-    } else if (e.data.type === 'bdgg_phrase_request') {
-        let xhr = {
-            method: 'GET',
-            url: 'http://downthecrop.xyz/bbdgg/api/phrases.json',
-            responseType: 'json'
-        };
-        doXHR(xhr, phrase => {
-            window.postMessage({ type: 'bdgg_phrase_reply', response: phrase }, '*');
-        });
-    } else if (e.data.type === 'bdgg_flair_request') {
-        let xhr = {
-            method: 'GET',
-            url: 'http://downthecrop.xyz/bbdgg/api/flairs.json',
-            responseType: 'json'
-        };
-        doXHR(xhr, flairs => {
-            window.postMessage({ type: 'bdgg_flair_reply', response: flairs }, '*');
-        });
-    } else if (e.data.type === 'bdgg_get_url') {
-        let url = chrome.runtime.getURL(e.data.path);
-        window.postMessage({ type: 'bdgg_url', path: e.data.path, url: url }, '*');
-    } else if (e.data.type === 'bdgg_get_linkinfo') {
-        let encodedURL = encodeURIComponent(e.data.url);
-        let xhr = {
-            method: 'GET',
-            url: 'https://api.betterttv.net/2/link_resolver/' + encodedURL,
-            responseType: 'json'
-        };
-        doXHR(xhr, data => {
-            window.postMessage({ type: 'bdgg_linkinfo', url: e.data.url, data }, '*');
-        });
-    }
+handleMessage('bdgg_overrustle_get_strims', msg => {
+    let xhr = {
+        method: 'GET',
+        url: 'http://api.overrustle.com/api',
+        responseType: 'json'
+    };
+
+    return doXHR(xhr).then(response => {
+        let strims = sortStrims(response).slice(0, msg.count);
+        return {strims};
+    });
+});
+
+handleMessage('bdgg_get_profile_info', () => {
+    let xhr = {
+        method: 'GET',
+        url: 'https://www.destiny.gg/profile/info',
+        responseType: 'json'
+    };
+
+    return doXHR(xhr);
+});
+
+handleMessage('bdgg_phrase_request', () => {
+    let xhr = {
+        method: 'GET',
+        url: 'http://downthecrop.xyz/bbdgg/api/phrases.json',
+        responseType: 'json'
+    };
+
+    return doXHR(xhr);
+});
+
+handleMessage('bdgg_flair_request', () => {
+    let xhr = {
+        method: 'GET',
+        url: 'http://downthecrop.xyz/bbdgg/api/flairs.json',
+        responseType: 'json'
+    };
+
+    return doXHR(xhr);
+});
+
+handleMessage('bdgg_get_url', chrome.runtime.getURL);
+
+handleMessage('bdgg_get_linkinfo', url => {
+    let encodedURL = encodeURIComponent(url);
+    let xhr = {
+        method: 'GET',
+        url: 'https://api.betterttv.net/2/link_resolver/' + encodedURL,
+        responseType: 'json'
+    };
+
+    return doXHR(xhr);
 });
 
 function sortStrims(responseText) {
@@ -117,5 +113,3 @@ function buildStrim(resp, k, enrich) {
 
     return strim;
 }
-
-export { isWindow };

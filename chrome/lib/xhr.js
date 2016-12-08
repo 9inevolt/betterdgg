@@ -1,15 +1,16 @@
 import xhr from 'xhr';
+import { onMessage } from './messaging';
 
-chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-    if (!msg || !msg.xhr || !sendResponse) {
-        return;
-    }
-
-    xhr(msg.xhr, (err, resp, body) => {
-        if (!err && resp.statusCode == 200) {
-            sendResponse(body);
-        }
+onMessage('bdgg_xhr', options => {
+    return new Promise((resolve, reject) => {
+        xhr(options, (err, resp, body) => {
+            if (!!err) {
+                reject(err);
+            } else if (resp.statusCode !== 200) {
+                reject(resp);
+            } else {
+                resolve(body);
+            }
+        });
     });
-
-    return true;
 });

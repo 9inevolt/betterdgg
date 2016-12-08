@@ -18,13 +18,7 @@ const DOMAINS = new Set([
 
 let linkData = new Map();
 
-function listener(e) {
-    if (window != e.source || e.data.type != 'bdgg_linkinfo') {
-        return;
-    }
-
-    let { data, url } = e.data;
-
+function onData(url, data) {
     linkData.set(url, data);
 
     if (!data || !data.tooltip) {
@@ -54,13 +48,11 @@ function resolveLink(url) {
     }
 
     // Call from content script for now
-    // window.postMessage({type: 'bdgg_get_linkinfo', url}, '*');
+    // postMessage('bdgg_get_linkinfo', url).then(data => { onData(url, data); });
 
     let encodedURL = encodeURIComponent(url);
     $.getJSON('https://api.betterttv.net/2/link_resolver/' + encodedURL)
-        .then(data => {
-            listener({data: { data, url, type: 'bdgg_linkinfo' }, source: window});
-        });
+        .then(data => { onData(url, data); });
 }
 
 let hoverLink = debounce(function() {
@@ -86,7 +78,6 @@ let linkinfo = {
     init() {
         this.enabled(settings.get('bdgg_show_linkinfo'));
         settings.on('bdgg_show_linkinfo', value => { this.enabled(value); });
-        window.addEventListener('message', listener);
     },
     enabled(value) {
         if (value) {

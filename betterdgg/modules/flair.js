@@ -1,4 +1,7 @@
 import _get from 'lodash.get';
+import promiseFinally from 'promise-finally';
+import xhr from 'xhr';
+import { postMessage } from '../messaging';
 import alert from './alert';
 import countries from './countries';
 import settings from './settings';
@@ -11,38 +14,68 @@ var ALERT_MSG = '<p>To display or hide your country flair, please '
     + 'a destiny.gg login key.</p>';
 
 function _getToken() {
-    try {
-        var response = $.ajax(window.location.origin + '/profile/authentication', {
-            async: false,
-            timeout: 3000
-        });
+    const options = {
+        method: 'GET',
+        url: window.location.origin + '/profile/authentication',
+        timeout: 3000
+    };
 
-        if (response.status == 200) {
-            var tokenLinks = $(response.responseText).find("a[href^='/profile/authtoken/']");
-            if (tokenLinks.length > 0) {
-                var href = tokenLinks[0].getAttribute('href');
-                var matches;
-                if (matches = /^\/profile\/authtoken\/(\w+)/.exec(href)) {
-                    return matches[1];
-                }
+    return new Promise((resolve, reject) => {
+        xhr(options, (err, resp, body) => {
+            if (!!err) {
+                reject(err);
+            } else if (resp.statusCode !== 200) {
+                reject(resp);
             } else {
-                alert.show(ALERT_MSG);
+                const tokenLinks = $(body).find("a[href^='/profile/authtoken/']");
+                if (tokenLinks.length > 0) {
+                    const href = tokenLinks[0].getAttribute('href');
+                    let matches;
+                    if (matches = /^\/profile\/authtoken\/(\w+)/.exec(href)) {
+                        resolve(matches[1]);
+                    }
+                } else {
+                    alert.show(ALERT_MSG);
+                    reject();
+                }
             }
-        }
-    } catch (e) {
-        console.warn(e);
-    }
+        });
+    });
 }
 
 function _getRemoteFlairs() {
     if (!_hideAll) {
-        window.postMessage({type: 'bdgg_flair_request'}, '*');
-        _rtid = setTimeout(_getRemoteFlairs, 60000);
+        const p = postMessage('bdgg_flair_request').then(response => {
+            REMOTE_NICKNAMES.clear();
+            let remote_users = _get(response, 'users', []);
+            for (let user of remote_users) {
+                REMOTE_NICKNAMES.set(_get(user, 'nick').toLowerCase(), _get(user, 'flairs', []));
+            }
+        });
+
+        promiseFinally(p, () => {
+            clearTimeout(_rtid);
+            _rtid = setTimeout(_getRemoteFlairs, 60000);
+        });
     }
 }
 
 function _getCountry() {
-    window.postMessage({type: 'bdgg_get_profile_info'}, '*');
+    return postMessage('bdgg_get_profile_info').then(info => {
+        let currentUser = users.get(destiny.chat.user.username);
+
+        if (info && info['country'] == currentUser.country) {
+            return false;
+        }
+
+        return true;
+    });
+}
+
+function updateFlair(data) {
+    return postMessage('bdgg_flair_update', data).catch(err => {
+        console.error(err);
+    });
 }
 
 function _processFlair() {
@@ -52,46 +85,32 @@ function _processFlair() {
         return;
     }
 
-    var data = {
-        type: 'bdgg_flair_update',
-        displayCountry: _displayCountry,
-        username: destiny.chat.user.username,
-        token: _getToken()
-    };
+    _getToken().then(token => {
+        const data = {
+            displayCountry: _displayCountry,
+            username: destiny.chat.user.username,
+            token
+        };
 
-    if (!_displayCountry || !currentUser) {
-        window.postMessage(data, '*');
-    } else {
-        _tid = setTimeout(function() {
-            window.postMessage(data, '*');
-        }, 7000);
-
-        _getCountry();
-    }
+        if (!_displayCountry || !currentUser) {
+            // Request required
+            updateFlair(data);
+        } else {
+            _getCountry().then(updated => {
+                // Avoid redundant on request
+                if (updated) {
+                    return updateFlair(data);
+                }
+            });
+        }
+    })
+    .catch(err => {
+        if (err) {
+            console.error(err);
+        }
+    });
 }
 
-function listener(e) {
-    if (window !== e.source) {
-        return;
-    }
-
-    if (e.data.type === 'bdgg_flair_reply') {
-        REMOTE_NICKNAMES.clear();
-        let remote_users = _get(e, 'data.response.users', []);
-        for (var i = 0; i < remote_users.length; i++) {
-            let user = remote_users[i];
-            REMOTE_NICKNAMES.set(_get(user, 'nick').toLowerCase(), _get(user, 'flairs', []));
-        }
-    } else if (e.data.type === 'bdgg_profile_info') {
-        var currentUser = users.get(destiny.chat.user.username);
-        if (e.data.info && e.data.info['country'] == currentUser.country) {
-            // Avoid redundant on request
-            clearTimeout(_tid);
-        }
-    }
-}
-
-var _tid = null;
 var _rtid = null;
 var _displayCountry = false;
 var _displayAllCountries = true;
@@ -155,14 +174,9 @@ let flair = {
             this.hideAll(value);
             this.flairRequest(2500);
         });
-
-        window.addEventListener('message', listener);
     },
     displayCountry: function(value, wait) {
         _displayCountry = value;
-        if (_tid != null) {
-            clearTimeout(_tid);
-        }
 
         if (wait != null && wait > 0) {
             setTimeout(_processFlair, wait);
@@ -172,9 +186,7 @@ let flair = {
     },
     flairRequest: function(wait) {
         if (!_hideAll) {
-            if (_rtid != null) {
-                clearTimeout(_rtid);
-            }
+            clearTimeout(_rtid);
             if (wait != null && wait > 0) {
                 setTimeout(_getRemoteFlairs, wait);
             }

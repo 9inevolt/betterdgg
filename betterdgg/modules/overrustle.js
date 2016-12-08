@@ -1,3 +1,5 @@
+import shortid from 'shortid';
+import { postMessage } from '../messaging';
 import settings from './settings';
 
 const TWITCH_URL = /http:\/\/(?:www\.)?twitch.tv\/(\w+)\/?$/;
@@ -16,7 +18,13 @@ function _initStrims() {
             let match;
             if (match = cmd.match(/^str(?:(?:ea|i)ms?)?(?: (\d+))?$/)) {
                 let count = match[1] || 5;
-                window.postMessage({type: 'bdgg_overrustle_get_strims', count}, '*');
+                postMessage('bdgg_overrustle_get_strims', {count})
+                    .then(data => {
+                        for (let strim of data.strims) {
+                            destiny.chat.gui.push(new BDGGChatStrimMessage(strim));
+                        }
+                    })
+                    .catch(() => {});
             } else {
                 destiny.chat.gui.push(new ChatInfoMessage("Format: /str(ims) {optional #}"));
             }
@@ -24,19 +32,6 @@ function _initStrims() {
             fnHandleCommand.apply(this, arguments);
         }
     };
-
-    let listener = function(e) {
-        if (window != e.source || e.data.type != 'bdgg_overrustle_strims' ) {
-            return;
-        }
-
-        for (let i=0; i<e.data.strims.length; i++) {
-            let strim = e.data.strims[i];
-            //console.log(strim);
-            destiny.chat.gui.push(new BDGGChatStrimMessage(strim));
-        }
-    };
-    window.addEventListener('message', listener);
 
     function BDGGChatStrimMessage(strim) {
         this.strim = strim;
@@ -89,14 +84,6 @@ function _initStrims() {
     };
 }
 
-function _randString(len) {
-    let s = '';
-    for (let i=0; i<len; i++) {
-        s += String.fromCharCode(Math.floor(97 + Math.random() * (123 - 97)));
-    }
-    return s;
-}
-
 function _link(s, stream) {
     return 'http://overrustle.com/destinychat?s='
         + s + '&stream=' + stream;
@@ -120,28 +107,22 @@ function _convert(elem) {
             href = _channels[href];
         } else {
             // Set the id since the element gets re-parsed later
-            let elemId = _randString(5);
+            let elemId = shortid.generate();
             elem.id = elemId;
 
-            let listener = function(e) {
-                if (window != e.source ||
-                        e.data.type != 'bdgg_ustream_channel' || e.data.text != href) {
-                    return;
-                }
+            postMessage('bdgg_ustream_url', {text: href})
+                .then(data => {
+                    let link = _link('ustream', data.id);
+                    _channels[href] = link;
 
-                let link = _link('ustream', e.data.id);
-                _channels[href] = link;
+                    let newElem = document.getElementById(elemId);
+                    if (newElem) {
+                        newElem.setAttribute('href', link);
+                        newElem.textContent = link;
+                    }
+                })
+                .catch(() => {});
 
-                let newElem = document.getElementById(elemId);
-                if (newElem) {
-                    newElem.setAttribute('href', link);
-                    newElem.textContent = link;
-                }
-                window.removeEventListener('message', listener);
-            };
-            window.addEventListener('message', listener);
-            window.postMessage({type: 'bdgg_ustream_url', text: href}, '*');
-            setTimeout(function() { window.removeEventListener('message', listener); }, 10000);
             return;
         }
     } else {
