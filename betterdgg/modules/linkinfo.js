@@ -1,4 +1,5 @@
 import debounce from 'debounce';
+import { postMessage } from '../messaging';
 import security from './security';
 import settings from './settings';
 
@@ -47,12 +48,9 @@ function resolveLink(url) {
         return linkData.get(url);
     }
 
-    // Call from content script for now
-    // postMessage('bdgg_get_linkinfo', url).then(data => { onData(url, data); });
-
-    let encodedURL = encodeURIComponent(url);
-    $.getJSON('https://api.betterttv.net/2/link_resolver/' + encodedURL)
-        .then(data => { onData(url, data); });
+    postMessage('bdgg_get_linkinfo', url)
+        .then(data => { onData(url, data); })
+        .catch(() => {});
 }
 
 let hoverLink = debounce(function() {
