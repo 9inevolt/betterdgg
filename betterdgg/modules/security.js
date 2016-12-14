@@ -1,4 +1,3 @@
-import casino from './casino';
 import embed from './embed';
 import emoji from './emoji';
 import emoticons from './emoticons';
@@ -27,7 +26,6 @@ function secureWrap(proto, target) {
         emoticons.wrapMessage(elem, this);
         formatters.wrapMessage(elem, this);
         spooky.wrapMessage(elem, this);
-        casino.wrapMessage(elem, this);
         emoji.wrapMessage(elem, this);
 
         sanitize(elem);

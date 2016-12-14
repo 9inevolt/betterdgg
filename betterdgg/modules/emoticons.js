@@ -18,7 +18,7 @@ var BTTV_EMOTICONS = ["GabeN", "gachiGASM", "ShibeZ", "D:", "FeelsBadMan", "Feel
 
 var NEW = [ ];
 
-var ANIMATED = [ "CuckCrab", "SourPls", "RaveDoge", "BAR" ];
+var ANIMATED = [ "CuckCrab", "SourPls", "RaveDoge" ];
 
 var OVERRIDES = [ "SoSad", "SpookerZ", "Kappa", "OhKrappa", "DappaKappa", "Klappa" ];
 

@@ -248,10 +248,6 @@ let or = {
     },
 };
 
-let slot = function(str, delay, timestamp) {
-    chat.self(str || 'BAR BAR BAR', delay, timestamp);
-};
-
 let subreddit = function(str) {
     destiny.chat.onMSG({data:str || '/r/destiny! also /r/fallout_shelter, /r/starcraft? maybe /r/games',
         nick:'BetterDGG', features:['flair1']});
@@ -309,6 +305,6 @@ let strawpoll = {
     },
 };
 
-let test = { chat, emoji, link, or, slot, strawpoll, subreddit, test1, test2, test3, test4 };
+let test = { chat, emoji, link, or, strawpoll, subreddit, test1, test2, test3, test4 };
 
 export default test;

@@ -1,6 +1,5 @@
 import alert from './modules/alert';
 import backlog from './modules/backlog';
-import casino from './modules/casino';
 import chat from './modules/chat';
 import countries from './modules/countries';
 import embed from './modules/embed';
@@ -40,7 +39,6 @@ let init = function() {
     chat.init();
     ignore.init();
     spooky.init();
-    casino.init();
     leftchat.init();
     linkinfo.init();
     overrustle.init();
@@ -66,7 +64,6 @@ let BetterDGG = {
     init,
     alert,
     backlog,
-    casino,
     chat,
     countries,
     embed,
